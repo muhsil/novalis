@@ -1,14 +1,14 @@
 /* ── Tailwind v4 Core Import ── */
 @import "tailwindcss";
 
-/* ── AliExpress-inspired design tokens ── */
+/* ── Luxury perfume design tokens ── */
 @layer base {
   :root {
-    --color-brand: #E53935;
-    --color-brand-dark: #C62828;
-    --color-brand-light: #FFEBEE;
-    --color-accent: #FF6D00;
-    --color-accent-light: #FFF3E0;
+    --color-brand: #1A1A2E;
+    --color-brand-dark: #0F0F1A;
+    --color-brand-light: #F0EDE8;
+    --color-accent: #C9A96E;
+    --color-accent-light: #FAF6F0;
     --color-success: #00B578;
     --color-success-light: #E8F8F0;
     --color-warning: #FF9F00;

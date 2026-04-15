@@ -19,7 +19,7 @@ export default function DealSection({
   href,
   products,
   icon,
-  accentColor = '#E53935',
+  accentColor = '#C9A96E',
   children,
   currency = 'AED',
 }: DealSectionProps) {
@@ -30,12 +30,12 @@ export default function DealSection({
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#f0f0f0]">
         <div className="flex items-center gap-2">
-          {icon && <span className="text-[#E53935]">{icon === 'deals' ? <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> : icon}</span>}
+          {icon && <span className="text-[#C9A96E]">{icon === 'deals' ? <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> : icon}</span>}
           <h2 className="text-base font-bold" style={{ color: accentColor }}>{title}</h2>
           {subtitle && <span className="text-xs text-[#999]">{subtitle}</span>}
           {children}
         </div>
-        <Link href={href} className="text-xs text-[#999] hover:text-[#E53935] flex items-center gap-0.5">
+        <Link href={href} className="text-xs text-[#999] hover:text-[#C9A96E] flex items-center gap-0.5">
           View all
           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

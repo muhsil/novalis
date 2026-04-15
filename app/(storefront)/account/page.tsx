@@ -36,10 +36,10 @@ export default function AccountPage() {
             <Link
               key={link.href}
               href={link.href}
-              className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:border-[#E53935]/20 transition-all group"
+              className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:border-[#C9A96E]/20 transition-all group"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#FFEBEE] rounded-lg flex items-center justify-center text-[#E53935] group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 bg-[#FAF6F0] rounded-lg flex items-center justify-center text-[#C9A96E] group-hover:scale-110 transition-transform">
                   {ACCOUNT_ICONS[link.key]}
                 </div>
                 <div>

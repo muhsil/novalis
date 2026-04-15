@@ -57,7 +57,7 @@ export default async function HomePage() {
 
       {/* Hero Banner */}
       <section className="max-w-7xl mx-auto px-4 max-md:px-3 pt-4 max-md:pt-3">
-        <div className="bg-[#E53935] rounded-lg overflow-hidden">
+        <div className="bg-[#1A1A2E] rounded-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center">
             {/* Text */}
             <div className="px-6 py-8 max-md:px-4 max-md:py-5">
@@ -68,12 +68,12 @@ export default async function HomePage() {
                 Celebrate Every Moment
               </h1>
               <p className="text-white/80 text-sm max-md:text-xs mb-4 leading-relaxed max-w-md">
-                Premium balloon decorations delivered to your door in Dubai. Same-day delivery available!
+                Luxury Arabic perfumes and exquisite fragrances crafted with the finest ingredients. Delivered across the UAE.
               </p>
               <div className="flex gap-2">
                 <Link
                   href="/shop"
-                  className="inline-flex items-center bg-white text-[#E53935] font-bold text-sm px-5 py-2 rounded-full hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center bg-[#C9A96E] text-white font-bold text-sm px-5 py-2 rounded-full hover:bg-[#B8985D] transition-colors"
                 >
                   Shop All
                 </Link>
@@ -131,7 +131,7 @@ export default async function HomePage() {
             href="/shop?featured=true"
             products={featured.slice(0, 8)}
             icon="deals"
-            accentColor="#E53935"
+            accentColor="#C9A96E"
             currency={currency}
           >
             <CountdownTimer hours={12} />
@@ -144,7 +144,7 @@ export default async function HomePage() {
         <section className="max-w-7xl mx-auto px-4 max-md:px-3 pt-4 pb-8 max-md:pb-20">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-bold text-[#191919]">More to love</h2>
-            <Link href="/shop" className="text-xs text-[#999] hover:text-[#E53935]">See All &gt;</Link>
+            <Link href="/shop" className="text-xs text-[#999] hover:text-[#C9A96E]">See All &gt;</Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 max-md:gap-1.5">
             {allProducts.map((p: any) => (

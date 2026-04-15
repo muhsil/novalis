@@ -33,7 +33,7 @@ export default function PageHeader({
         )}
         {badge && <div className="badge badge-brand mb-3 max-md:mb-2">{badge}</div>}
         <h1 className="text-2xl font-extrabold text-[#191919] max-md:text-2xl">
-          {title} {highlight && <span className="text-[#E53935]">{highlight}</span>}
+          {title} {highlight && <span className="text-[#C9A96E]">{highlight}</span>}
         </h1>
         {subtitle && (
           <p className="text-gray-500 max-w-md mx-auto max-md:text-sm mt-2">{subtitle}</p>

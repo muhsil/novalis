@@ -23,7 +23,7 @@ export default function SectionHeader({
     <div className={centered ? 'text-center' : ''}>
       {badge && <div className={`${badgeClass} mb-3`}>{badge}</div>}
       <h2 className="text-2xl font-extrabold text-[#191919]">
-        {title} {highlight && <span className="text-[#E53935]">{highlight}</span>}
+        {title} {highlight && <span className="text-[#C9A96E]">{highlight}</span>}
       </h2>
       {subtitle && (
         <p className="text-gray-500 mt-3 max-w-md mx-auto text-sm md:text-base">{subtitle}</p>

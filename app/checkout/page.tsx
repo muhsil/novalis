@@ -208,7 +208,7 @@ function CheckoutContent() {
             <OrderNotes value={orderNotes} onChange={setOrderNotes} />
 
             <SectionCard title="Payment Method">
-              <div className="w-full text-left p-4 max-md:p-3 rounded-lg border-2 border-[#E53935] bg-[#FFEBEE]">
+              <div className="w-full text-left p-4 max-md:p-3 rounded-lg border-2 border-[#C9A96E] bg-[#FAF6F0]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 max-md:w-8 max-md:h-8 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white">
@@ -219,7 +219,7 @@ function CheckoutContent() {
                       <p className="text-[10px] text-gray-400">Pay when you receive your order</p>
                     </div>
                   </div>
-                  <div className="w-5 h-5 rounded-full bg-[#E53935] flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-[#C9A96E] flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
@@ -260,7 +260,7 @@ function CheckoutContent() {
       <div className="md:hidden mobile-sticky-bottom">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-bold text-gray-400">Total</span>
-          <span className="text-lg font-extrabold text-[#E53935]">{currency} {subtotal.toFixed(0)}</span>
+          <span className="text-lg font-extrabold text-[#C9A96E]">{currency} {subtotal.toFixed(0)}</span>
         </div>
         <button
           onClick={handleCreateOrder}

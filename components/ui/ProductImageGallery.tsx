@@ -46,7 +46,7 @@ export default function ProductImageGallery({ images, name, discount }: ProductI
               onClick={() => setActiveIndex(idx)}
               className={`w-16 h-16 max-md:w-14 max-md:h-14 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
                 idx === activeIndex
-                  ? 'border-[#E53935] ring-1 ring-[#E53935]/30'
+                  ? 'border-[#C9A96E] ring-1 ring-[#C9A96E]/30'
                   : 'border-transparent hover:border-gray-300'
               }`}
             >

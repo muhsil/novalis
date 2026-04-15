@@ -61,10 +61,10 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
       {/* Section Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="w-1 h-5 bg-[#E53935] rounded-full" />
+          <div className="w-1 h-5 bg-[#C9A96E] rounded-full" />
           <h2 className="text-base font-bold text-[#191919]">Shop by Category</h2>
         </div>
-        <Link href="/shop" className="text-xs font-medium text-[#999] hover:text-[#E53935] transition-colors flex items-center gap-1">
+        <Link href="/shop" className="text-xs font-medium text-[#999] hover:text-[#C9A96E] transition-colors flex items-center gap-1">
           View All
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
         </Link>
@@ -76,7 +76,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
         {canScrollLeft && (
           <button
             onClick={() => scroll('left')}
-            className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-[#E53935] hover:border-[#E53935]/20 transition-all opacity-0 group-hover:opacity-100"
+            className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
             aria-label="Scroll left"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
@@ -95,7 +95,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
             className="shrink-0 w-[130px] max-md:w-[100px] group/card"
             style={{ scrollSnapAlign: 'start' }}
           >
-            <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-gradient-to-br from-[#E53935] to-[#C62828] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all group-hover/card:-translate-y-0.5">
+            <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-gradient-to-br from-[#C9A96E] to-[#B8985D] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all group-hover/card:-translate-y-0.5">
               <div className="w-10 h-10 max-md:w-8 max-md:h-8 rounded-full bg-white/20 flex items-center justify-center text-white mb-2">
                 {PILL_ICONS.all}
               </div>
@@ -114,7 +114,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
                 className="shrink-0 w-[130px] max-md:w-[100px] group/card"
                 style={{ scrollSnapAlign: 'start' }}
               >
-                <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-[#E53935]/20 transition-all group-hover/card:-translate-y-0.5">
+                <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-[#C9A96E]/20 transition-all group-hover/card:-translate-y-0.5">
                   {/* Category Image */}
                   {cat.image?.src ? (
                     <img
@@ -125,7 +125,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                      <span className="text-[#E53935] opacity-40 scale-150">
+                      <span className="text-[#C9A96E] opacity-40 scale-150">
                         {PILL_ICONS[iconKey] || PILL_ICONS.all}
                       </span>
                     </div>
@@ -141,7 +141,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
                   </div>
 
                   {/* Icon Badge */}
-                  <div className="absolute top-2 right-2 w-7 h-7 max-md:w-6 max-md:h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#E53935] shadow-sm">
+                  <div className="absolute top-2 right-2 w-7 h-7 max-md:w-6 max-md:h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#C9A96E] shadow-sm">
                     <span className="scale-75">{PILL_ICONS[iconKey] || PILL_ICONS.all}</span>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
         {canScrollRight && (
           <button
             onClick={() => scroll('right')}
-            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-[#E53935] hover:border-[#E53935]/20 transition-all opacity-0 group-hover:opacity-100"
+            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
             aria-label="Scroll right"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>

@@ -9,7 +9,7 @@ export function OrganizationJsonLd() {
     name: 'Novalis',
     url: 'https://shapehive.in',
     logo: 'https://shapehive.in/hero-balloons.png',
-    description: 'Premium balloon decorations and delivery service in Dubai, UAE.',
+    description: 'Luxury Arabic perfumes, oud collections, and premium fragrances in Dubai, UAE.',
     email: 'hello@shapehive.in',
     telephone: '+971563554303',
     address: {
@@ -67,7 +67,7 @@ export function LocalBusinessJsonLd({ currency = 'AED' }: { currency?: string })
     url: 'https://shapehive.in',
     telephone: '+971563554303',
     email: 'hello@shapehive.in',
-    description: 'Premium balloon decorations and delivery service in Dubai. Same-day delivery, wide variety of balloon styles for every occasion.',
+    description: 'Luxury Arabic perfumes, oud collections, and premium fragrances in Dubai. Handcrafted scents inspired by Emirati heritage.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Dubai',
@@ -148,7 +148,7 @@ export function ProductJsonLd({ name, description, image, price, slug, inStock, 
       '@type': 'Brand',
       name: 'Novalis',
     },
-    category: category || 'Balloons & Decorations',
+    category: category || 'Perfumes & Fragrances',
     offers: {
       '@type': 'Offer',
       url: `https://shapehive.in/product/${slug}`,

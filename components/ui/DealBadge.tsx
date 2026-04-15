@@ -6,7 +6,7 @@ interface DealBadgeProps {
 }
 
 const VARIANT_CLASSES: Record<string, string> = {
-  red: 'bg-[#E53935] text-white',
+  red: 'bg-[#C9A96E] text-white',
   orange: 'bg-[#FF6D00] text-white',
   green: 'bg-[#00B578] text-white',
 };

@@ -25,8 +25,8 @@ export default function WishlistButton({ item, size = 'md', className = '' }: Wi
       }}
       className={`${sizeClass} rounded-full flex items-center justify-center transition-all ${
         active
-          ? 'bg-red-50 text-[#E53935]'
-          : 'bg-white/80 text-gray-400 hover:text-[#E53935] hover:bg-red-50'
+          ? 'bg-red-50 text-[#C9A96E]'
+          : 'bg-white/80 text-gray-400 hover:text-[#C9A96E] hover:bg-red-50'
       } shadow-sm backdrop-blur-sm ${className}`}
       aria-label={active ? 'Remove from wishlist' : 'Add to wishlist'}
     >

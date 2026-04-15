@@ -34,7 +34,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
         
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-[#f0f0f0]">
-          <h2 className="text-base font-bold text-[#191919]">Your Cart <span className="text-[#E53935]">({items.length})</span></h2>
+          <h2 className="text-base font-bold text-[#191919]">Your Cart <span className="text-[#C9A96E]">({items.length})</span></h2>
           <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#f5f5f5] transition-colors">
             <svg className="w-5 h-5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -48,7 +48,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             <div className="text-center py-16">
               <div className="mb-3 text-gray-300"><svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg></div>
               <p className="text-[#666] font-medium text-sm">Your cart is empty</p>
-              <button onClick={onClose} className="mt-3 text-[#E53935] font-semibold text-sm hover:underline">
+              <button onClick={onClose} className="mt-3 text-[#C9A96E] font-semibold text-sm hover:underline">
                 Continue Shopping
               </button>
             </div>
@@ -74,7 +74,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
           <div className="border-t border-[#f0f0f0] px-4 py-4 space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-[#666] text-sm font-medium">Subtotal</span>
-              <span className="text-xl font-bold text-[#E53935]">{currency} {subtotal.toFixed(0)}</span>
+              <span className="text-xl font-bold text-[#C9A96E]">{currency} {subtotal.toFixed(0)}</span>
             </div>
             <Link href="/checkout" onClick={onClose}
               className="btn-primary w-full justify-center py-3 text-sm rounded-lg">

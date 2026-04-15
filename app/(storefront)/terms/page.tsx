@@ -4,7 +4,7 @@ import { getStoreSettings } from '@/lib/store-settings';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
-  description: 'Read Novalis\'s terms and conditions for ordering balloons and decorations in Dubai.',
+  description: 'Read Novalis\'s terms and conditions for ordering luxury perfumes and fragrances in the UAE.',
   alternates: { canonical: '/terms' },
 };
 
@@ -27,7 +27,7 @@ const SECTIONS = [
   },
   {
     title: '5. Returns & Refunds',
-    content: 'Due to the perishable nature of balloon products, we do not accept returns. If your order arrives damaged or incorrect, please contact us within 2 hours of delivery for a replacement or refund.',
+    content: 'Due to the nature of perfume and fragrance products, we only accept returns for sealed, unopened items within 7 days of delivery. If your order arrives damaged or incorrect, please contact us within 48 hours of delivery for a replacement or refund.',
   },
   {
     title: '6. Liability',
@@ -55,7 +55,7 @@ export default async function TermsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#E53935]">Home</Link>
+        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">Terms &amp; Conditions</span>
       </nav>

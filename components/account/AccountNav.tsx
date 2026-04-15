@@ -51,11 +51,11 @@ export default function AccountNav() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 text-sm transition-colors border-b border-gray-50 ${
                 isActive
-                  ? 'bg-[#FFEBEE] text-[#E53935] font-semibold'
+                  ? 'bg-[#FAF6F0] text-[#C9A96E] font-semibold'
                   : 'text-[#333] hover:bg-gray-50'
               }`}
             >
-              <span className="text-[#E53935]">{NAV_ICONS[item.key]}</span>
+              <span className="text-[#C9A96E]">{NAV_ICONS[item.key]}</span>
               {item.label}
             </Link>
           );
@@ -64,7 +64,7 @@ export default function AccountNav() {
         {/* Logout button */}
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 text-sm text-[#999] hover:text-[#E53935] hover:bg-[#FFEBEE] transition-colors w-full text-left"
+          className="flex items-center gap-3 px-4 py-3 text-sm text-[#999] hover:text-[#C9A96E] hover:bg-[#FAF6F0] transition-colors w-full text-left"
         >
           <span className="text-[#999]">{NAV_ICONS.logout}</span>
           Logout

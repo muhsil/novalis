@@ -10,12 +10,12 @@ import { BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Shop Balloons & Decorations',
-  description: 'Browse our full collection of premium balloons, balloon arches, garland kits, and event decorations. Birthday, wedding, baby shower balloons with same-day delivery in Dubai.',
+  title: 'Shop Luxury Perfumes & Fragrances',
+  description: 'Browse our full collection of luxury Arabic perfumes, oud oils, dokhun incense, and premium fragrances. Handcrafted scents with delivery across the UAE.',
   alternates: { canonical: '/shop' },
   openGraph: {
-    title: 'Shop Balloons & Decorations | Novalis Dubai',
-    description: 'Browse premium balloons for every occasion. Same-day delivery across Dubai.',
+    title: 'Shop Luxury Perfumes & Fragrances | Novalis',
+    description: 'Browse premium Arabic perfumes and fragrances. Delivery across the UAE.',
   },
 };
 
@@ -78,14 +78,14 @@ export default async function ShopPage({
       <div className="max-w-7xl mx-auto px-4 max-md:px-3 pb-8 max-md:pb-20">
         {/* Mobile search */}
         <form method="GET" action="/shop" className="md:hidden pt-3 mb-3">
-          <div className="flex rounded-full overflow-hidden bg-[#f5f5f5] border border-[#e8e8e8] focus-within:border-[#E53935]">
+          <div className="flex rounded-full overflow-hidden bg-[#f5f5f5] border border-[#e8e8e8] focus-within:border-[#C9A96E]">
             <input
               name="search"
               defaultValue={searchParams.search || ''}
-              placeholder="Search balloons..."
+              placeholder="Search perfumes..."
               className="flex-1 px-3 py-2 text-sm outline-none bg-transparent"
             />
-            <button type="submit" className="bg-[#E53935] text-white px-3">
+            <button type="submit" className="bg-[#C9A96E] text-white px-3">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -122,7 +122,7 @@ export default async function ShopPage({
         {/* Product Grid */}
         {displayProducts.length === 0 ? (
           <EmptyState
-            title={isFeatured ? 'No deals right now' : 'No balloons found'}
+            title={isFeatured ? 'No deals right now' : 'No products found'}
             description={isFeatured ? 'Check back soon for new deals.' : 'Try a different search or browse all categories.'}
             actionLabel="Browse All"
             actionHref="/shop"

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Novalis is a premium balloon and event decoration e-commerce store based in Dubai, UAE. The frontend is built with Next.js and the backend uses WordPress + WooCommerce as a headless CMS.
+Novalis is a luxury Arabic perfume and fragrance e-commerce store based in Dubai, UAE. The frontend is built with Next.js and the backend uses WordPress + WooCommerce as a headless CMS.
 
 ---
 

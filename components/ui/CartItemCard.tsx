@@ -40,7 +40,7 @@ export default function CartItemCard({
         />
       ) : (
         <div className={`w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 text-xl ${
-          isSummary ? 'bg-gray-50 border border-gray-100' : 'bg-[#FFEBEE]'
+          isSummary ? 'bg-gray-50 border border-gray-100' : 'bg-[#FAF6F0]'
         }`}>
           {'\u{1F388}'}
         </div>
@@ -50,7 +50,7 @@ export default function CartItemCard({
           <p className="font-bold text-gray-900 text-sm leading-tight truncate">
             {name}
           </p>
-          <p className="font-bold text-sm whitespace-nowrap text-[#E53935]">
+          <p className="font-bold text-sm whitespace-nowrap text-[#C9A96E]">
             {currency} {(price * quantity).toFixed(0)}
           </p>
         </div>
