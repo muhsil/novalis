@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { PILL_ICONS } from '@/components/ui/CategoryIconPill';
 
 interface Category {
   id: number;
@@ -15,15 +14,6 @@ interface Category {
 interface CategorySliderProps {
   categories: Category[];
 }
-
-const ICON_MAP: Record<string, string> = {
-  perfumes: 'perfumes',
-  'luxury-fragrances': 'luxury-fragrances',
-  'oud-collection': 'oud-collection',
-  oils: 'oils',
-  dokhun: 'dokhun',
-  'all-over-spray': 'all-over-spray',
-};
 
 export default function CategorySlider({ categories }: CategorySliderProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -59,7 +49,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
   return (
     <div className="relative group">
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-1 h-5 bg-[#C9A96E] rounded-full" />
           <h2 className="text-base font-bold text-[#191919]">Shop by Category</h2>
@@ -92,62 +82,50 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
           {/* All Categories Card */}
           <Link
             href="/shop"
-            className="shrink-0 w-[130px] max-md:w-[100px] group/card"
+            className="shrink-0 w-[160px] max-md:w-[120px] group/card"
             style={{ scrollSnapAlign: 'start' }}
           >
-            <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-gradient-to-br from-[#C9A96E] to-[#B8985D] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all group-hover/card:-translate-y-0.5">
-              <div className="w-10 h-10 max-md:w-8 max-md:h-8 rounded-full bg-white/20 flex items-center justify-center text-white mb-2">
-                {PILL_ICONS.all}
+            <div className="relative overflow-hidden rounded-lg aspect-[3/4] bg-gradient-to-br from-[#1A1A2E] to-[#2A2A4E] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all group-hover/card:-translate-y-0.5">
+              <div className="w-12 h-12 max-md:w-10 max-md:h-10 rounded-full bg-[#C9A96E]/20 flex items-center justify-center text-[#C9A96E] mb-3">
+                <svg className="w-6 h-6 max-md:w-5 max-md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
               </div>
-              <span className="text-white font-bold text-xs">All Products</span>
-              <span className="text-white/70 text-[10px] mt-0.5">Browse all</span>
+              <span className="text-white font-semibold text-sm max-md:text-xs">All Products</span>
             </div>
           </Link>
 
           {/* Category Cards */}
-          {categories.map((cat) => {
-            const iconKey = ICON_MAP[cat.slug] || 'all';
-            return (
-              <Link
-                key={cat.id}
-                href={`/shop?category=${cat.slug}`}
-                className="shrink-0 w-[130px] max-md:w-[100px] group/card"
-                style={{ scrollSnapAlign: 'start' }}
-              >
-                <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-[#C9A96E]/20 transition-all group-hover/card:-translate-y-0.5">
-                  {/* Category Image */}
-                  {cat.image?.src ? (
-                    <img
-                      src={cat.image.src}
-                      alt={cat.name}
-                      className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                      <span className="text-[#C9A96E] opacity-40 scale-150">
-                        {PILL_ICONS[iconKey] || PILL_ICONS.all}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                  {/* Label */}
-                  <div className="absolute bottom-0 left-0 right-0 p-2.5 max-md:p-2">
-                    <p className="text-white font-semibold text-xs max-md:text-[10px] leading-tight line-clamp-2">{cat.name}</p>
-                    <p className="text-white/60 text-[10px] max-md:text-[9px] mt-0.5">{cat.count} items</p>
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/shop?category=${cat.slug}`}
+              className="shrink-0 w-[160px] max-md:w-[120px] group/card"
+              style={{ scrollSnapAlign: 'start' }}
+            >
+              <div className="relative overflow-hidden rounded-lg aspect-[3/4] bg-[#f5f5f5] shadow-sm hover:shadow-md transition-all group-hover/card:-translate-y-0.5">
+                {/* Category Image */}
+                {cat.image?.src ? (
+                  <img
+                    src={cat.image.src}
+                    alt={cat.name}
+                    className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-[#FAF6F0] to-[#f0ebe0] flex items-center justify-center">
+                    <span className="text-[#C9A96E]/30 text-5xl max-md:text-4xl font-light">{cat.name.charAt(0)}</span>
                   </div>
+                )}
 
-                  {/* Icon Badge */}
-                  <div className="absolute top-2 right-2 w-7 h-7 max-md:w-6 max-md:h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#C9A96E] shadow-sm">
-                    <span className="scale-75">{PILL_ICONS[iconKey] || PILL_ICONS.all}</span>
-                  </div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                {/* Label */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 max-md:p-2">
+                  <p className="text-white font-semibold text-sm max-md:text-xs leading-tight line-clamp-2">{cat.name}</p>
                 </div>
-              </Link>
-            );
-          })}
+              </div>
+            </Link>
+          ))}
         </div>
 
         {/* Right Arrow */}
