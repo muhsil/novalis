@@ -22,6 +22,9 @@ interface CartState {
   clearCart: () => void;
 }
 
+// Legacy localStorage keys from previous rebrands
+const LEGACY_CART_KEYS = ['shapehive-cart', 'balloonsmall-cart'];
+
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
@@ -48,6 +51,25 @@ export const useCartStore = create<CartState>()(
       setDelivery: (date, time) => set({ deliveryDate: date, deliveryTime: time }),
       clearCart: () => set({ items: [], deliveryDate: null, deliveryTime: null }),
     }),
-    { name: 'novalis-cart' }
+    {
+      name: 'novalis-cart',
+      storage: {
+        getItem: (name) => {
+          const value = localStorage.getItem(name);
+          if (value) return JSON.parse(value);
+          for (const key of LEGACY_CART_KEYS) {
+            const legacy = localStorage.getItem(key);
+            if (legacy) {
+              localStorage.setItem(name, legacy);
+              localStorage.removeItem(key);
+              return JSON.parse(legacy);
+            }
+          }
+          return null;
+        },
+        setItem: (name, value) => localStorage.setItem(name, JSON.stringify(value)),
+        removeItem: (name) => localStorage.removeItem(name),
+      },
+    }
   )
 );

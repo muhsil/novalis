@@ -17,6 +17,9 @@ interface AuthState {
   updateCustomer: (updates: Partial<AuthCustomer>) => void;
 }
 
+// Legacy localStorage keys from previous rebrands
+const LEGACY_AUTH_KEYS = ['shapehive-auth', 'balloonsmall-auth'];
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -31,6 +34,24 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'novalis-auth',
+      storage: {
+        getItem: (name) => {
+          const value = localStorage.getItem(name);
+          if (value) return JSON.parse(value);
+          // Migrate from legacy keys
+          for (const key of LEGACY_AUTH_KEYS) {
+            const legacy = localStorage.getItem(key);
+            if (legacy) {
+              localStorage.setItem(name, legacy);
+              localStorage.removeItem(key);
+              return JSON.parse(legacy);
+            }
+          }
+          return null;
+        },
+        setItem: (name, value) => localStorage.setItem(name, JSON.stringify(value)),
+        removeItem: (name) => localStorage.removeItem(name),
+      },
     }
   )
 );
