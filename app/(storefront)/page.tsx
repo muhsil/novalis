@@ -65,7 +65,7 @@ export default async function HomePage() {
                 UP TO 30% OFF
               </span>
               <h1 className="text-2xl max-md:text-lg font-bold text-white mb-2 leading-tight">
-                Celebrate Every Moment
+                Discover Luxury Fragrances
               </h1>
               <p className="text-white/80 text-sm max-md:text-xs mb-4 leading-relaxed max-w-md">
                 Luxury Arabic perfumes and exquisite fragrances crafted with the finest ingredients. Delivered across the UAE.
