@@ -1,6 +1,11 @@
 /* ── Tailwind v4 Core Import ── */
 @import "tailwindcss";
 
+/* ── Override Tailwind v4 font-serif to use Playfair Display ── */
+@theme {
+  --font-serif: var(--font-playfair, 'Playfair Display', Georgia, serif);
+}
+
 /* ── Luxury perfume design tokens ── */
 @layer base {
   :root {
@@ -32,6 +37,7 @@
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
   }
+
 
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: #f5f5f5; }
@@ -314,6 +320,21 @@
 
 .promo-scroll { animation: slide-left 20s linear infinite; }
 .deal-pulse { animation: pulse-deal 2s ease-in-out infinite; }
+
+/* Scroll reveal animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RTL support */
+[dir="rtl"] .rtl\:text-right { text-align: right; }
+[dir="rtl"] .rtl\:flex-row-reverse { flex-direction: row-reverse; }
 
 @media (max-width: 767px) {
   button, a, .mobile-nav-item {

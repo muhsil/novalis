@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { OrganizationJsonLd, WebSiteJsonLd, LocalBusinessJsonLd } from '@/components/seo/JsonLd';
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics';
 import { GoogleTagManagerScript, GoogleTagManagerNoScript } from '@/components/seo/GoogleTagManager';
 import StoreSettingsProvider from '@/components/providers/StoreSettingsProvider';
+import LocaleHydrator from '@/components/providers/LocaleHydrator';
 import { getStoreSettings } from '@/lib/store-settings';
 
 const inter = Inter({
@@ -12,6 +13,13 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 const SITE_URL = 'https://shapehive.in';
@@ -100,7 +108,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const settings = await getStoreSettings();
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
         <GoogleTagManagerNoScript />
         <GoogleTagManagerScript />
@@ -109,6 +117,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <WebSiteJsonLd />
         <LocalBusinessJsonLd currency={settings.currency} />
         <StoreSettingsProvider currency={settings.currency} numDecimals={settings.numDecimals}>
+          <LocaleHydrator />
           {children}
         </StoreSettingsProvider>
       </body>

@@ -5,10 +5,6 @@ import { getStoreSettings } from '@/lib/store-settings';
 import Link from 'next/link';
 import ProductCard from '@/components/ui/ProductCard';
 import EmptyState from '@/components/ui/EmptyState';
-import RatingStars from '@/components/ui/RatingStars';
-import SoldCount from '@/components/ui/SoldCount';
-import DealBadge from '@/components/ui/DealBadge';
-import ShippingBadge from '@/components/ui/ShippingBadge';
 import ProductImageGallery from '@/components/ui/ProductImageGallery';
 import StickyAddToCart from '@/components/ui/StickyAddToCart';
 import ProductVariationPicker from '@/components/ui/ProductVariationPicker';
@@ -16,21 +12,12 @@ import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 
 export const revalidate = 60;
 
-const HIGHLIGHT_ICONS: Record<string, React.ReactNode> = {
-  'same-day': <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
-  premium: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
-  delivery: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>,
-  whatsapp: <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>,
-};
-
-function getProductHighlights(currency: string) {
-  return [
-    { key: 'same-day', title: 'Same-Day', description: 'Order before 2 PM' },
-    { key: 'premium', title: 'Premium', description: 'Finest quality ingredients' },
-    { key: 'delivery', title: 'Free Delivery', description: `Orders over ${currency} 100` },
-    { key: 'whatsapp', title: 'WhatsApp', description: 'Instant support' },
-  ];
-}
+const SERVICE_FEATURES = [
+  { icon: '🚚', title: 'Free UAE Delivery', description: 'Complimentary shipping on orders over AED 100' },
+  { icon: '⚡', title: 'Same-Day Delivery', description: 'Order before 2 PM for same-day' },
+  { icon: '🎁', title: 'Gift Wrapping', description: 'Complimentary luxury packaging' },
+  { icon: '↩️', title: '14-Day Returns', description: 'Full refund on unopened items' },
+];
 
 async function getProduct(slug: string) {
   try {
@@ -73,12 +60,28 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
         title: `${product.name} | Novalis Dubai`,
         description: desc || `Buy ${product.name} from Novalis Dubai.`,
         type: 'website',
-        images: product.images?.[0]?.src ? [{ url: product.images[0].src, width: 800, height: 800, alt: product.name }] : [],
+        images: product.images?.[0]?.src ? [{ url: product.images[0].src, width: 800, height: 800 }] : [],
       },
     };
   } catch {
     return { title: 'Product' };
   }
+}
+
+function extractFragranceNotes(description: string): { top: string[]; heart: string[]; base: string[] } | null {
+  const text = description.replace(/<[^>]*>/g, ' ').toLowerCase();
+  const notes: { top: string[]; heart: string[]; base: string[] } = { top: [], heart: [], base: [] };
+
+  const topMatch = text.match(/top\s*(?:notes?)?[:\s-]+([^.]*?)(?:heart|middle|base|$)/i);
+  const heartMatch = text.match(/(?:heart|middle)\s*(?:notes?)?[:\s-]+([^.]*?)(?:base|$)/i);
+  const baseMatch = text.match(/base\s*(?:notes?)?[:\s-]+([^.]*?)(?:\.|$)/i);
+
+  if (topMatch) notes.top = topMatch[1].split(/[,&]/).map(n => n.trim()).filter(Boolean).slice(0, 4);
+  if (heartMatch) notes.heart = heartMatch[1].split(/[,&]/).map(n => n.trim()).filter(Boolean).slice(0, 4);
+  if (baseMatch) notes.base = baseMatch[1].split(/[,&]/).map(n => n.trim()).filter(Boolean).slice(0, 4);
+
+  if (notes.top.length || notes.heart.length || notes.base.length) return notes;
+  return null;
 }
 
 export default async function ProductPage({ params: paramsPromise }: { params: Promise<{ slug: string }> }) {
@@ -107,13 +110,11 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
   const price = parseFloat(product.price || '0');
   const regularPrice = product.regular_price ? parseFloat(product.regular_price) : null;
   const discount = product.on_sale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
-  const hash = params.slug.split('').reduce((acc: number, c: string) => acc + c.charCodeAt(0), 0);
-  const soldNum = Math.floor((hash * 7 + price * 3) % 900 + 100);
-  const reviewCount = Math.floor(price * 2 + 30);
   const mainImage = product.images?.[0]?.src || '';
+  const fragranceNotes = extractFragranceNotes(product.description || '');
 
   return (
-    <div className="max-w-7xl mx-auto pb-10 max-md:pb-24">
+    <div className="max-w-7xl mx-auto pb-16 max-md:pb-24">
       <ProductJsonLd
         name={product.name}
         description={product.short_description || product.description || ''}
@@ -131,16 +132,16 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       ]} />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-[#999] px-4 py-3 max-md:px-3 overflow-x-auto no-scrollbar">
+      <nav className="flex items-center gap-2 text-xs text-[#999] px-6 py-4 max-md:px-4 overflow-x-auto no-scrollbar">
         <Link href="/" className="hover:text-[#C9A96E] transition-colors shrink-0">Home</Link>
-        <span className="shrink-0">&gt;</span>
+        <span className="shrink-0">/</span>
         <Link href="/shop" className="hover:text-[#C9A96E] transition-colors shrink-0">Shop</Link>
-        <span className="shrink-0">&gt;</span>
+        <span className="shrink-0">/</span>
         <span className="text-[#191919] font-medium truncate">{product.name}</span>
       </nav>
 
       {/* Product Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-md:gap-0 px-4 max-md:px-0 mb-10 max-md:mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-md:gap-0 px-6 max-md:px-0 mb-16 max-md:mb-8">
         {/* Left: Image Gallery */}
         <ProductImageGallery
           images={product.images || []}
@@ -149,53 +150,41 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
         />
 
         {/* Right: Info */}
-        <div className="flex flex-col max-md:px-3 max-md:pt-3">
+        <div className="flex flex-col max-md:px-4 max-md:pt-5">
           {/* Categories */}
           {product.categories?.length > 0 && (
-            <div className="flex gap-1.5 mb-2">
+            <div className="flex gap-2 mb-3">
               {product.categories.slice(0, 2).map((cat: any) => (
-                <span key={cat.id} className="text-[10px] font-medium bg-[#FAF6F0] text-[#C9A96E] px-2 py-0.5 rounded">{cat.name}</span>
+                <span key={cat.id} className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#C9A96E]">{cat.name}</span>
               ))}
             </div>
           )}
 
           {/* Title */}
-          <h1 className="text-xl md:text-2xl font-bold text-[#191919] mb-2 leading-tight">{product.name}</h1>
+          <h1 className="font-serif text-2xl md:text-3xl font-medium text-[#191919] mb-4 leading-tight">{product.name}</h1>
 
-          {/* Rating + Sold */}
-          <div className="flex items-center gap-3 mb-3">
-            <RatingStars rating={4.8} count={reviewCount} size="md" />
-            <SoldCount count={soldNum} className="text-xs" />
-          </div>
-
-          {/* Price Block - AliExpress style */}
-          <div className="bg-[#FAF6F0] rounded-lg p-3 mb-3">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl max-md:text-xl font-bold text-[#C9A96E]">{currency} {price.toFixed(0)}</span>
-              {product.on_sale && regularPrice && (
-                <>
-                  <span className="text-sm text-[#999] line-through">{currency} {regularPrice.toFixed(0)}</span>
-                  <DealBadge text={`${discount}% OFF`} variant="red" />
-                </>
-              )}
-            </div>
-            <div className="flex gap-2 mt-2">
-              <ShippingBadge variant="free" />
-              <ShippingBadge variant="same-day" />
-            </div>
+          {/* Price */}
+          <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#f0f0f0]">
+            <span className="text-2xl font-light text-[#191919]">{currency} {price.toFixed(0)}</span>
+            {product.on_sale && regularPrice && (
+              <>
+                <span className="text-base text-[#bbb] line-through">{currency} {regularPrice.toFixed(0)}</span>
+                <span className="text-xs font-semibold text-[#C9A96E] tracking-wide uppercase">Save {discount}%</span>
+              </>
+            )}
           </div>
 
           {/* Short description */}
           {product.short_description && (
-            <div className="text-[#666] text-sm leading-relaxed mb-3 prose"
+            <div className="text-[#666] text-sm leading-relaxed mb-6 font-light prose"
               dangerouslySetInnerHTML={{ __html: product.short_description }} />
           )}
 
-          {/* Stock badge */}
-          <div className="flex items-center gap-2 mb-4">
-            <div className={`w-2 h-2 rounded-full ${product.in_stock !== false ? 'bg-[#00B578]' : 'bg-red-400'}`} />
-            <span className="text-xs font-medium text-[#666]">
-              {product.in_stock !== false ? 'In Stock — Ready for delivery' : 'Out of Stock'}
+          {/* Stock status */}
+          <div className="flex items-center gap-2 mb-6">
+            <div className={`w-1.5 h-1.5 rounded-full ${product.in_stock !== false ? 'bg-[#00B578]' : 'bg-red-400'}`} />
+            <span className="text-xs tracking-wide uppercase text-[#999]">
+              {product.in_stock !== false ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>
 
@@ -209,14 +198,14 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
             variations={variations}
           />
 
-          {/* Highlights Grid */}
-          <div className="grid grid-cols-2 gap-2 mt-4">
-            {getProductHighlights(currency).map((h) => (
-              <div key={h.title} className="flex items-center gap-2 bg-white border border-[#f0f0f0] rounded-lg px-3 py-2">
-                <span className="text-[#C9A96E]">{HIGHLIGHT_ICONS[h.key]}</span>
+          {/* Service features */}
+          <div className="grid grid-cols-2 gap-3 mt-8 pt-8 border-t border-[#f0f0f0]">
+            {SERVICE_FEATURES.map((f) => (
+              <div key={f.title} className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">{f.icon}</span>
                 <div>
-                  <span className="text-xs font-semibold text-[#191919]">{h.title}</span>
-                  <p className="text-[10px] text-[#999]">{h.description}</p>
+                  <span className="text-xs font-semibold text-[#191919] block">{f.title}</span>
+                  <p className="text-[10px] text-[#999] mt-0.5 leading-relaxed">{f.description}</p>
                 </div>
               </div>
             ))}
@@ -224,24 +213,53 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
         </div>
       </div>
 
+      {/* Fragrance Notes Pyramid */}
+      {fragranceNotes && (
+        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
+          <div className="text-center mb-8">
+            <h2 className="font-serif text-xl font-medium text-[#191919] mb-1">Fragrance Profile</h2>
+            <p className="text-xs text-[#999] tracking-wide uppercase">Scent Composition</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            {[
+              { label: 'Top Notes', notes: fragranceNotes.top, desc: 'First impression' },
+              { label: 'Heart Notes', notes: fragranceNotes.heart, desc: 'The character' },
+              { label: 'Base Notes', notes: fragranceNotes.base, desc: 'The lasting trail' },
+            ].map((tier) => (
+              tier.notes.length > 0 && (
+                <div key={tier.label} className="text-center p-6 bg-[#FAF6F0] border border-[#f0ebe0]">
+                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#C9A96E] mb-1">{tier.label}</p>
+                  <p className="text-[9px] text-[#bbb] mb-4 tracking-wide uppercase">{tier.desc}</p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {tier.notes.map((note) => (
+                      <span key={note} className="text-xs text-[#666] font-light capitalize">{note}</span>
+                    ))}
+                  </div>
+                </div>
+              )
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Product Description */}
       {product.description && (
-        <div className="mx-4 max-md:mx-3 mb-10 max-md:mb-6 bg-white rounded-lg p-5 max-md:p-4 border border-[#f0f0f0]">
-          <h3 className="text-base font-bold text-[#191919] mb-3">Product Details</h3>
-          <div className="prose text-[#666] text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
+        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
+          <h3 className="font-serif text-xl font-medium text-[#191919] mb-4">About This Fragrance</h3>
+          <div className="prose text-[#666] text-sm leading-relaxed font-light max-w-3xl" dangerouslySetInnerHTML={{ __html: product.description }} />
         </div>
       )}
 
       {/* Related Products */}
       {similarProducts.length > 0 && (
-        <div className="mx-4 max-md:mx-3 mb-10 max-md:mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-base font-bold text-[#191919]">You May Also Like</h2>
-            <Link href="/shop" className="text-xs text-[#999] hover:text-[#C9A96E]">See All &gt;</Link>
+        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-serif text-xl font-medium text-[#191919]">You May Also Like</h2>
+            <Link href="/shop" className="text-xs text-[#C9A96E] font-semibold hover:underline tracking-wide uppercase">View All</Link>
           </div>
 
           {/* Desktop grid */}
-          <div className="hidden md:grid grid-cols-4 gap-2">
+          <div className="hidden md:grid grid-cols-4 gap-4">
             {similarProducts.map((p: any) => (
               <ProductCard
                 key={p.id}
@@ -252,14 +270,15 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
                 imageSrc={p.images?.[0]?.src}
                 variant="compact"
                 currency={currency}
+                productId={p.id}
               />
             ))}
           </div>
 
           {/* Mobile horizontal scroll */}
-          <div className="md:hidden flex overflow-x-auto no-scrollbar gap-1.5">
+          <div className="md:hidden flex overflow-x-auto no-scrollbar gap-3">
             {similarProducts.map((p: any) => (
-              <div key={p.id} className="w-[42vw] min-w-[145px] shrink-0">
+              <div key={p.id} className="w-[42vw] min-w-[160px] shrink-0">
                 <ProductCard
                   slug={p.slug}
                   name={p.name}
@@ -268,6 +287,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
                   imageSrc={p.images?.[0]?.src}
                   variant="compact"
                   currency={currency}
+                  productId={p.id}
                 />
               </div>
             ))}

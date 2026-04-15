@@ -128,7 +128,7 @@ export default async function ShopPage({
             actionHref="/shop"
           />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 max-md:gap-1.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-md:gap-2.5">
             {displayProducts.map((p: any) => (
               <ProductCard
                 key={p.id}
@@ -141,6 +141,7 @@ export default async function ShopPage({
                 onSale={p.on_sale}
                 featured={p.featured}
                 currency={currency}
+                productId={p.id}
               />
             ))}
           </div>
