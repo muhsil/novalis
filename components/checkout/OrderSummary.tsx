@@ -5,6 +5,7 @@ import { CartItem } from '@/store/useCartStore';
 import CartItemCard from '@/components/ui/CartItemCard';
 import PriceDisplay from '@/components/ui/PriceDisplay';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -13,6 +14,9 @@ interface OrderSummaryProps {
 
 export default function OrderSummary({ items, subtotal }: OrderSummaryProps) {
   const { currency } = useStoreSettings();
+  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
+  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const displaySubtotal = selectedCurrency !== 'AED' ? convertPrice(subtotal) : subtotal;
 
   return (
     <div className="bg-white p-5 max-md:p-4 rounded-xl border border-gray-100">
@@ -37,7 +41,7 @@ export default function OrderSummary({ items, subtotal }: OrderSummaryProps) {
       <div className="space-y-2.5 pt-4 border-t border-dashed border-gray-200">
         <div className="flex justify-between text-sm">
           <span className="text-gray-400 font-medium">Subtotal</span>
-          <span className="text-gray-900 font-bold">{currency} {subtotal.toFixed(0)}</span>
+          <span className="text-gray-900 font-bold">{currSymbol} {displaySubtotal.toFixed(0)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-400 font-medium">Delivery</span>
@@ -45,7 +49,7 @@ export default function OrderSummary({ items, subtotal }: OrderSummaryProps) {
         </div>
         <div className="flex justify-between items-center pt-3 border-t border-gray-100">
           <span className="text-gray-900 font-extrabold text-base">Total</span>
-          <PriceDisplay amount={subtotal} size="xl" />
+          <PriceDisplay amount={displaySubtotal} currency={currSymbol} size="xl" />
         </div>
       </div>
 
