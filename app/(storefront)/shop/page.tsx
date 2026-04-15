@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'Browse our full collection of premium balloons, balloon arches, garland kits, and event decorations. Birthday, wedding, baby shower balloons with same-day delivery in Dubai.',
   alternates: { canonical: '/shop' },
   openGraph: {
-    title: 'Shop Balloons & Decorations | BalloonsMall Dubai',
+    title: 'Shop Balloons & Decorations | ShapeHive Dubai',
     description: 'Browse premium balloons for every occasion. Same-day delivery across Dubai.',
   },
 };

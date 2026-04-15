@@ -14,7 +14,7 @@ export interface SavedAddress {
   is_default?: boolean;
 }
 
-const META_KEY = 'balloonsmall_addresses';
+const META_KEY = 'shapehive_addresses';
 
 // GET: Fetch saved addresses for a customer
 export async function GET(req: Request) {

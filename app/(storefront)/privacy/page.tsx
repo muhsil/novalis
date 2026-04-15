@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'BalloonsMall privacy policy. Learn how we collect, use, and protect your personal information.',
+  description: 'ShapeHive privacy policy. Learn how we collect, use, and protect your personal information.',
   alternates: { canonical: '/privacy' },
 };
 
@@ -30,11 +30,11 @@ const SECTIONS = [
   },
   {
     title: '6. Your Rights',
-    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@balloonsmall.com.',
+    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@shapehive.in.',
   },
   {
     title: '7. Contact',
-    content: 'For privacy-related inquiries, email hello@balloonsmall.com or WhatsApp +971 56 355 4303.',
+    content: 'For privacy-related inquiries, email hello@shapehive.in or WhatsApp +971 56 355 4303.',
   },
 ];
 

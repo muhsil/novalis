@@ -4,14 +4,14 @@ import { getStoreSettings } from '@/lib/store-settings';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
-  description: 'Read BalloonsMall\'s terms and conditions for ordering balloons and decorations in Dubai.',
+  description: 'Read ShapeHive\'s terms and conditions for ordering balloons and decorations in Dubai.',
   alternates: { canonical: '/terms' },
 };
 
 const SECTIONS = [
   {
     title: '1. General',
-    content: 'By accessing and using BalloonsMall (balloonsmall.com), you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
+    content: 'By accessing and using ShapeHive (shapehive.in), you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
   },
   {
     title: '2. Products & Pricing',
@@ -31,11 +31,11 @@ const SECTIONS = [
   },
   {
     title: '6. Liability',
-    content: 'BalloonsMall shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or services. Our total liability shall not exceed the amount paid for the order in question.',
+    content: 'ShapeHive shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or services. Our total liability shall not exceed the amount paid for the order in question.',
   },
   {
     title: '7. Contact',
-    content: 'For questions about these terms, contact us at hello@balloonsmall.com or WhatsApp +971 56 355 4303.',
+    content: 'For questions about these terms, contact us at hello@shapehive.in or WhatsApp +971 56 355 4303.',
   },
 ];
 

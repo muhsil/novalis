@@ -1,8 +1,8 @@
-# BalloonsMall - Project Details
+# ShapeHive - Project Details
 
 ## Overview
 
-BalloonsMall is a premium balloon and event decoration e-commerce store based in Dubai, UAE. The frontend is built with Next.js and the backend uses WordPress + WooCommerce as a headless CMS.
+ShapeHive is a premium balloon and event decoration e-commerce store based in Dubai, UAE. The frontend is built with Next.js and the backend uses WordPress + WooCommerce as a headless CMS.
 
 ---
 
@@ -19,9 +19,9 @@ BalloonsMall is a premium balloon and event decoration e-commerce store based in
 
 ### Backend (Headless CMS)
 - **CMS:** WordPress + WooCommerce
-- **URL:** https://cms.balloonsmall.com
-- **Admin Panel:** https://cms.balloonsmall.com/wp-admin/
-- **REST API Base:** https://cms.balloonsmall.com/wp-json/wc/v3
+- **URL:** https://cms.shapehive.in
+- **Admin Panel:** https://cms.shapehive.in/wp-admin/
+- **REST API Base:** https://cms.shapehive.in/wp-json/wc/v3
 
 ### Payment Gateway
 - **Provider:** Ziina (https://ziina.com)
@@ -35,8 +35,8 @@ BalloonsMall is a premium balloon and event decoration e-commerce store based in
 ### Hosting
 - **Frontend Hosting:** Hostinger (Business Web Hosting plan)
 - **Backend Hosting:** Hostinger (same plan, WordPress)
-- **Domain:** balloonsmall.com
-- **CMS Domain:** cms.balloonsmall.com
+- **Domain:** shapehive.in
+- **CMS Domain:** cms.shapehive.in
 - **Hosting Panel:** https://hpanel.hostinger.com
 
 ---
@@ -45,10 +45,10 @@ BalloonsMall is a premium balloon and event decoration e-commerce store based in
 
 | Service | URL |
 |---------|-----|
-| Live Site | https://balloonsmall.com |
-| WP Admin | https://cms.balloonsmall.com/wp-admin/ |
-| WooCommerce API | https://cms.balloonsmall.com/wp-json/wc/v3 |
-| GitHub Repo | https://github.com/muhsil/-balloonsmall-front |
+| Live Site | https://shapehive.in |
+| WP Admin | https://cms.shapehive.in/wp-admin/ |
+| WooCommerce API | https://cms.shapehive.in/wp-json/wc/v3 |
+| GitHub Repo | https://github.com/muhsil/novalis |
 | Hostinger Panel | https://hpanel.hostinger.com |
 | Ziina Dashboard | https://ziina.com |
 
@@ -60,7 +60,7 @@ The following environment variables are required in `.env.local` (local dev) and
 
 ```env
 # WordPress / WooCommerce
-NEXT_PUBLIC_WP_URL="https://cms.balloonsmall.com"
+NEXT_PUBLIC_WP_URL="https://cms.shapehive.in"
 WC_CONSUMER_KEY="<your-woocommerce-consumer-key>"
 WC_CONSUMER_SECRET="<your-woocommerce-consumer-secret>"
 
@@ -70,7 +70,7 @@ ZIINA_TEST_MODE="true"   # Set to "true" to enable test mode in production (for 
 ```
 
 ### How to generate WooCommerce API keys:
-1. Go to https://cms.balloonsmall.com/wp-admin/
+1. Go to https://cms.shapehive.in/wp-admin/
 2. Navigate to **WooCommerce > Settings > Advanced > REST API**
 3. Click **Add Key**
 4. Set permissions to **Read/Write**
@@ -89,7 +89,7 @@ ZIINA_TEST_MODE="true"   # Set to "true" to enable test mode in production (for 
 ## Credentials Reference
 
 ### WordPress Admin
-- **URL:** https://cms.balloonsmall.com/wp-admin/
+- **URL:** https://cms.shapehive.in/wp-admin/
 - **Email:** muhsilv@gmail.com
 
 ### Hostinger
@@ -124,7 +124,7 @@ These settings are fetched dynamically by the frontend via `lib/store-settings.t
 
 | Type | Value |
 |------|-------|
-| Email | hello@balloonsmall.com |
+| Email | hello@shapehive.in |
 | Phone | 56 355 4303 |
 | WhatsApp | +971 56 355 4303 |
 | WhatsApp Link | https://wa.me/971563554303 |
@@ -134,7 +134,7 @@ These settings are fetched dynamically by the frontend via `lib/store-settings.t
 ## Project Structure
 
 ```
-balloonsmall-front/
+shapehive-front/
 ├── app/
 │   ├── (storefront)/          # Main storefront pages (layout with Navbar + Footer)
 │   │   ├── page.tsx           # Home page

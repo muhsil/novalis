@@ -6,11 +6,11 @@ export function OrganizationJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'BalloonsMall',
-    url: 'https://balloonsmall.com',
-    logo: 'https://balloonsmall.com/hero-balloons.png',
+    name: 'ShapeHive',
+    url: 'https://shapehive.in',
+    logo: 'https://shapehive.in/hero-balloons.png',
     description: 'Premium balloon decorations and delivery service in Dubai, UAE.',
-    email: 'hello@balloonsmall.com',
+    email: 'hello@shapehive.in',
     telephone: '+971563554303',
     address: {
       '@type': 'PostalAddress',
@@ -38,13 +38,13 @@ export function WebSiteJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'BalloonsMall',
-    url: 'https://balloonsmall.com',
+    name: 'ShapeHive',
+    url: 'https://shapehive.in',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://balloonsmall.com/shop?search={search_term_string}',
+        urlTemplate: 'https://shapehive.in/shop?search={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -61,12 +61,12 @@ export function LocalBusinessJsonLd({ currency = 'AED' }: { currency?: string })
   const data = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://balloonsmall.com/#business',
-    name: 'BalloonsMall',
-    image: 'https://balloonsmall.com/hero-balloons.png',
-    url: 'https://balloonsmall.com',
+    '@id': 'https://shapehive.in/#business',
+    name: 'ShapeHive',
+    image: 'https://shapehive.in/hero-balloons.png',
+    url: 'https://shapehive.in',
     telephone: '+971563554303',
-    email: 'hello@balloonsmall.com',
+    email: 'hello@shapehive.in',
     description: 'Premium balloon decorations and delivery service in Dubai. Same-day delivery, wide variety of balloon styles for every occasion.',
     address: {
       '@type': 'PostalAddress',
@@ -114,7 +114,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `https://balloonsmall.com${item.href}`,
+      item: `https://shapehive.in${item.href}`,
     })),
   };
   return (
@@ -143,15 +143,15 @@ export function ProductJsonLd({ name, description, image, price, slug, inStock, 
     name,
     description: description.replace(/<[^>]*>/g, '').slice(0, 500),
     image,
-    url: `https://balloonsmall.com/product/${slug}`,
+    url: `https://shapehive.in/product/${slug}`,
     brand: {
       '@type': 'Brand',
-      name: 'BalloonsMall',
+      name: 'ShapeHive',
     },
     category: category || 'Balloons & Decorations',
     offers: {
       '@type': 'Offer',
-      url: `https://balloonsmall.com/product/${slug}`,
+      url: `https://shapehive.in/product/${slug}`,
       priceCurrency: currency,
       price: price.toFixed(2),
       availability: inStock
@@ -159,7 +159,7 @@ export function ProductJsonLd({ name, description, image, price, slug, inStock, 
         : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'BalloonsMall',
+        name: 'ShapeHive',
       },
       shippingDetails: {
         '@type': 'OfferShippingDetails',

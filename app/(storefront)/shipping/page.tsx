@@ -5,7 +5,7 @@ import { getStoreSettings } from '@/lib/store-settings';
 
 export const metadata: Metadata = {
   title: 'Shipping & Delivery',
-  description: 'BalloonsMall shipping and delivery information. Same-day delivery across Dubai. Free shipping on eligible orders.',
+  description: 'ShapeHive shipping and delivery information. Same-day delivery across Dubai. Free shipping on eligible orders.',
   alternates: { canonical: '/shipping' },
 };
 

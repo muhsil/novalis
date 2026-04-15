@@ -48,6 +48,6 @@ export const useCartStore = create<CartState>()(
       setDelivery: (date, time) => set({ deliveryDate: date, deliveryTime: time }),
       clearCart: () => set({ items: [], deliveryDate: null, deliveryTime: null }),
     }),
-    { name: 'balloonsmall-cart' }
+    { name: 'shapehive-cart' }
   )
 );

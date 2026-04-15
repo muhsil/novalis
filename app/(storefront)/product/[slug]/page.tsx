@@ -67,11 +67,11 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
     const desc = (product.short_description || product.description || '').replace(/<[^>]*>/g, '').slice(0, 160);
     return {
       title: product.name,
-      description: desc || `Buy ${product.name} from BalloonsMall. Premium balloons delivered in Dubai.`,
+      description: desc || `Buy ${product.name} from ShapeHive. Premium balloons delivered in Dubai.`,
       alternates: { canonical: `/product/${params.slug}` },
       openGraph: {
-        title: `${product.name} | BalloonsMall Dubai`,
-        description: desc || `Buy ${product.name} from BalloonsMall Dubai.`,
+        title: `${product.name} | ShapeHive Dubai`,
+        description: desc || `Buy ${product.name} from ShapeHive Dubai.`,
         type: 'website',
         images: product.images?.[0]?.src ? [{ url: product.images[0].src, width: 800, height: 800, alt: product.name }] : [],
       },
