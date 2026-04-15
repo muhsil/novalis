@@ -14,8 +14,8 @@ export interface SavedAddress {
   is_default?: boolean;
 }
 
-const META_KEY = 'shapehive_addresses';
-const LEGACY_META_KEY = 'balloonsmall_addresses';
+const META_KEY = 'novalis_addresses';
+const LEGACY_META_KEYS = ['shapehive_addresses', 'balloonsmall_addresses'];
 
 // GET: Fetch saved addresses for a customer
 export async function GET(req: Request) {
@@ -30,11 +30,11 @@ export async function GET(req: Request) {
     const response = await wooApi.get(`/customers/${customerId}?_=${Date.now()}`);
     const customer = response.data;
 
-    // Get addresses from customer meta (check new key first, fall back to legacy key)
+    // Get addresses from customer meta (check new key first, fall back to legacy keys)
     const metaEntry = customer.meta_data?.find(
       (m: { key: string; value: string }) => m.key === META_KEY
     ) || customer.meta_data?.find(
-      (m: { key: string; value: string }) => m.key === LEGACY_META_KEY
+      (m: { key: string; value: string }) => LEGACY_META_KEYS.includes(m.key)
     );
 
     let addresses: SavedAddress[] = [];
@@ -106,7 +106,7 @@ export async function POST(req: Request) {
     const metaEntry = customer.meta_data?.find(
       (m: { key: string; value: string }) => m.key === META_KEY
     ) || customer.meta_data?.find(
-      (m: { key: string; value: string }) => m.key === LEGACY_META_KEY
+      (m: { key: string; value: string }) => LEGACY_META_KEYS.includes(m.key)
     );
 
     let addresses: SavedAddress[] = [];
@@ -187,7 +187,7 @@ export async function PUT(req: Request) {
     const metaEntry = customer.meta_data?.find(
       (m: { key: string; value: string }) => m.key === META_KEY
     ) || customer.meta_data?.find(
-      (m: { key: string; value: string }) => m.key === LEGACY_META_KEY
+      (m: { key: string; value: string }) => LEGACY_META_KEYS.includes(m.key)
     );
 
     let addresses: SavedAddress[] = [];
@@ -241,7 +241,7 @@ export async function DELETE(req: Request) {
     const metaEntry = customer.meta_data?.find(
       (m: { key: string; value: string }) => m.key === META_KEY
     ) || customer.meta_data?.find(
-      (m: { key: string; value: string }) => m.key === LEGACY_META_KEY
+      (m: { key: string; value: string }) => LEGACY_META_KEYS.includes(m.key)
     );
 
     let addresses: SavedAddress[] = [];

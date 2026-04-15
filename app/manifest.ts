@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'ShapeHive - Premium Balloons & Decorations in Dubai',
-    short_name: 'ShapeHive',
+    name: 'Novalis - Premium Balloons & Decorations in Dubai',
+    short_name: 'Novalis',
     description: 'Shop premium balloons and event decorations in Dubai. Same-day delivery available.',
     start_url: '/',
     display: 'standalone',

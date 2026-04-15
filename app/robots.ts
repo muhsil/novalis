@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/checkout'],
       },
     ],
-    sitemap: 'https://shapehive.in/sitemap.xml',
+    sitemap: 'https://novalis.ae/sitemap.xml',
   };
 }

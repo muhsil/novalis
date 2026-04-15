@@ -18,6 +18,9 @@ interface WishlistState {
   clearWishlist: () => void;
 }
 
+// Legacy localStorage keys from previous rebrands
+const LEGACY_WISHLIST_KEYS = ['shapehive-wishlist', 'balloonsmall-wishlist'];
+
 export const useWishlistStore = create<WishlistState>()(
   persist(
     (set, get) => ({
@@ -40,6 +43,25 @@ export const useWishlistStore = create<WishlistState>()(
       },
       clearWishlist: () => set({ items: [] }),
     }),
-    { name: 'shapehive-wishlist' }
+    {
+      name: 'novalis-wishlist',
+      storage: {
+        getItem: (name) => {
+          const value = localStorage.getItem(name);
+          if (value) return JSON.parse(value);
+          for (const key of LEGACY_WISHLIST_KEYS) {
+            const legacy = localStorage.getItem(key);
+            if (legacy) {
+              localStorage.setItem(name, legacy);
+              localStorage.removeItem(key);
+              return JSON.parse(legacy);
+            }
+          }
+          return null;
+        },
+        setItem: (name, value) => localStorage.setItem(name, JSON.stringify(value)),
+        removeItem: (name) => localStorage.removeItem(name),
+      },
+    }
   )
 );

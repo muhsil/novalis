@@ -6,11 +6,11 @@ export function OrganizationJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'ShapeHive',
-    url: 'https://shapehive.in',
-    logo: 'https://shapehive.in/hero-balloons.png',
+    name: 'Novalis',
+    url: 'https://novalis.ae',
+    logo: 'https://novalis.ae/hero-balloons.png',
     description: 'Premium balloon decorations and delivery service in Dubai, UAE.',
-    email: 'hello@shapehive.in',
+    email: 'hello@novalis.ae',
     telephone: '+971563554303',
     address: {
       '@type': 'PostalAddress',
@@ -38,13 +38,13 @@ export function WebSiteJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'ShapeHive',
-    url: 'https://shapehive.in',
+    name: 'Novalis',
+    url: 'https://novalis.ae',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://shapehive.in/shop?search={search_term_string}',
+        urlTemplate: 'https://novalis.ae/shop?search={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -61,12 +61,12 @@ export function LocalBusinessJsonLd({ currency = 'AED' }: { currency?: string })
   const data = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://shapehive.in/#business',
-    name: 'ShapeHive',
-    image: 'https://shapehive.in/hero-balloons.png',
-    url: 'https://shapehive.in',
+    '@id': 'https://novalis.ae/#business',
+    name: 'Novalis',
+    image: 'https://novalis.ae/hero-balloons.png',
+    url: 'https://novalis.ae',
     telephone: '+971563554303',
-    email: 'hello@shapehive.in',
+    email: 'hello@novalis.ae',
     description: 'Premium balloon decorations and delivery service in Dubai. Same-day delivery, wide variety of balloon styles for every occasion.',
     address: {
       '@type': 'PostalAddress',
@@ -114,7 +114,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `https://shapehive.in${item.href}`,
+      item: `https://novalis.ae${item.href}`,
     })),
   };
   return (
@@ -143,15 +143,15 @@ export function ProductJsonLd({ name, description, image, price, slug, inStock, 
     name,
     description: description.replace(/<[^>]*>/g, '').slice(0, 500),
     image,
-    url: `https://shapehive.in/product/${slug}`,
+    url: `https://novalis.ae/product/${slug}`,
     brand: {
       '@type': 'Brand',
-      name: 'ShapeHive',
+      name: 'Novalis',
     },
     category: category || 'Balloons & Decorations',
     offers: {
       '@type': 'Offer',
-      url: `https://shapehive.in/product/${slug}`,
+      url: `https://novalis.ae/product/${slug}`,
       priceCurrency: currency,
       price: price.toFixed(2),
       availability: inStock
@@ -159,7 +159,7 @@ export function ProductJsonLd({ name, description, image, price, slug, inStock, 
         : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'ShapeHive',
+        name: 'Novalis',
       },
       shippingDetails: {
         '@type': 'OfferShippingDetails',

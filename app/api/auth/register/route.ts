@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       },
       // Store hashed password in meta for simple auth (no JWT plugin needed)
       meta_data: [
-        { key: 'shapehive_password', value: hashPassword(password) },
+        { key: 'novalis_password', value: hashPassword(password) },
       ],
     });
 
