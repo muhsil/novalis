@@ -13,7 +13,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_URL = 'https://shapehive.in';
+const SITE_URL = 'https://novalis.ae';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -26,8 +26,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ShapeHive – Premium Balloon Decorations & Delivery in Dubai, UAE | Same-Day Delivery',
-    template: '%s | ShapeHive – Balloon Delivery Dubai & UAE',
+    default: 'Novalis – Premium Balloon Decorations & Delivery in Dubai, UAE | Same-Day Delivery',
+    template: '%s | Novalis – Balloon Delivery Dubai & UAE',
   },
   description: 'Order premium balloons and event decorations online in Dubai, Abu Dhabi & across the UAE. Birthday, wedding, baby shower & custom balloon arrangements with same-day delivery. Trusted by 1000+ customers in the GCC.',
   keywords: [
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     'balloon delivery Oman', 'balloons Qatar', 'GCC balloon delivery',
     'balloon arrangements Gulf', 'event decorations GCC',
   ],
-  authors: [{ name: 'ShapeHive', url: SITE_URL }],
-  creator: 'ShapeHive',
-  publisher: 'ShapeHive',
+  authors: [{ name: 'Novalis', url: SITE_URL }],
+  creator: 'Novalis',
+  publisher: 'Novalis',
   formatDetection: {
     email: false,
     address: false,
@@ -58,25 +58,25 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: 'ShapeHive – Premium Balloon Decorations & Delivery in Dubai, UAE',
+    title: 'Novalis – Premium Balloon Decorations & Delivery in Dubai, UAE',
     description: 'Order premium balloons and event decorations online in Dubai, Abu Dhabi & across the UAE. Same-day delivery available. Trusted by 1000+ customers in the GCC.',
     type: 'website',
     locale: 'en_AE',
     url: SITE_URL,
-    siteName: 'ShapeHive',
+    siteName: 'Novalis',
     images: [{
       url: '/hero-balloons.png',
       width: 1200,
       height: 630,
-      alt: 'ShapeHive – Premium Balloons & Decorations in Dubai',
+      alt: 'Novalis – Premium Balloons & Decorations in Dubai',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ShapeHive – Premium Balloon Decorations & Delivery in Dubai, UAE',
+    title: 'Novalis – Premium Balloon Decorations & Delivery in Dubai, UAE',
     description: 'Order premium balloons online in Dubai & UAE. Birthday, wedding, baby shower decorations with same-day delivery across the GCC.',
     images: ['/hero-balloons.png'],
-    creator: '@shapehive',
+    creator: '@novalis',
   },
   robots: {
     index: true,

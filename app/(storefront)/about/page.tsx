@@ -4,7 +4,7 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about ShapeHive — Dubai\'s premium balloon delivery service. We bring joy to every celebration with beautiful balloon arrangements.',
+  description: 'Learn about Novalis — Dubai\'s premium balloon delivery service. We bring joy to every celebration with beautiful balloon arrangements.',
   alternates: { canonical: '/about' },
 };
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
       {/* Hero */}
       <div className="bg-white rounded-lg border border-[#f0f0f0] p-6 max-md:p-4 mb-6 text-center">
         <span className="text-[#E53935] mb-3 block"><svg className="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg></span>
-        <h1 className="text-2xl max-md:text-xl font-bold text-[#191919] mb-2">About ShapeHive</h1>
+        <h1 className="text-2xl max-md:text-xl font-bold text-[#191919] mb-2">About Novalis</h1>
         <p className="text-[#666] text-sm max-w-lg mx-auto leading-relaxed">
           Dubai&apos;s premier balloon delivery service. We make every celebration special with premium balloon arrangements delivered right to your door.
         </p>
