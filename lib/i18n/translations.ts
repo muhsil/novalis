@@ -78,7 +78,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Trust Banner
     'trust.free_delivery': 'Free UAE Delivery',
-    'trust.free_delivery_sub': 'On orders over {currency} 100',
+    'trust.free_delivery_sub': 'On orders over {currency} {threshold}',
     'trust.gcc_shipping': 'GCC Shipping',
     'trust.gcc_shipping_sub': '2-10 business days',
     'trust.returns': '14-Day Returns',
@@ -198,7 +198,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Trust Banner
     'trust.free_delivery': 'توصيل مجاني في الإمارات',
-    'trust.free_delivery_sub': 'للطلبات فوق {currency} 100',
+    'trust.free_delivery_sub': 'للطلبات فوق {currency} {threshold}',
     'trust.gcc_shipping': 'شحن الخليج',
     'trust.gcc_shipping_sub': '2-10 أيام عمل',
     'trust.returns': 'إرجاع خلال 14 يوم',

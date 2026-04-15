@@ -14,13 +14,12 @@ const TRUST_ICONS = {
 
 export default function TrustBanner({ currency = 'AED' }: { currency?: string }) {
   const locale = useLocaleStore((s) => s.locale);
-  const currSymbol = useCurrencyStore((s) => {
-    const curr = s.currencies.find((c) => c.code === s.selectedCurrency);
-    return curr ? curr.code : currency;
-  });
+  const { convertPrice, getSymbol } = useCurrencyStore();
+  const currSymbol = getSymbol();
+  const convertedThreshold = String(Math.round(convertPrice(100)));
 
   const trustItems = [
-    { icon: TRUST_ICONS.shipping, title: t(locale, 'trust.free_delivery'), subtitle: t(locale, 'trust.free_delivery_sub', { currency: currSymbol }) },
+    { icon: TRUST_ICONS.shipping, title: t(locale, 'trust.free_delivery'), subtitle: t(locale, 'trust.free_delivery_sub', { currency: currSymbol, threshold: convertedThreshold }) },
     { icon: TRUST_ICONS.delivery, title: t(locale, 'trust.gcc_shipping'), subtitle: t(locale, 'trust.gcc_shipping_sub') },
     { icon: TRUST_ICONS.returns, title: t(locale, 'trust.returns'), subtitle: t(locale, 'trust.returns_sub') },
     { icon: TRUST_ICONS.prices, title: t(locale, 'trust.quality'), subtitle: t(locale, 'trust.quality_sub') },
