@@ -55,7 +55,7 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#C9A96E] via-[#FF5252] to-[#C9A96E] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
+      <div className="bg-gradient-to-r from-[#C9A96E] via-[#D4B87A] to-[#C9A96E] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
         <span className="inline-flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
           <span className="hidden sm:inline">Free Delivery on orders over AED 100</span>
@@ -72,7 +72,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4 h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0 group">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#C9A96E] to-[#FF6B6B] rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+              <div className="w-9 h-9 bg-gradient-to-br from-[#C9A96E] to-[#D4B87A] rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
               </div>
               <div className="flex flex-col">
@@ -83,7 +83,7 @@ export default function Navbar() {
 
             {/* Desktop Search */}
             <form method="GET" action="/shop" className="hidden md:flex flex-1 max-w-xl mx-6">
-              <div className={`flex w-full rounded-full overflow-hidden border-2 transition-all duration-200 ${searchFocused ? 'border-[#C9A96E] shadow-[0_0_0_3px_rgba(229,57,53,0.1)]' : 'border-[#eee] hover:border-[#ddd]'} bg-[#fafafa]`}>
+              <div className={`flex w-full rounded-full overflow-hidden border-2 transition-all duration-200 ${searchFocused ? 'border-[#C9A96E] shadow-[0_0_0_3px_rgba(201,169,110,0.15)]' : 'border-[#eee] hover:border-[#ddd]'} bg-[#fafafa]`}>
                 <input
                   ref={searchRef}
                   name="search"
@@ -193,7 +193,7 @@ export default function Navbar() {
       {/* Mobile Slide-in Menu Panel */}
       <div className={`md:hidden fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Menu Header */}
-        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#C9A96E] to-[#FF5252]">
+        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#C9A96E] to-[#D4B87A]">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#C9A96E] transition-all"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
               onClick={() => setMenuOpen(false)}
             >
               <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]">{NAV_ICONS[link.key]}</span>
@@ -238,7 +238,7 @@ export default function Navbar() {
           <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">Quick Access</p>
           <button
             onClick={() => { setMenuOpen(false); setCartOpen(true); }}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#C9A96E] transition-all w-full text-left"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all w-full text-left"
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg></span>
             Cart
@@ -250,7 +250,7 @@ export default function Navbar() {
           </button>
           <Link
             href="/account/wishlist"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#C9A96E] transition-all"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></span>
@@ -263,7 +263,7 @@ export default function Navbar() {
           </Link>
           <Link
             href={isLoggedIn ? '/account' : '/account/login'}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#C9A96E] transition-all"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></span>

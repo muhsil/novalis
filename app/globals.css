@@ -144,7 +144,7 @@
     background: #fff;
     color: var(--color-text);
   }
-  .form-input:focus { border-color: var(--color-brand); box-shadow: 0 0 0 2px rgba(229,57,53,0.1); }
+  .form-input:focus { border-color: var(--color-brand); box-shadow: 0 0 0 2px rgba(201,169,110,0.15); }
   .form-input::placeholder { color: #bbb; }
 
   .section-wrapper {
