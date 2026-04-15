@@ -71,7 +71,7 @@ export function LocalBusinessJsonLd({ currency = 'AED' }: { currency?: string })
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Dubai',
-      addressRegion: 'Dubai, Abu Dhabi, Sharjah',
+      addressRegion: 'Dubai',
       addressCountry: 'AE',
     },
     geo: {

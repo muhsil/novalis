@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     siteName: 'Novalis Perfumes UAE | Luxury Arabic Perfume Brand',
     images: [{
       url: '/novalis-logo.png',
-      width: 1200,
-      height: 630,
+      width: 534,
+      height: 416,
       alt: 'Novalis Perfumes | Luxury Fragrances with an Emirati Soul',
     }],
   },

@@ -35,21 +35,11 @@ async function getAllProducts() {
   } catch { return []; }
 }
 
-async function getOnSaleProducts() {
-  try {
-    const { data } = await wooApi.get('/products', {
-      params: { on_sale: true, per_page: 8, status: 'publish' },
-    });
-    return data as any[];
-  } catch { return []; }
-}
-
 export default async function HomePage() {
-  const [featured, categories, allProducts, onSale, settings] = await Promise.all([
+  const [featured, categories, allProducts, settings] = await Promise.all([
     getFeaturedProducts(),
     getCategories(),
     getAllProducts(),
-    getOnSaleProducts(),
     getStoreSettings(),
   ]);
   const { currency } = settings;
