@@ -36,12 +36,12 @@ export default function ProductCard({
   return (
     <Link href={`/product/${slug}`} className="product-card group block">
       {/* Image */}
-      <div className="relative overflow-hidden aspect-[3/4] bg-[#f5f5f5]">
+      <div className="relative overflow-hidden aspect-[3/4] bg-[#fafafa]">
         {imageSrc ? (
           <img
             src={imageSrc}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             loading="lazy"
           />
         ) : (
@@ -50,7 +50,7 @@ export default function ProductCard({
           </div>
         )}
 
-        {/* Discount badge - top left */}
+        {/* Discount badge */}
         {discount > 0 && (
           <span className="absolute top-3 left-3 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2.5 py-1 tracking-wider uppercase">
             -{discount}%
@@ -72,18 +72,21 @@ export default function ProductCard({
           />
         </div>
 
-        {/* Category tag at bottom */}
-        {categoryName && (
-          <div className="absolute bottom-3 left-3">
-            <span className="bg-white/90 backdrop-blur-sm text-[10px] font-medium text-[#666] px-2 py-0.5 tracking-wide uppercase">
-              {categoryName}
-            </span>
-          </div>
-        )}
+        {/* Quick view overlay on hover */}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <span className="text-white text-[10px] font-semibold tracking-[0.2em] uppercase">View Details</span>
+        </div>
       </div>
 
       {/* Card body */}
-      <div className={variant === 'compact' ? 'p-3' : 'p-4 max-md:p-3'}>
+      <div className={variant === 'compact' ? 'pt-3' : 'pt-4 max-md:pt-3'}>
+        {/* Category */}
+        {categoryName && (
+          <span className="text-[10px] font-medium text-[#C9A96E] tracking-[0.15em] uppercase mb-1 block">
+            {categoryName}
+          </span>
+        )}
+
         {/* Product name */}
         <h3 className="font-serif text-sm max-md:text-[13px] text-[#191919] line-clamp-2 leading-snug mb-2">
           {name}
@@ -95,7 +98,7 @@ export default function ProductCard({
             {currency} {price.toFixed(0)}
           </span>
           {onSale && regularPrice && (
-            <span className="text-xs text-[#bbb] line-through">
+            <span className="text-xs text-[#ccc] line-through">
               {currency} {regularPrice.toFixed(0)}
             </span>
           )}
