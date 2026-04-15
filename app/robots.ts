@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/checkout'],
       },
     ],
-    sitemap: 'https://balloonsmall.com/sitemap.xml',
+    sitemap: 'https://shapehive.in/sitemap.xml',
   };
 }

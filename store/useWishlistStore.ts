@@ -40,6 +40,6 @@ export const useWishlistStore = create<WishlistState>()(
       },
       clearWishlist: () => set({ items: [] }),
     }),
-    { name: 'balloonsmall-wishlist' }
+    { name: 'shapehive-wishlist' }
   )
 );

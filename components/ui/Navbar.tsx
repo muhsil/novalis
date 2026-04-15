@@ -76,7 +76,7 @@ export default function Navbar() {
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-[17px] text-[#1a1a1a] leading-tight tracking-tight">BalloonsMall</span>
+                <span className="font-extrabold text-[17px] text-[#1a1a1a] leading-tight tracking-tight">ShapeHive</span>
                 <span className="text-[9px] text-[#999] font-medium tracking-widest uppercase leading-none hidden sm:block">Dubai Celebrations</span>
               </div>
             </Link>
@@ -198,7 +198,7 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
             </div>
-            <span className="font-bold text-sm text-white">BalloonsMall</span>
+            <span className="font-bold text-sm text-white">ShapeHive</span>
           </div>
           <button onClick={() => setMenuOpen(false)} className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 transition-colors">
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

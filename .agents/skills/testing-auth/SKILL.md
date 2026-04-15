@@ -1,4 +1,4 @@
-# Testing BalloonsMall Authentication
+# Testing ShapeHive Authentication
 
 ## Overview
 The auth system uses WooCommerce Customer API with custom PBKDF2 password hashing stored in customer meta_data.
@@ -17,7 +17,7 @@ The auth system uses WooCommerce Customer API with custom PBKDF2 password hashin
 ### Register → Login → Checkout Pre-fill
 1. Navigate to `/account/register`, fill form, click Create Account
 2. Verify redirect to `/account` with welcome message and navbar name
-3. Verify password hash via WooCommerce API: `GET /wp-json/wc/v3/customers?email=<email>` — check `balloonsmall_password` meta key matches PBKDF2 regex `^[0-9a-f]{32}:[0-9a-f]{128}$`
+3. Verify password hash via WooCommerce API: `GET /wp-json/wc/v3/customers?email=<email>` — check `shapehive_password` meta key matches PBKDF2 regex `^[0-9a-f]{32}:[0-9a-f]{128}$`
 4. Click Logout, navigate to `/account/login`, enter credentials, click Sign In
 5. Verify redirect to `/account` with welcome message
 6. Navigate to `/checkout` — verify form fields pre-filled (First Name, Email, Phone)
@@ -38,8 +38,8 @@ The auth system uses WooCommerce Customer API with custom PBKDF2 password hashin
 
 ### WooCommerce Meta Key Prefix
 - Meta keys prefixed with `_` (underscore) are hidden from WooCommerce REST API GET responses
-- The password hash is stored under `balloonsmall_password` (no underscore prefix) so it's readable via API
-- If login fails with "Please use the password you registered with", the meta key may have been changed back to `_balloonsmall_password`
+- The password hash is stored under `shapehive_password` (no underscore prefix) so it's readable via API
+- If login fails with "Please use the password you registered with", the meta key may have been changed back to `_shapehive_password`
 
 ### Zustand Hydration Timing
 - `authCustomer` from Zustand persist middleware is `null` on initial render
@@ -57,6 +57,6 @@ The auth system uses WooCommerce Customer API with custom PBKDF2 password hashin
 ## Verifying Password Hash via CLI
 ```bash
 curl -s -u "$WC_CONSUMER_KEY:$WC_CONSUMER_SECRET" \
-  "https://cms.balloonsmall.com/wp-json/wc/v3/customers?email=<email>&per_page=1" | \
-  python3 -c "import sys,json,re; d=json.load(sys.stdin); m={x['key']:x['value'] for x in d[0].get('meta_data',[])}; pw=m.get('balloonsmall_password','NOT FOUND'); print('PASS' if re.match(r'^[0-9a-f]{32}:[0-9a-f]{128}$',pw) else 'FAIL:', pw[:40])"
+  "https://cms.shapehive.in/wp-json/wc/v3/customers?email=<email>&per_page=1" | \
+  python3 -c "import sys,json,re; d=json.load(sys.stdin); m={x['key']:x['value'] for x in d[0].get('meta_data',[])}; pw=m.get('shapehive_password','NOT FOUND'); print('PASS' if re.match(r'^[0-9a-f]{32}:[0-9a-f]{128}$',pw) else 'FAIL:', pw[:40])"
 ```

@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthState>()(
         })),
     }),
     {
-      name: 'balloonsmall-auth',
+      name: 'shapehive-auth',
     }
   )
 );

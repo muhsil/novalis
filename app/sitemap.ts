@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { wooApi } from '@/lib/woocommerce';
 
-const SITE_URL = 'https://balloonsmall.com';
+const SITE_URL = 'https://shapehive.in';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
