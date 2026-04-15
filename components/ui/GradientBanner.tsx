@@ -28,7 +28,7 @@ export default function GradientBanner({
         style={{ background: gradient, padding: '60px 40px' }}
       >
         <div className="absolute inset-0 opacity-10 max-md:hidden">
-          {['\u{1F388}', '\u{1F38A}', '\u{1F380}', '\u2728', '\u{1F389}', '\u{1F388}'].map((e, i) => (
+          {['\u{1F9F4}', '\u2728', '\u{1F33F}', '\u{1F4AB}', '\u{1F338}', '\u{1F9F4}'].map((e, i) => (
             <span
               key={i}
               className="absolute text-5xl"

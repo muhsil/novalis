@@ -23,7 +23,7 @@ export default function OrderSuccess({ deliveryDate, deliveryTime, customer }: O
           Woohoo! Order Confirmed
         </h1>
         <p className="text-xl max-md:text-sm text-gray-600 mb-10 max-md:mb-6 leading-relaxed font-medium">
-          Your balloons are being prepared with love and will arrive on
+          Your order is being prepared with care and will arrive on
           <span className="text-violet-600 block sm:inline">
             {' '}
             {new Date(deliveryDate).toLocaleDateString('en-US', {

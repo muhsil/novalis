@@ -55,7 +55,7 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#E53935] via-[#FF5252] to-[#E53935] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
+      <div className="bg-gradient-to-r from-[#C9A96E] via-[#D4B87A] to-[#C9A96E] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
         <span className="inline-flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
           <span className="hidden sm:inline">Free Delivery on orders over AED 100</span>
@@ -72,27 +72,27 @@ export default function Navbar() {
           <div className="flex items-center gap-4 h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0 group">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#E53935] to-[#FF6B6B] rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+              <div className="w-9 h-9 bg-gradient-to-br from-[#C9A96E] to-[#D4B87A] rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-[17px] text-[#1a1a1a] leading-tight tracking-tight">Novalis</span>
-                <span className="text-[9px] text-[#999] font-medium tracking-widest uppercase leading-none hidden sm:block">Dubai Celebrations</span>
+                <span className="text-[9px] text-[#999] font-medium tracking-widest uppercase leading-none hidden sm:block">Luxury Fragrances</span>
               </div>
             </Link>
 
             {/* Desktop Search */}
             <form method="GET" action="/shop" className="hidden md:flex flex-1 max-w-xl mx-6">
-              <div className={`flex w-full rounded-full overflow-hidden border-2 transition-all duration-200 ${searchFocused ? 'border-[#E53935] shadow-[0_0_0_3px_rgba(229,57,53,0.1)]' : 'border-[#eee] hover:border-[#ddd]'} bg-[#fafafa]`}>
+              <div className={`flex w-full rounded-full overflow-hidden border-2 transition-all duration-200 ${searchFocused ? 'border-[#C9A96E] shadow-[0_0_0_3px_rgba(201,169,110,0.15)]' : 'border-[#eee] hover:border-[#ddd]'} bg-[#fafafa]`}>
                 <input
                   ref={searchRef}
                   name="search"
-                  placeholder="Search balloons, decorations, occasions..."
+                  placeholder="Search perfumes, fragrances, oud..."
                   className="flex-1 px-5 py-2.5 text-sm outline-none bg-transparent text-[#333] placeholder:text-[#bbb]"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
                 />
-                <button type="submit" className="bg-gradient-to-r from-[#E53935] to-[#EF5350] text-white px-5 hover:from-[#C62828] hover:to-[#E53935] transition-all">
+                <button type="submit" className="bg-gradient-to-r from-[#C9A96E] to-[#D4B87A] text-white px-5 hover:from-[#B8985D] hover:to-[#C9A96E] transition-all">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -104,11 +104,11 @@ export default function Navbar() {
             <div className="flex items-center gap-1 ml-auto">
               {/* Wishlist */}
               <Link href="/account/wishlist" className="hidden md:flex relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Wishlist">
-                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#E53935] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-[#E53935] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1 ring-2 ring-white">
+                  <span className="absolute top-1 right-1 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1 ring-2 ring-white">
                     {wishlistCount}
                   </span>
                 )}
@@ -116,28 +116,28 @@ export default function Navbar() {
 
               {/* Account */}
               <Link href={isLoggedIn ? '/account' : '/account/login'} className="hidden md:flex items-center gap-1.5 p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Account">
-                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#E53935] transition-colors" fill={isLoggedIn ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill={isLoggedIn ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 {isLoggedIn && authCustomer && (
-                  <span className="text-xs font-semibold text-[#555] group-hover:text-[#E53935] max-w-[80px] truncate hidden lg:inline transition-colors">{authCustomer.firstName}</span>
+                  <span className="text-xs font-semibold text-[#555] group-hover:text-[#C9A96E] max-w-[80px] truncate hidden lg:inline transition-colors">{authCustomer.firstName}</span>
                 )}
               </Link>
 
               {/* Cart */}
               <button onClick={() => setCartOpen(true)} className="relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Cart">
-                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#E53935] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
                 {cartCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-[#E53935] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1 ring-2 ring-white">
+                  <span className="absolute top-1 right-1 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1 ring-2 ring-white">
                     {cartCount}
                   </span>
                 )}
               </button>
 
               {/* Desktop Shop CTA */}
-              <Link href="/shop" className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-r from-[#E53935] to-[#EF5350] text-white text-sm font-bold px-5 py-2.5 rounded-full hover:from-[#C62828] hover:to-[#E53935] transition-all shadow-sm hover:shadow-md ml-1">
+              <Link href="/shop" className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-r from-[#C9A96E] to-[#D4B87A] text-white text-sm font-bold px-5 py-2.5 rounded-full hover:from-[#B8985D] hover:to-[#C9A96E] transition-all shadow-sm hover:shadow-md ml-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                 </svg>
@@ -165,7 +165,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[#555] hover:text-[#E53935] hover:bg-white text-[13px] font-medium whitespace-nowrap transition-all border border-transparent hover:border-[#f0f0f0] hover:shadow-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[#555] hover:text-[#C9A96E] hover:bg-white text-[13px] font-medium whitespace-nowrap transition-all border border-transparent hover:border-[#f0f0f0] hover:shadow-sm"
                 >
                   <span className="text-[#888]">{NAV_ICONS[link.key]}</span>
                   {link.label}
@@ -193,7 +193,7 @@ export default function Navbar() {
       {/* Mobile Slide-in Menu Panel */}
       <div className={`md:hidden fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Menu Header */}
-        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#E53935] to-[#FF5252]">
+        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#C9A96E] to-[#D4B87A]">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
@@ -211,7 +211,7 @@ export default function Navbar() {
         <form method="GET" action="/shop" className="p-3 border-b border-[#f0f0f0]">
           <div className="flex rounded-xl overflow-hidden bg-[#f5f5f5] border border-[#eee]">
             <input name="search" placeholder="Search products..." className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent" />
-            <button type="submit" className="bg-[#E53935] text-white px-3">
+            <button type="submit" className="bg-[#C9A96E] text-white px-3">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#E53935] transition-all"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
               onClick={() => setMenuOpen(false)}
             >
               <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]">{NAV_ICONS[link.key]}</span>
@@ -238,32 +238,32 @@ export default function Navbar() {
           <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">Quick Access</p>
           <button
             onClick={() => { setMenuOpen(false); setCartOpen(true); }}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#E53935] transition-all w-full text-left"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all w-full text-left"
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg></span>
             Cart
             {cartCount > 0 && (
-              <span className="ml-auto bg-[#E53935] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              <span className="ml-auto bg-[#C9A96E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {cartCount}
               </span>
             )}
           </button>
           <Link
             href="/account/wishlist"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#E53935] transition-all"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></span>
             Wishlist
             {wishlistCount > 0 && (
-              <span className="ml-auto bg-[#E53935] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              <span className="ml-auto bg-[#C9A96E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {wishlistCount}
               </span>
             )}
           </Link>
           <Link
             href={isLoggedIn ? '/account' : '/account/login'}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FFF5F5] hover:text-[#E53935] transition-all"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all"
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></span>

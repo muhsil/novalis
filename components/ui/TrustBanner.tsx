@@ -23,7 +23,7 @@ export default function TrustBanner({ currency = 'AED' }: { currency?: string })
         <div className="flex items-center justify-between max-md:justify-start max-md:gap-4 max-md:overflow-x-auto no-scrollbar">
           {getTrustItems(currency).map((item) => (
             <div key={item.title} className="flex items-center gap-2 shrink-0">
-              <span className="text-[#E53935]">{item.icon}</span>
+              <span className="text-[#C9A96E]">{item.icon}</span>
               <div>
                 <span className="text-xs font-semibold text-[#191919]">{item.title}</span>
                 <span className="hidden md:inline text-xs text-[#999] ml-1">{item.subtitle}</span>

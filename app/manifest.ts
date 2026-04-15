@@ -2,13 +2,13 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Novalis - Premium Balloons & Decorations in Dubai',
+    name: 'Novalis - Luxury Arabic Perfumes & Fragrances',
     short_name: 'Novalis',
-    description: 'Shop premium balloons and event decorations in Dubai. Same-day delivery available.',
+    description: 'Discover exquisite Arabic perfumes, oud collections, and luxury fragrances. Delivery across UAE.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#E53935',
+    theme_color: '#1A1A2E',
     orientation: 'portrait',
     icons: [
       {

@@ -54,7 +54,7 @@ export default function ProductCard({
 
         {/* Discount badge - top left */}
         {discount > 0 && (
-          <span className="absolute top-2 left-2 bg-[#E53935] text-white text-[11px] font-bold px-1.5 py-0.5 rounded-sm">
+          <span className="absolute top-2 left-2 bg-[#C9A96E] text-white text-[11px] font-bold px-1.5 py-0.5 rounded-sm">
             -{discount}%
           </span>
         )}

@@ -8,7 +8,7 @@ interface WhatsAppFabProps {
 }
 
 export default function WhatsAppFab({ 
-  productName = "Custom Balloon", 
+  productName = "Novalis Perfume", 
   price = 0, 
   phoneNumber = "971563554303",
   currency = "AED",

@@ -42,7 +42,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#E53935]">Home</Link>
+        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">Privacy Policy</span>
       </nav>

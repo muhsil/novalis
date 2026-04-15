@@ -26,7 +26,7 @@ const HIGHLIGHT_ICONS: Record<string, React.ReactNode> = {
 function getProductHighlights(currency: string) {
   return [
     { key: 'same-day', title: 'Same-Day', description: 'Order before 2 PM' },
-    { key: 'premium', title: 'Premium', description: 'Finest quality balloons' },
+    { key: 'premium', title: 'Premium', description: 'Finest quality ingredients' },
     { key: 'delivery', title: 'Free Delivery', description: `Orders over ${currency} 100` },
     { key: 'whatsapp', title: 'WhatsApp', description: 'Instant support' },
   ];
@@ -67,7 +67,7 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
     const desc = (product.short_description || product.description || '').replace(/<[^>]*>/g, '').slice(0, 160);
     return {
       title: product.name,
-      description: desc || `Buy ${product.name} from Novalis. Premium balloons delivered in Dubai.`,
+      description: desc || `Buy ${product.name} from Novalis. Luxury Arabic perfumes delivered across the UAE.`,
       alternates: { canonical: `/product/${params.slug}` },
       openGraph: {
         title: `${product.name} | Novalis Dubai`,
@@ -89,8 +89,8 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
     return (
       <EmptyState
         title="Product Not Found"
-        description="This balloon may have floated away! Browse our full collection."
-        actionLabel="Browse All Balloons"
+        description="This product may no longer be available. Browse our full collection."
+        actionLabel="Browse All Fragrances"
         actionHref="/shop"
       />
     );
@@ -132,9 +132,9 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#999] px-4 py-3 max-md:px-3 overflow-x-auto no-scrollbar">
-        <Link href="/" className="hover:text-[#E53935] transition-colors shrink-0">Home</Link>
+        <Link href="/" className="hover:text-[#C9A96E] transition-colors shrink-0">Home</Link>
         <span className="shrink-0">&gt;</span>
-        <Link href="/shop" className="hover:text-[#E53935] transition-colors shrink-0">Shop</Link>
+        <Link href="/shop" className="hover:text-[#C9A96E] transition-colors shrink-0">Shop</Link>
         <span className="shrink-0">&gt;</span>
         <span className="text-[#191919] font-medium truncate">{product.name}</span>
       </nav>
@@ -154,7 +154,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           {product.categories?.length > 0 && (
             <div className="flex gap-1.5 mb-2">
               {product.categories.slice(0, 2).map((cat: any) => (
-                <span key={cat.id} className="text-[10px] font-medium bg-[#FFEBEE] text-[#E53935] px-2 py-0.5 rounded">{cat.name}</span>
+                <span key={cat.id} className="text-[10px] font-medium bg-[#FAF6F0] text-[#C9A96E] px-2 py-0.5 rounded">{cat.name}</span>
               ))}
             </div>
           )}
@@ -169,9 +169,9 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           </div>
 
           {/* Price Block - AliExpress style */}
-          <div className="bg-[#FFEBEE] rounded-lg p-3 mb-3">
+          <div className="bg-[#FAF6F0] rounded-lg p-3 mb-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl max-md:text-xl font-bold text-[#E53935]">{currency} {price.toFixed(0)}</span>
+              <span className="text-2xl max-md:text-xl font-bold text-[#C9A96E]">{currency} {price.toFixed(0)}</span>
               {product.on_sale && regularPrice && (
                 <>
                   <span className="text-sm text-[#999] line-through">{currency} {regularPrice.toFixed(0)}</span>
@@ -213,7 +213,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           <div className="grid grid-cols-2 gap-2 mt-4">
             {getProductHighlights(currency).map((h) => (
               <div key={h.title} className="flex items-center gap-2 bg-white border border-[#f0f0f0] rounded-lg px-3 py-2">
-                <span className="text-[#E53935]">{HIGHLIGHT_ICONS[h.key]}</span>
+                <span className="text-[#C9A96E]">{HIGHLIGHT_ICONS[h.key]}</span>
                 <div>
                   <span className="text-xs font-semibold text-[#191919]">{h.title}</span>
                   <p className="text-[10px] text-[#999]">{h.description}</p>
@@ -237,7 +237,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
         <div className="mx-4 max-md:mx-3 mb-10 max-md:mb-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-bold text-[#191919]">You May Also Like</h2>
-            <Link href="/shop" className="text-xs text-[#999] hover:text-[#E53935]">See All &gt;</Link>
+            <Link href="/shop" className="text-xs text-[#999] hover:text-[#C9A96E]">See All &gt;</Link>
           </div>
 
           {/* Desktop grid */}

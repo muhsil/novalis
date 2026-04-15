@@ -42,7 +42,7 @@ export default function BillingAddressForm({
           type="checkbox"
           checked={sameAsShipping}
           onChange={(e) => onSameAsShippingChange(e.target.checked)}
-          className="w-4 h-4 rounded border-gray-300 text-[#E53935] focus:ring-[#E53935] cursor-pointer"
+          className="w-4 h-4 rounded border-gray-300 text-[#C9A96E] focus:ring-[#C9A96E] cursor-pointer"
         />
         <span className="text-sm text-gray-700 font-medium">Same as shipping address</span>
       </label>

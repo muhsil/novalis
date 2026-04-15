@@ -12,7 +12,7 @@ export default function EmptyCart() {
         It looks like you haven&apos;t added any magic to your cart yet.
       </p>
       <Link href="/shop" className="btn-primary">
-        Discover Balloons
+        Discover Fragrances
       </Link>
     </div>
   );

@@ -18,8 +18,8 @@ export default function AccountLayout({ title, children }: AccountLayoutProps) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
         <div className="text-center max-w-sm">
-          <div className="w-16 h-16 bg-[#FFEBEE] rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-[#E53935]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-[#FAF6F0] rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>

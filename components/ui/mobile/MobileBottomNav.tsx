@@ -107,10 +107,10 @@ export default function MobileBottomNav() {
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium transition-colors active:bg-[#f5f5f5] ${
-                    pathname === link.href ? 'text-[#E53935] bg-[#FFEBEE]' : 'text-[#333]'
+                    pathname === link.href ? 'text-[#C9A96E] bg-[#FAF6F0]' : 'text-[#333]'
                   }`}
                 >
-                  <span className="text-[#E53935]">{MENU_ICONS[link.key]}</span>
+                  <span className="text-[#C9A96E]">{MENU_ICONS[link.key]}</span>
                   {link.label}
                 </Link>
               ))}
