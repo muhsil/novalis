@@ -24,6 +24,7 @@ export default function ProductCard({
   price,
   regularPrice,
   imageSrc,
+  categoryName,
   onSale,
   featured,
   variant = 'default',
@@ -31,79 +32,73 @@ export default function ProductCard({
   productId,
 }: ProductCardProps) {
   const discount = onSale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
-  const hash = slug.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
-  const soldNum = Math.floor((hash * 7 + price * 3) % 900 + 100);
-  const rating = (4.0 + ((hash % 10) / 10)).toFixed(1);
 
   return (
     <Link href={`/product/${slug}`} className="product-card group block">
       {/* Image */}
-      <div className="relative overflow-hidden aspect-square bg-[#f5f5f5]">
+      <div className="relative overflow-hidden aspect-[3/4] bg-[#f5f5f5]">
         {imageSrc ? (
           <img
             src={imageSrc}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-300">
-            <svg className="w-16 h-16 max-md:w-10 max-md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#FAF6F0] to-[#f0ebe0]">
+            <svg className="w-16 h-16 max-md:w-10 max-md:h-10 text-[#C9A96E]/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
           </div>
         )}
 
         {/* Discount badge - top left */}
         {discount > 0 && (
-          <span className="absolute top-2 left-2 bg-[#C9A96E] text-white text-[11px] font-bold px-1.5 py-0.5 rounded-sm">
+          <span className="absolute top-3 left-3 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2.5 py-1 tracking-wider uppercase">
             -{discount}%
           </span>
         )}
 
-        {/* Featured badge */}
+        {/* New badge for featured */}
         {featured && !discount && (
-          <span className="absolute top-2 left-2 bg-[#FF6D00] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-sm">
-            HOT
+          <span className="absolute top-3 left-3 bg-[#C9A96E] text-white text-[10px] font-semibold px-2.5 py-1 tracking-wider uppercase">
+            New
           </span>
         )}
 
         {/* Wishlist heart */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-md:opacity-100">
           <WishlistButton
             item={{ id: productId || 0, name, price, image: imageSrc, slug }}
             size="sm"
           />
         </div>
+
+        {/* Category tag at bottom */}
+        {categoryName && (
+          <div className="absolute bottom-3 left-3">
+            <span className="bg-white/90 backdrop-blur-sm text-[10px] font-medium text-[#666] px-2 py-0.5 tracking-wide uppercase">
+              {categoryName}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Card body */}
-      <div className={variant === 'compact' ? 'p-2' : 'p-2.5'}>
+      <div className={variant === 'compact' ? 'p-3' : 'p-4 max-md:p-3'}>
         {/* Product name */}
-        <h3 className="text-[13px] text-[#191919] line-clamp-2 leading-[1.4] mb-1.5 min-h-[36px]">
+        <h3 className="font-serif text-sm max-md:text-[13px] text-[#191919] line-clamp-2 leading-snug mb-2">
           {name}
         </h3>
 
         {/* Price row */}
-        <div className="flex items-baseline gap-1.5 mb-1">
-          <span className="text-lg font-bold text-[#191919] max-md:text-base">
+        <div className="flex items-baseline gap-2">
+          <span className="text-base font-semibold text-[#191919]">
             {currency} {price.toFixed(0)}
           </span>
           {onSale && regularPrice && (
-            <span className="text-xs text-[#999] line-through">
+            <span className="text-xs text-[#bbb] line-through">
               {currency} {regularPrice.toFixed(0)}
             </span>
           )}
-        </div>
-
-        {/* Rating + Sold row */}
-        <div className="flex items-center gap-1.5 text-xs text-[#999]">
-          <div className="flex items-center gap-0.5">
-            <svg className="w-3 h-3 text-[#FFC107]" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <span>{rating}</span>
-          </div>
-          <span className="text-[#ccc]">|</span>
-          <span>{soldNum}+ sold</span>
         </div>
       </div>
     </Link>

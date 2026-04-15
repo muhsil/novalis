@@ -33,6 +33,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  .font-serif {
+    font-family: var(--font-playfair, 'Playfair Display', Georgia, serif);
+  }
+
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: #f5f5f5; }
   ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 99px; }
@@ -314,6 +318,21 @@
 
 .promo-scroll { animation: slide-left 20s linear infinite; }
 .deal-pulse { animation: pulse-deal 2s ease-in-out infinite; }
+
+/* Scroll reveal animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RTL support */
+[dir="rtl"] .rtl\:text-right { text-align: right; }
+[dir="rtl"] .rtl\:flex-row-reverse { flex-direction: row-reverse; }
 
 @media (max-width: 767px) {
   button, a, .mobile-nav-item {
