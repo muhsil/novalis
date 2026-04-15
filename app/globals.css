@@ -69,7 +69,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: var(--color-brand);
+    background: var(--color-accent);
     color: #fff;
     font-weight: 700;
     padding: 0.625rem 1.5rem;
@@ -80,7 +80,7 @@
     text-decoration: none;
     font-size: 0.875rem;
   }
-  .btn-primary:hover { background: var(--color-brand-dark); }
+  .btn-primary:hover { background: #B8985D; }
   .btn-primary:active { transform: scale(0.98); }
   .btn-primary:disabled {
     opacity: 0.5;
@@ -94,11 +94,11 @@
     justify-content: center;
     gap: 0.5rem;
     background: #fff;
-    color: var(--color-brand);
+    color: var(--color-accent);
     font-weight: 600;
     padding: 0.625rem 1.5rem;
     border-radius: 1.25rem;
-    border: 1px solid var(--color-brand);
+    border: 1px solid var(--color-accent);
     transition: all 0.2s ease;
     cursor: pointer;
     text-decoration: none;
@@ -116,10 +116,10 @@
     padding: 2px 6px;
     border-radius: 2px;
   }
-  .badge-brand  { background: var(--color-brand-light); color: var(--color-brand); }
+  .badge-brand  { background: var(--color-accent-light); color: var(--color-accent); }
   .badge-accent { background: var(--color-accent-light); color: var(--color-accent); }
   .badge-green  { background: var(--color-success-light); color: var(--color-success); }
-  .badge-deal   { background: var(--color-brand); color: #fff; }
+  .badge-deal   { background: var(--color-accent); color: #fff; }
 
   .product-card {
     background: #fff;
@@ -144,7 +144,7 @@
     background: #fff;
     color: var(--color-text);
   }
-  .form-input:focus { border-color: var(--color-brand); box-shadow: 0 0 0 2px rgba(201,169,110,0.15); }
+  .form-input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 2px rgba(201,169,110,0.15); }
   .form-input::placeholder { color: #bbb; }
 
   .section-wrapper {
@@ -212,7 +212,7 @@
   font: inherit;
 }
 .mobile-nav-item:active { transform: scale(0.92); }
-.mobile-nav-active { color: var(--color-brand) !important; }
+.mobile-nav-active { color: var(--color-accent) !important; }
 
 .mobile-nav-label {
   font-size: 10px;
@@ -224,7 +224,7 @@
   position: absolute;
   top: -2px;
   right: -6px;
-  background: var(--color-brand);
+  background: var(--color-accent);
   color: #fff;
   font-size: 9px;
   font-weight: 700;

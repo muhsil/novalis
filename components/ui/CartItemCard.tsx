@@ -42,7 +42,7 @@ export default function CartItemCard({
         <div className={`w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 text-xl ${
           isSummary ? 'bg-gray-50 border border-gray-100' : 'bg-[#FAF6F0]'
         }`}>
-          {'\u{1F388}'}
+          {'\u{1F9F4}'}
         </div>
       )}
       <div className="flex-1 min-w-0">
