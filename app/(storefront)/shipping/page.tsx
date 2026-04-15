@@ -51,7 +51,7 @@ export default async function ShippingPage() {
             <div className="flex-1">
               <h2 className="text-sm font-bold text-[#191919]">{opt.title}</h2>
               <p className="text-xs text-[#666] mt-1">{opt.description}</p>
-              <span className="text-xs text-[#00B578] font-medium mt-1 inline-block">{opt.price}</span>
+              <span className={`text-xs font-medium mt-1 inline-block ${opt.price.includes('Free') ? 'text-[#00B578]' : 'text-[#666]'}`}>{opt.price}</span>
             </div>
           </div>
         ))}

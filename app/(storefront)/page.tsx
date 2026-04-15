@@ -45,10 +45,14 @@ export default async function HomePage() {
   const { currency } = settings;
 
   const topCategories = categories.filter((c: any) => c.count > 0).slice(0, 8);
-  const bestSellers = (featured.length > 0 ? featured : allProducts).filter(
-    (p: any) => p.images?.[0]?.src
-  );
-  const newArrivals = allProducts.filter((p: any) => p.images?.[0]?.src);
+  const withImages = allProducts.filter((p: any) => p.images?.[0]?.src);
+  const hasFeatured = featured.length > 0;
+  const bestSellers = hasFeatured
+    ? featured.filter((p: any) => p.images?.[0]?.src)
+    : withImages.slice(0, Math.ceil(withImages.length / 2));
+  const newArrivals = hasFeatured
+    ? withImages
+    : withImages.slice(Math.ceil(withImages.length / 2));
 
   return (
     <>
