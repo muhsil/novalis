@@ -19,7 +19,8 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
   const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
   const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
 
-  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const subtotalAED = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const subtotal = selectedCurrency !== 'AED' ? convertPrice(subtotalAED) : subtotalAED;
   const threshold = selectedCurrency !== 'AED' ? convertPrice(FREE_DELIVERY_THRESHOLD_AED) : FREE_DELIVERY_THRESHOLD_AED;
   const remaining = Math.max(0, threshold - subtotal);
   const progress = Math.min(100, (subtotal / threshold) * 100);
