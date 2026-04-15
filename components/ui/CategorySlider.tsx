@@ -17,12 +17,12 @@ interface CategorySliderProps {
 }
 
 const ICON_MAP: Record<string, string> = {
-  birthday: 'birthday',
-  wedding: 'wedding',
-  'baby-shower': 'baby-shower',
-  events: 'events',
-  anniversary: 'anniversary',
-  graduation: 'graduation',
+  perfumes: 'perfumes',
+  'luxury-fragrances': 'luxury-fragrances',
+  'oud-collection': 'oud-collection',
+  oils: 'oils',
+  dokhun: 'dokhun',
+  'all-over-spray': 'all-over-spray',
 };
 
 export default function CategorySlider({ categories }: CategorySliderProps) {

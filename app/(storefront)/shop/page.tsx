@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
-  birthday: 'birthday', wedding: 'wedding', 'baby-shower': 'baby-shower',
-  events: 'events', anniversary: 'anniversary', graduation: 'graduation',
+  perfumes: 'perfumes', 'luxury-fragrances': 'luxury-fragrances', 'oud-collection': 'oud-collection',
+  oils: 'oils', dokhun: 'dokhun', 'all-over-spray': 'all-over-spray',
   default: 'all',
 };
 
