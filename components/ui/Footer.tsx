@@ -12,10 +12,10 @@ const SOCIAL_LINKS = [
 
 const SHOP_LINKS = [
   { labelKey: 'footer.all_fragrances', href: '/shop' },
-  { label: 'Perfumes', href: '/shop?category=perfumes' },
-  { label: 'Oud Collection', href: '/shop?category=oud-collection' },
-  { label: 'Luxury Fragrances', href: '/shop?category=luxury-fragrances' },
-  { label: 'Oils', href: '/shop?category=oils' },
+  { labelKey: 'nav.perfumes', href: '/shop?category=perfumes' },
+  { labelKey: 'nav.oud_collection', href: '/shop?category=oud-collection' },
+  { labelKey: 'nav.luxury_fragrances', href: '/shop?category=luxury-fragrances' },
+  { labelKey: 'nav.oils', href: '/shop?category=oils' },
 ];
 
 const COMPANY_LINKS = [
@@ -116,7 +116,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 {SHOP_LINKS.map(link => (
                   <Link key={link.href} href={link.href} className="text-white/40 text-sm hover:text-[#C9A96E] transition-colors font-light">
-                    {link.labelKey ? t(locale, link.labelKey) : link.label}
+                    {t(locale, link.labelKey)}
                   </Link>
                 ))}
               </div>

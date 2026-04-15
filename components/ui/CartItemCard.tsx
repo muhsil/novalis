@@ -3,6 +3,7 @@
 import React from 'react';
 import QuantitySelector from './QuantitySelector';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 interface CartItemCardProps {
   name: string;
@@ -26,6 +27,9 @@ export default function CartItemCard({
   onRemove,
 }: CartItemCardProps) {
   const { currency } = useStoreSettings();
+  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
+  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const displayPrice = selectedCurrency !== 'AED' ? convertPrice(price) : price;
   const isSummary = variant === 'summary';
 
   return (
@@ -51,7 +55,7 @@ export default function CartItemCard({
             {name}
           </p>
           <p className="font-bold text-sm whitespace-nowrap text-[#C9A96E]">
-            {currency} {(price * quantity).toFixed(0)}
+            {currSymbol} {(displayPrice * quantity).toFixed(0)}
           </p>
         </div>
         {variantLabel && (
@@ -60,7 +64,7 @@ export default function CartItemCard({
           </p>
         )}
         <p className="text-gray-400 text-[10px] font-medium mt-1">
-          {currency} {price.toFixed(0)} x {quantity}
+          {currSymbol} {displayPrice.toFixed(0)} x {quantity}
         </p>
         {onQuantityChange && (
           <div className="mt-2">
