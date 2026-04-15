@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useCartStore } from '@/store/useCartStore';
 import { useWishlistStore } from '@/store/useWishlistStore';
+import { useLocaleStore } from '@/store/useLocaleStore';
+import { t } from '@/lib/i18n/translations';
 import { useState } from 'react';
 
 function HomeIcon({ active }: { active: boolean }) {
@@ -71,6 +73,7 @@ export default function MobileBottomNav() {
   const cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const wishlistItems = useWishlistStore((s) => s.items);
   const wishlistCount = wishlistItems.length;
+  const locale = useLocaleStore((s) => s.locale);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const searchParams = useSearchParams();
@@ -90,7 +93,7 @@ export default function MobileBottomNav() {
           <div className="mobile-menu-sheet" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-menu-handle" />
             <div className="flex items-center justify-between px-5 py-3 border-b border-[#f0f0f0]">
-              <span className="font-bold text-[#191919] text-sm">Menu</span>
+              <span className="font-bold text-[#191919] text-sm">{t(locale, 'mobile.menu')}</span>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="p-1.5 rounded-full hover:bg-[#f5f5f5] transition-colors"
@@ -134,12 +137,12 @@ export default function MobileBottomNav() {
       <nav className="mobile-bottom-nav">
         <Link href="/" className={`mobile-nav-item ${isHome ? 'mobile-nav-active' : ''}`}>
           <HomeIcon active={isHome} />
-          <span className="mobile-nav-label">Home</span>
+          <span className="mobile-nav-label">{t(locale, 'mobile.home')}</span>
         </Link>
 
         <Link href="/shop" className={`mobile-nav-item ${isShop ? 'mobile-nav-active' : ''}`}>
           <CategoryIcon active={isShop} />
-          <span className="mobile-nav-label">Shop</span>
+          <span className="mobile-nav-label">{t(locale, 'mobile.shop')}</span>
         </Link>
 
         <Link href="/checkout" className={`mobile-nav-item ${isCart ? 'mobile-nav-active' : ''}`}>
@@ -151,7 +154,7 @@ export default function MobileBottomNav() {
               </span>
             )}
           </div>
-          <span className="mobile-nav-label">Cart</span>
+          <span className="mobile-nav-label">{t(locale, 'mobile.cart')}</span>
         </Link>
 
         <Link href="/account/wishlist" className={`mobile-nav-item ${isWishlist ? 'mobile-nav-active' : ''}`}>
@@ -163,12 +166,12 @@ export default function MobileBottomNav() {
               </span>
             )}
           </div>
-          <span className="mobile-nav-label">Wishlist</span>
+          <span className="mobile-nav-label">{t(locale, 'mobile.wishlist')}</span>
         </Link>
 
         <Link href="/account" className={`mobile-nav-item ${isAccount || isMenu || menuOpen ? 'mobile-nav-active' : ''}`}>
           <AccountIcon active={isAccount || isMenu || menuOpen} />
-          <span className="mobile-nav-label">Account</span>
+          <span className="mobile-nav-label">{t(locale, 'mobile.account')}</span>
         </Link>
       </nav>
     </>

@@ -6,6 +6,10 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useState, useEffect, useRef } from 'react';
 import CartDrawer from '@/components/cart/CartDrawer';
 import { ToastContainer } from '@/components/ui/Toast';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import CurrencySwitcher from '@/components/ui/CurrencySwitcher';
+import { useLocaleStore } from '@/store/useLocaleStore';
+import { t } from '@/lib/i18n/translations';
 
 const NAV_ICONS: Record<string, React.ReactNode> = {
   all: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>,
@@ -18,13 +22,13 @@ const NAV_ICONS: Record<string, React.ReactNode> = {
 };
 
 const NAV_LINKS = [
-  { href: '/shop', label: 'All', key: 'all' },
-  { href: '/shop?category=perfumes', label: 'Perfumes', key: 'perfumes' },
-  { href: '/shop?category=luxury-fragrances', label: 'Luxury Fragrances', key: 'luxury-fragrances' },
-  { href: '/shop?category=oud-collection', label: 'Oud Collection', key: 'oud-collection' },
-  { href: '/shop?category=oils', label: 'Oils', key: 'oils' },
-  { href: '/shop?category=dokhun', label: 'Dokhun', key: 'dokhun' },
-  { href: '/shop?category=all-over-spray', label: 'All Over Spray', key: 'all-over-spray' },
+  { href: '/shop', labelKey: 'nav.all', key: 'all' },
+  { href: '/shop?category=perfumes', labelKey: 'nav.perfumes', key: 'perfumes' },
+  { href: '/shop?category=luxury-fragrances', labelKey: 'nav.luxury_fragrances', key: 'luxury-fragrances' },
+  { href: '/shop?category=oud-collection', labelKey: 'nav.oud_collection', key: 'oud-collection' },
+  { href: '/shop?category=oils', labelKey: 'nav.oils', key: 'oils' },
+  { href: '/shop?category=dokhun', labelKey: 'nav.dokhun', key: 'dokhun' },
+  { href: '/shop?category=all-over-spray', labelKey: 'nav.all_over_spray', key: 'all-over-spray' },
 ];
 
 export default function Navbar() {
@@ -33,6 +37,7 @@ export default function Navbar() {
   const wishlistCount = useWishlistStore((s) => s.items.length);
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const authCustomer = useAuthStore((s) => s.customer);
+  const locale = useLocaleStore((s) => s.locale);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -60,10 +65,10 @@ export default function Navbar() {
       <div className="bg-gradient-to-r from-[#C9A96E] via-[#D4B87A] to-[#C9A96E] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
         <span className="inline-flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
-          <span className="hidden sm:inline">Free Delivery Across UAE</span>
+          <span className="hidden sm:inline">{t(locale, 'announcement.free_delivery')}</span>
           <span className="hidden sm:inline mx-2 opacity-40">|</span>
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-          <span>Luxury Fragrances with an Emirati Signature</span>
+          <span>{t(locale, 'announcement.tagline')}</span>
         </span>
       </div>
 
@@ -83,7 +88,7 @@ export default function Navbar() {
                 <input
                   ref={searchRef}
                   name="search"
-                  placeholder="Search perfumes, fragrances, oud..."
+                  placeholder={t(locale, 'nav.search_placeholder')}
                   className="flex-1 px-5 py-2.5 text-sm outline-none bg-transparent text-[#333] placeholder:text-[#bbb]"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
@@ -98,8 +103,28 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-1 ml-auto">
+              {/* Language Switcher - mobile */}
+              <div className="md:hidden">
+                <LanguageSwitcher variant="compact" />
+              </div>
+
+              {/* Currency Switcher - mobile */}
+              <div className="md:hidden">
+                <CurrencySwitcher variant="compact" />
+              </div>
+
+              {/* Language Switcher - desktop */}
+              <div className="hidden md:block">
+                <LanguageSwitcher variant="compact" />
+              </div>
+
+              {/* Currency Switcher - desktop */}
+              <div className="hidden md:block">
+                <CurrencySwitcher variant="compact" />
+              </div>
+
               {/* Wishlist */}
-              <Link href="/account/wishlist" className="hidden md:flex relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Wishlist">
+              <Link href="/account/wishlist" className="hidden md:flex relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title={t(locale, 'nav.wishlist')}>
                 <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
@@ -111,7 +136,7 @@ export default function Navbar() {
               </Link>
 
               {/* Account */}
-              <Link href={isLoggedIn ? '/account' : '/account/login'} className="hidden md:flex items-center gap-1.5 p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Account">
+              <Link href={isLoggedIn ? '/account' : '/account/login'} className="hidden md:flex items-center gap-1.5 p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title={t(locale, 'nav.account')}>
                 <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill={isLoggedIn ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -120,8 +145,8 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Cart */}
-              <button onClick={() => setCartOpen(true)} className="relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title="Cart">
+              {/* Cart - desktop only */}
+              <button onClick={() => setCartOpen(true)} className="hidden md:flex relative p-2.5 rounded-xl hover:bg-[#f8f8f8] transition-all group" title={t(locale, 'nav.cart')}>
                 <svg className="w-[22px] h-[22px] text-[#555] group-hover:text-[#C9A96E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -137,7 +162,7 @@ export default function Navbar() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                 </svg>
-                Shop Now
+                {t(locale, 'nav.shop_now')}
               </Link>
 
               {/* Mobile hamburger */}
@@ -164,7 +189,7 @@ export default function Navbar() {
                   className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[#555] hover:text-[#C9A96E] hover:bg-white text-[13px] font-medium whitespace-nowrap transition-all border border-transparent hover:border-[#f0f0f0] hover:shadow-sm"
                 >
                   <span className="text-[#888]">{NAV_ICONS[link.key]}</span>
-                  {link.label}
+                  {t(locale, link.labelKey)}
                 </Link>
               ))}
               <div className="ml-auto flex items-center gap-1.5 text-[12px] text-[#999]">
@@ -172,7 +197,7 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>Dubai, UAE</span>
+                <span>{t(locale, 'nav.dubai_uae')}</span>
               </div>
             </div>
           </div>
@@ -203,7 +228,7 @@ export default function Navbar() {
         {/* Mobile Search */}
         <form method="GET" action="/shop" className="p-3 border-b border-[#f0f0f0]">
           <div className="flex rounded-xl overflow-hidden bg-[#f5f5f5] border border-[#eee]">
-            <input name="search" placeholder="Search products..." className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent" />
+            <input name="search" placeholder={t(locale, 'nav.search_placeholder')} className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent" />
             <button type="submit" className="bg-[#C9A96E] text-white px-3">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -214,7 +239,7 @@ export default function Navbar() {
 
         {/* Category Links */}
         <nav className="p-2 flex flex-col gap-0.5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 220px)' }}>
-          <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">Categories</p>
+          <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">{t(locale, 'nav.categories')}</p>
           {NAV_LINKS.map(link => (
             <Link
               key={link.href}
@@ -223,18 +248,18 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]">{NAV_ICONS[link.key]}</span>
-              {link.label}
+              {t(locale, link.labelKey)}
             </Link>
           ))}
           <div className="border-t border-[#f0f0f0] my-1.5" />
 
-          <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">Quick Access</p>
+          <p className="text-[10px] font-bold text-[#999] uppercase tracking-wider px-3 py-1.5">{t(locale, 'nav.quick_access')}</p>
           <button
             onClick={() => { setMenuOpen(false); setCartOpen(true); }}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#333] text-sm font-medium hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all w-full text-left"
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg></span>
-            Cart
+            {t(locale, 'nav.cart')}
             {cartCount > 0 && (
               <span className="ml-auto bg-[#C9A96E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {cartCount}
@@ -247,7 +272,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></span>
-            Wishlist
+            {t(locale, 'nav.wishlist')}
             {wishlistCount > 0 && (
               <span className="ml-auto bg-[#C9A96E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {wishlistCount}
@@ -260,7 +285,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 bg-[#f8f8f8] rounded-lg flex items-center justify-center text-[#666]"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></span>
-            {isLoggedIn ? 'My Account' : 'Sign In'}
+            {isLoggedIn ? t(locale, 'nav.my_account') : t(locale, 'nav.sign_in')}
           </Link>
         </nav>
 
@@ -271,7 +296,7 @@ export default function Navbar() {
             className="btn-primary w-full text-center text-sm py-3 rounded-xl shadow-lg"
             onClick={() => setMenuOpen(false)}
           >
-            Shop Now
+            {t(locale, 'nav.shop_now')}
           </Link>
         </div>
       </div>
