@@ -52,74 +52,46 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
     <div ref={wrapRef}>
       <TrustBanner currency={currSymbol} />
 
-      {/* Hero Banner */}
-      <section className="relative overflow-hidden bg-[#1A1A2E]">
+      {/* Hero Banner — Full-bleed lifestyle image */}
+      <section className="relative overflow-hidden bg-[#1A1A2E] min-h-[600px] max-md:min-h-[500px]">
+        {/* Background image */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A2E] via-[#1A1A2E] to-[#2A2A4E]" />
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #C9A96E 1px, transparent 0)', backgroundSize: '48px 48px' }} />
+          <img
+            src="/hero-perfume.png"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A2E]/90 via-[#1A1A2E]/60 to-transparent max-md:bg-gradient-to-t max-md:from-[#1A1A2E]/95 max-md:via-[#1A1A2E]/70 max-md:to-[#1A1A2E]/30" />
         </div>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full bg-[#C9A96E] blur-[150px]" />
-          <div className="absolute -bottom-20 -right-20 w-[600px] h-[600px] rounded-full bg-[#C9A96E] blur-[180px]" />
-        </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 max-md:px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center min-h-[540px] max-md:min-h-[420px]">
-            <div className="py-20 max-md:py-12">
-              <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1.5 mb-8">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />
-                <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.25em] uppercase">
-                  {t(locale, 'hero.subtitle')}
-                </span>
-              </div>
-              <h1 className="font-serif text-5xl max-md:text-3xl font-normal text-white mb-6 leading-[1.1]">
-                {t(locale, 'hero.title_1')}{' '}
-                <span className="text-[#C9A96E] italic">{t(locale, 'hero.title_highlight')}</span>
-              </h1>
-              <p className="text-white/40 text-lg max-md:text-sm mb-12 leading-relaxed max-w-lg font-light">
-                {t(locale, 'hero.description')}
-              </p>
-              <div className="flex gap-4 max-md:gap-3">
-                <Link
-                  href="/shop"
-                  className="inline-flex items-center bg-[#C9A96E] text-white font-semibold text-xs px-8 max-md:px-6 py-4 max-md:py-3 hover:bg-[#B8985D] transition-colors tracking-[0.2em] uppercase"
-                >
-                  {t(locale, 'hero.shop_collection')}
-                </Link>
-                <Link
-                  href="/shop?category=oud-collection"
-                  className="hidden md:inline-flex items-center border border-white/20 text-white font-semibold text-xs px-8 py-4 hover:bg-white/5 hover:border-white/40 transition-all tracking-[0.2em] uppercase"
-                >
-                  {t(locale, 'hero.oud_collection')}
-                </Link>
-              </div>
+        <div className="relative max-w-7xl mx-auto px-6 max-md:px-4 flex items-center min-h-[600px] max-md:min-h-[500px]">
+          <div className="max-w-xl py-20 max-md:py-16 max-md:mt-auto">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 px-5 py-2 mb-8 max-md:mb-6">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+              <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase">
+                {t(locale, 'hero.subtitle')}
+              </span>
             </div>
-
-            {/* Image grid - desktop */}
-            <div className="hidden md:grid grid-cols-2 gap-3 p-8">
-              {bestSellers.slice(0, 4).map((p: any) => (
-                <Link key={p.id} href={`/product/${p.slug}`} className="group">
-                  <div className="relative overflow-hidden aspect-square bg-white/5 border border-white/10">
-                    <img src={p.images[0].src} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                      <p className="text-white text-xs font-light line-clamp-1">{p.name}</p>
-                      <p className="text-[#C9A96E] text-xs font-medium">{currSymbol} {getPrice(p.price).toFixed(0)}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* Image strip - mobile */}
-            <div className="md:hidden flex gap-2 pb-8 overflow-x-auto no-scrollbar">
-              {bestSellers.slice(0, 4).map((p: any) => (
-                <Link key={p.id} href={`/product/${p.slug}`} className="shrink-0 w-[80px]">
-                  <div className="w-[80px] h-[80px] overflow-hidden bg-white/5 border border-white/10">
-                    <img src={p.images[0].src} alt={p.name} className="w-full h-full object-cover" />
-                  </div>
-                  <p className="text-[#C9A96E] text-[9px] font-medium mt-1 text-center line-clamp-1">{currSymbol} {getPrice(p.price).toFixed(0)}</p>
-                </Link>
-              ))}
+            <h1 className="font-serif text-[56px] max-md:text-[32px] font-normal text-white mb-6 leading-[1.08] tracking-tight">
+              {t(locale, 'hero.title_1')}{' '}
+              <span className="text-[#C9A96E] italic">{t(locale, 'hero.title_highlight')}</span>
+            </h1>
+            <p className="text-white/50 text-lg max-md:text-sm mb-12 max-md:mb-8 leading-relaxed max-w-md font-light">
+              {t(locale, 'hero.description')}
+            </p>
+            <div className="flex gap-4 max-md:gap-3">
+              <Link
+                href="/shop"
+                className="inline-flex items-center bg-[#C9A96E] text-white font-semibold text-xs px-10 max-md:px-7 py-4 max-md:py-3.5 hover:bg-[#B8985D] transition-colors tracking-[0.2em] uppercase"
+              >
+                {t(locale, 'hero.shop_collection')}
+              </Link>
+              <Link
+                href="/shop?category=oud-collection"
+                className="hidden md:inline-flex items-center border border-white/25 text-white font-semibold text-xs px-10 py-4 hover:bg-white/10 hover:border-white/40 transition-all tracking-[0.2em] uppercase backdrop-blur-sm"
+              >
+                {t(locale, 'hero.oud_collection')}
+              </Link>
             </div>
           </div>
         </div>
@@ -129,14 +101,14 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
       {/* Categories */}
       {topCategories.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
+        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
           <CategorySlider categories={topCategories} />
         </section>
       )}
 
       {/* Decorative divider */}
-      <div className="max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
-        <div className="flex items-center gap-4">
+      <div className="max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
+        <div className="flex items-center gap-6">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#e8e4dc]" />
           <div className="w-1.5 h-1.5 rotate-45 bg-[#C9A96E]" />
           <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#e8e4dc]" />
@@ -145,14 +117,16 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
       {/* Best Selling Fragrances */}
       {bestSellers.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
-          <div className="text-center mb-10 max-md:mb-6">
-            <h2 className="font-serif text-3xl max-md:text-xl font-normal text-[#191919]">
+        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
+          <div className="text-center mb-12 max-md:mb-8">
+            <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-3 block">
+              {t(locale, 'bestsellers.subtitle')}
+            </span>
+            <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-[#191919]">
               {t(locale, 'bestsellers.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'bestsellers.title_2')}</span>
             </h2>
-            <p className="text-sm text-[#999] mt-2 font-light">{t(locale, 'bestsellers.subtitle')}</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-md:gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
             {bestSellers.slice(0, 8).map((p: any) => (
               <ProductCard
                 key={p.id}
@@ -169,27 +143,29 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
               />
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link href="/shop" className="inline-flex items-center text-[#C9A96E] font-semibold text-xs hover:underline tracking-[0.2em] uppercase">
-              {t(locale, 'bestsellers.view_all')} &rarr;
+          <div className="text-center mt-12">
+            <Link href="/shop" className="inline-flex items-center gap-2 border border-[#C9A96E] text-[#C9A96E] font-semibold text-xs px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors tracking-[0.2em] uppercase">
+              {t(locale, 'bestsellers.view_all')}
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
         </section>
       )}
 
-      {/* Oud Collection Feature */}
-      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
+      {/* Oud Collection Feature — with image */}
+      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-24 max-md:pt-14">
         <div className="relative overflow-hidden bg-[#1A1A2E]">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#C9A96E] blur-3xl" />
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#C9A96E] blur-[120px]" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#C9A96E] blur-[80px]" />
           </div>
           <div className="relative grid grid-cols-1 md:grid-cols-2 items-center">
-            <div className="p-10 max-md:p-6">
-              <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-4 block">{t(locale, 'oud.label')}</span>
-              <h2 className="font-serif text-3xl max-md:text-xl font-normal text-white mb-4">
+            <div className="p-12 max-md:p-8">
+              <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-5 block">{t(locale, 'oud.label')}</span>
+              <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-white mb-5 leading-tight">
                 {t(locale, 'oud.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'oud.title_2')}</span>
               </h2>
-              <p className="text-white/50 text-sm leading-relaxed mb-8 font-light max-w-md">
+              <p className="text-white/45 text-sm leading-relaxed mb-10 font-light max-w-md">
                 {t(locale, 'oud.description')}
               </p>
               <Link
@@ -202,7 +178,7 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
             <div className="hidden md:flex items-center justify-center p-10">
               {bestSellers.filter((p: any) => p.categories?.some((c: any) => c.slug === 'oud-collection')).slice(0, 1).map((p: any) => (
                 <Link key={p.id} href={`/product/${p.slug}`} className="group">
-                  <div className="w-72 h-72 overflow-hidden border border-white/10">
+                  <div className="w-80 h-80 overflow-hidden border border-white/10">
                     <img src={p.images[0].src} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
                 </Link>
@@ -214,14 +190,16 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
-          <div className="text-center mb-10 max-md:mb-6">
-            <h2 className="font-serif text-3xl max-md:text-xl font-normal text-[#191919]">
+        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-24 max-md:pt-14">
+          <div className="text-center mb-12 max-md:mb-8">
+            <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-3 block">
+              {t(locale, 'arrivals.subtitle')}
+            </span>
+            <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-[#191919]">
               {t(locale, 'arrivals.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'arrivals.title_2')}</span>
             </h2>
-            <p className="text-sm text-[#999] mt-2 font-light">{t(locale, 'arrivals.subtitle')}</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-md:gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
             {newArrivals.slice(0, 8).map((p: any) => (
               <ProductCard
                 key={p.id}
@@ -241,19 +219,27 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
         </section>
       )}
 
-      {/* Brand Story */}
-      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
-        <div className="bg-[#FAF6F0] p-12 max-md:p-6 text-center">
-          <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-4 block">{t(locale, 'brand.label')}</span>
-          <h2 className="font-serif text-3xl max-md:text-xl font-normal text-[#191919] mb-4">
+      {/* Brand Story — with background image */}
+      <section className="fade-up relative overflow-hidden mt-24 max-md:mt-14">
+        <div className="absolute inset-0">
+          <img
+            src="/novalis-brand-story.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[#1A1A2E]/80" />
+        </div>
+        <div className="relative max-w-3xl mx-auto px-6 max-md:px-4 py-24 max-md:py-14 text-center">
+          <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-5 block">{t(locale, 'brand.label')}</span>
+          <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-white mb-5 leading-tight">
             {t(locale, 'brand.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'brand.title_2')}</span>
           </h2>
-          <p className="text-[#666] text-sm leading-relaxed max-w-2xl mx-auto font-light mb-8">
+          <p className="text-white/50 text-sm leading-relaxed max-w-2xl mx-auto font-light mb-10">
             {t(locale, 'brand.description')}
           </p>
           <Link
             href="/about"
-            className="inline-flex items-center border border-[#C9A96E] text-[#C9A96E] font-semibold text-xs px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors tracking-[0.2em] uppercase"
+            className="inline-flex items-center border border-white/30 text-white font-semibold text-xs px-10 py-4 hover:bg-white/10 hover:border-white/50 transition-colors tracking-[0.2em] uppercase backdrop-blur-sm"
           >
             {t(locale, 'brand.cta')}
           </Link>
@@ -261,9 +247,9 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
       </section>
 
       {/* FAQ Section */}
-      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12 pb-16 max-md:pb-24">
-        <div className="text-center mb-10 max-md:mb-6">
-          <h2 className="font-serif text-3xl max-md:text-xl font-normal text-[#191919]">
+      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-24 max-md:pt-14 pb-20 max-md:pb-28">
+        <div className="text-center mb-12 max-md:mb-8">
+          <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-[#191919]">
             {t(locale, 'faq.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'faq.title_2')}</span>
           </h2>
         </div>
@@ -285,7 +271,7 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
             </details>
           ))}
         </div>
-        <div className="text-center mt-6">
+        <div className="text-center mt-8">
           <Link href="/faq" className="text-[#C9A96E] font-semibold text-xs hover:underline tracking-[0.2em] uppercase">
             {t(locale, 'faq.view_all')} &rarr;
           </Link>
