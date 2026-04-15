@@ -51,7 +51,9 @@ export async function POST(req: Request) {
       // If no JWT plugin, use a simple check (WooCommerce doesn't expose password verification)
       // In production, install JWT Authentication plugin for proper auth
       const meta = customer.meta_data || [];
-      const storedHash = meta.find((m: { key: string; value: string }) => m.key === 'shapehive_password');
+      // Check new key first, fall back to legacy key for users who registered before rebrand
+      const storedHash = meta.find((m: { key: string; value: string }) => m.key === 'shapehive_password')
+        || meta.find((m: { key: string; value: string }) => m.key === 'balloonsmall_password');
 
       if (!storedHash) {
         return NextResponse.json(
