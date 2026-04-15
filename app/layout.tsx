@@ -11,7 +11,7 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
 
 const SITE_URL = 'https://shapehive.in';
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Novalis Perfumes | Luxury Fragrances with an Emirati Soul',
     description: 'Discover Novalis luxury perfumes from Dubai - exclusive oud, musk, and amber compositions with a touch of AI innovation.',
     images: ['/novalis-logo.png'],
