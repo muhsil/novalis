@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: 'Novalis',
     images: [{
-      url: '/hero-balloons.png',
+      url: '/hero-banner.png',
       width: 1200,
       height: 630,
       alt: 'Novalis – Luxury Arabic Perfumes & Fragrances',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Novalis – Luxury Arabic Perfumes & Fragrances | UAE',
     description: 'Discover exquisite Arabic perfumes, oud collections, and luxury fragrances from Novalis. Delivery across the UAE.',
-    images: ['/hero-balloons.png'],
+    images: ['/hero-banner.png'],
     creator: '@novalis_ae',
   },
   robots: {
