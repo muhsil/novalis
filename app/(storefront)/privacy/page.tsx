@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Novalis privacy policy. Learn how we collect, use, and protect your personal information.',
+  description: 'Novalis Perfumes privacy policy. Learn how we collect, use, and protect your personal information.',
   alternates: { canonical: '/privacy' },
 };
 
@@ -30,11 +30,11 @@ const SECTIONS = [
   },
   {
     title: '6. Your Rights',
-    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@shapehive.in.',
+    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at info@novalis.ae.',
   },
   {
     title: '7. Contact',
-    content: 'For privacy-related inquiries, email hello@shapehive.in or WhatsApp +971 56 355 4303.',
+    content: 'For privacy-related inquiries, email info@novalis.ae or WhatsApp +971 56 355 4303.',
   },
 ];
 

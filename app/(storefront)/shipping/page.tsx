@@ -5,7 +5,7 @@ import { getStoreSettings } from '@/lib/store-settings';
 
 export const metadata: Metadata = {
   title: 'Shipping & Delivery',
-  description: 'Novalis shipping and delivery information. Same-day delivery across Dubai. Free shipping on eligible orders.',
+  description: 'Novalis Perfumes shipping and delivery information. Free delivery across UAE and GCC countries.',
   alternates: { canonical: '/shipping' },
 };
 
@@ -17,16 +17,16 @@ const DELIVERY_ICONS: Record<string, React.ReactNode> = {
 
 function getDeliveryOptions(currency: string) {
   return [
-    { key: 'same-day', title: 'Same-Day Delivery', description: 'Order before 2:00 PM for same-day delivery across Dubai.', price: `Free on orders over ${currency} 100` },
-    { key: 'standard', title: 'Standard Delivery', description: 'Next-day delivery for orders placed after 2:00 PM.', price: `Free on orders over ${currency} 100` },
-    { key: 'scheduled', title: 'Scheduled Delivery', description: 'Choose a specific date and time slot for your delivery.', price: `Free on orders over ${currency} 100` },
+    { key: 'same-day', title: 'UAE Express Delivery', description: 'Express shipping within 2-4 business days inside the UAE.', price: `Free on orders over ${currency} 100` },
+    { key: 'standard', title: 'GCC Delivery', description: 'Delivery to Saudi Arabia, Kuwait, Qatar, Bahrain, and Oman within 5-10 business days.', price: 'Calculated at checkout' },
+    { key: 'scheduled', title: 'International Shipping', description: 'Select international destinations. Contact us for availability.', price: 'Calculated at checkout' },
   ];
 }
 
 const DELIVERY_AREAS = [
-  'Downtown Dubai', 'Dubai Marina', 'JBR', 'Palm Jumeirah',
-  'Business Bay', 'JLT', 'DIFC', 'Jumeirah',
-  'Al Barsha', 'Arabian Ranches', 'Dubai Hills', 'Silicon Oasis',
+  'Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman',
+  'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain',
+  'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman',
 ];
 
 export default async function ShippingPage() {
@@ -60,7 +60,7 @@ export default async function ShippingPage() {
       {/* Delivery Areas */}
       <div className="bg-white rounded-lg border border-[#f0f0f0] p-6 max-md:p-4 mb-6">
         <h2 className="text-lg font-bold text-[#191919] mb-3">Delivery Areas</h2>
-        <p className="text-sm text-[#666] mb-3">We deliver across all areas in Dubai, including:</p>
+        <p className="text-sm text-[#666] mb-3 font-light">We ship across the UAE and all GCC countries, including:</p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {DELIVERY_AREAS.map((area) => (
             <div key={area} className="flex items-center gap-1.5 text-sm text-[#666]">
@@ -69,7 +69,7 @@ export default async function ShippingPage() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#999] mt-3">Don&apos;t see your area? Contact us — we likely deliver there too!</p>
+        <p className="text-xs text-[#999] mt-3 font-light">Don&apos;t see your location? Contact us — we may deliver there too!</p>
       </div>
 
       {/* Important Notes */}

@@ -19,7 +19,7 @@ export default function GradientBanner({
   title,
   subtitle,
   actions = [],
-  gradient = 'linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)',
+  gradient = 'linear-gradient(135deg, #1A1A2E 0%, #2A2A4E 50%, #1A1A2E 100%)',
 }: GradientBannerProps) {
   return (
     <section className="py-20 max-md:py-12 px-4">
@@ -54,7 +54,7 @@ export default function GradientBanner({
                 const className =
                   action.variant === 'outline'
                     ? 'border-2 border-white text-white font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-full hover:bg-white/10 transition-all hover:-translate-y-1 max-md:text-sm'
-                    : 'bg-white text-violet-700 font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-full hover:shadow-xl transition-all hover:-translate-y-1 max-md:text-sm';
+                    : 'bg-[#C9A96E] text-white font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-none hover:bg-[#B8985D] transition-all hover:-translate-y-1 max-md:text-sm tracking-wide uppercase';
 
                 if (action.external) {
                   return (

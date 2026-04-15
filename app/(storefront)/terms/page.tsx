@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const SECTIONS = [
   {
     title: '1. General',
-    content: 'By accessing and using Novalis (shapehive.in), you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
+    content: 'By accessing and using Novalis Perfumes, you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
   },
   {
     title: '2. Products & Pricing',
@@ -27,7 +27,7 @@ const SECTIONS = [
   },
   {
     title: '5. Returns & Refunds',
-    content: 'Due to the nature of perfume and fragrance products, we only accept returns for sealed, unopened items within 7 days of delivery. If your order arrives damaged or incorrect, please contact us within 48 hours of delivery for a replacement or refund.',
+    content: 'We offer a complete satisfaction guarantee. Unopened products can be returned within 14 days of delivery for a full refund or exchange. In case of a product defect, we provide immediate free replacement. If your order arrives damaged or incorrect, please contact us within 48 hours of delivery.',
   },
   {
     title: '6. Liability',
@@ -35,7 +35,7 @@ const SECTIONS = [
   },
   {
     title: '7. Contact',
-    content: 'For questions about these terms, contact us at hello@shapehive.in or WhatsApp +971 56 355 4303.',
+    content: 'For questions about these terms, contact us at info@novalis.ae or WhatsApp +971 56 355 4303.',
   },
 ];
 
@@ -48,7 +48,7 @@ export default async function TermsPage() {
     content: section.content === 'DYNAMIC_PRICING_TERMS'
       ? `All prices are listed in ${currency} and include VAT where applicable. Prices are subject to change without notice. Product images are for illustration purposes and may vary slightly from the actual product.`
       : section.content === 'DYNAMIC_DELIVERY_TERMS'
-        ? `We deliver across Dubai. Same-day delivery is available for orders placed before 2:00 PM. Delivery times are estimates and may vary due to traffic, weather, or other factors beyond our control. Free delivery on orders over ${currency} 100.`
+        ? `We ship across all GCC countries including UAE, Saudi Arabia, Kuwait, Qatar, Bahrain, and Oman. Express shipping within 2-4 business days inside the UAE. Delivery times are estimates and may vary. Free delivery on orders over ${currency} 100.`
         : section.content,
   }));
 

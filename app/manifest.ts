@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Novalis - Luxury Arabic Perfumes & Fragrances',
+    name: 'Novalis | Luxury Perfumes with an Emirati Soul',
     short_name: 'Novalis',
-    description: 'Discover exquisite Arabic perfumes, oud collections, and luxury fragrances. Delivery across UAE.',
+    description: 'Shop luxury Arabic perfumes & oud fragrances at Novalis UAE. Premium Emirati-inspired scents.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
