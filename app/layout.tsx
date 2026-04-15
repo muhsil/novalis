@@ -13,7 +13,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_URL = 'https://novalis.ae';
+const SITE_URL = 'https://shapehive.in';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: 'Novalis – Premium Balloon Decorations & Delivery in Dubai, UAE',
     description: 'Order premium balloons online in Dubai & UAE. Birthday, wedding, baby shower decorations with same-day delivery across the GCC.',
     images: ['/hero-balloons.png'],
-    creator: '@novalis',
+    creator: '@shapehive',
   },
   robots: {
     index: true,

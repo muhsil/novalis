@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const SECTIONS = [
   {
     title: '1. General',
-    content: 'By accessing and using Novalis (novalis.ae), you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
+    content: 'By accessing and using Novalis (shapehive.in), you agree to be bound by these Terms & Conditions. We reserve the right to modify these terms at any time without prior notice.',
   },
   {
     title: '2. Products & Pricing',
@@ -35,7 +35,7 @@ const SECTIONS = [
   },
   {
     title: '7. Contact',
-    content: 'For questions about these terms, contact us at hello@novalis.ae or WhatsApp +971 56 355 4303.',
+    content: 'For questions about these terms, contact us at hello@shapehive.in or WhatsApp +971 56 355 4303.',
   },
 ];
 

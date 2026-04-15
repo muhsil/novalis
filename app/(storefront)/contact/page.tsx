@@ -16,7 +16,7 @@ const CONTACT_ICONS: Record<string, React.ReactNode> = {
 };
 
 const CONTACT_METHODS = [
-  { key: 'email', label: 'Email', value: 'hello@novalis.ae', href: 'mailto:hello@novalis.ae' },
+  { key: 'email', label: 'Email', value: 'hello@shapehive.in', href: 'mailto:hello@shapehive.in' },
   { key: 'phone', label: 'Phone', value: '56 355 4303', href: 'tel:+971563554303' },
   { key: 'whatsapp', label: 'WhatsApp', value: '+971 56 355 4303', href: 'https://wa.me/971563554303' },
   { key: 'location', label: 'Location', value: 'Dubai, UAE', href: null },
