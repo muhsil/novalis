@@ -57,6 +57,6 @@ The auth system uses WooCommerce Customer API with custom PBKDF2 password hashin
 ## Verifying Password Hash via CLI
 ```bash
 curl -s -u "$WC_CONSUMER_KEY:$WC_CONSUMER_SECRET" \
-  "https://cms.novalis.ae/wp-json/wc/v3/customers?email=<email>&per_page=1" | \
+  "https://cms.shapehive.in/wp-json/wc/v3/customers?email=<email>&per_page=1" | \
   python3 -c "import sys,json,re; d=json.load(sys.stdin); m={x['key']:x['value'] for x in d[0].get('meta_data',[])}; pw=m.get('novalis_password','NOT FOUND'); print('PASS' if re.match(r'^[0-9a-f]{32}:[0-9a-f]{128}$',pw) else 'FAIL:', pw[:40])"
 ```

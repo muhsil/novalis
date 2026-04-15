@@ -30,11 +30,11 @@ const SECTIONS = [
   },
   {
     title: '6. Your Rights',
-    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@novalis.ae.',
+    content: 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@shapehive.in.',
   },
   {
     title: '7. Contact',
-    content: 'For privacy-related inquiries, email hello@novalis.ae or WhatsApp +971 56 355 4303.',
+    content: 'For privacy-related inquiries, email hello@shapehive.in or WhatsApp +971 56 355 4303.',
   },
 ];
 
