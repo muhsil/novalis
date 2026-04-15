@@ -50,8 +50,9 @@ export default async function HomePage() {
   const bestSellers = hasFeatured
     ? featured.filter((p: any) => p.images?.[0]?.src)
     : withImages.slice(0, Math.ceil(withImages.length / 2));
+  const bestSellerIds = new Set(bestSellers.map((p: any) => p.id));
   const newArrivals = hasFeatured
-    ? withImages
+    ? withImages.filter((p: any) => !bestSellerIds.has(p.id))
     : withImages.slice(Math.ceil(withImages.length / 2));
 
   return (
