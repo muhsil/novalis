@@ -124,7 +124,7 @@ These settings are fetched dynamically by the frontend via `lib/store-settings.t
 
 | Type | Value |
 |------|-------|
-| Email | hello@shapehive.in |
+| Email | info@novalis.ae |
 | Phone | 56 355 4303 |
 | WhatsApp | +971 56 355 4303 |
 | WhatsApp Link | https://wa.me/971563554303 |

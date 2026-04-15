@@ -9,10 +9,10 @@ const TRUST_ICONS = {
 
 function getTrustItems(currency: string) {
   return [
-    { icon: TRUST_ICONS.shipping, title: 'Free shipping', subtitle: `On orders over ${currency} 100` },
-    { icon: TRUST_ICONS.delivery, title: 'Same-day delivery', subtitle: 'Order before 2 PM' },
-    { icon: TRUST_ICONS.returns, title: 'Easy returns', subtitle: 'Hassle-free exchanges' },
-    { icon: TRUST_ICONS.prices, title: 'Best prices', subtitle: 'Guaranteed savings' },
+    { icon: TRUST_ICONS.shipping, title: 'Free UAE Delivery', subtitle: `On orders over ${currency} 100` },
+    { icon: TRUST_ICONS.delivery, title: 'GCC Shipping', subtitle: '2-10 business days' },
+    { icon: TRUST_ICONS.returns, title: '14-Day Returns', subtitle: 'Satisfaction guaranteed' },
+    { icon: TRUST_ICONS.prices, title: 'Premium Quality', subtitle: 'Handcrafted perfumes' },
   ];
 }
 

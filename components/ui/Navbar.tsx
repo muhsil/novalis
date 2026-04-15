@@ -60,10 +60,10 @@ export default function Navbar() {
       <div className="bg-gradient-to-r from-[#C9A96E] via-[#D4B87A] to-[#C9A96E] text-white text-center text-[11px] font-medium py-1.5 px-4 tracking-wide">
         <span className="inline-flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5 hidden sm:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
-          <span className="hidden sm:inline">Free Delivery on orders over AED 100</span>
+          <span className="hidden sm:inline">Free Delivery Across UAE</span>
           <span className="hidden sm:inline mx-2 opacity-40">|</span>
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-          <span>Same-Day Delivery — Order before 2 PM</span>
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+          <span>Luxury Fragrances with an Emirati Signature</span>
         </span>
       </div>
 
@@ -73,14 +73,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0 group">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#C9A96E] to-[#D4B87A] rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-[17px] text-[#1a1a1a] leading-tight tracking-tight">Novalis</span>
-                <span className="text-[9px] text-[#999] font-medium tracking-widest uppercase leading-none hidden sm:block">Luxury Fragrances</span>
-              </div>
+            <Link href="/" className="flex items-center shrink-0 group">
+              <img src="/novalis-logo.png" alt="Novalis" className="h-10 w-auto object-contain" />
             </Link>
 
             {/* Desktop Search */}
@@ -197,10 +191,7 @@ export default function Navbar() {
         {/* Menu Header */}
         <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#C9A96E] to-[#D4B87A]">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
-            </div>
-            <span className="font-bold text-sm text-white">Novalis</span>
+            <img src="/novalis-logo.png" alt="Novalis" className="h-7 w-auto brightness-0 invert" />
           </div>
           <button onClick={() => setMenuOpen(false)} className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 transition-colors">
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
