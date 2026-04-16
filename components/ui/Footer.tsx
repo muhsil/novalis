@@ -62,13 +62,13 @@ function NewsletterForm() {
 
 function PaymentIcons() {
   return (
-    <div className="flex items-center gap-3 opacity-40">
+    <div className="flex items-center gap-3">
       {/* Visa */}
-      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="4" fill="white"/><path d="M19.5 21H17L18.9 11H21.4L19.5 21ZM15.3 11L12.9 18L12.6 16.5L11.7 12C11.7 12 11.6 11 10.3 11H6.1L6 11.2C6 11.2 7.5 11.5 9.2 12.5L11.3 21H13.9L18 11H15.3ZM37.2 21H39.5L37.5 11H35.5C34.4 11 34 11.8 34 11.8L30.3 21H32.9L33.4 19.5H36.6L37.2 21ZM34.2 17.5L35.5 14L36.2 17.5H34.2ZM30 13.5L30.4 11.3C30.4 11.3 29 10.8 27.6 10.8C26 10.8 22.6 11.5 22.6 14.5C22.6 17.3 26.5 17.3 26.5 18.8C26.5 20.3 23 20.1 21.7 19.1L21.3 21.4C21.3 21.4 22.7 22 24.6 22C26.5 22 30 20.9 30 18.2C30 15.4 26 15.1 26 13.9C26 12.7 28.7 12.9 30 13.5Z" fill="#1A1F71"/></svg>
+      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="white" stroke="#e0e0e0"/><path d="M19.5 21H17L18.9 11H21.4L19.5 21ZM15.3 11L12.9 18L12.6 16.5L11.7 12C11.7 12 11.6 11 10.3 11H6.1L6 11.2C6 11.2 7.5 11.5 9.2 12.5L11.3 21H13.9L18 11H15.3ZM37.2 21H39.5L37.5 11H35.5C34.4 11 34 11.8 34 11.8L30.3 21H32.9L33.4 19.5H36.6L37.2 21ZM34.2 17.5L35.5 14L36.2 17.5H34.2ZM30 13.5L30.4 11.3C30.4 11.3 29 10.8 27.6 10.8C26 10.8 22.6 11.5 22.6 14.5C22.6 17.3 26.5 17.3 26.5 18.8C26.5 20.3 23 20.1 21.7 19.1L21.3 21.4C21.3 21.4 22.7 22 24.6 22C26.5 22 30 20.9 30 18.2C30 15.4 26 15.1 26 13.9C26 12.7 28.7 12.9 30 13.5Z" fill="#1A1F71"/></svg>
       {/* Mastercard */}
-      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="4" fill="white"/><circle cx="20" cy="16" r="8" fill="#EB001B"/><circle cx="28" cy="16" r="8" fill="#F79E1B"/><path d="M24 10.3C25.8 11.7 27 13.7 27 16C27 18.3 25.8 20.3 24 21.7C22.2 20.3 21 18.3 21 16C21 13.7 22.2 11.7 24 10.3Z" fill="#FF5F00"/></svg>
+      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="white" stroke="#e0e0e0"/><circle cx="20" cy="16" r="8" fill="#EB001B"/><circle cx="28" cy="16" r="8" fill="#F79E1B"/><path d="M24 10.3C25.8 11.7 27 13.7 27 16C27 18.3 25.8 20.3 24 21.7C22.2 20.3 21 18.3 21 16C21 13.7 22.2 11.7 24 10.3Z" fill="#FF5F00"/></svg>
       {/* Apple Pay */}
-      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="4" fill="white"/><path d="M17.2 12.3C17.6 11.8 17.9 11.1 17.8 10.4C17.2 10.4 16.4 10.8 16 11.3C15.6 11.7 15.3 12.5 15.3 13.1C16 13.2 16.8 12.8 17.2 12.3ZM17.8 13.3C16.9 13.2 16.1 13.8 15.7 13.8C15.2 13.8 14.5 13.3 13.8 13.3C12.8 13.4 11.9 13.9 11.4 14.8C10.4 16.5 11.1 19.1 12.1 20.4C12.6 21.1 13.2 21.8 14 21.8C14.7 21.8 15 21.3 15.8 21.3C16.6 21.3 16.9 21.8 17.6 21.8C18.4 21.7 18.9 21.1 19.4 20.4C20 19.6 20.2 18.8 20.2 18.8C20.2 18.7 18.8 18.2 18.8 16.6C18.8 15.2 19.9 14.6 20 14.5C19.3 13.5 18.2 13.3 17.8 13.3Z" fill="#333"/><text x="23" y="19" fontSize="7" fontWeight="700" fill="#333" fontFamily="system-ui">Pay</text></svg>
+      <svg className="h-6 w-auto" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="white" stroke="#e0e0e0"/><path d="M17.2 12.3C17.6 11.8 17.9 11.1 17.8 10.4C17.2 10.4 16.4 10.8 16 11.3C15.6 11.7 15.3 12.5 15.3 13.1C16 13.2 16.8 12.8 17.2 12.3ZM17.8 13.3C16.9 13.2 16.1 13.8 15.7 13.8C15.2 13.8 14.5 13.3 13.8 13.3C12.8 13.4 11.9 13.9 11.4 14.8C10.4 16.5 11.1 19.1 12.1 20.4C12.6 21.1 13.2 21.8 14 21.8C14.7 21.8 15 21.3 15.8 21.3C16.6 21.3 16.9 21.8 17.6 21.8C18.4 21.7 18.9 21.1 19.4 20.4C20 19.6 20.2 18.8 20.2 18.8C20.2 18.7 18.8 18.2 18.8 16.6C18.8 15.2 19.9 14.6 20 14.5C19.3 13.5 18.2 13.3 17.8 13.3Z" fill="#333"/><text x="23" y="19" fontSize="7" fontWeight="700" fill="#333" fontFamily="system-ui">Pay</text></svg>
     </div>
   );
 }
@@ -85,8 +85,7 @@ export default function Footer() {
           {/* Newsletter Section */}
           <div className="py-10 border-b border-[#e0e0e0] flex items-center justify-between gap-8 flex-wrap">
             <div>
-              <h3 className="text-lg text-[#191919] font-bold mb-1">Join the Novalis Circle</h3>
-              <p className="text-[#666] text-sm">Receive exclusive offers and fragrance stories.</p>
+              <h3 className="text-lg text-[#191919] font-bold mb-1">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
             </div>
             <NewsletterForm />
           </div>
@@ -167,8 +166,7 @@ export default function Footer() {
       <footer className="md:hidden bg-[#f5f5f5] border-t border-[#e8e8e8] mb-14">
         {/* Newsletter - mobile */}
         <div className="px-4 py-6 border-b border-[#e0e0e0] text-center">
-          <h3 className="text-base text-[#191919] font-bold mb-1">Join the Novalis Circle</h3>
-          <p className="text-[#666] text-xs mb-4">Exclusive offers and fragrance stories.</p>
+          <h3 className="text-base text-[#191919] font-bold mb-3">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
           <NewsletterForm />
         </div>
 

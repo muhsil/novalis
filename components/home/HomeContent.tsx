@@ -76,27 +76,33 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
 
   return (
     <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
-      <div className="flex items-center justify-between mb-8 max-md:mb-6">
-        <h2 className="text-xl max-md:text-lg font-bold text-[#191919] uppercase tracking-wide">
+      {/* Section header: centered title with inline arrows (makeup.ae style) */}
+      <div className="flex items-center justify-center mb-10 max-md:mb-6 gap-4">
+        <h2 className="text-[22px] max-md:text-lg font-normal text-[#191919] text-center">
           {t(locale, 'bestsellers.title_1')} {t(locale, 'bestsellers.title_2')}
         </h2>
-        <Link href="/shop" className="text-[13px] font-medium text-[#191919] hover:text-[#C9A96E] transition-colors hidden md:flex items-center gap-1">
-          {t(locale, 'bestsellers.view_all')}
-          <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-        </Link>
+        <div className="hidden md:flex items-center gap-1.5">
+          <button
+            onClick={() => scroll('prev')}
+            disabled={!canScrollPrev}
+            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
+            aria-label="Previous"
+          >
+            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6-6m-6 6l6 6" /></svg>
+          </button>
+          <button
+            onClick={() => scroll('next')}
+            disabled={!canScrollNext}
+            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
+            aria-label="Next"
+          >
+            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
+          </button>
+        </div>
       </div>
 
       {/* Desktop Slider */}
-      <div className="hidden md:block relative group">
-        {canScrollPrev && (
-          <button
-            onClick={() => scroll('prev')}
-            className="absolute -start-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll previous"
-          >
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
-          </button>
-        )}
+      <div className="hidden md:block relative">
         <div
           ref={scrollRef}
           className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth pb-2"
@@ -119,15 +125,6 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
             </div>
           ))}
         </div>
-        {canScrollNext && (
-          <button
-            onClick={() => scroll('next')}
-            className="absolute -end-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll next"
-          >
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-          </button>
-        )}
       </div>
 
       {/* Mobile Grid */}
@@ -149,10 +146,10 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
         ))}
       </div>
 
-      <div className="text-center mt-8 md:hidden">
-        <Link href="/shop" className="inline-flex items-center gap-2 text-[#191919] font-semibold text-xs px-6 py-3 border border-[#191919] hover:bg-[#191919] hover:text-white transition-colors tracking-wide uppercase">
+      <div className="text-center mt-6 md:hidden">
+        <Link href="/shop" className="inline-flex items-center gap-2 text-[#191919] font-medium text-sm hover:text-[#666] transition-colors">
           {t(locale, 'bestsellers.view_all')}
-          <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
         </Link>
       </div>
     </section>
@@ -263,8 +260,8 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
         <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10">
-          <div className="flex items-center justify-between mb-8 max-md:mb-6">
-            <h2 className="text-xl max-md:text-lg font-bold text-[#191919] uppercase tracking-wide">
+          <div className="flex items-center justify-center mb-10 max-md:mb-6">
+            <h2 className="text-[22px] max-md:text-lg font-normal text-[#191919] text-center">
               {t(locale, 'arrivals.title_1')} {t(locale, 'arrivals.title_2')}
             </h2>
           </div>
@@ -317,14 +314,10 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
       {/* FAQ Section */}
       <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-16 max-md:pt-10 pb-16 max-md:pb-24">
-        <div className="flex items-center justify-between mb-8 max-md:mb-6">
-          <h2 className="text-xl max-md:text-lg font-bold text-[#191919] uppercase tracking-wide">
+        <div className="flex items-center justify-center mb-10 max-md:mb-6">
+          <h2 className="text-[22px] max-md:text-lg font-normal text-[#191919] text-center">
             {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
           </h2>
-          <Link href="/faq" className="text-[13px] font-medium text-[#191919] hover:text-[#C9A96E] transition-colors hidden md:flex items-center gap-1">
-            {t(locale, 'faq.view_all')}
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </Link>
         </div>
         <div className="max-w-full space-y-2">
           {[

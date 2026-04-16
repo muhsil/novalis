@@ -57,19 +57,20 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <div className="bg-[#191919] text-white hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9 text-[11px]">
-          <Link href="/shipping" className="hover:underline font-light">
+      {/* Top Announcement Bar — matches makeup.ae layout */}
+      <div className="bg-[#f5f5f5] border-b border-[#e8e8e8] hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9 text-[11px] text-[#666]">
+          <Link href="/shipping" className="hover:text-[#191919] transition-colors">
             {t(locale, 'announcement.free_delivery') || 'Free delivery for orders over AED 100'}
           </Link>
           <div className="flex items-center gap-5">
-            <Link href="/about" className="hover:underline font-light">{t(locale, 'footer.about_us')}</Link>
-            <Link href="/contact" className="hover:underline font-light">{t(locale, 'footer.contact')}</Link>
+            <Link href="/shop?on_sale=true" className="text-[#d32f2f] font-medium hover:underline">{t(locale, 'nav.special_offers') || 'Special offers'}</Link>
+            <Link href="/shipping" className="hover:text-[#191919] transition-colors">{t(locale, 'footer.shipping') || 'Delivery and Payment'}</Link>
+            <Link href="/about" className="hover:text-[#191919] transition-colors">{t(locale, 'footer.about_us')}</Link>
           </div>
           <div className="flex items-center gap-3">
-            <LanguageSwitcher variant="dark" />
-            <CurrencySwitcher variant="dark" />
+            <LanguageSwitcher variant="compact" />
+            <CurrencySwitcher variant="compact" />
           </div>
         </div>
       </div>
