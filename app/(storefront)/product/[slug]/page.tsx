@@ -12,12 +12,6 @@ import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 
 export const revalidate = 60;
 
-const SERVICE_FEATURES = [
-  { icon: '🚚', title: 'Free UAE Delivery', description: 'Complimentary shipping on orders over AED 100' },
-  { icon: '⚡', title: 'Same-Day Delivery', description: 'Order before 2 PM for same-day' },
-  { icon: '🎁', title: 'Gift Wrapping', description: 'Complimentary luxury packaging' },
-  { icon: '↩️', title: '14-Day Returns', description: 'Full refund on unopened items' },
-];
 
 async function getProduct(slug: string) {
   try {
@@ -198,18 +192,6 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
             variations={variations}
           />
 
-          {/* Service features */}
-          <div className="grid grid-cols-2 gap-3 mt-8 pt-8 border-t border-[#f0f0f0]">
-            {SERVICE_FEATURES.map((f) => (
-              <div key={f.title} className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">{f.icon}</span>
-                <div>
-                  <span className="text-xs font-semibold text-[#191919] block">{f.title}</span>
-                  <p className="text-[10px] text-[#999] mt-0.5 leading-relaxed">{f.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

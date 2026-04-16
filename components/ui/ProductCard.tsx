@@ -34,7 +34,7 @@ export default function ProductCard({
   const discount = onSale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
 
   return (
-    <Link href={`/product/${slug}`} className="product-card group block">
+    <Link href={`/product/${slug}`} className="product-card group block bg-white rounded-lg overflow-hidden border border-[#f0f0f0] hover:border-[#e0dbd3] hover:shadow-md transition-all duration-300">
       {/* Image */}
       <div className="relative overflow-hidden aspect-[3/4] bg-[#fafafa]">
         {imageSrc ? (
@@ -52,55 +52,57 @@ export default function ProductCard({
 
         {/* Discount badge */}
         {discount > 0 && (
-          <span className="absolute top-3 left-3 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2.5 py-1 tracking-wider uppercase">
+          <span className="absolute top-2.5 left-2.5 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
             -{discount}%
           </span>
         )}
 
         {/* New badge for featured */}
         {featured && !discount && (
-          <span className="absolute top-3 left-3 bg-[#C9A96E] text-white text-[10px] font-semibold px-2.5 py-1 tracking-wider uppercase">
+          <span className="absolute top-2.5 left-2.5 bg-[#C9A96E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
             New
           </span>
         )}
 
         {/* Wishlist heart */}
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-md:opacity-100">
+        <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-md:opacity-100">
           <WishlistButton
             item={{ id: productId || 0, name, price, image: imageSrc, slug }}
             size="sm"
           />
         </div>
-
-        {/* Quick view overlay on hover */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-          <span className="text-white text-[10px] font-semibold tracking-[0.2em] uppercase">View Details</span>
-        </div>
       </div>
 
       {/* Card body */}
-      <div className={variant === 'compact' ? 'pt-3' : 'pt-4 max-md:pt-3'}>
+      <div className={variant === 'compact' ? 'px-3 py-3' : 'px-4 py-3.5 max-md:px-3 max-md:py-3'}>
         {/* Category */}
         {categoryName && (
-          <span className="text-[10px] font-medium text-[#C9A96E] tracking-[0.15em] uppercase mb-1 block">
+          <span className="text-[9px] font-medium text-[#C9A96E] tracking-[0.15em] uppercase mb-1 block">
             {categoryName}
           </span>
         )}
 
         {/* Product name */}
-        <h3 className="font-serif text-sm max-md:text-[13px] text-[#191919] line-clamp-2 leading-snug mb-2">
+        <h3 className="font-serif text-sm max-md:text-[13px] text-[#191919] line-clamp-1 leading-snug mb-2">
           {name}
         </h3>
 
         {/* Price row */}
         <div className="flex items-baseline gap-2">
-          <span className="text-base font-semibold text-[#191919]">
+          <span className="text-sm font-semibold text-[#191919]">
             {currency} {price.toFixed(0)}
           </span>
           {onSale && regularPrice && (
-            <span className="text-xs text-[#ccc] line-through">
-              {currency} {regularPrice.toFixed(0)}
-            </span>
+            <>
+              <span className="text-[11px] text-[#ccc] line-through">
+                {currency} {regularPrice.toFixed(0)}
+              </span>
+              {discount > 0 && (
+                <span className="text-[10px] font-semibold text-[#C9A96E]">
+                  Save {discount}%
+                </span>
+              )}
+            </>
           )}
         </div>
       </div>
