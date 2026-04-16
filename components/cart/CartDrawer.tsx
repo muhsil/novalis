@@ -40,7 +40,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
 
       {/* Drawer */}
       <div className={`fixed top-0 end-0 h-full w-full max-w-sm bg-white z-[100] shadow-2xl flex flex-col
-        transition-transform duration-300 ${open ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'}`}>
+        transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full rtl:-translate-x-full'}`}>
         
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#f0f0f0]">

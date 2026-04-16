@@ -193,7 +193,7 @@ export default function Navbar() {
       )}
 
       {/* Mobile Slide-in Menu Panel */}
-      <div className={`md:hidden fixed top-0 end-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'}`}>
+      <div className={`md:hidden fixed top-0 end-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full rtl:-translate-x-full'}`}>
         {/* Menu Header */}
         <div className="flex items-center justify-between p-4 bg-[#1A1A2E]">
           <img src="/novalis-logo.png" alt="Novalis" className="h-7 w-auto brightness-0 invert" />
