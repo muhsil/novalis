@@ -126,16 +126,16 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       ]} />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-[#999] px-6 py-4 max-md:px-4 overflow-x-auto no-scrollbar">
-        <Link href="/" className="hover:text-[#C9A96E] transition-colors shrink-0">Home</Link>
-        <span className="shrink-0">/</span>
-        <Link href="/shop" className="hover:text-[#C9A96E] transition-colors shrink-0">Shop</Link>
-        <span className="shrink-0">/</span>
-        <span className="text-[#191919] font-medium truncate">{product.name}</span>
+      <nav className="flex items-center gap-2 text-[11px] text-[#999] px-6 py-3 max-md:px-4 overflow-x-auto no-scrollbar">
+        <Link href="/" className="hover:text-[#191919] transition-colors shrink-0">Home</Link>
+        <span className="shrink-0 text-[#ddd]">/</span>
+        <Link href="/shop" className="hover:text-[#191919] transition-colors shrink-0">Shop</Link>
+        <span className="shrink-0 text-[#ddd]">/</span>
+        <span className="text-[#191919] truncate">{product.name}</span>
       </nav>
 
       {/* Product Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-md:gap-0 px-6 max-md:px-0 mb-16 max-md:mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-md:gap-0 px-6 max-md:px-0 mb-14 max-md:mb-6">
         {/* Left: Image Gallery */}
         <ProductImageGallery
           images={product.images || []}
@@ -155,16 +155,17 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           )}
 
           {/* Title */}
-          <h1 className="text-xl md:text-2xl font-bold text-[#191919] mb-4 leading-tight">{product.name}</h1>
+          <h1 className="text-lg md:text-xl font-bold text-[#191919] mb-3 leading-tight">{product.name}</h1>
 
           {/* Price */}
-          <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#e8e8e8]">
-            <span className="text-xl font-bold text-[#191919]">{currency} {price.toFixed(0)}</span>
-            {product.on_sale && regularPrice && (
+          <div className="flex items-baseline gap-2.5 mb-5 pb-5 border-b border-[#eee]">
+            {product.on_sale && regularPrice ? (
               <>
-                <span className="text-base text-[#999] line-through">{currency} {regularPrice.toFixed(0)}</span>
-                <span className="text-xs font-bold text-[#d32f2f]">-{discount}%</span>
+                <span className="text-lg font-bold text-[#d32f2f]">{currency} {price.toFixed(0)}</span>
+                <span className="text-sm text-[#bbb] line-through">{currency} {regularPrice.toFixed(0)}</span>
               </>
+            ) : (
+              <span className="text-lg font-bold text-[#191919]">{currency} {price.toFixed(0)}</span>
             )}
           </div>
 
@@ -198,7 +199,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {/* Fragrance Notes Pyramid */}
       {fragranceNotes && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <h2 className="text-lg font-bold text-[#191919] mb-6 uppercase tracking-wide">Fragrance Profile</h2>
+          <h2 className="text-base font-bold text-[#191919] mb-5 uppercase tracking-wide">Fragrance Profile</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
             {[
               { label: 'Top Notes', notes: fragranceNotes.top, desc: 'First impression' },
@@ -224,7 +225,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {/* Product Description */}
       {product.description && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <h3 className="text-lg font-bold text-[#191919] mb-4 uppercase tracking-wide">About This Fragrance</h3>
+          <h3 className="text-base font-bold text-[#191919] mb-4 uppercase tracking-wide">About This Fragrance</h3>
           <div className="prose text-[#666] text-sm leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: product.description }} />
         </div>
       )}
@@ -233,7 +234,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {similarProducts.length > 0 && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-[#191919] uppercase tracking-wide">You May Also Like</h2>
+            <h2 className="text-base font-bold text-[#191919] uppercase tracking-wide">You May Also Like</h2>
             <Link href="/shop" className="text-[13px] font-medium text-[#191919] hover:text-[#C9A96E] transition-colors flex items-center gap-1">
               View All
               <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>

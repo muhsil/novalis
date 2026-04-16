@@ -57,9 +57,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Announcement Bar — matches makeup.ae layout */}
-      <div className="bg-[#f5f5f5] border-b border-[#e8e8e8] hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9 text-[11px] text-[#666]">
+      {/* Top Announcement Bar — matches makeup.ae: thin, light bg, small links */}
+      <div className="bg-[#fafafa] border-b border-[#eee] hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-8 text-[11px] text-[#888]">
           <Link href="/shipping" className="hover:text-[#191919] transition-colors">
             {t(locale, 'announcement.free_delivery') || 'Free delivery for orders over AED 100'}
           </Link>
@@ -76,7 +76,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Header */}
-      <header className={`bg-white sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-sm' : 'border-b border-[#e8e8e8]'}`}>
+      <header className={`bg-white sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-sm' : 'border-b border-[#eee]'}`}>
         {/* Primary Row: Search | Logo (center) | Icons */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -151,14 +151,14 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Category Navigation */}
-        <div className="hidden md:block border-t border-[#e8e8e8]">
+        <div className="hidden md:block border-t border-[#eee]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center justify-center gap-0 h-11 overflow-x-auto no-scrollbar">
+            <nav className="flex items-center justify-center gap-0 h-10 overflow-x-auto no-scrollbar">
               {NAV_LINKS.map(link => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-5 py-2 text-[#191919] hover:text-[#C9A96E] text-[13px] font-medium whitespace-nowrap transition-colors"
+                  className="px-4 py-2 text-[#191919] hover:text-[#999] text-[13px] font-normal whitespace-nowrap transition-colors"
                 >
                   {t(locale, link.labelKey)}
                 </Link>
@@ -169,10 +169,10 @@ export default function Navbar() {
 
         {/* Search Dropdown */}
         {searchOpen && (
-          <div className="border-t border-[#e8e8e8] bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-              <form method="GET" action="/shop" className="flex items-center gap-3 max-w-2xl mx-auto">
-                <div className="flex-1 flex items-center border-b-2 border-[#191919] pb-1">
+          <div className="border-t border-[#eee] bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+              <form method="GET" action="/shop" className="flex items-center gap-3 max-w-xl mx-auto">
+                <div className="flex-1 flex items-center border-b border-[#ddd] pb-1">
                   <svg className="w-5 h-5 text-[#999] shrink-0 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -208,7 +208,7 @@ export default function Navbar() {
       {/* Mobile Slide-in Menu Panel */}
       <div className={`md:hidden fixed top-0 end-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full rtl:-translate-x-full'}`}>
         {/* Menu Header */}
-        <div className="flex items-center justify-between p-4 border-b border-[#e8e8e8]">
+        <div className="flex items-center justify-between p-4 border-b border-[#eee]">
           <img src="/novalis-logo.png" alt="Novalis" className="h-7 w-auto" />
           <button onClick={() => setMenuOpen(false)} className="p-1.5 rounded-full hover:bg-[#f5f5f5] transition-colors">
             <svg className="w-4 h-4 text-[#191919]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,7 +218,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Search */}
-        <form method="GET" action="/shop" className="p-3 border-b border-[#e8e8e8]">
+        <form method="GET" action="/shop" className="p-3 border-b border-[#eee]">
           <div className="flex items-center bg-[#f5f5f5] px-3">
             <svg className="w-4 h-4 text-[#999] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
