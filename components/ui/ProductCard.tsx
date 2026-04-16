@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import React from 'react';
 import WishlistButton from '@/components/ui/WishlistButton';
+import { useLocaleStore } from '@/store/useLocaleStore';
+import { t } from '@/lib/i18n/translations';
 
 interface ProductCardProps {
   slug: string;
@@ -31,6 +33,7 @@ export default function ProductCard({
   currency = 'AED',
   productId,
 }: ProductCardProps) {
+  const locale = useLocaleStore((s) => s.locale);
   const discount = onSale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
 
   return (
@@ -53,13 +56,13 @@ export default function ProductCard({
         {/* Badge: HIT for on-sale, NEW for featured */}
         {discount > 0 && (
           <span className="absolute top-2.5 start-2.5 bg-[#4caf50] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide uppercase">
-            HIT
+            {t(locale, 'product.hit')}
           </span>
         )}
 
         {featured && !discount && (
           <span className="absolute top-2.5 start-2.5 bg-[#4caf50] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide uppercase">
-            NEW
+            {t(locale, 'product.new')}
           </span>
         )}
 

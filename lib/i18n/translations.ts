@@ -124,6 +124,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Product Card
     'product.sold': 'sold',
     'product.hot': 'HOT',
+    'product.hit': 'HIT',
+    'product.new': 'NEW',
   },
   ar: {
     // Navbar & Header
@@ -248,6 +250,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Product Card
     'product.sold': 'مباع',
     'product.hot': 'رائج',
+    'product.hit': 'عرض',
+    'product.new': 'جديد',
   },
 };
 
