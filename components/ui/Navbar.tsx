@@ -64,7 +64,7 @@ export default function Navbar() {
             {t(locale, 'announcement.free_delivery') || 'Free delivery for orders over AED 100'}
           </Link>
           <div className="flex items-center gap-5">
-            <Link href="/shop?on_sale=true" className="text-[#d32f2f] font-medium hover:underline">{t(locale, 'nav.special_offers') || 'Special offers'}</Link>
+            <Link href="/shop?featured=true" className="text-[#d32f2f] font-medium hover:underline">{t(locale, 'nav.special_offers') || 'Special offers'}</Link>
             <Link href="/shipping" className="hover:text-[#191919] transition-colors">{t(locale, 'footer.shipping') || 'Delivery and Payment'}</Link>
             <Link href="/about" className="hover:text-[#191919] transition-colors">{t(locale, 'footer.about_us')}</Link>
           </div>
