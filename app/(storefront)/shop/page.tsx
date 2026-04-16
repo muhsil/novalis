@@ -78,14 +78,14 @@ export default async function ShopPage({
       <div className="max-w-7xl mx-auto px-4 max-md:px-3 pb-8 max-md:pb-20">
         {/* Mobile search */}
         <form method="GET" action="/shop" className="md:hidden pt-3 mb-3">
-          <div className="flex rounded-full overflow-hidden bg-[#f5f5f5] border border-[#e8e8e8] focus-within:border-[#C9A96E]">
+          <div className="flex rounded-full overflow-hidden bg-[#f5f5f5] border border-[#eee] focus-within:border-[#999]">
             <input
               name="search"
               defaultValue={searchParams.search || ''}
               placeholder="Search perfumes..."
               className="flex-1 px-3 py-2 text-sm outline-none bg-transparent"
             />
-            <button type="submit" className="bg-[#C9A96E] text-white px-3">
+            <button type="submit" className="bg-[#191919] text-white px-3">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -128,7 +128,7 @@ export default async function ShopPage({
             actionHref="/shop"
           />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-md:gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-md:gap-2">
             {displayProducts.map((p: any) => (
               <ProductCard
                 key={p.id}

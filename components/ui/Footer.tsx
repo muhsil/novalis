@@ -80,18 +80,18 @@ export default function Footer() {
   return (
     <>
       {/* Desktop Footer */}
-      <footer className="bg-[#f5f5f5] max-md:hidden border-t border-[#e8e8e8]">
+      <footer className="bg-[#fafafa] max-md:hidden border-t border-[#eee]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           {/* Newsletter Section */}
-          <div className="py-10 border-b border-[#e0e0e0] flex items-center justify-between gap-8 flex-wrap">
+          <div className="py-8 border-b border-[#e8e8e8] flex items-center justify-between gap-8 flex-wrap">
             <div>
-              <h3 className="text-lg text-[#191919] font-bold mb-1">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
+              <h3 className="text-base text-[#191919] font-medium mb-0">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
             </div>
             <NewsletterForm />
           </div>
 
           {/* Links Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-8">
             {/* Brand */}
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
@@ -111,8 +111,8 @@ export default function Footer() {
 
             {/* Shop */}
             <div>
-              <h4 className="text-[#191919] text-sm font-bold mb-4 uppercase tracking-wide">{t(locale, 'footer.shop')}</h4>
-              <div className="flex flex-col gap-2.5">
+              <h4 className="text-[#191919] text-xs font-bold mb-3 uppercase tracking-wide">{t(locale, 'footer.shop')}</h4>
+              <div className="flex flex-col gap-2">
                 {SHOP_LINKS.map(link => (
                   <Link key={link.href} href={link.href} className="text-[#666] text-sm hover:text-[#191919] transition-colors">
                     {t(locale, link.labelKey)}
@@ -123,8 +123,8 @@ export default function Footer() {
 
             {/* Company */}
             <div>
-              <h4 className="text-[#191919] text-sm font-bold mb-4 uppercase tracking-wide">{t(locale, 'footer.company')}</h4>
-              <div className="flex flex-col gap-2.5">
+              <h4 className="text-[#191919] text-xs font-bold mb-3 uppercase tracking-wide">{t(locale, 'footer.company')}</h4>
+              <div className="flex flex-col gap-2">
                 {COMPANY_LINKS.map(link => (
                   <Link key={link.href} href={link.href} className="text-[#666] text-sm hover:text-[#191919] transition-colors">
                     {t(locale, link.labelKey)}
@@ -135,8 +135,8 @@ export default function Footer() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-[#191919] text-sm font-bold mb-4 uppercase tracking-wide">{t(locale, 'footer.contact_us')}</h4>
-              <div className="flex flex-col gap-2.5 text-[#666] text-sm">
+              <h4 className="text-[#191919] text-xs font-bold mb-3 uppercase tracking-wide">{t(locale, 'footer.contact_us')}</h4>
+              <div className="flex flex-col gap-2 text-[#666] text-[13px]">
                 <span className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-[#191919] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                   {t(locale, 'nav.dubai_uae')}
@@ -154,7 +154,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="border-t border-[#e0e0e0] py-5 flex items-center justify-between flex-wrap gap-4">
+          <div className="border-t border-[#e8e8e8] py-4 flex items-center justify-between flex-wrap gap-4">
             <p className="text-[#999] text-xs">{t(locale, 'footer.copyright', { year: String(year) })}</p>
             <PaymentIcons />
             <p className="text-[#999] text-xs">{t(locale, 'footer.tagline')}</p>
@@ -163,10 +163,10 @@ export default function Footer() {
       </footer>
 
       {/* Mobile Footer */}
-      <footer className="md:hidden bg-[#f5f5f5] border-t border-[#e8e8e8] mb-14">
+      <footer className="md:hidden bg-[#fafafa] border-t border-[#eee] mb-14">
         {/* Newsletter - mobile */}
-        <div className="px-4 py-6 border-b border-[#e0e0e0] text-center">
-          <h3 className="text-base text-[#191919] font-bold mb-3">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
+        <div className="px-4 py-5 border-b border-[#e8e8e8] text-center">
+          <h3 className="text-sm text-[#191919] font-medium mb-3">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
           <NewsletterForm />
         </div>
 

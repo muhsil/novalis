@@ -21,10 +21,10 @@
     --color-text: #191919;
     --color-text-secondary: #666;
     --color-text-muted: #999;
-    --color-border: #e8e8e8;
+    --color-border: #eee;
     --color-sale: #d32f2f;
-    --shadow-card: 0 1px 4px rgba(0,0,0,0.04);
-    --shadow-hover: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.03);
+    --shadow-hover: 0 2px 12px rgba(0,0,0,0.06);
     --radius-card: 0;
     --color-bg: #fff;
   }
@@ -132,12 +132,12 @@
   .product-card {
     background: #fff;
     overflow: hidden;
-    transition: box-shadow 0.25s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
     display: block;
   }
-  .product-card:hover { box-shadow: var(--shadow-hover); }
+  .product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
 
   .form-input {
     width: 100%;
@@ -283,8 +283,8 @@
   .mobile-body-padding {
     padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
   }
-  .product-card:hover { transform: none; box-shadow: none; }
-  .product-card:active { transform: scale(0.98); }
+  .product-card:hover { transform: none !important; box-shadow: none !important; }
+  .product-card:active { transform: scale(0.98) !important; }
   .mobile-sticky-bottom {
     position: fixed;
     bottom: 56px;
