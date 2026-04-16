@@ -63,8 +63,8 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
       {/* Section Header */}
       <div className="text-center mb-8 max-md:mb-5">
         <h2 className="font-serif text-3xl max-md:text-xl font-normal text-[#191919]">
-          Shop by{' '}
-          <span className="italic text-[#C9A96E]">Category</span>
+          {t(locale, 'categories.title_1')}{' '}
+          <span className="italic text-[#C9A96E]">{t(locale, 'categories.title_2')}</span>
         </h2>
       </div>
 
@@ -97,8 +97,8 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
               <div className="w-14 h-14 max-md:w-11 max-md:h-11 rounded-full bg-[#C9A96E]/15 flex items-center justify-center text-[#C9A96E] mb-4">
                 <svg className="w-7 h-7 max-md:w-5 max-md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
               </div>
-              <span className="text-white font-semibold text-sm max-md:text-xs tracking-wide">All Products</span>
-              <span className="text-white/30 text-[10px] mt-1 tracking-widest uppercase">View All</span>
+              <span className="text-white font-semibold text-sm max-md:text-xs tracking-wide">{t(locale, 'categories.all_products')}</span>
+              <span className="text-white/30 text-[10px] mt-1 tracking-widest uppercase">{t(locale, 'categories.view_all')}</span>
             </div>
           </Link>
 

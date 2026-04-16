@@ -35,6 +35,8 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Categories
     'categories.title': 'Shop by Category',
+    'categories.title_1': 'Shop by',
+    'categories.title_2': 'Category',
     'categories.view_all': 'View All',
     'categories.all_products': 'All Products',
 
@@ -155,6 +157,8 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Categories
     'categories.title': 'تسوق حسب الفئة',
+    'categories.title_1': 'تسوق حسب',
+    'categories.title_2': 'الفئة',
     'categories.view_all': 'عرض الكل',
     'categories.all_products': 'جميع المنتجات',
 
