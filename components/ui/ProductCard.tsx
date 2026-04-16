@@ -89,11 +89,11 @@ export default function ProductCard({
         {/* Price row */}
         <div className="flex items-baseline gap-2 flex-wrap">
           <span className="text-[14px] font-bold text-[#191919]">
-            {price.toFixed(2)} {currency}
+            {currency} {price.toFixed(0)}
           </span>
           {onSale && regularPrice && (
             <span className="text-[12px] text-[#aaa] line-through">
-              {regularPrice.toFixed(2)} {currency}
+              {currency} {regularPrice.toFixed(0)}
             </span>
           )}
         </div>
