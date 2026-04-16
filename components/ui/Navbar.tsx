@@ -84,7 +84,7 @@ export default function Navbar() {
 
             {/* Mobile Search Toggle */}
             <button
-              className="md:hidden p-2 hover:bg-[#fafafa] transition-all ml-auto"
+              className="md:hidden p-2 hover:bg-[#fafafa] transition-all ms-auto"
               onClick={() => { setMobileSearchOpen(!mobileSearchOpen); setTimeout(() => mobileSearchRef.current?.focus(), 100); }}
             >
               <svg className="w-5 h-5 text-[#555]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +93,7 @@ export default function Navbar() {
             </button>
 
             {/* Right Actions */}
-            <div className="flex items-center gap-1 md:ml-auto">
+            <div className="flex items-center gap-1 md:ms-auto">
               {/* Language Switcher */}
               <LanguageSwitcher variant="compact" />
 
@@ -106,7 +106,7 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-0.5 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1">
+                  <span className="absolute top-1 end-0.5 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1">
                     {wishlistCount}
                   </span>
                 )}
@@ -128,7 +128,7 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
                 {cartCount > 0 && (
-                  <span className="absolute top-1 right-0.5 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1">
+                  <span className="absolute top-1 end-0.5 bg-[#C9A96E] text-white text-[9px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1">
                     {cartCount}
                   </span>
                 )}
@@ -193,7 +193,7 @@ export default function Navbar() {
       )}
 
       {/* Mobile Slide-in Menu Panel */}
-      <div className={`md:hidden fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`md:hidden fixed top-0 end-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full rtl:-translate-x-full'}`}>
         {/* Menu Header */}
         <div className="flex items-center justify-between p-4 bg-[#1A1A2E]">
           <img src="/novalis-logo.png" alt="Novalis" className="h-7 w-auto brightness-0 invert" />
@@ -234,7 +234,7 @@ export default function Navbar() {
           <p className="text-[10px] font-semibold text-[#999] uppercase tracking-[0.15em] px-3 py-1.5">{t(locale, 'nav.quick_access')}</p>
           <button
             onClick={() => { setMenuOpen(false); setCartOpen(true); }}
-            className="flex items-center justify-between px-3 py-2.5 text-[#333] text-sm font-light hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all w-full text-left"
+            className="flex items-center justify-between px-3 py-2.5 text-[#333] text-sm font-light hover:bg-[#FAF6F0] hover:text-[#C9A96E] transition-all w-full text-start"
           >
             {t(locale, 'nav.cart')}
             {cartCount > 0 && (
@@ -265,7 +265,7 @@ export default function Navbar() {
         </nav>
 
         {/* Bottom CTA */}
-        <div className="absolute bottom-8 left-3 right-3">
+        <div className="absolute bottom-8 start-3 end-3">
           <Link
             href="/shop"
             className="block w-full text-center text-xs font-semibold tracking-[0.15em] uppercase bg-[#C9A96E] text-white py-3.5 hover:bg-[#B8985D] transition-colors"

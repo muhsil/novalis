@@ -52,20 +52,20 @@ export default function ProductCard({
 
         {/* Discount badge */}
         {discount > 0 && (
-          <span className="absolute top-2.5 left-2.5 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
+          <span className="absolute top-2.5 start-2.5 bg-[#1A1A2E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
             -{discount}%
           </span>
         )}
 
         {/* New badge for featured */}
         {featured && !discount && (
-          <span className="absolute top-2.5 left-2.5 bg-[#C9A96E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
+          <span className="absolute top-2.5 start-2.5 bg-[#C9A96E] text-white text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider">
             New
           </span>
         )}
 
         {/* Wishlist heart */}
-        <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-md:opacity-100">
+        <div className="absolute top-2.5 end-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-md:opacity-100">
           <WishlistButton
             item={{ id: productId || 0, name, price, image: imageSrc, slug }}
             size="sm"

@@ -41,7 +41,7 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
       </button>
 
       {open && (
-        <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-[#eee] py-1 z-50 min-w-[140px] max-h-[300px] overflow-y-auto">
+        <div className="absolute top-full end-0 mt-1 bg-white rounded-lg shadow-lg border border-[#eee] py-1 z-50 min-w-[140px] max-h-[300px] overflow-y-auto">
           {currencies.map((c) => (
             <button
               key={c.code}
@@ -49,7 +49,7 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
                 setSelectedCurrency(c.code);
                 setOpen(false);
               }}
-              className={`w-full text-left px-3 py-2 text-sm hover:bg-[#FAF6F0] transition-colors flex items-center justify-between ${
+              className={`w-full text-start px-3 py-2 text-sm hover:bg-[#FAF6F0] transition-colors flex items-center justify-between ${
                 c.code === selectedCurrency ? 'text-[#C9A96E] font-semibold bg-[#FAF6F0]' : 'text-[#333]'
               }`}
             >
