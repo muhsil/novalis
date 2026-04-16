@@ -19,11 +19,14 @@ import SectionCard from '@/components/ui/SectionCard';
 import PriceDisplay from '@/components/ui/PriceDisplay';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 
 function CheckoutContent() {
   const { items, deliveryDate, deliveryTime, clearCart } = useCartStore();
   const { currency } = useStoreSettings();
+  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
+  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
   const authCustomer = useAuthStore((s) => s.customer);
 
   const [orderCreated, setOrderCreated] = useState(false);
@@ -184,7 +187,7 @@ function CheckoutContent() {
             <h1 className="text-lg font-extrabold text-gray-900">Checkout</h1>
           </div>
           <div className="bg-white px-3 py-1.5 rounded-lg border border-gray-100">
-            <PriceDisplay amount={subtotal} size="md" />
+            <PriceDisplay amount={selectedCurrency !== 'AED' ? convertPrice(subtotal) : subtotal} currency={currSymbol} size="md" />
           </div>
         </div>
 
@@ -260,7 +263,7 @@ function CheckoutContent() {
       <div className="md:hidden mobile-sticky-bottom">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-bold text-gray-400">Total</span>
-          <span className="text-lg font-extrabold text-[#C9A96E]">{currency} {subtotal.toFixed(0)}</span>
+          <span className="text-lg font-extrabold text-[#C9A96E]">{currSymbol} {(selectedCurrency !== 'AED' ? convertPrice(subtotal) : subtotal).toFixed(0)}</span>
         </div>
         <button
           onClick={handleCreateOrder}

@@ -66,9 +66,9 @@ function extractFragranceNotes(description: string): { top: string[]; heart: str
   const text = description.replace(/<[^>]*>/g, ' ').toLowerCase();
   const notes: { top: string[]; heart: string[]; base: string[] } = { top: [], heart: [], base: [] };
 
-  const topMatch = text.match(/top\s*(?:notes?)?[:\s-]+([^.]*?)(?:heart|middle|base|$)/i);
-  const heartMatch = text.match(/(?:heart|middle)\s*(?:notes?)?[:\s-]+([^.]*?)(?:base|$)/i);
-  const baseMatch = text.match(/base\s*(?:notes?)?[:\s-]+([^.]*?)(?:\.|$)/i);
+  const topMatch = text.match(/top\s*(?:notes?)?[:\s-]+([\s\S]*?)(?=heart|middle|base|$)/i);
+  const heartMatch = text.match(/(?:heart|middle)\s*(?:notes?)?[:\s-]+([\s\S]*?)(?=base|$)/i);
+  const baseMatch = text.match(/base\s*(?:notes?)?[:\s-]+([\s\S]*?)(?:\.|$)/i);
 
   if (topMatch) notes.top = topMatch[1].split(/[,&]/).map(n => n.trim()).filter(Boolean).slice(0, 4);
   if (heartMatch) notes.heart = heartMatch[1].split(/[,&]/).map(n => n.trim()).filter(Boolean).slice(0, 4);
