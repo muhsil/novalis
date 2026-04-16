@@ -147,23 +147,23 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
         <div className="flex flex-col max-md:px-4 max-md:pt-5">
           {/* Categories */}
           {product.categories?.length > 0 && (
-            <div className="flex gap-2 mb-3">
+            <div className="flex gap-2 mb-2">
               {product.categories.slice(0, 2).map((cat: any) => (
-                <span key={cat.id} className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#C9A96E]">{cat.name}</span>
+                <span key={cat.id} className="text-[11px] text-[#999]">{cat.name}</span>
               ))}
             </div>
           )}
 
           {/* Title */}
-          <h1 className="font-serif text-2xl md:text-3xl font-medium text-[#191919] mb-4 leading-tight">{product.name}</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-[#191919] mb-4 leading-tight">{product.name}</h1>
 
           {/* Price */}
-          <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#f0f0f0]">
-            <span className="text-2xl font-light text-[#191919]">{currency} {price.toFixed(0)}</span>
+          <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#e8e8e8]">
+            <span className="text-xl font-bold text-[#191919]">{currency} {price.toFixed(0)}</span>
             {product.on_sale && regularPrice && (
               <>
-                <span className="text-base text-[#bbb] line-through">{currency} {regularPrice.toFixed(0)}</span>
-                <span className="text-xs font-semibold text-[#C9A96E] tracking-wide uppercase">Save {discount}%</span>
+                <span className="text-base text-[#999] line-through">{currency} {regularPrice.toFixed(0)}</span>
+                <span className="text-xs font-bold text-[#d32f2f]">-{discount}%</span>
               </>
             )}
           </div>
@@ -176,8 +176,8 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
 
           {/* Stock status */}
           <div className="flex items-center gap-2 mb-6">
-            <div className={`w-1.5 h-1.5 rounded-full ${product.in_stock !== false ? 'bg-[#00B578]' : 'bg-red-400'}`} />
-            <span className="text-xs tracking-wide uppercase text-[#999]">
+            <div className={`w-1.5 h-1.5 rounded-full ${product.in_stock !== false ? 'bg-[#00B578]' : 'bg-[#d32f2f]'}`} />
+            <span className="text-xs text-[#666]">
               {product.in_stock !== false ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>
@@ -198,23 +198,20 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {/* Fragrance Notes Pyramid */}
       {fragranceNotes && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <div className="text-center mb-8">
-            <h2 className="font-serif text-xl font-medium text-[#191919] mb-1">Fragrance Profile</h2>
-            <p className="text-xs text-[#999] tracking-wide uppercase">Scent Composition</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          <h2 className="text-lg font-bold text-[#191919] mb-6 uppercase tracking-wide">Fragrance Profile</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
             {[
               { label: 'Top Notes', notes: fragranceNotes.top, desc: 'First impression' },
               { label: 'Heart Notes', notes: fragranceNotes.heart, desc: 'The character' },
               { label: 'Base Notes', notes: fragranceNotes.base, desc: 'The lasting trail' },
             ].map((tier) => (
               tier.notes.length > 0 && (
-                <div key={tier.label} className="text-center p-6 bg-[#FAF6F0] border border-[#f0ebe0]">
-                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#C9A96E] mb-1">{tier.label}</p>
-                  <p className="text-[9px] text-[#bbb] mb-4 tracking-wide uppercase">{tier.desc}</p>
-                  <div className="flex flex-wrap justify-center gap-2">
+                <div key={tier.label} className="p-5 bg-[#f5f5f5]">
+                  <p className="text-[11px] font-bold tracking-wide uppercase text-[#191919] mb-1">{tier.label}</p>
+                  <p className="text-[10px] text-[#999] mb-3">{tier.desc}</p>
+                  <div className="flex flex-wrap gap-2">
                     {tier.notes.map((note) => (
-                      <span key={note} className="text-xs text-[#666] font-light capitalize">{note}</span>
+                      <span key={note} className="text-xs text-[#666] capitalize">{note}</span>
                     ))}
                   </div>
                 </div>
@@ -227,8 +224,8 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {/* Product Description */}
       {product.description && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <h3 className="font-serif text-xl font-medium text-[#191919] mb-4">About This Fragrance</h3>
-          <div className="prose text-[#666] text-sm leading-relaxed font-light max-w-3xl" dangerouslySetInnerHTML={{ __html: product.description }} />
+          <h3 className="text-lg font-bold text-[#191919] mb-4 uppercase tracking-wide">About This Fragrance</h3>
+          <div className="prose text-[#666] text-sm leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: product.description }} />
         </div>
       )}
 
@@ -236,8 +233,11 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       {similarProducts.length > 0 && (
         <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-xl font-medium text-[#191919]">You May Also Like</h2>
-            <Link href="/shop" className="text-xs text-[#C9A96E] font-semibold hover:underline tracking-wide uppercase">View All</Link>
+            <h2 className="text-lg font-bold text-[#191919] uppercase tracking-wide">You May Also Like</h2>
+            <Link href="/shop" className="text-[13px] font-medium text-[#191919] hover:text-[#C9A96E] transition-colors flex items-center gap-1">
+              View All
+              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </Link>
           </div>
 
           {/* Desktop grid */}

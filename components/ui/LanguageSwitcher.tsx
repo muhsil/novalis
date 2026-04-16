@@ -4,7 +4,7 @@ import { useLocaleStore } from '@/store/useLocaleStore';
 import type { Locale } from '@/lib/i18n/translations';
 
 interface LanguageSwitcherProps {
-  variant?: 'compact' | 'full';
+  variant?: 'compact' | 'full' | 'dark';
 }
 
 export default function LanguageSwitcher({ variant = 'compact' }: LanguageSwitcherProps) {
@@ -31,10 +31,15 @@ export default function LanguageSwitcher({ variant = 'compact' }: LanguageSwitch
     );
   }
 
+  const isDark = variant === 'dark';
+
   return (
     <button
       onClick={toggle}
-      className="flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-xs font-semibold text-[#555] border border-[#eee]"
+      className={isDark
+        ? 'flex items-center gap-1 px-2 py-1 hover:bg-white/10 transition-colors text-xs font-medium text-white/70 hover:text-white'
+        : 'flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-xs font-semibold text-[#555] border border-[#eee]'
+      }
       title={locale === 'en' ? 'Switch to Arabic' : 'Switch to English'}
     >
       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
