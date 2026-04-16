@@ -6,7 +6,7 @@ import ProductCard from '@/components/ui/ProductCard';
 import CategorySlider from '@/components/ui/CategorySlider';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
-import { t } from '@/lib/i18n/translations';
+import { t, type Locale } from '@/lib/i18n/translations';
 
 interface HomeContentProps {
   currency: string;
@@ -33,7 +33,7 @@ function useScrollReveal() {
 
 interface BestSellerSliderProps {
   bestSellers: any[];
-  locale: string;
+  locale: Locale;
   currSymbol: string;
   getPrice: (price: string) => number;
   getRegPrice: (price: string | undefined) => number | null;
