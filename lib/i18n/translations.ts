@@ -20,6 +20,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'nav.dokhun': 'Dokhun',
     'nav.all_over_spray': 'All Over Spray',
     'nav.dubai_uae': 'Dubai, UAE',
+    'nav.special_offers': 'Special offers',
 
     // Announcement bar
     'announcement.free_delivery': 'Free Delivery Across UAE',
@@ -102,6 +103,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.contact_us': 'Contact Us',
     'footer.copyright': '© {year} Novalis Perfumes. All rights reserved.',
     'footer.tagline': 'Luxury Arabic Fragrances | Dubai, UAE',
+    'footer.newsletter_title': 'Be the first to know about sales and new arrivals!',
 
     // Mobile Bottom Nav
     'mobile.home': 'Home',
@@ -142,6 +144,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'nav.dokhun': 'الدخون',
     'nav.all_over_spray': 'بخاخ الجسم',
     'nav.dubai_uae': 'دبي، الإمارات',
+    'nav.special_offers': 'عروض خاصة',
 
     // Announcement bar
     'announcement.free_delivery': 'توصيل مجاني في الإمارات',
@@ -224,6 +227,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.contact_us': 'تواصل معنا',
     'footer.copyright': '© {year} نوفاليس للعطور. جميع الحقوق محفوظة.',
     'footer.tagline': 'عطور عربية فاخرة | دبي، الإمارات',
+    'footer.newsletter_title': 'كن أول من يعرف عن التخفيضات والوصولات الجديدة!',
 
     // Mobile Bottom Nav
     'mobile.home': 'الرئيسية',
