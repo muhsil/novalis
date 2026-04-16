@@ -32,7 +32,9 @@ export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const mobileSearchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (menuOpen) {
@@ -51,15 +53,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="bg-[#1A1A2E] text-white text-center text-[11px] font-light py-2 px-4 tracking-[0.1em]">
-        <span className="inline-flex items-center gap-2">
-          <span className="hidden sm:inline">{t(locale, 'announcement.free_delivery')}</span>
-          <span className="hidden sm:inline mx-2 opacity-20">|</span>
-          <span>{t(locale, 'announcement.tagline')}</span>
-        </span>
-      </div>
-
       {/* Main Header */}
       <header className={`bg-white sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'border-b border-[#f0f0f0]'}`}>
         {/* Primary Row */}
@@ -71,26 +64,36 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Search */}
-            <form method="GET" action="/shop" className="hidden md:flex flex-1 max-w-xl mx-6">
-              <div className={`flex w-full overflow-hidden border transition-all duration-200 ${searchFocused ? 'border-[#C9A96E]' : 'border-[#e8e8e8] hover:border-[#ddd]'} bg-[#fafafa]`}>
+            <form method="GET" action="/shop" className="hidden md:flex flex-1 max-w-[240px] mx-4">
+              <div className={`flex w-full overflow-hidden border rounded transition-all duration-200 ${searchFocused ? 'border-[#C9A96E]' : 'border-[#e8e8e8] hover:border-[#ddd]'} bg-[#fafafa]`}>
                 <input
                   ref={searchRef}
                   name="search"
                   placeholder={t(locale, 'nav.search_placeholder')}
-                  className="flex-1 px-4 py-2.5 text-sm outline-none bg-transparent text-[#333] placeholder:text-[#bbb] font-light"
+                  className="flex-1 px-3 py-2 text-xs outline-none bg-transparent text-[#333] placeholder:text-[#bbb] font-light"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
                 />
-                <button type="submit" className="bg-[#C9A96E] text-white px-4 hover:bg-[#B8985D] transition-colors">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button type="submit" className="bg-[#C9A96E] text-white px-3 hover:bg-[#B8985D] transition-colors">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
               </div>
             </form>
 
+            {/* Mobile Search Toggle */}
+            <button
+              className="md:hidden p-2 hover:bg-[#fafafa] transition-all ml-auto"
+              onClick={() => { setMobileSearchOpen(!mobileSearchOpen); setTimeout(() => mobileSearchRef.current?.focus(), 100); }}
+            >
+              <svg className="w-5 h-5 text-[#555]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+
             {/* Right Actions */}
-            <div className="flex items-center gap-1 ml-auto">
+            <div className="flex items-center gap-1 md:ml-auto">
               {/* Language Switcher */}
               <LanguageSwitcher variant="compact" />
 
@@ -131,11 +134,6 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Desktop Shop CTA */}
-              <Link href="/shop" className="hidden md:inline-flex items-center bg-[#C9A96E] text-white text-xs font-semibold px-6 py-2.5 hover:bg-[#B8985D] transition-colors tracking-[0.15em] uppercase ml-1">
-                {t(locale, 'nav.shop_now')}
-              </Link>
-
               {/* Mobile hamburger */}
               <button className="md:hidden p-2.5 hover:bg-[#fafafa] transition-all" onClick={() => setMenuOpen(!menuOpen)}>
                 <svg className="w-5 h-5 text-[#333]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,16 +160,29 @@ export default function Navbar() {
                   {t(locale, link.labelKey)}
                 </Link>
               ))}
-              <div className="ml-auto flex items-center gap-1.5 text-[12px] text-[#999] font-light">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>{t(locale, 'nav.dubai_uae')}</span>
-              </div>
             </div>
           </div>
         </div>
+        {/* Mobile Search Dropdown */}
+        {mobileSearchOpen && (
+          <div className="md:hidden border-t border-[#f0f0f0] px-4 py-3 bg-white">
+            <form method="GET" action="/shop" className="flex">
+              <div className="flex w-full overflow-hidden border border-[#e8e8e8] rounded bg-[#fafafa]">
+                <input
+                  ref={mobileSearchRef}
+                  name="search"
+                  placeholder={t(locale, 'nav.search_placeholder')}
+                  className="flex-1 px-3 py-2 text-sm outline-none bg-transparent text-[#333] placeholder:text-[#bbb] font-light"
+                />
+                <button type="submit" className="bg-[#C9A96E] text-white px-3 hover:bg-[#B8985D] transition-colors">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </header>
 
       {/* Mobile Slide-in Menu Overlay */}

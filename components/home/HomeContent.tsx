@@ -1,9 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import ProductCard from '@/components/ui/ProductCard';
-import TrustBanner from '@/components/ui/TrustBanner';
 import CategorySlider from '@/components/ui/CategorySlider';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
@@ -32,6 +31,129 @@ function useScrollReveal() {
   return ref;
 }
 
+interface BestSellerSliderProps {
+  bestSellers: any[];
+  locale: string;
+  currSymbol: string;
+  getPrice: (price: string) => number;
+  getRegPrice: (price: string | undefined) => number | null;
+}
+
+function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPrice }: BestSellerSliderProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll);
+    return () => {
+      el.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [checkScroll]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = el.clientWidth * 0.7;
+    el.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  return (
+    <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
+      <div className="text-center mb-12 max-md:mb-8">
+        <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-3 block">
+          {t(locale, 'bestsellers.subtitle')}
+        </span>
+        <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-[#191919]">
+          {t(locale, 'bestsellers.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'bestsellers.title_2')}</span>
+        </h2>
+      </div>
+
+      {/* Desktop Slider */}
+      <div className="hidden md:block relative group">
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll('left')}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Scroll left"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+          </button>
+        )}
+        <div
+          ref={scrollRef}
+          className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth pb-2"
+          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
+        >
+          {bestSellers.slice(0, 8).map((p: any) => (
+            <div key={p.id} className="shrink-0 w-[calc(25%-15px)]" style={{ scrollSnapAlign: 'start' }}>
+              <ProductCard
+                slug={p.slug}
+                name={p.name}
+                price={getPrice(p.price)}
+                regularPrice={getRegPrice(p.regular_price)}
+                imageSrc={p.images?.[0]?.src}
+                categoryName={p.categories?.[0]?.name}
+                onSale={p.on_sale}
+                featured={p.featured}
+                currency={currSymbol}
+                productId={p.id}
+              />
+            </div>
+          ))}
+        </div>
+        {canScrollRight && (
+          <button
+            onClick={() => scroll('right')}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Scroll right"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+          </button>
+        )}
+      </div>
+
+      {/* Mobile Grid */}
+      <div className="md:hidden grid grid-cols-2 gap-3">
+        {bestSellers.slice(0, 8).map((p: any) => (
+          <ProductCard
+            key={p.id}
+            slug={p.slug}
+            name={p.name}
+            price={getPrice(p.price)}
+            regularPrice={getRegPrice(p.regular_price)}
+            imageSrc={p.images?.[0]?.src}
+            categoryName={p.categories?.[0]?.name}
+            onSale={p.on_sale}
+            featured={p.featured}
+            currency={currSymbol}
+            productId={p.id}
+          />
+        ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <Link href="/shop" className="inline-flex items-center gap-2 border border-[#C9A96E] text-[#C9A96E] font-semibold text-xs px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors tracking-[0.2em] uppercase">
+          {t(locale, 'bestsellers.view_all')}
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 export default function HomeContent({ currency, topCategories, bestSellers, newArrivals }: HomeContentProps) {
   const locale = useLocaleStore((s) => s.locale);
   const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
@@ -50,8 +172,6 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
   return (
     <div ref={wrapRef}>
-      <TrustBanner currency={currSymbol} />
-
       {/* Hero Banner — Full-bleed lifestyle image */}
       <section className="relative overflow-hidden bg-[#1A1A2E] min-h-[600px] max-md:min-h-[500px]">
         {/* Background image */}
@@ -115,41 +235,15 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
         </div>
       </div>
 
-      {/* Best Selling Fragrances */}
+      {/* Best Selling Fragrances — Desktop Slider */}
       {bestSellers.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-20 max-md:pt-12">
-          <div className="text-center mb-12 max-md:mb-8">
-            <span className="text-[#C9A96E] text-[10px] font-semibold tracking-[0.3em] uppercase mb-3 block">
-              {t(locale, 'bestsellers.subtitle')}
-            </span>
-            <h2 className="font-serif text-4xl max-md:text-2xl font-normal text-[#191919]">
-              {t(locale, 'bestsellers.title_1')} <span className="italic text-[#C9A96E]">{t(locale, 'bestsellers.title_2')}</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
-            {bestSellers.slice(0, 8).map((p: any) => (
-              <ProductCard
-                key={p.id}
-                slug={p.slug}
-                name={p.name}
-                price={getPrice(p.price)}
-                regularPrice={getRegPrice(p.regular_price)}
-                imageSrc={p.images?.[0]?.src}
-                categoryName={p.categories?.[0]?.name}
-                onSale={p.on_sale}
-                featured={p.featured}
-                currency={currSymbol}
-                productId={p.id}
-              />
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link href="/shop" className="inline-flex items-center gap-2 border border-[#C9A96E] text-[#C9A96E] font-semibold text-xs px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors tracking-[0.2em] uppercase">
-              {t(locale, 'bestsellers.view_all')}
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </Link>
-          </div>
-        </section>
+        <BestSellerSlider
+          bestSellers={bestSellers}
+          locale={locale}
+          currSymbol={currSymbol}
+          getPrice={getPrice}
+          getRegPrice={getRegPrice}
+        />
       )}
 
       {/* Oud Collection Feature — with image */}
