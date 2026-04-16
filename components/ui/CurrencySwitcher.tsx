@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 interface CurrencySwitcherProps {
-  variant?: 'compact' | 'full';
+  variant?: 'compact' | 'full' | 'dark';
 }
 
 export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitcherProps) {
@@ -31,7 +31,9 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
         className={
           variant === 'full'
             ? 'flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#f8f8f8] transition-colors text-sm font-medium text-[#555]'
-            : 'flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-xs font-semibold text-[#555] border border-[#eee]'
+            : variant === 'dark'
+              ? 'flex items-center gap-1 px-2 py-1 hover:bg-white/10 transition-colors text-xs font-medium text-white/70 hover:text-white'
+              : 'flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-xs font-semibold text-[#555] border border-[#eee]'
         }
       >
         <span>{current.code}</span>

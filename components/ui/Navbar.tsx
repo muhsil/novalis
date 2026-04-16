@@ -61,15 +61,15 @@ export default function Navbar() {
       <div className="bg-[#191919] text-white hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9 text-[11px]">
           <Link href="/shipping" className="hover:underline font-light">
-            {t(locale, 'nav.free_delivery') || 'Free delivery for orders over AED 100'}
+            {t(locale, 'announcement.free_delivery') || 'Free delivery for orders over AED 100'}
           </Link>
           <div className="flex items-center gap-5">
             <Link href="/about" className="hover:underline font-light">{t(locale, 'footer.about_us')}</Link>
             <Link href="/contact" className="hover:underline font-light">{t(locale, 'footer.contact')}</Link>
           </div>
           <div className="flex items-center gap-3">
-            <LanguageSwitcher variant="compact" />
-            <CurrencySwitcher variant="compact" />
+            <LanguageSwitcher variant="dark" />
+            <CurrencySwitcher variant="dark" />
           </div>
         </div>
       </div>
