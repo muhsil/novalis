@@ -65,26 +65,33 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
 
   return (
     <div className="relative group">
-      {/* Section Header */}
-      <div className="flex items-center justify-between mb-6 max-md:mb-4">
-        <h2 className="text-xl max-md:text-lg font-bold text-[#191919] uppercase tracking-wide">
+      {/* Section Header: centered title with inline arrows (makeup.ae style) */}
+      <div className="flex items-center justify-center mb-8 max-md:mb-5 gap-4">
+        <h2 className="text-[22px] max-md:text-lg font-normal text-[#191919] text-center">
           {t(locale, 'categories.title_1')} {t(locale, 'categories.title_2')}
         </h2>
+        <div className="hidden md:flex items-center gap-1.5">
+          <button
+            onClick={() => scroll('prev')}
+            disabled={!canScrollLeft}
+            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
+            aria-label="Previous"
+          >
+            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6-6m-6 6l6 6" /></svg>
+          </button>
+          <button
+            onClick={() => scroll('next')}
+            disabled={!canScrollRight}
+            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
+            aria-label="Next"
+          >
+            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
+          </button>
+        </div>
       </div>
 
       {/* Slider Container */}
       <div className="relative">
-        {/* Left Arrow */}
-        {canScrollLeft && (
-          <button
-            onClick={() => scroll('prev')}
-            className="hidden md:flex absolute -start-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white shadow-md items-center justify-center text-[#191919] hover:bg-[#191919] hover:text-white transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll previous"
-          >
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
-          </button>
-        )}
-
         {/* Scrollable Track */}
         <div
           ref={scrollRef}
@@ -145,16 +152,6 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
           })}
         </div>
 
-        {/* Right Arrow */}
-        {canScrollRight && (
-          <button
-            onClick={() => scroll('next')}
-            className="hidden md:flex absolute -end-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white shadow-md items-center justify-center text-[#191919] hover:bg-[#191919] hover:text-white transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll next"
-          >
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-          </button>
-        )}
       </div>
     </div>
   );

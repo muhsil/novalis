@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import React from 'react';
 import WishlistButton from '@/components/ui/WishlistButton';
+import { useLocaleStore } from '@/store/useLocaleStore';
+import { t } from '@/lib/i18n/translations';
 
 interface ProductCardProps {
   slug: string;
@@ -31,12 +33,13 @@ export default function ProductCard({
   currency = 'AED',
   productId,
 }: ProductCardProps) {
+  const locale = useLocaleStore((s) => s.locale);
   const discount = onSale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
 
   return (
-    <Link href={`/product/${slug}`} className="product-card group block bg-white overflow-hidden transition-all duration-300">
+    <Link href={`/product/${slug}`} className="product-card group block bg-[#f9f9f9] overflow-hidden transition-all duration-300">
       {/* Image */}
-      <div className="relative overflow-hidden aspect-[3/4] bg-[#f5f5f5]">
+      <div className="relative overflow-hidden aspect-square bg-[#f9f9f9]">
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -50,17 +53,16 @@ export default function ProductCard({
           </div>
         )}
 
-        {/* Discount badge */}
+        {/* Badge: HIT for on-sale, NEW for featured */}
         {discount > 0 && (
-          <span className="absolute top-2 start-2 bg-[#d32f2f] text-white text-[10px] font-bold px-2 py-0.5 tracking-wide">
-            -{discount}%
+          <span className="absolute top-2.5 start-2.5 bg-[#4caf50] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide uppercase">
+            {t(locale, 'product.hit')}
           </span>
         )}
 
-        {/* New badge for featured */}
         {featured && !discount && (
-          <span className="absolute top-2 start-2 bg-[#191919] text-white text-[10px] font-bold px-2 py-0.5 tracking-wide uppercase">
-            New
+          <span className="absolute top-2.5 start-2.5 bg-[#4caf50] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide uppercase">
+            {t(locale, 'product.new')}
           </span>
         )}
 
@@ -74,26 +76,26 @@ export default function ProductCard({
       </div>
 
       {/* Card body */}
-      <div className={variant === 'compact' ? 'px-1 py-3' : 'px-1 py-3 max-md:py-2.5'}>
+      <div className={variant === 'compact' ? 'px-2.5 py-3' : 'px-2.5 py-3 max-md:py-2.5'}>
         {/* Product name */}
-        <h3 className="text-[13px] max-md:text-[12px] text-[#191919] line-clamp-2 leading-snug mb-1 font-normal">
+        <h3 className="text-[13px] max-md:text-[12px] text-[#191919] line-clamp-2 leading-snug mb-0.5 font-medium">
           {name}
         </h3>
 
-        {/* Category as brand */}
+        {/* Category as brand/type */}
         {categoryName && (
-          <p className="text-[11px] text-[#999] mb-1.5 line-clamp-1">
+          <p className="text-[11px] text-[#888] mb-2 line-clamp-1">
             {categoryName}
           </p>
         )}
 
         {/* Price row */}
-        <div className="flex items-baseline gap-2">
-          <span className="text-sm font-bold text-[#191919]">
+        <div className="flex items-baseline gap-2 flex-wrap">
+          <span className="text-[14px] font-bold text-[#191919]">
             {currency} {price.toFixed(0)}
           </span>
           {onSale && regularPrice && (
-            <span className="text-[12px] text-[#999] line-through">
+            <span className="text-[12px] text-[#aaa] line-through">
               {currency} {regularPrice.toFixed(0)}
             </span>
           )}
