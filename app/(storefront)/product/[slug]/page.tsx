@@ -161,11 +161,11 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           <div className="flex items-baseline gap-2.5 mb-5 pb-5 border-b border-[#eee]">
             {product.on_sale && regularPrice ? (
               <>
-                <span className="text-lg font-bold text-[#d32f2f]">{price.toFixed(0)} {currency}</span>
-                <span className="text-sm text-[#bbb] line-through">{regularPrice.toFixed(0)} {currency}</span>
+                <span className="text-lg font-bold text-[#d32f2f]">{currency} {price.toFixed(0)}</span>
+                <span className="text-sm text-[#bbb] line-through">{currency} {regularPrice.toFixed(0)}</span>
               </>
             ) : (
-              <span className="text-lg font-bold text-[#191919]">{price.toFixed(0)} {currency}</span>
+              <span className="text-lg font-bold text-[#191919]">{currency} {price.toFixed(0)}</span>
             )}
           </div>
 

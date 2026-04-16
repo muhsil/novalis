@@ -89,20 +89,20 @@ export default function ProductCard({
           </p>
         )}
 
-        {/* Price row - makeup.ae style: sale price in red, original strikethrough */}
+        {/* Price row - sale price in red, original strikethrough */}
         <div className="flex items-baseline gap-1.5 flex-wrap">
           {onSale && regularPrice ? (
             <>
               <span className="text-[13px] font-bold text-[#d32f2f]">
-                {price.toFixed(0)} {currency}
+                {currency} {price.toFixed(0)}
               </span>
               <span className="text-[12px] text-[#bbb] line-through">
-                {regularPrice.toFixed(0)} {currency}
+                {currency} {regularPrice.toFixed(0)}
               </span>
             </>
           ) : (
             <span className="text-[13px] font-bold text-[#191919]">
-              {price.toFixed(0)} {currency}
+              {currency} {price.toFixed(0)}
             </span>
           )}
         </div>
