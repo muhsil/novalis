@@ -41,14 +41,17 @@ interface BestSellerSliderProps {
 
 function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPrice }: BestSellerSliderProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const isRTL = locale === 'ar';
 
   const checkScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+    const absScroll = Math.abs(el.scrollLeft);
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setCanScrollPrev(absScroll > 4);
+    setCanScrollNext(absScroll < maxScroll - 4);
   }, []);
 
   useEffect(() => {
@@ -63,11 +66,12 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
     };
   }, [checkScroll]);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: 'prev' | 'next') => {
     const el = scrollRef.current;
     if (!el) return;
     const amount = el.clientWidth * 0.7;
-    el.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+    const scrollAmount = direction === 'prev' ? -amount : amount;
+    el.scrollBy({ left: isRTL ? -scrollAmount : scrollAmount, behavior: 'smooth' });
   };
 
   return (
@@ -83,13 +87,13 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
 
       {/* Desktop Slider */}
       <div className="hidden md:block relative group">
-        {canScrollLeft && (
+        {canScrollPrev && (
           <button
-            onClick={() => scroll('left')}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll left"
+            onClick={() => scroll('prev')}
+            className="absolute -start-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Scroll previous"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
           </button>
         )}
         <div
@@ -114,13 +118,13 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
             </div>
           ))}
         </div>
-        {canScrollRight && (
+        {canScrollNext && (
           <button
-            onClick={() => scroll('right')}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll right"
+            onClick={() => scroll('next')}
+            className="absolute -end-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#C9A96E] hover:border-[#C9A96E]/20 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Scroll next"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+            <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
           </button>
         )}
       </div>
@@ -147,7 +151,7 @@ function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPri
       <div className="text-center mt-12">
         <Link href="/shop" className="inline-flex items-center gap-2 border border-[#C9A96E] text-[#C9A96E] font-semibold text-xs px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors tracking-[0.2em] uppercase">
           {t(locale, 'bestsellers.view_all')}
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
         </Link>
       </div>
     </section>
@@ -181,7 +185,7 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
             alt=""
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A2E]/90 via-[#1A1A2E]/60 to-transparent max-md:bg-gradient-to-t max-md:from-[#1A1A2E]/95 max-md:via-[#1A1A2E]/70 max-md:to-[#1A1A2E]/30" />
+          <div className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-[#1A1A2E]/90 via-[#1A1A2E]/60 to-transparent max-md:bg-gradient-to-t max-md:from-[#1A1A2E]/95 max-md:via-[#1A1A2E]/70 max-md:to-[#1A1A2E]/30" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 max-md:px-4 flex items-center min-h-[600px] max-md:min-h-[500px]">
