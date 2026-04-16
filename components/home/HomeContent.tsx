@@ -228,7 +228,7 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
               {bestSellers.filter((p: any) => p.categories?.some((c: any) => c.slug === 'oud-collection')).slice(0, 1).map((p: any) => (
                 <Link key={p.id} href={`/product/${p.slug}`} className="group">
                   <div className="w-72 h-72 overflow-hidden">
-                    <img src={p.images[0].src} alt={p.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
+                    <img src={p.images?.[0]?.src} alt={p.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
                   </div>
                 </Link>
               ))}
