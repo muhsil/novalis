@@ -36,7 +36,7 @@ export default async function ShippingPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
+        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">Shipping &amp; Delivery</span>
       </nav>
@@ -47,7 +47,7 @@ export default async function ShippingPage() {
       <div className="space-y-3 mb-6">
         {getDeliveryOptions(currency).map((opt) => (
           <div key={opt.title} className="bg-white rounded-lg border border-[#f0f0f0] p-4 flex gap-3">
-            <span className="text-[#C9A96E] shrink-0">{DELIVERY_ICONS[opt.key]}</span>
+            <span className="text-[#D4AFB9] shrink-0">{DELIVERY_ICONS[opt.key]}</span>
             <div className="flex-1">
               <h2 className="text-sm font-bold text-[#191919]">{opt.title}</h2>
               <p className="text-xs text-[#666] mt-1">{opt.description}</p>
@@ -64,7 +64,7 @@ export default async function ShippingPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {DELIVERY_AREAS.map((area) => (
             <div key={area} className="flex items-center gap-1.5 text-sm text-[#666]">
-              <span className="w-1.5 h-1.5 bg-[#C9A96E] rounded-full shrink-0" />
+              <span className="w-1.5 h-1.5 bg-[#D4AFB9] rounded-full shrink-0" />
               {area}
             </div>
           ))}
@@ -74,12 +74,12 @@ export default async function ShippingPage() {
 
       {/* Important Notes */}
       <div className="bg-[#FAF6F0] rounded-lg p-6 max-md:p-4">
-        <h2 className="text-lg font-bold text-[#C9A96E] mb-3">Important Notes</h2>
+        <h2 className="text-lg font-bold text-[#D4AFB9] mb-3">Important Notes</h2>
         <ul className="space-y-2 text-sm text-[#666]">
-          <li className="flex gap-2"><span className="text-[#C9A96E]">•</span> Delivery times may vary during peak seasons and holidays.</li>
-          <li className="flex gap-2"><span className="text-[#C9A96E]">•</span> Someone must be available to receive the delivery at the specified address.</li>
-          <li className="flex gap-2"><span className="text-[#C9A96E]">•</span> For bulk or corporate orders, please contact us for special arrangements and pricing.</li>
-          <li className="flex gap-2"><span className="text-[#C9A96E]">•</span> Perfumes are packaged securely to prevent damage during transit.</li>
+          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Delivery times may vary during peak seasons and holidays.</li>
+          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Someone must be available to receive the delivery at the specified address.</li>
+          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> For bulk or corporate orders, please contact us for special arrangements and pricing.</li>
+          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Perfumes are packaged securely to prevent damage during transit.</li>
         </ul>
       </div>
     </div>

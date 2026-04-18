@@ -8,6 +8,9 @@ import EmptyState from '@/components/ui/EmptyState';
 import ProductImageGallery from '@/components/ui/ProductImageGallery';
 import StickyAddToCart from '@/components/ui/StickyAddToCart';
 import ProductVariationPicker from '@/components/ui/ProductVariationPicker';
+import PriceDisplay from '@/components/ui/PriceDisplay';
+import ProductSlider from '@/components/ui/ProductSlider';
+import { Accordion, AccordionItem } from '@/components/ui/Accordion';
 import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 
 export const revalidate = 60;
@@ -108,7 +111,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
   const fragranceNotes = extractFragranceNotes(product.description || '');
 
   return (
-    <div className="max-w-7xl mx-auto pb-16 max-md:pb-24">
+    <div className="max-w-7xl mx-auto pb-10 max-md:pb-24">
       <ProductJsonLd
         name={product.name}
         description={product.short_description || product.description || ''}
@@ -126,7 +129,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       ]} />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-[11px] text-[#999] px-6 py-3 max-md:px-4 overflow-x-auto no-scrollbar">
+      <nav className="flex items-center gap-2 text-[11px] text-[#999] px-4 max-md:px-3 py-2 max-md:py-2 overflow-x-auto no-scrollbar">
         <Link href="/" className="hover:text-[#191919] transition-colors shrink-0">Home</Link>
         <span className="shrink-0 text-[#ddd]">/</span>
         <Link href="/shop" className="hover:text-[#191919] transition-colors shrink-0">Shop</Link>
@@ -135,146 +138,124 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
       </nav>
 
       {/* Product Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-md:gap-0 px-6 max-md:px-0 mb-14 max-md:mb-6">
-        {/* Left: Image Gallery */}
-        <ProductImageGallery
-          images={product.images || []}
-          name={product.name}
-          discount={discount}
-        />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-md:gap-0 px-4 max-md:px-0 mb-10 max-md:mb-4">
+        {/* Left: Image Scroller */}
+        <div>
+          <ProductImageGallery
+            images={product.images || []}
+            name={product.name}
+            discount={discount}
+          />
+        </div>
 
         {/* Right: Info */}
-        <div className="flex flex-col max-md:px-4 max-md:pt-5">
+        <div className="flex flex-col max-md:px-3 max-md:pt-3">
           {/* Categories */}
           {product.categories?.length > 0 && (
-            <div className="flex gap-2 mb-2">
+            <div className="flex gap-2 mb-3">
               {product.categories.slice(0, 2).map((cat: any) => (
-                <span key={cat.id} className="text-[11px] text-[#999]">{cat.name}</span>
+                <span key={cat.id} className="text-[10px] text-[#D4AFB9] font-bold tracking-[0.25em] uppercase">{cat.name}</span>
               ))}
             </div>
           )}
 
           {/* Title */}
-          <h1 className="text-lg md:text-xl font-bold text-[#191919] mb-3 leading-tight">{product.name}</h1>
+          <h1 className="text-3xl md:text-5xl font-serif text-[#121212] mb-6 leading-[1.1]">{product.name}</h1>
 
           {/* Price */}
-          <div className="flex items-baseline gap-2.5 mb-5 pb-5 border-b border-[#eee]">
-            {product.on_sale && regularPrice ? (
-              <>
-                <span className="text-lg font-bold text-[#d32f2f]">{currency} {price.toFixed(0)}</span>
-                <span className="text-sm text-[#bbb] line-through">{currency} {regularPrice.toFixed(0)}</span>
-              </>
-            ) : (
-              <span className="text-lg font-bold text-[#191919]">{currency} {price.toFixed(0)}</span>
-            )}
-          </div>
+          <PriceDisplay 
+            amount={price} 
+            originalAmount={regularPrice} 
+            onSale={product.on_sale} 
+            size="xl" 
+            className="mb-8 pb-8 border-b border-[#E8E4DE]/50" 
+          />
 
           {/* Short description */}
           {product.short_description && (
-            <div className="text-[#666] text-sm leading-relaxed mb-6 font-light prose"
+            <div className="text-[#121212]/70 text-sm md:text-base leading-relaxed mb-6 font-light prose"
               dangerouslySetInnerHTML={{ __html: product.short_description }} />
           )}
 
           {/* Stock status */}
-          <div className="flex items-center gap-2 mb-6">
-            <div className={`w-1.5 h-1.5 rounded-full ${product.in_stock !== false ? 'bg-[#00B578]' : 'bg-[#d32f2f]'}`} />
-            <span className="text-xs text-[#666]">
+          <div className="flex items-center gap-2 mb-8">
+            <div className={`w-1.5 h-1.5 rounded-full ${product.in_stock !== false ? 'bg-[#D4AFB9]' : 'bg-[#8B0000]'}`} />
+            <span className="text-xs text-[#121212]/60 uppercase tracking-widest font-semibold">
               {product.in_stock !== false ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>
 
-          {/* Variations / Add to Cart */}
-          <ProductVariationPicker
-            productId={product.id}
-            productName={product.name}
-            basePrice={price}
-            image={mainImage}
-            attributes={product.attributes || []}
-            variations={variations}
-          />
+          {/* Add to Cart / Variations */}
+          <div className="mb-10">
+            <ProductVariationPicker
+              productId={product.id}
+              productName={product.name}
+              basePrice={price}
+              image={mainImage}
+              attributes={product.attributes || []}
+              variations={variations}
+            />
+          </div>
+
+          {/* Details Accordion */}
+          <div className="mt-4">
+            <Accordion>
+              {fragranceNotes && (
+                <AccordionItem title="Fragrance Profile" defaultOpen={true}>
+                  <div className="flex flex-col gap-6 py-2">
+                    {[
+                      { label: 'Top Notes', notes: fragranceNotes.top, desc: 'First impression' },
+                      { label: 'Heart Notes', notes: fragranceNotes.heart, desc: 'The character' },
+                      { label: 'Base Notes', notes: fragranceNotes.base, desc: 'The lasting trail' },
+                    ].map((tier) => (
+                      tier.notes.length > 0 && (
+                        <div key={tier.label}>
+                          <p className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#D4AFB9] mb-1">{tier.label}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {tier.notes.map((note, index) => (
+                              <React.Fragment key={note}>
+                                <span className="text-sm font-serif text-[#121212] capitalize">{note}</span>
+                                {index !== tier.notes.length - 1 && <span className="text-[#121212]/20 px-1">•</span>}
+                              </React.Fragment>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    ))}
+                  </div>
+                </AccordionItem>
+              )}
+
+              {product.description && (
+                <AccordionItem title="About This Fragrance">
+                  <div className="prose prose-sm text-[#121212]/70 leading-relaxed font-light py-2" dangerouslySetInnerHTML={{ __html: product.description }} />
+                </AccordionItem>
+              )}
+              
+              <AccordionItem title="Shipping & Returns">
+                <div className="space-y-3 py-2 text-[#121212]/70 font-light text-sm">
+                  <p><strong>Free Delivery:</strong> Available across all emirates in the UAE for orders above {currency} 250.</p>
+                  <p><strong>Standard Delivery:</strong> 1-2 business days within Dubai, 2-3 business days for other emirates.</p>
+                  <p><strong>Returns:</strong> We accept returns for unopened and sealed full-size bottles within 14 days of delivery. Sample sets and opened fragrances cannot be returned for hygiene reasons.</p>
+                </div>
+              </AccordionItem>
+            </Accordion>
+          </div>
 
         </div>
       </div>
 
-      {/* Fragrance Notes Pyramid */}
-      {fragranceNotes && (
-        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <h2 className="text-base font-bold text-[#191919] mb-5 uppercase tracking-wide">Fragrance Profile</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
-            {[
-              { label: 'Top Notes', notes: fragranceNotes.top, desc: 'First impression' },
-              { label: 'Heart Notes', notes: fragranceNotes.heart, desc: 'The character' },
-              { label: 'Base Notes', notes: fragranceNotes.base, desc: 'The lasting trail' },
-            ].map((tier) => (
-              tier.notes.length > 0 && (
-                <div key={tier.label} className="p-5 bg-[#f5f5f5]">
-                  <p className="text-[11px] font-bold tracking-wide uppercase text-[#191919] mb-1">{tier.label}</p>
-                  <p className="text-[10px] text-[#999] mb-3">{tier.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {tier.notes.map((note) => (
-                      <span key={note} className="text-xs text-[#666] capitalize">{note}</span>
-                    ))}
-                  </div>
-                </div>
-              )
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Product Description */}
-      {product.description && (
-        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <h3 className="text-base font-bold text-[#191919] mb-4 uppercase tracking-wide">About This Fragrance</h3>
-          <div className="prose text-[#666] text-sm leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: product.description }} />
-        </div>
-      )}
-
       {/* Related Products */}
       {similarProducts.length > 0 && (
-        <div className="mx-6 max-md:mx-4 mb-16 max-md:mb-10">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-base font-bold text-[#191919] uppercase tracking-wide">You May Also Like</h2>
-            <Link href="/shop" className="text-[13px] font-medium text-[#191919] hover:text-[#C9A96E] transition-colors flex items-center gap-1">
-              View All
-              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </Link>
-          </div>
-
-          {/* Desktop grid */}
-          <div className="hidden md:grid grid-cols-4 gap-4">
-            {similarProducts.map((p: any) => (
-              <ProductCard
-                key={p.id}
-                slug={p.slug}
-                name={p.name}
-                price={parseFloat(p.price || '0')}
-                regularPrice={p.regular_price ? parseFloat(p.regular_price) : null}
-                imageSrc={p.images?.[0]?.src}
-                variant="compact"
-                currency={currency}
-                productId={p.id}
-              />
-            ))}
-          </div>
-
-          {/* Mobile horizontal scroll */}
-          <div className="md:hidden flex overflow-x-auto no-scrollbar gap-3">
-            {similarProducts.map((p: any) => (
-              <div key={p.id} className="w-[42vw] min-w-[160px] shrink-0">
-                <ProductCard
-                  slug={p.slug}
-                  name={p.name}
-                  price={parseFloat(p.price || '0')}
-                  regularPrice={p.regular_price ? parseFloat(p.regular_price) : null}
-                  imageSrc={p.images?.[0]?.src}
-                  variant="compact"
-                  currency={currency}
-                  productId={p.id}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="border-t border-[#121212]/10 pt-8 mt-16 pb-8">
+          <ProductSlider
+            products={similarProducts}
+            title1="You May Also"
+            title2="Like"
+            viewAllLink="/shop"
+            viewAllText="View All"
+            currSymbol={currency}
+          />
         </div>
       )}
 

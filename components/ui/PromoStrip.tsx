@@ -7,7 +7,7 @@ interface PromoStripProps {
 
 export default function PromoStrip({ messages }: PromoStripProps) {
   return (
-    <div className="bg-[#C9A96E] text-white overflow-hidden h-8 flex items-center">
+    <div className="bg-[#D4AFB9] text-white overflow-hidden h-8 flex items-center">
       <div className="flex whitespace-nowrap promo-scroll">
         {[...messages, ...messages].map((msg, i) => (
           <span key={i} className="text-xs font-medium px-8">

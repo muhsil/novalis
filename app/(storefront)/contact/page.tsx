@@ -34,7 +34,7 @@ export default function ContactPage() {
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
+        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">Contact</span>
       </nav>
@@ -47,11 +47,11 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
         {CONTACT_METHODS.map((m) => (
           <div key={m.label} className="bg-white rounded-lg border border-[#f0f0f0] p-4 flex items-start gap-3">
-            <span className="text-[#C9A96E]">{CONTACT_ICONS[m.key]}</span>
+            <span className="text-[#D4AFB9]">{CONTACT_ICONS[m.key]}</span>
             <div>
               <h3 className="text-sm font-semibold text-[#191919]">{m.label}</h3>
               {m.href ? (
-                <a href={m.href} className="text-sm text-[#C9A96E] hover:underline font-light" target={m.href.startsWith('http') ? '_blank' : undefined} rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                <a href={m.href} className="text-sm text-[#D4AFB9] hover:underline font-light" target={m.href.startsWith('http') ? '_blank' : undefined} rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                   {m.value}
                 </a>
               ) : (
@@ -79,7 +79,7 @@ export default function ContactPage() {
       <div className="bg-[#FAF6F0] rounded-lg p-6 max-md:p-4 text-center">
         <h2 className="text-lg font-light text-[#191919] mb-2">Need <span className="font-semibold">Help?</span></h2>
         <p className="text-sm text-[#666] mb-4 font-light">Our team is available to assist you with any questions about our fragrances.</p>
-        <a href="https://wa.me/971563554303" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-[#C9A96E] text-white font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
+        <a href="https://wa.me/971563554303" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-[#D4AFB9] text-white font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
           Chat on WhatsApp
         </a>
       </div>

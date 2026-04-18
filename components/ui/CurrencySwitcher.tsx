@@ -30,10 +30,10 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
         onClick={() => setOpen(!open)}
         className={
           variant === 'full'
-            ? 'flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#f8f8f8] transition-colors text-sm font-medium text-[#555]'
+            ? 'flex items-center gap-2 px-3 py-2 hover:bg-[#FAF6F0] transition-colors text-sm font-serif font-medium text-[#121212]'
             : variant === 'dark'
-              ? 'flex items-center gap-1 px-2 py-1 hover:bg-white/10 transition-colors text-xs font-medium text-white/70 hover:text-white'
-              : 'flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-xs font-semibold text-[#555] border border-[#eee]'
+              ? 'flex items-center gap-1 px-2 py-1 hover:text-[#D4AFB9] transition-colors text-[10px] uppercase font-bold text-white/70'
+              : 'flex items-center gap-1 px-2 py-1.5 transition-colors text-[10px] uppercase font-bold text-[#F9F7F2] hover:text-[#D4AFB9]'
         }
       >
         <span>{current.code}</span>
@@ -43,7 +43,7 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
       </button>
 
       {open && (
-        <div className="absolute top-full end-0 mt-1 bg-white rounded-lg shadow-lg border border-[#eee] py-1 z-50 min-w-[140px] max-h-[300px] overflow-y-auto">
+        <div className="absolute top-full end-0 mt-2 bg-[#742938] border border-[#E8E4DE]/20 shadow-2xl py-2 z-[9999] min-w-[140px] max-h-[300px] overflow-y-auto no-scrollbar rounded-md">
           {currencies.map((c) => (
             <button
               key={c.code}
@@ -51,12 +51,12 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
                 setSelectedCurrency(c.code);
                 setOpen(false);
               }}
-              className={`w-full text-start px-3 py-2 text-sm hover:bg-[#FAF6F0] transition-colors flex items-center justify-between ${
-                c.code === selectedCurrency ? 'text-[#C9A96E] font-semibold bg-[#FAF6F0]' : 'text-[#333]'
+              className={`w-full text-start px-4 py-2 text-[10px] tracking-widest uppercase hover:text-white hover:bg-white/5 transition-colors flex items-center justify-between ${
+                c.code === selectedCurrency ? 'text-[#D4AFB9] font-bold' : 'text-[#F9F7F2]/60'
               }`}
             >
               <span>{c.code}</span>
-              <span className="text-xs text-[#999]">{c.symbol}</span>
+              <span className="opacity-50">{c.symbol}</span>
             </button>
           ))}
         </div>

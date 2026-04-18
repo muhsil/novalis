@@ -26,18 +26,18 @@ export default function TrustBanner({ currency = 'AED' }: { currency?: string })
   ];
 
   return (
-    <div className="bg-[#FAF6F0] border-b border-[#e8e4dc]">
+    <div className="bg-[#742938] border-b border-[#F9F7F2]/10 py-1 border-t">
       <div className="max-w-7xl mx-auto px-4 py-2.5">
-        <div className="flex items-center justify-between max-md:justify-start max-md:gap-5 max-md:overflow-x-auto no-scrollbar">
+        <div className="flex items-center justify-between max-md:justify-start max-md:gap-6 max-md:overflow-x-auto no-scrollbar pb-1">
           {trustItems.map((item, i) => (
-            <div key={item.title} className="flex items-center gap-2.5 shrink-0">
-              <span className="text-[#C9A96E]">{item.icon}</span>
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-[11px] font-semibold text-[#191919] tracking-wide">{item.title}</span>
-                <span className="hidden md:inline text-[11px] text-[#999] font-light">{item.subtitle}</span>
+            <div key={item.title} className="flex items-center gap-3 shrink-0">
+              <span className="text-[#D4AFB9]">{item.icon}</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-[11px] font-bold text-[#F9F7F2] tracking-[0.08em] uppercase">{item.title}</span>
+                <span className="hidden md:inline text-[10px] text-[#F9F7F2]/60 font-light tracking-wide">{item.subtitle}</span>
               </div>
               {i < trustItems.length - 1 && (
-                <div className="hidden md:block w-px h-3 bg-[#e0dbd3] ml-4" />
+                <div className="hidden md:block w-px h-4 bg-[#F9F7F2]/10 ml-5" />
               )}
             </div>
           ))}

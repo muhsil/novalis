@@ -92,39 +92,39 @@ export default function MobileBottomNav() {
         <div className="mobile-menu-overlay" onClick={() => setMenuOpen(false)}>
           <div className="mobile-menu-sheet" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-menu-handle" />
-            <div className="flex items-center justify-between px-5 py-3 border-b border-[#f0f0f0]">
-              <span className="font-bold text-[#191919] text-sm">{t(locale, 'mobile.menu')}</span>
+            <div className="flex items-center justify-between px-5 py-4 border-b border-[#E8E4DE]">
+              <span className="font-serif font-medium text-[#121212] text-base">{t(locale, 'mobile.menu')}</span>
               <button
                 onClick={() => setMenuOpen(false)}
-                className="p-1.5 rounded-full hover:bg-[#f5f5f5] transition-colors"
+                className="p-1.5 rounded-full hover:bg-[#F9F7F2] transition-colors text-[#121212]"
               >
-                <svg className="w-5 h-5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <nav className="py-2 max-h-[50vh] overflow-y-auto">
+            <nav className="py-2 max-h-[50vh] overflow-y-auto no-scrollbar">
               {MENU_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium transition-colors active:bg-[#f5f5f5] ${
-                    pathname === link.href ? 'text-[#C9A96E] bg-[#FAF6F0]' : 'text-[#333]'
+                  className={`flex items-center gap-4 px-6 py-4 text-sm font-light transition-colors active:bg-[#F9F7F2] ${
+                    pathname === link.href ? 'text-[#D4AFB9] bg-[#FCFAF7]' : 'text-[#555555]'
                   }`}
                 >
-                  <span className="text-[#C9A96E]">{MENU_ICONS[link.key]}</span>
+                  <span className={pathname === link.href ? 'text-[#D4AFB9]' : 'text-[#888888]'}>{MENU_ICONS[link.key]}</span>
                   {link.label}
                 </Link>
               ))}
-              <div className="border-t border-[#f0f0f0] mt-2 pt-2">
+              <div className="border-t border-[#E8E4DE] mt-2 pt-2 pb-6">
                 <a
                   href="https://wa.me/971563554303"
-                  className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-[#333] active:bg-[#f5f5f5]"
+                  className="flex items-center gap-4 px-6 py-4 text-sm font-light text-[#555555] active:bg-[#F9F7F2]"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="text-[#25D366]">{MENU_ICONS.whatsapp}</span>
+                  <span className="text-[#D4AFB9]">{MENU_ICONS.whatsapp}</span>
                   WhatsApp Support
                 </a>
               </div>
@@ -137,12 +137,12 @@ export default function MobileBottomNav() {
       <nav className="mobile-bottom-nav">
         <Link href="/" className={`mobile-nav-item ${isHome ? 'mobile-nav-active' : ''}`}>
           <HomeIcon active={isHome} />
-          <span className="mobile-nav-label">{t(locale, 'mobile.home')}</span>
+          <span className="mobile-nav-label tracking-wide mt-1">{t(locale, 'mobile.home')}</span>
         </Link>
 
         <Link href="/shop" className={`mobile-nav-item ${isShop ? 'mobile-nav-active' : ''}`}>
           <CategoryIcon active={isShop} />
-          <span className="mobile-nav-label">{t(locale, 'mobile.shop')}</span>
+          <span className="mobile-nav-label tracking-wide mt-1">{t(locale, 'mobile.shop')}</span>
         </Link>
 
         <Link href="/checkout" className={`mobile-nav-item ${isCart ? 'mobile-nav-active' : ''}`}>
@@ -154,7 +154,7 @@ export default function MobileBottomNav() {
               </span>
             )}
           </div>
-          <span className="mobile-nav-label">{t(locale, 'mobile.cart')}</span>
+          <span className="mobile-nav-label tracking-wide mt-1">{t(locale, 'mobile.cart')}</span>
         </Link>
 
         <Link href="/account/wishlist" className={`mobile-nav-item ${isWishlist ? 'mobile-nav-active' : ''}`}>
@@ -166,12 +166,12 @@ export default function MobileBottomNav() {
               </span>
             )}
           </div>
-          <span className="mobile-nav-label">{t(locale, 'mobile.wishlist')}</span>
+          <span className="mobile-nav-label tracking-wide mt-1">{t(locale, 'mobile.wishlist')}</span>
         </Link>
 
         <Link href="/account" className={`mobile-nav-item ${isAccount || isMenu || menuOpen ? 'mobile-nav-active' : ''}`}>
           <AccountIcon active={isAccount || isMenu || menuOpen} />
-          <span className="mobile-nav-label">{t(locale, 'mobile.account')}</span>
+          <span className="mobile-nav-label tracking-wide mt-1">{t(locale, 'mobile.account')}</span>
         </Link>
       </nav>
     </>

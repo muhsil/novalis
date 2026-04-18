@@ -27,7 +27,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'announcement.tagline': 'Luxury Fragrances with an Emirati Signature',
 
     // Hero
-    'hero.subtitle': 'The Essence of Modern Luxury',
+    'hero.subtitle': 'The Art of Perfumery',
     'hero.title_1': 'Luxury Fragrances with an',
     'hero.title_highlight': 'Emirati Signature',
     'hero.description': 'Luxury perfumes in the UAE crafted for men and women who appreciate refined fragrance experiences.',
@@ -48,7 +48,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'bestsellers.view_all': 'View All Fragrances',
 
     // Oud Collection Feature
-    'oud.label': 'Oud Collection',
+    'oud.label': 'Exclusive Collection',
     'oud.title_1': 'Luxury',
     'oud.title_2': 'Oud Collection',
     'oud.description': 'Discover the Oud Collection by Novalis, featuring luxury Arabic oud fragrances designed for depth, sophistication, and lasting impression in the UAE.',
@@ -60,7 +60,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'arrivals.subtitle': 'Discover our latest fragrances, crafted for modern elegance.',
 
     // Brand Story
-    'brand.label': 'Luxury Fragrance House',
+    'brand.label': 'The House of Novalis',
     'brand.title_1': 'Luxury Perfumes Crafted with an',
     'brand.title_2': 'Emirati Soul',
     'brand.description': 'Discover luxury perfumes by Novalis, blending premium ingredients with refined craftsmanship. Inspired by Emirati heritage and designed for modern elegance in the UAE.',
@@ -103,7 +103,9 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.contact_us': 'Contact Us',
     'footer.copyright': '© {year} Novalis Perfumes. All rights reserved.',
     'footer.tagline': 'Luxury Arabic Fragrances | Dubai, UAE',
-    'footer.newsletter_title': 'Be the first to know about sales and new arrivals!',
+    'footer.newsletter_title': 'Join our elite circle',
+    'footer.newsletter_subtitle': 'Be the first to know about sales and new arrivals!',
+    'arrivals.label': 'Freshly Crafted',
 
     // Mobile Bottom Nav
     'mobile.home': 'Home',
@@ -153,7 +155,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'announcement.tagline': 'عطور فاخرة بطابع إماراتي أصيل',
 
     // Hero
-    'hero.subtitle': 'جوهر الفخامة العصرية',
+    'hero.subtitle': 'فن صناعة العطور',
     'hero.title_1': 'عطور فاخرة بـ',
     'hero.title_highlight': 'طابع إماراتي',
     'hero.description': 'عطور فاخرة في الإمارات صُنعت للرجال والنساء الذين يقدّرون تجارب العطور الراقية.',
@@ -174,7 +176,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'bestsellers.view_all': 'عرض جميع العطور',
 
     // Oud Collection Feature
-    'oud.label': 'مجموعة العود',
+    'oud.label': 'مجموعة حصرية',
     'oud.title_1': 'مجموعة',
     'oud.title_2': 'العود الفاخرة',
     'oud.description': 'اكتشف مجموعة العود من نوفاليس، التي تضم عطور عود عربية فاخرة مصممة للعمق والأناقة والانطباع الدائم في الإمارات.',
@@ -186,7 +188,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'arrivals.subtitle': 'اكتشف أحدث عطورنا المصنوعة للأناقة العصرية.',
 
     // Brand Story
-    'brand.label': 'دار عطور فاخرة',
+    'brand.label': 'دار نوفاليس',
     'brand.title_1': 'عطور فاخرة صُنعت بـ',
     'brand.title_2': 'روح إماراتية',
     'brand.description': 'اكتشف عطور نوفاليس الفاخرة، التي تمزج المكونات الممتازة مع الحرفية الراقية. مستوحاة من التراث الإماراتي ومصممة للأناقة العصرية في الإمارات.',
@@ -229,7 +231,9 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.contact_us': 'تواصل معنا',
     'footer.copyright': '© {year} نوفاليس للعطور. جميع الحقوق محفوظة.',
     'footer.tagline': 'عطور عربية فاخرة | دبي، الإمارات',
-    'footer.newsletter_title': 'كن أول من يعرف عن التخفيضات والوصولات الجديدة!',
+    'footer.newsletter_title': 'انضم إلى دائرتنا النخبوية',
+    'footer.newsletter_subtitle': 'كن أول من يعرف عن التخفيضات والوصولات الجديدة!',
+    'arrivals.label': 'صُنعت حديثاً',
 
     // Mobile Bottom Nav
     'mobile.home': 'الرئيسية',

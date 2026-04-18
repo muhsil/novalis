@@ -54,7 +54,7 @@ export default function WishlistPage() {
               </Link>
               <div className="p-3">
                 <Link href={`/product/${item.slug}`}>
-                  <h3 className="text-sm text-[#191919] font-medium line-clamp-2 mb-2 hover:text-[#C9A96E] transition-colors">
+                  <h3 className="text-sm text-[#191919] font-medium line-clamp-2 mb-2 hover:text-[#D4AFB9] transition-colors">
                     {item.name}
                   </h3>
                 </Link>
@@ -64,13 +64,13 @@ export default function WishlistPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleAddToCart(item)}
-                    className="flex-1 bg-[#C9A96E] text-white text-xs font-semibold py-2 rounded-lg hover:bg-[#B8985D] transition-colors"
+                    className="flex-1 bg-[#D4AFB9] text-white text-xs font-semibold py-2 rounded-lg hover:bg-[#B8985D] transition-colors"
                   >
                     Add to Cart
                   </button>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="px-3 py-2 rounded-lg border border-gray-200 text-gray-400 hover:text-[#C9A96E] hover:border-[#C9A96E] transition-colors"
+                    className="px-3 py-2 rounded-lg border border-gray-200 text-gray-400 hover:text-[#D4AFB9] hover:border-[#D4AFB9] transition-colors"
                     aria-label="Remove from wishlist"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

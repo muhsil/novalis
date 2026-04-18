@@ -25,11 +25,11 @@ export default function CategoryIconPill({ icon, label, href, active }: Category
       href={href}
       className={`flex flex-col items-center gap-1 shrink-0 min-w-[56px] px-2 py-1.5 rounded-lg transition-colors ${
         active
-          ? 'bg-[#FAF6F0] text-[#C9A96E]'
+          ? 'bg-[#FAF6F0] text-[#D4AFB9]'
           : 'text-[#666] hover:bg-[#f5f5f5]'
       }`}
     >
-      <span className="text-[#C9A96E]">{PILL_ICONS[icon] || PILL_ICONS.all}</span>
+      <span className="text-[#D4AFB9]">{PILL_ICONS[icon] || PILL_ICONS.all}</span>
       <span className="text-[10px] font-medium whitespace-nowrap">{label}</span>
     </Link>
   );

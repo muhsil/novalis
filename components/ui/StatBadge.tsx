@@ -8,7 +8,7 @@ interface StatBadgeProps {
 export default function StatBadge({ value, label }: StatBadgeProps) {
   return (
     <div>
-      <div className="text-2xl max-md:text-xl font-extrabold text-[#C9A96E]">{value}</div>
+      <div className="text-2xl max-md:text-xl font-extrabold text-[#D4AFB9]">{value}</div>
       <div className="text-xs text-gray-500 font-medium">{label}</div>
     </div>
   );

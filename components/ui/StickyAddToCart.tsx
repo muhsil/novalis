@@ -25,21 +25,21 @@ export default function StickyAddToCart({ productId, name, price, image }: Stick
   };
 
   return (
-    <div className="md:hidden fixed bottom-14 left-0 right-0 z-70 bg-white border-t border-gray-100 px-3 py-2.5 shadow-[0_-2px_10px_rgba(0,0,0,0.06)]">
-      <div className="flex items-center gap-3">
+    <div className="md:hidden fixed bottom-[60px] left-0 right-0 z-70 bg-[#742938] border-t border-t-[#D4AFB9]/20 px-4 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.15)] flex justify-between items-center">
+      <div className="flex items-center gap-3 w-full">
         <div className="flex-1 min-w-0">
-          <div className="text-xs text-gray-500 truncate">{name}</div>
-          <div className="text-lg font-extrabold text-[#C9A96E]">{currency} {price.toFixed(0)}</div>
+          <div className="text-xs text-[#F9F7F2]/60 truncate font-light">{name}</div>
+          <div className="text-[15px] font-serif text-[#D4AFB9]">{currency} {price.toFixed(0)}</div>
         </div>
         <button
           onClick={handleAdd}
-          className={`px-6 py-3 rounded-xl font-bold text-sm transition-all shrink-0 ${
+          className={`px-8 py-2.5 rounded-none text-xs font-semibold tracking-widest uppercase transition-all shrink-0 ${
             added
-              ? 'bg-[#00B578] text-white'
-              : 'bg-[#C9A96E] text-white hover:bg-[#B8985D] active:scale-[0.98]'
+              ? 'bg-[#742938] text-white border border-[#F9F7F2]/30'
+              : 'bg-[#D4AFB9] text-white hover:bg-[#A6803F] active:scale-[0.98]'
           }`}
         >
-          {added ? (<span className="inline-flex items-center gap-1"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg> Added!</span>) : 'Add to Cart'}
+          {added ? (<span className="inline-flex items-center gap-2"><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> Added</span>) : 'Add to Cart'}
         </button>
       </div>
     </div>

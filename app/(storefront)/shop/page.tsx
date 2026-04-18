@@ -3,8 +3,6 @@ import { wooApi } from '@/lib/woocommerce';
 import { getStoreSettings } from '@/lib/store-settings';
 import ProductCard from '@/components/ui/ProductCard';
 import EmptyState from '@/components/ui/EmptyState';
-import CategoryIconPill from '@/components/ui/CategoryIconPill';
-import TrustBanner from '@/components/ui/TrustBanner';
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 
 export const revalidate = 60;
@@ -73,7 +71,6 @@ export default async function ShopPage({
         { name: 'Home', href: '/' },
         { name: 'Shop', href: '/shop' },
       ]} />
-      <TrustBanner currency={currency} />
 
       <div className="max-w-7xl mx-auto px-4 max-md:px-3 pb-8 max-md:pb-20">
         {/* Mobile search */}
@@ -93,21 +90,7 @@ export default async function ShopPage({
           </div>
         </form>
 
-        {/* Category pills */}
-        {topCategories.length > 0 && (
-          <div className="flex gap-2 max-md:gap-1 overflow-x-auto no-scrollbar py-3">
-            <CategoryIconPill icon="all" label="All" href="/shop" active={!searchParams.category} />
-            {topCategories.map((cat: any) => (
-              <CategoryIconPill
-                key={cat.id}
-                icon={CATEGORY_ICONS[cat.slug] || CATEGORY_ICONS.default}
-                label={cat.name}
-                href={`/shop?category=${cat.slug}`}
-                active={searchParams.category === cat.slug}
-              />
-            ))}
-          </div>
-        )}
+        {/* Search */}
 
         {/* Results count */}
         <div className="flex items-center justify-between mb-3 mt-1">

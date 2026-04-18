@@ -30,7 +30,7 @@ export default function FAQPage() {
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
+        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">FAQ</span>
       </nav>
@@ -45,7 +45,7 @@ export default function FAQPage() {
           <details key={item.q} className="bg-white rounded-lg border border-[#f0f0f0] group">
             <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-[#191919] hover:bg-[#fafafa] transition-colors">
               {item.q}
-              <svg className="w-4 h-4 text-[#C9A96E] shrink-0 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#D4AFB9] shrink-0 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
@@ -59,10 +59,10 @@ export default function FAQPage() {
         <h2 className="text-lg font-light text-[#191919] mb-2">Still Have <span className="font-semibold">Questions?</span></h2>
         <p className="text-sm text-[#666] mb-4 font-light">We&apos;re happy to help. Reach out anytime.</p>
         <div className="flex justify-center gap-3">
-          <a href="https://wa.me/971563554303" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-[#C9A96E] text-white font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
+          <a href="https://wa.me/971563554303" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-[#D4AFB9] text-white font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
             WhatsApp Us
           </a>
-          <a href="mailto:info@novalis.ae" className="inline-flex items-center border border-[#C9A96E] text-[#C9A96E] font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#FAF6F0] transition-colors tracking-wide uppercase">
+          <a href="mailto:info@novalis.ae" className="inline-flex items-center border border-[#D4AFB9] text-[#D4AFB9] font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#FAF6F0] transition-colors tracking-wide uppercase">
             Email Us
           </a>
         </div>

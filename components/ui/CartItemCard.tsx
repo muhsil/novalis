@@ -54,7 +54,7 @@ export default function CartItemCard({
           <p className="font-bold text-gray-900 text-sm leading-tight truncate">
             {name}
           </p>
-          <p className="font-bold text-sm whitespace-nowrap text-[#C9A96E]">
+          <p className="font-bold text-sm whitespace-nowrap text-[#D4AFB9]">
             {currSymbol} {(displayPrice * quantity).toFixed(0)}
           </p>
         </div>

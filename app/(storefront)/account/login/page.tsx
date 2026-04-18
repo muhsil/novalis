@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-[#FAF6F0] rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
+            <svg className="w-8 h-8 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
           </div>
           <h1 className="text-2xl font-bold text-[#191919]">Welcome Back</h1>
           <p className="text-sm text-[#666] mt-1">Sign in to your Novalis account</p>
@@ -93,7 +93,7 @@ export default function LoginPage() {
         <div className="text-center mt-6">
           <p className="text-sm text-[#666]">
             Don&apos;t have an account?{' '}
-            <Link href="/account/register" className="text-[#C9A96E] font-semibold hover:underline">
+            <Link href="/account/register" className="text-[#D4AFB9] font-semibold hover:underline">
               Create Account
             </Link>
           </p>

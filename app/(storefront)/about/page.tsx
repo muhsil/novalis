@@ -43,16 +43,16 @@ export default function AboutPage() {
     <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#C9A96E]">Home</Link>
+        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
         <span>&gt;</span>
         <span className="text-[#191919] font-medium">About Us</span>
       </nav>
 
       {/* Hero */}
       <div className="bg-[#1A1A2E] rounded-lg p-8 max-md:p-5 mb-8 text-center">
-        <span className="text-[#C9A96E] text-xs font-semibold tracking-[0.25em] uppercase mb-3 block">Our Story</span>
+        <span className="text-[#D4AFB9] text-xs font-semibold tracking-[0.25em] uppercase mb-3 block">Our Story</span>
         <h1 className="text-2xl max-md:text-xl font-light text-white mb-3">
-          About <span className="font-semibold text-[#C9A96E]">Novalis</span>
+          About <span className="font-semibold text-[#D4AFB9]">Novalis</span>
         </h1>
         <p className="text-white/60 text-sm max-w-lg mx-auto leading-relaxed font-light">
           Novalis Perfumes is a luxury fragrance brand from Dubai, UAE, crafting exclusive perfumes with an authentic Emirati soul using premium ingredients like oud, musk, amber, and rare botanicals.
@@ -63,7 +63,7 @@ export default function AboutPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         {STATS.map((stat) => (
           <div key={stat.label} className="bg-white rounded-lg border border-[#f0f0f0] p-5 text-center">
-            <div className="text-2xl font-light text-[#C9A96E]">{stat.value}</div>
+            <div className="text-2xl font-light text-[#D4AFB9]">{stat.value}</div>
             <div className="text-xs text-[#999] mt-1 font-light tracking-wide uppercase">{stat.label}</div>
           </div>
         ))}
@@ -94,7 +94,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {VALUES.map((v) => (
             <div key={v.title} className="flex gap-3">
-              <span className="text-[#C9A96E] shrink-0">{v.icon}</span>
+              <span className="text-[#D4AFB9] shrink-0">{v.icon}</span>
               <div>
                 <h3 className="text-sm font-semibold text-[#191919]">{v.title}</h3>
                 <p className="text-xs text-[#666] leading-relaxed mt-1 font-light">{v.description}</p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
       <div className="bg-[#FAF6F0] rounded-lg p-6 max-md:p-4 text-center">
         <h2 className="text-lg font-light text-[#191919] mb-2">Discover Our <span className="font-semibold">Collection</span></h2>
         <p className="text-sm text-[#666] mb-4 font-light">Explore luxury fragrances crafted with an Emirati signature.</p>
-        <Link href="/shop" className="inline-flex items-center bg-[#C9A96E] text-white font-semibold text-sm px-8 py-3 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
+        <Link href="/shop" className="inline-flex items-center bg-[#D4AFB9] text-white font-semibold text-sm px-8 py-3 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
           Shop Collection
         </Link>
       </div>

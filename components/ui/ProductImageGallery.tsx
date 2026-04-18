@@ -16,41 +16,35 @@ export default function ProductImageGallery({ images, name, discount }: ProductI
   const activeSrc = hasImages ? images[activeIndex]?.src : null;
 
   return (
-    <div className="max-md:mb-0">
+    <div className="w-full">
       {/* Main Image */}
-      <div className="rounded-2xl max-md:rounded-none overflow-hidden bg-gray-50 aspect-square flex items-center justify-center relative">
+      <div className="w-full bg-[#F9F7F2] aspect-[4/5] md:aspect-[3/4] flex items-center justify-center relative rounded-none overflow-hidden group">
         {activeSrc ? (
-          <img src={activeSrc} alt={name} className="w-full h-full object-cover" />
+          <img src={activeSrc} alt={name} className="w-full h-full object-contain p-8 mix-blend-multiply transition-transform duration-700 ease-in-out group-hover:scale-105" />
         ) : (
-          <svg className="w-24 h-24 max-md:w-16 max-md:h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <svg className="w-24 h-24 text-[#E8E4DE]" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-2.21 0-4 2.015-4 4.5S9.79 17 12 17s4-2.015 4-4.5S14.21 8 12 8zm0 0V3m0 14v4" /></svg>
         )}
         {discount !== undefined && discount > 0 && (
-          <div className="absolute top-3 start-3 max-md:top-2 max-md:start-2">
+          <div className="absolute top-4 start-4 z-10">
             <DealBadge text={`-${discount}%`} variant="red" />
-          </div>
-        )}
-        {/* Image counter */}
-        {hasImages && images.length > 1 && (
-          <div className="absolute bottom-3 end-3 bg-black/50 text-white text-[10px] font-bold px-2 py-1 rounded-full">
-            {activeIndex + 1}/{images.length}
           </div>
         )}
       </div>
 
-      {/* Thumbnail Strip */}
+      {/* Thumbnails */}
       {hasImages && images.length > 1 && (
-        <div className="flex gap-2 mt-3 max-md:mt-2 px-0 max-md:px-3 overflow-x-auto no-scrollbar">
-          {images.slice(0, 6).map((img, idx) => (
+        <div className="flex gap-3 mt-4 overflow-x-auto no-scrollbar pb-2">
+          {images.map((img, idx) => (
             <button
-              key={img.id}
+              key={img.id || idx}
               onClick={() => setActiveIndex(idx)}
-              className={`w-16 h-16 max-md:w-14 max-md:h-14 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
+              className={`w-20 h-24 shrink-0 transition-all aspect-[3/4] overflow-hidden ${
                 idx === activeIndex
-                  ? 'border-[#C9A96E] ring-1 ring-[#C9A96E]/30'
-                  : 'border-transparent hover:border-gray-300'
+                  ? 'border border-[#D4AFB9] opacity-100'
+                  : 'border border-transparent bg-[#F9F7F2] opacity-70 hover:opacity-100'
               }`}
             >
-              <img src={img.src} alt={`${name} ${idx + 1}`} className="w-full h-full object-cover" />
+              <img src={img.src} alt={`${name} ${idx + 1}`} className="w-full h-full object-contain p-2 mix-blend-multiply" />
             </button>
           ))}
         </div>

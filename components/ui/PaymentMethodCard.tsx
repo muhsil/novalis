@@ -14,13 +14,13 @@ export default function PaymentMethodCard({ selected = true, onClick }: PaymentM
       onClick={onClick}
       className={`w-full text-left p-4 max-md:p-3 rounded-lg border-2 transition-all ${
         selected
-          ? 'border-[#C9A96E] bg-[#FAF6F0]'
-          : 'border-gray-200 bg-white hover:border-[#C9A96E]/30'
+          ? 'border-[#D4AFB9] bg-[#FAF6F0]'
+          : 'border-gray-200 bg-white hover:border-[#D4AFB9]/30'
       }`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 max-md:w-8 max-md:h-8 rounded-lg bg-gradient-to-br from-[#C9A96E] to-[#D4B87A] flex items-center justify-center text-white text-base max-md:text-sm font-bold">
+          <div className="w-9 h-9 max-md:w-8 max-md:h-8 rounded-lg bg-gradient-to-br from-[#D4AFB9] to-[#D4B87A] flex items-center justify-center text-white text-base max-md:text-sm font-bold">
             💳
           </div>
           <div>
@@ -29,7 +29,7 @@ export default function PaymentMethodCard({ selected = true, onClick }: PaymentM
           </div>
         </div>
         {selected && (
-          <div className="w-5 h-5 rounded-full bg-[#C9A96E] flex items-center justify-center">
+          <div className="w-5 h-5 rounded-full bg-[#D4AFB9] flex items-center justify-center">
             <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>

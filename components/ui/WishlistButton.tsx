@@ -23,11 +23,11 @@ export default function WishlistButton({ item, size = 'md', className = '' }: Wi
         e.stopPropagation();
         toggleItem(item);
       }}
-      className={`${sizeClass} rounded-full flex items-center justify-center transition-all ${
+      className={`${sizeClass} rounded-full flex items-center justify-center transition-all duration-300 ${
         active
-          ? 'bg-[#FAF6F0] text-[#C9A96E]'
-          : 'bg-white/80 text-gray-400 hover:text-[#C9A96E] hover:bg-[#FAF6F0]'
-      } shadow-sm backdrop-blur-sm ${className}`}
+          ? 'bg-[#742938] text-[#D4AFB9] border border-[#D4AFB9]/30 shadow-lg'
+          : 'bg-white/90 text-[#888888] hover:text-[#D4AFB9] hover:bg-[#F9F7F2] border border-[#E8E4DE]'
+      } backdrop-blur-sm ${className}`}
       aria-label={active ? 'Remove from wishlist' : 'Add to wishlist'}
     >
       <svg

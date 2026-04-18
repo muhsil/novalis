@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import ProductCard from '@/components/ui/ProductCard';
+import ProductSlider from '@/components/ui/ProductSlider';
 import CategorySlider from '@/components/ui/CategorySlider';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
@@ -31,135 +32,12 @@ function useScrollReveal() {
   return ref;
 }
 
-interface BestSellerSliderProps {
-  bestSellers: any[];
-  locale: Locale;
-  currSymbol: string;
-  getPrice: (price: string) => number;
-  getRegPrice: (price: string | undefined) => number | null;
-}
-
-function BestSellerSlider({ bestSellers, locale, currSymbol, getPrice, getRegPrice }: BestSellerSliderProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-  const isRTL = locale === 'ar';
-
-  const checkScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const absScroll = Math.abs(el.scrollLeft);
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    setCanScrollPrev(absScroll > 4);
-    setCanScrollNext(absScroll < maxScroll - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    checkScroll();
-    el.addEventListener('scroll', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    return () => {
-      el.removeEventListener('scroll', checkScroll);
-      window.removeEventListener('resize', checkScroll);
-    };
-  }, [checkScroll]);
-
-  const scroll = (direction: 'prev' | 'next') => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const amount = el.clientWidth * 0.7;
-    const scrollAmount = direction === 'prev' ? -amount : amount;
-    el.scrollBy({ left: isRTL ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-  };
-
-  return (
-    <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-14 max-md:pt-8">
-      {/* Section header: centered title with inline arrows (makeup.ae style) */}
-      <div className="flex items-center justify-center mb-8 max-md:mb-5 gap-4">
-        <h2 className="text-xl max-md:text-base font-normal text-[#191919] text-center italic">
-          {t(locale, 'bestsellers.title_1')} {t(locale, 'bestsellers.title_2')}
-        </h2>
-        <div className="hidden md:flex items-center gap-1.5">
-          <button
-            onClick={() => scroll('prev')}
-            disabled={!canScrollPrev}
-            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
-            aria-label="Previous"
-          >
-            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6-6m-6 6l6 6" /></svg>
-          </button>
-          <button
-            onClick={() => scroll('next')}
-            disabled={!canScrollNext}
-            className="w-8 h-8 flex items-center justify-center text-[#191919] disabled:text-[#ccc] hover:text-[#666] transition-colors"
-            aria-label="Next"
-          >
-            <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Desktop Slider */}
-      <div className="hidden md:block relative">
-        <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth pb-2"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-        >
-          {bestSellers.slice(0, 8).map((p: any) => (
-            <div key={p.id} className="shrink-0 w-[calc(25%-15px)]" style={{ scrollSnapAlign: 'start' }}>
-              <ProductCard
-                slug={p.slug}
-                name={p.name}
-                price={getPrice(p.price)}
-                regularPrice={getRegPrice(p.regular_price)}
-                imageSrc={p.images?.[0]?.src}
-                categoryName={p.categories?.[0]?.name}
-                onSale={p.on_sale}
-                featured={p.featured}
-                currency={currSymbol}
-                productId={p.id}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile Grid */}
-      <div className="md:hidden grid grid-cols-2 gap-3">
-        {bestSellers.slice(0, 8).map((p: any) => (
-          <ProductCard
-            key={p.id}
-            slug={p.slug}
-            name={p.name}
-            price={getPrice(p.price)}
-            regularPrice={getRegPrice(p.regular_price)}
-            imageSrc={p.images?.[0]?.src}
-            categoryName={p.categories?.[0]?.name}
-            onSale={p.on_sale}
-            featured={p.featured}
-            currency={currSymbol}
-            productId={p.id}
-          />
-        ))}
-      </div>
-
-      <div className="text-center mt-6 md:hidden">
-        <Link href="/shop" className="inline-flex items-center gap-2 text-[#191919] font-medium text-sm hover:text-[#666] transition-colors">
-          {t(locale, 'bestsellers.view_all')}
-          <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
-        </Link>
-      </div>
-    </section>
-  );
-}
+// Abstracted ProductSlider logic moved to elements...
 
 export default function HomeContent({ currency, topCategories, bestSellers, newArrivals }: HomeContentProps) {
   const locale = useLocaleStore((s) => s.locale);
   const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
-  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const currSymbol = getSymbol();
   const wrapRef = useScrollReveal();
 
   const getPrice = (price: string) => {
@@ -174,112 +52,103 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
   return (
     <div ref={wrapRef}>
-      {/* Hero Banner — Clean full-width image banner like makeup.ae */}
-      <section className="relative overflow-hidden bg-white">
-        <Link href="/shop" className="block">
-          <div className="relative w-full" style={{ aspectRatio: '3/1' }}>
-            <img
-              src="/hero-perfume.png"
-              alt={t(locale, 'hero.title_1')}
-              className="w-full h-full object-cover"
-            />
+      {/* Hero Banner */}
+      <section className="relative h-[60vh] min-h-[400px] max-md:h-[55vh] overflow-hidden bg-[#742938]">
+        <div className="absolute inset-0 opacity-60">
+          <img src="/hero-perfume.png" alt={t(locale, 'hero.title_1')} className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#742938]/80" />
+        <div className="relative h-full max-w-7xl mx-auto px-5 flex flex-col items-center justify-center text-center">
+          <span className="text-[#D4AFB9] text-[10px] max-md:text-[9px] font-semibold tracking-[0.3em] uppercase mb-3 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            {t(locale, 'hero.subtitle') || 'The Art of Fragrance'}
+          </span>
+          <h1 className="text-4xl md:text-7xl lg:text-8xl text-white font-serif mb-4 max-md:mb-3 max-w-4xl leading-[1.1] animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            {t(locale, 'hero.title_1')} <span className="italic opacity-90">{t(locale, 'hero.title_highlight')}</span>
+          </h1>
+          <p className="text-[#F9F7F2]/80 text-sm md:text-xl font-light max-w-2xl mb-6 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300 max-md:hidden">
+            {t(locale, 'hero.description') || 'Discover our exclusive collection of premium Arabic perfumes.'}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-500">
+            <Link href="/shop" className="bg-[#D4AFB9] text-white px-8 py-3 max-md:px-6 max-md:py-3 text-xs font-semibold tracking-widest uppercase hover:bg-[#A6803F] transition-all">
+              {t(locale, 'nav.shop_now')}
+            </Link>
+            <Link href="/about" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-3 max-md:px-6 max-md:py-3 text-xs font-semibold tracking-widest uppercase hover:bg-white/20 transition-all max-md:hidden">
+              {t(locale, 'footer.about_us')}
+            </Link>
           </div>
-        </Link>
+        </div>
       </section>
 
       {/* Categories */}
       {topCategories.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-14 max-md:pt-8">
+        <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-10 max-md:py-5">
           <CategorySlider categories={topCategories} />
         </section>
       )}
 
-      {/* Best Selling Fragrances — Desktop Slider */}
+      {/* Best Selling Fragrances */}
       {bestSellers.length > 0 && (
-        <BestSellerSlider
-          bestSellers={bestSellers}
-          locale={locale}
-          currSymbol={currSymbol}
-          getPrice={getPrice}
-          getRegPrice={getRegPrice}
-        />
+        <div className="bg-white py-10 max-md:py-5">
+          <ProductSlider
+            products={bestSellers}
+            locale={locale}
+            currSymbol={currSymbol}
+            title1={t(locale, 'bestsellers.title_1')}
+            title2={t(locale, 'bestsellers.title_2')}
+            viewAllLink="/shop"
+            viewAllText={t(locale, 'bestsellers.view_all')}
+          />
+        </div>
       )}
 
-      {/* Oud Collection Feature Banner — clean minimal style */}
-      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-14 max-md:pt-8">
-        <div className="relative overflow-hidden bg-[#f7f7f7]">
-          <div className="relative grid grid-cols-1 md:grid-cols-2 items-center">
-            <div className="p-10 max-md:p-6">
-              <span className="text-[#999] text-[10px] font-bold tracking-[0.15em] uppercase mb-3 block">{t(locale, 'oud.label')}</span>
-              <h2 className="text-2xl max-md:text-xl font-bold text-[#191919] mb-3 leading-tight">
-                {t(locale, 'oud.title_1')} {t(locale, 'oud.title_2')}
-              </h2>
-              <p className="text-[#666] text-sm leading-relaxed mb-6 font-light max-w-md">
-                {t(locale, 'oud.description')}
-              </p>
-              <Link
-                href="/shop?category=oud-collection"
-                className="inline-flex items-center bg-[#191919] text-white font-semibold text-sm px-6 py-3 hover:bg-[#333] transition-colors"
-              >
-                {t(locale, 'oud.cta')}
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center justify-center p-8">
-              {bestSellers.filter((p: any) => p.categories?.some((c: any) => c.slug === 'oud-collection')).slice(0, 1).map((p: any) => (
-                <Link key={p.id} href={`/product/${p.slug}`} className="group">
-                  <div className="w-72 h-72 overflow-hidden">
-                    <img src={p.images?.[0]?.src} alt={p.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
-                  </div>
-                </Link>
-              ))}
-            </div>
+      {/* Oud Collection Feature Banner */}
+      <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-10 max-md:py-5">
+        <div className="relative overflow-hidden bg-[#742938] flex flex-col md:flex-row items-center group">
+          {/* Image first on mobile */}
+          <div className="w-full md:w-1/2 h-[220px] md:h-[500px] overflow-hidden order-1 md:order-2">
+            <img src="/novalis-brand-story.png" alt="Oud Collection" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
+          </div>
+          <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-20 order-2 md:order-1">
+            <span className="text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 block">{t(locale, 'oud.label')}</span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif text-white mb-3 leading-tight">
+              {t(locale, 'oud.title_1')} <span className="italic">{t(locale, 'oud.title_2')}</span>
+            </h2>
+            <p className="text-[#F9F7F2]/60 text-sm leading-relaxed mb-5 font-light max-w-md">{t(locale, 'oud.description')}</p>
+            <Link href="/shop?category=oud-collection" className="inline-flex items-center gap-3 text-[#D4AFB9] font-semibold text-xs tracking-widest uppercase hover:gap-5 transition-all duration-300">
+              {t(locale, 'oud.cta')}
+              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-14 max-md:pt-8">
-          <div className="flex items-center justify-center mb-8 max-md:mb-5">
-            <h2 className="text-xl max-md:text-base font-normal text-[#191919] text-center italic">
-              {t(locale, 'arrivals.title_1')} {t(locale, 'arrivals.title_2')}
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-md:gap-2.5">
-            {newArrivals.slice(0, 8).map((p: any) => (
-              <ProductCard
-                key={p.id}
-                slug={p.slug}
-                name={p.name}
-                price={getPrice(p.price)}
-                regularPrice={getRegPrice(p.regular_price)}
-                imageSrc={p.images?.[0]?.src}
-                categoryName={p.categories?.[0]?.name}
-                onSale={p.on_sale}
-                featured={p.featured}
-                currency={currSymbol}
-                productId={p.id}
-              />
-            ))}
-          </div>
-        </section>
+        <div className="bg-[#F9F7F2] py-10 max-md:py-5">
+          <ProductSlider
+            products={newArrivals.slice(0, 10)}
+            locale={locale}
+            currSymbol={currSymbol}
+            title1={t(locale, 'arrivals.title_1')}
+            title2={t(locale, 'arrivals.title_2')}
+            viewAllLink="/shop"
+            viewAllText={t(locale, 'nav.shop_now')}
+          />
+        </div>
       )}
 
-      {/* Brand Story — clean light section */}
-      <section className="fade-up mt-14 max-md:mt-8">
-        <div className="bg-[#f7f7f7]">
-          <div className="max-w-3xl mx-auto px-6 max-md:px-4 py-16 max-md:py-10 text-center">
-            <span className="text-[#999] text-[10px] font-bold tracking-[0.15em] uppercase mb-3 block">{t(locale, 'brand.label')}</span>
-            <h2 className="text-2xl max-md:text-lg font-bold text-[#191919] mb-3 leading-tight">
-              {t(locale, 'brand.title_1')} {t(locale, 'brand.title_2')}
+      {/* Brand Story */}
+      <section className="fade-up mt-6 max-md:mt-3">
+        <div className="bg-[#742938]">
+          <div className="max-w-3xl mx-auto px-5 max-md:px-4 py-10 max-md:py-8 text-center">
+            <span className="text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 block">{t(locale, 'brand.label')}</span>
+            <h2 className="text-3xl max-md:text-xl font-serif text-white mb-3 leading-tight">
+              {t(locale, 'brand.title_1')} <span className="italic text-[#D4AFB9]">{t(locale, 'brand.title_2')}</span>
             </h2>
-            <p className="text-[#666] text-sm leading-relaxed max-w-2xl mx-auto font-light mb-6">
+            <p className="text-[#F9F7F2]/60 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto font-light mb-6 max-md:hidden">
               {t(locale, 'brand.description')}
             </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center bg-[#191919] text-white font-semibold text-sm px-8 py-3 hover:bg-[#333] transition-colors"
-            >
+            <Link href="/about" className="inline-flex items-center text-[#D4AFB9] border border-[#D4AFB9] font-semibold text-xs tracking-widest uppercase px-8 py-3 hover:bg-[#D4AFB9] hover:text-[#121212] transition-colors">
               {t(locale, 'brand.cta')}
             </Link>
           </div>
@@ -287,27 +156,25 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
       </section>
 
       {/* FAQ Section */}
-      <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 pt-14 max-md:pt-8 pb-14 max-md:pb-24">
-        <div className="flex items-center justify-center mb-8 max-md:mb-5">
-          <h2 className="text-xl max-md:text-base font-normal text-[#191919] text-center italic">
-            {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
-          </h2>
-        </div>
-        <div className="max-w-full space-y-2">
+      <section className="fade-up max-w-5xl mx-auto px-4 max-md:px-4 pt-8 max-md:pt-6 pb-6 max-md:pb-24">
+        <h2 className="text-2xl max-md:text-lg font-serif text-[#121212] text-center italic mb-6 max-md:mb-4">
+          {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
+        </h2>
+        <div className="grid gap-0">
           {[
             { q: t(locale, 'faq.q1'), a: t(locale, 'faq.a1') },
             { q: t(locale, 'faq.q2'), a: t(locale, 'faq.a2') },
             { q: t(locale, 'faq.q3'), a: t(locale, 'faq.a3') },
             { q: t(locale, 'faq.q4'), a: t(locale, 'faq.a4') },
           ].map((item) => (
-            <details key={item.q} className="bg-white border border-[#e8e8e8] group">
-              <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-[#191919] hover:bg-[#f5f5f5] transition-colors">
+            <details key={item.q} className="bg-transparent border-b border-[#E8E4DE] group">
+              <summary className="flex items-center justify-between py-3.5 cursor-pointer text-sm font-semibold tracking-wide text-[#121212] hover:text-[#742938] transition-colors">
                 {item.q}
-                <svg className="w-4 h-4 text-[#999] shrink-0 ms-3 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <svg className="w-4 h-4 text-[#D4AFB9] shrink-0 ms-3 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
-              <p className="px-5 pb-4 text-sm text-[#666] leading-relaxed font-light">{item.a}</p>
+              <p className="pb-4 text-sm text-[#888888] leading-relaxed font-light pe-6">{item.a}</p>
             </details>
           ))}
         </div>

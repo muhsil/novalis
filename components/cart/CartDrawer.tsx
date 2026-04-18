@@ -44,7 +44,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
         
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#f0f0f0]">
-          <h2 className="font-serif text-lg text-[#191919]">Your Cart <span className="text-[#C9A96E] font-light">({items.length})</span></h2>
+          <h2 className="font-serif text-lg text-[#191919]">Your Cart <span className="text-[#D4AFB9] font-light">({items.length})</span></h2>
           <button onClick={onClose} className="p-2 hover:bg-[#f5f5f5] transition-colors">
             <svg className="w-5 h-5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -58,10 +58,10 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             {remaining > 0 ? (
               <>
                 <p className="text-xs text-[#666] font-light mb-2">
-                  Add <span className="font-semibold text-[#C9A96E]">{currSymbol} {remaining.toFixed(0)}</span> more for free delivery
+                  Add <span className="font-semibold text-[#D4AFB9]">{currSymbol} {remaining.toFixed(0)}</span> more for free delivery
                 </p>
                 <div className="w-full h-1.5 bg-[#e8e4dc] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#C9A96E] rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
+                  <div className="h-full bg-[#D4AFB9] rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
                 </div>
               </>
             ) : (
@@ -84,7 +84,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
               </div>
               <p className="text-[#666] font-light text-sm mb-1">Your cart is empty</p>
               <p className="text-[#bbb] text-xs font-light mb-4">Discover our luxury fragrances</p>
-              <button onClick={onClose} className="text-[#C9A96E] font-semibold text-xs tracking-[0.1em] uppercase hover:underline">
+              <button onClick={onClose} className="text-[#D4AFB9] font-semibold text-xs tracking-[0.1em] uppercase hover:underline">
                 Continue Shopping
               </button>
             </div>
@@ -113,7 +113,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
               <span className="text-lg font-medium text-[#191919]">{currSymbol} {subtotal.toFixed(0)}</span>
             </div>
             <Link href="/checkout" onClick={onClose}
-              className="block w-full text-center bg-[#C9A96E] text-white text-xs font-semibold tracking-[0.15em] uppercase py-3.5 hover:bg-[#B8985D] transition-colors">
+              className="block w-full text-center bg-[#D4AFB9] text-white text-xs font-semibold tracking-[0.15em] uppercase py-3.5 hover:bg-[#B8985D] transition-colors">
               Proceed to Checkout
             </Link>
             <button onClick={onClose}

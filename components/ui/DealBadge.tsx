@@ -6,9 +6,9 @@ interface DealBadgeProps {
 }
 
 const VARIANT_CLASSES: Record<string, string> = {
-  red: 'bg-[#C9A96E] text-white',
-  orange: 'bg-[#FF6D00] text-white',
-  green: 'bg-[#00B578] text-white',
+  red: 'bg-[#F9F7F2] text-[#8B0000] border border-[#E8E4DE]',
+  orange: 'bg-[#F9F7F2] text-[#A6803F] border border-[#E8E4DE]',
+  green: 'bg-[#F9F7F2] text-[#D4AFB9] border border-[#E8E4DE]',
 };
 
 export default function DealBadge({ text, variant = 'red' }: DealBadgeProps) {

@@ -92,9 +92,9 @@ function StatusTimeline({ current }: { current: string }) {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
                   isActive
-                    ? 'bg-[#C9A96E] border-[#C9A96E] text-white'
+                    ? 'bg-[#D4AFB9] border-[#D4AFB9] text-white'
                     : 'bg-white border-gray-200 text-gray-400'
-                } ${isCurrent ? 'ring-2 ring-[#C9A96E]/30' : ''}`}
+                } ${isCurrent ? 'ring-2 ring-[#D4AFB9]/30' : ''}`}
               >
                 {isActive ? <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg> : idx + 1}
               </div>
@@ -103,7 +103,7 @@ function StatusTimeline({ current }: { current: string }) {
               </span>
             </div>
             {idx < STATUS_STEPS.length - 1 && (
-              <div className={`h-0.5 flex-1 mt-[-16px] ${!isCancelled && idx < currentIdx ? 'bg-[#C9A96E]' : 'bg-gray-200'}`} />
+              <div className={`h-0.5 flex-1 mt-[-16px] ${!isCancelled && idx < currentIdx ? 'bg-[#D4AFB9]' : 'bg-gray-200'}`} />
             )}
           </React.Fragment>
         );
@@ -150,7 +150,7 @@ export default function OrderDetailPage() {
       <AccountLayout title="Order Details">
         <div className="text-center py-12">
           <p className="text-[#999] text-sm">{error || 'Order not found'}</p>
-          <Link href="/account/orders" className="text-[#C9A96E] text-sm font-semibold mt-2 inline-block">
+          <Link href="/account/orders" className="text-[#D4AFB9] text-sm font-semibold mt-2 inline-block">
             Back to Orders
           </Link>
         </div>
@@ -167,7 +167,7 @@ export default function OrderDetailPage() {
     <AccountLayout title={`Order #${order.id}`}>
       <div className="space-y-4">
         {/* Back link */}
-        <Link href="/account/orders" className="inline-flex items-center gap-1 text-sm text-[#999] hover:text-[#C9A96E] transition-colors">
+        <Link href="/account/orders" className="inline-flex items-center gap-1 text-sm text-[#999] hover:text-[#D4AFB9] transition-colors">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
@@ -195,7 +195,7 @@ export default function OrderDetailPage() {
         {(deliveryDate || deliveryTime) && (
           <div className="bg-white rounded-xl border border-gray-100 p-4">
             <h3 className="text-sm font-bold text-[#191919] mb-2 flex items-center gap-2">
-              <svg className="w-4 h-4 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg> Delivery Schedule
+              <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg> Delivery Schedule
             </h3>
             <div className="flex gap-4 text-sm text-[#666]">
               {deliveryDate && (
@@ -217,7 +217,7 @@ export default function OrderDetailPage() {
         {/* Line Items */}
         <div className="bg-white rounded-xl border border-gray-100 p-4">
           <h3 className="text-sm font-bold text-[#191919] mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg> Items ({order.line_items.length})
+            <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg> Items ({order.line_items.length})
           </h3>
           <div className="divide-y divide-gray-50">
             {order.line_items.map((item) => (
@@ -266,7 +266,7 @@ export default function OrderDetailPage() {
         {/* Shipping Address */}
         <div className="bg-white rounded-xl border border-gray-100 p-4">
           <h3 className="text-sm font-bold text-[#191919] mb-2 flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg> Shipping Address
+            <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg> Shipping Address
           </h3>
           <div className="text-sm text-[#666] space-y-0.5">
             <p className="font-medium text-[#333]">{order.shipping.first_name} {order.shipping.last_name}</p>
@@ -279,7 +279,7 @@ export default function OrderDetailPage() {
         {/* Payment Info */}
         <div className="bg-white rounded-xl border border-gray-100 p-4">
           <h3 className="text-sm font-bold text-[#191919] mb-2 flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg> Payment
+            <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg> Payment
           </h3>
           <div className="text-sm text-[#666] space-y-1">
             <div className="flex justify-between">
@@ -299,7 +299,7 @@ export default function OrderDetailPage() {
         {order.customer_note && (
           <div className="bg-white rounded-xl border border-gray-100 p-4">
             <h3 className="text-sm font-bold text-[#191919] mb-2 flex items-center gap-2">
-              <svg className="w-4 h-4 text-[#C9A96E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg> Order Notes
+              <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg> Order Notes
             </h3>
             <p className="text-sm text-[#666]">{order.customer_note}</p>
           </div>

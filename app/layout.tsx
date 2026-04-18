@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { OrganizationJsonLd, WebSiteJsonLd, LocalBusinessJsonLd } from '@/components/seo/JsonLd';
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics';
@@ -7,13 +6,6 @@ import { GoogleTagManagerScript, GoogleTagManagerNoScript } from '@/components/s
 import StoreSettingsProvider from '@/components/providers/StoreSettingsProvider';
 import LocaleHydrator from '@/components/providers/LocaleHydrator';
 import { getStoreSettings } from '@/lib/store-settings';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
 
 const SITE_URL = 'https://shapehive.in';
 
@@ -101,8 +93,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const settings = await getStoreSettings();
 
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">
+    <html lang="en">
+      <body className="antialiased">
         <GoogleTagManagerNoScript />
         <GoogleTagManagerScript />
         <GoogleAnalytics />

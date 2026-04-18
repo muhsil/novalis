@@ -66,7 +66,7 @@ export default function PhoneInput({
                     setDropdownOpen(false);
                   }}
                   className={`w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                    c.code === countryCode ? 'bg-[#FAF6F0] text-[#C9A96E]' : 'text-gray-700'
+                    c.code === countryCode ? 'bg-[#FAF6F0] text-[#D4AFB9]' : 'text-gray-700'
                   }`}
                 >
                   <span>{c.flag}</span>

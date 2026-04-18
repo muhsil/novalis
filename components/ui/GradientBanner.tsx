@@ -54,7 +54,7 @@ export default function GradientBanner({
                 const className =
                   action.variant === 'outline'
                     ? 'border-2 border-white text-white font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-full hover:bg-white/10 transition-all hover:-translate-y-1 max-md:text-sm'
-                    : 'bg-[#C9A96E] text-white font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-none hover:bg-[#B8985D] transition-all hover:-translate-y-1 max-md:text-sm tracking-wide uppercase';
+                    : 'bg-[#D4AFB9] text-white font-bold py-4 px-8 max-md:py-3 max-md:px-6 rounded-none hover:bg-[#B8985D] transition-all hover:-translate-y-1 max-md:text-sm tracking-wide uppercase';
 
                 if (action.external) {
                   return (
