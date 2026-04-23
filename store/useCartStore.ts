@@ -13,24 +13,18 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
-  deliveryDate: string | null;
-  deliveryTime: string | null;
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
-  setDelivery: (date: string, time: string) => void;
   clearCart: () => void;
 }
 
-// Legacy localStorage keys from previous rebrands
 const LEGACY_CART_KEYS = ['shapehive-cart', 'balloonsmall-cart'];
 
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       items: [],
-      deliveryDate: null,
-      deliveryTime: null,
       addToCart: (item) => set((state) => {
         const existing = state.items.find((i) => i.id === item.id);
         if (existing) {
@@ -48,8 +42,7 @@ export const useCartStore = create<CartState>()(
           ? state.items.filter((i) => i.id !== id)
           : state.items.map((i) => i.id === id ? { ...i, quantity } : i)
       })),
-      setDelivery: (date, time) => set({ deliveryDate: date, deliveryTime: time }),
-      clearCart: () => set({ items: [], deliveryDate: null, deliveryTime: null }),
+      clearCart: () => set({ items: [] }),
     }),
     {
       name: 'novalis-cart',

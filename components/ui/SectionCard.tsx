@@ -5,22 +5,31 @@ import React from 'react';
 interface SectionCardProps {
   icon?: string;
   title: string;
+  subtitle?: string;
+  step?: number;
   children: React.ReactNode;
   className?: string;
 }
 
-export default function SectionCard({ icon, title, children, className = '' }: SectionCardProps) {
+export default function SectionCard({ icon, title, subtitle, step, children, className = '' }: SectionCardProps) {
   return (
-    <div className={`bg-white p-5 max-md:p-4 rounded-xl border border-gray-100 ${className}`}>
-      <div className="flex items-center gap-2 mb-4 max-md:mb-3">
-        {icon && (
-          <div className="w-8 h-8 bg-[#FAF6F0] text-[#D4AFB9] rounded-lg flex items-center justify-center text-base font-bold">
+    <div className={`bg-white border border-[#E8E4DE] ${className}`}>
+      <div className="flex items-start gap-3 px-6 py-4 max-md:px-4 max-md:py-3 border-b border-[#E8E4DE]">
+        {step !== undefined ? (
+          <div className="w-8 h-8 bg-[#742938] text-white rounded-full flex items-center justify-center text-xs font-semibold shrink-0">
+            {String(step).padStart(2, '0')}
+          </div>
+        ) : icon ? (
+          <div className="w-8 h-8 bg-[#F9F7F2] text-[#742938] rounded-full flex items-center justify-center text-sm shrink-0">
             {icon}
           </div>
-        )}
-        <h3 className="text-base max-md:text-sm font-bold text-gray-900">{title}</h3>
+        ) : null}
+        <div className="flex-1">
+          <h3 className="text-base font-serif text-[#121212]">{title}</h3>
+          {subtitle && <p className="text-[11px] text-[#121212]/50 font-light mt-0.5">{subtitle}</p>}
+        </div>
       </div>
-      {children}
+      <div className="px-6 py-5 max-md:px-4 max-md:py-4">{children}</div>
     </div>
   );
 }

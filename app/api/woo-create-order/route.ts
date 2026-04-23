@@ -4,8 +4,7 @@ import axios from 'axios';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
-    // Construct the payload for WooCommerce
+
     const orderData: Record<string, unknown> = {
       payment_method: body.paymentMethod,
       payment_method_title: body.paymentMethodTitle,
@@ -17,14 +16,8 @@ export async function POST(req: Request) {
         product_id: item.productId || item.id,
         ...(item.productId ? { variation_id: item.id } : {}),
         quantity: item.quantity,
-        meta_data: item.variant ? [
-          { key: 'Variation', value: item.variant }
-        ] : []
+        meta_data: item.variant ? [{ key: 'Variation', value: item.variant }] : [],
       })),
-      meta_data: [
-        { key: 'delivery_date', value: body.deliveryDate },
-        { key: 'delivery_time', value: body.deliveryTime }
-      ],
     };
 
     if (body.customerNote) {
@@ -42,13 +35,12 @@ export async function POST(req: Request) {
       {
         auth: {
           username: process.env.WC_CONSUMER_KEY!,
-          password: process.env.WC_CONSUMER_SECRET!
-        }
+          password: process.env.WC_CONSUMER_SECRET!,
+        },
       }
     );
 
     return NextResponse.json({ success: true, orderId: response.data.id }, { status: 201 });
-
   } catch (error) {
     console.error('Order creation failed:', error);
     return NextResponse.json({ error: 'Failed to create order' }, { status: 500 });
