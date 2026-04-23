@@ -33,7 +33,7 @@ export default function CurrencySwitcher({ variant = 'compact' }: CurrencySwitch
             ? 'flex items-center gap-2 px-3 py-2 hover:bg-[#FAF6F0] transition-colors text-sm font-serif font-medium text-[#121212]'
             : variant === 'dark'
               ? 'flex items-center gap-1 px-2 py-1 hover:text-[#D4AFB9] transition-colors text-[10px] uppercase font-bold text-white/70'
-              : 'flex items-center gap-1 px-2 py-1.5 transition-colors text-[10px] uppercase font-bold text-[#F9F7F2] hover:text-[#D4AFB9]'
+              : 'flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#f8f8f8] transition-colors text-[10px] uppercase font-bold text-[#555] hover:text-[#742938] border border-[#eee]'
         }
       >
         <span>{current.code}</span>

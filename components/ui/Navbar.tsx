@@ -56,18 +56,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Announcement Bar - not sticky */}
-      <div className="bg-[#742938] hidden md:block border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-end gap-6 text-[10px] text-[#F9F7F2] tracking-[0.15em] uppercase font-medium">
-          <Link href="/about" className="hover:text-[#D4AFB9] transition-colors">{t(locale, 'footer.about_us')}</Link>
-          <div className="w-[1px] h-3 bg-white/20" />
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher variant="compact" />
-            <CurrencySwitcher variant="compact" />
-          </div>
-        </div>
-      </div>
-
       {/* Main Header - sticky */}
       <header className={`sticky top-0 z-50 bg-white/95 backdrop-blur-lg transition-all duration-500 ${scrolled ? 'shadow-md' : 'border-b border-[#E8E4DE]/20'}`}>
 
@@ -98,6 +86,10 @@ export default function Navbar() {
 
               {/* Right: Icons */}
               <div className="flex items-center gap-1 flex-1 justify-end">
+                <div className="hidden md:flex items-center gap-2 me-2 border-e border-[#E8E4DE]/60 pe-3">
+                  <LanguageSwitcher variant="compact" />
+                  <CurrencySwitcher variant="compact" />
+                </div>
                 <Link href={isLoggedIn ? '/account' : '/account/login'} className="hidden md:flex p-2.5 hover:bg-[#F9F7F2] rounded-full transition-colors group" title={t(locale, 'nav.account')}>
                   <svg className="w-5 h-5 text-[#121212] group-hover:text-[#D4AFB9] transition-colors" fill={isLoggedIn ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import React from 'react';
+import { PageHero, SectionHeader, IconCard, ChipList } from '@/components/ui/page';
 import { getStoreSettings } from '@/lib/store-settings';
 
 export const metadata: Metadata = {
@@ -9,79 +8,126 @@ export const metadata: Metadata = {
   alternates: { canonical: '/shipping' },
 };
 
-const DELIVERY_ICONS: Record<string, React.ReactNode> = {
-  'same-day': <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
-  standard: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>,
-  scheduled: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>,
-};
+const BoltIcon = (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+);
+const BoxIcon = (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+);
+const GlobeIcon = (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18" /></svg>
+);
 
-function getDeliveryOptions(currency: string) {
-  return [
-    { key: 'same-day', title: 'UAE Express Delivery', description: 'Express shipping within 2-4 business days inside the UAE.', price: `Free on orders over ${currency} 100` },
-    { key: 'standard', title: 'GCC Delivery', description: 'Delivery to Saudi Arabia, Kuwait, Qatar, Bahrain, and Oman within 5-10 business days.', price: 'Calculated at checkout' },
-    { key: 'scheduled', title: 'International Shipping', description: 'Select international destinations. Contact us for availability.', price: 'Calculated at checkout' },
-  ];
-}
+const STEPS = [
+  { step: '01', title: 'Order placed', description: 'You place your order online with secure Ziina payment.' },
+  { step: '02', title: 'Packaged with care', description: 'Each fragrance is hand-packed in our Dubai workshop.' },
+  { step: '03', title: 'On its way', description: 'Dispatched within 24 hours on business days.' },
+  { step: '04', title: 'Enjoy', description: 'Delivered to your door. Unbox and experience your scent.' },
+];
 
-const DELIVERY_AREAS = [
-  'Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman',
-  'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain',
-  'Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman',
+const AREAS = [
+  { group: 'UAE Emirates', items: ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain'] },
+  { group: 'GCC Countries', items: ['Saudi Arabia', 'Kuwait', 'Qatar', 'Bahrain', 'Oman'] },
 ];
 
 export default async function ShippingPage() {
-  const settings = await getStoreSettings();
-  const { currency } = settings;
+  const { currency } = await getStoreSettings();
+
+  const options = [
+    { key: 'express', title: 'UAE Express Delivery', badge: '2-4 days', description: 'Express shipping inside the UAE, including all seven emirates.', price: `Free on orders over ${currency} 100`, isFree: true, accent: '#742938', icon: BoltIcon },
+    { key: 'gcc', title: 'GCC Delivery', badge: '5-10 days', description: 'Delivery to Saudi Arabia, Kuwait, Qatar, Bahrain, and Oman.', price: 'Calculated at checkout', isFree: false, accent: '#8a3648', icon: BoxIcon },
+    { key: 'intl', title: 'International Shipping', badge: 'On request', description: 'Select international destinations worldwide. Contact us for availability.', price: 'Calculated at checkout', isFree: false, accent: '#D4AFB9', icon: GlobeIcon },
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
-      <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
-        <span>&gt;</span>
-        <span className="text-[#191919] font-medium">Shipping &amp; Delivery</span>
-      </nav>
-
-      <h1 className="text-2xl max-md:text-xl font-bold text-[#191919] mb-6">Shipping &amp; Delivery</h1>
+    <div className="min-h-screen bg-[#FCFAF7]">
+      <PageHero
+        breadcrumb="Shipping"
+        eyebrow="Fast · Tracked · Secure"
+        title={<>Shipping &amp; <span className="italic text-[#D4AFB9]">Delivery</span></>}
+        subtitle="We deliver across the UAE and all GCC countries with express service from our Dubai workshop."
+        patternOrigin="70% 30%"
+      />
 
       {/* Delivery Options */}
-      <div className="space-y-3 mb-6">
-        {getDeliveryOptions(currency).map((opt) => (
-          <div key={opt.title} className="bg-white rounded-lg border border-[#f0f0f0] p-4 flex gap-3">
-            <span className="text-[#D4AFB9] shrink-0">{DELIVERY_ICONS[opt.key]}</span>
-            <div className="flex-1">
-              <h2 className="text-sm font-bold text-[#191919]">{opt.title}</h2>
-              <p className="text-xs text-[#666] mt-1">{opt.description}</p>
-              <span className={`text-xs font-medium mt-1 inline-block ${opt.price.includes('Free') ? 'text-[#00B578]' : 'text-[#666]'}`}>{opt.price}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <section className="max-w-6xl mx-auto px-6 -mt-10 max-md:-mt-8 relative z-10 mb-12 max-md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-md:gap-3">
+          {options.map((opt) => (
+            <IconCard key={opt.key} icon={opt.icon} title={opt.title} description={opt.description} accent={opt.accent} badge={opt.badge}>
+              <div className="pt-4 mt-4 border-t border-[#E8E4DE]">
+                <span className={`text-xs font-semibold tracking-[0.1em] uppercase ${opt.isFree ? 'text-[#1B4332]' : 'text-[#121212]/70'}`}>
+                  {opt.price}
+                </span>
+              </div>
+            </IconCard>
+          ))}
+        </div>
+      </section>
 
-      {/* Delivery Areas */}
-      <div className="bg-white rounded-lg border border-[#f0f0f0] p-6 max-md:p-4 mb-6">
-        <h2 className="text-lg font-bold text-[#191919] mb-3">Delivery Areas</h2>
-        <p className="text-sm text-[#666] mb-3 font-light">We ship across the UAE and all GCC countries, including:</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {DELIVERY_AREAS.map((area) => (
-            <div key={area} className="flex items-center gap-1.5 text-sm text-[#666]">
-              <span className="w-1.5 h-1.5 bg-[#D4AFB9] rounded-full shrink-0" />
-              {area}
+      {/* Delivery Process */}
+      <section className="max-w-6xl mx-auto px-6 mb-12 max-md:mb-8">
+        <SectionHeader
+          eyebrow="How it works"
+          title={<>From order to <span className="italic text-[#742938]">your door</span></>}
+          className="mb-10 max-md:mb-6"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-md:gap-3">
+          {STEPS.map((s) => (
+            <div key={s.step} className="relative bg-white border border-[#E8E4DE] p-6 max-md:p-5">
+              <span className="text-4xl font-serif italic text-[#D4AFB9]/50 leading-none">{s.step}</span>
+              <h3 className="text-base font-serif font-semibold text-[#121212] mt-3 mb-2">{s.title}</h3>
+              <p className="text-sm text-[#121212]/60 font-light leading-relaxed">{s.description}</p>
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#999] mt-3 font-light">Don&apos;t see your location? Contact us — we may deliver there too!</p>
-      </div>
+      </section>
 
-      {/* Important Notes */}
-      <div className="bg-[#FAF6F0] rounded-lg p-6 max-md:p-4">
-        <h2 className="text-lg font-bold text-[#D4AFB9] mb-3">Important Notes</h2>
-        <ul className="space-y-2 text-sm text-[#666]">
-          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Delivery times may vary during peak seasons and holidays.</li>
-          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Someone must be available to receive the delivery at the specified address.</li>
-          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> For bulk or corporate orders, please contact us for special arrangements and pricing.</li>
-          <li className="flex gap-2"><span className="text-[#D4AFB9]">•</span> Perfumes are packaged securely to prevent damage during transit.</li>
-        </ul>
-      </div>
+      {/* Areas */}
+      <section className="max-w-6xl mx-auto px-6 mb-12 max-md:mb-8">
+        <div className="bg-white border border-[#E8E4DE] p-8 max-md:p-5">
+          <SectionHeader
+            eyebrow="Coverage"
+            title={<>Delivery <span className="italic text-[#742938]">Areas</span></>}
+            className="mb-6"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {AREAS.map((group) => (
+              <div key={group.group}>
+                <h3 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#742938] mb-3">{group.group}</h3>
+                <ChipList items={group.items} />
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-[#121212]/50 mt-6 font-light text-center">
+            Don&apos;t see your location? <a href="https://wa.me/971563554303" className="text-[#742938] font-semibold hover:underline">Contact us</a> — we may deliver there too.
+          </p>
+        </div>
+      </section>
+
+      {/* Notes */}
+      <section className="max-w-6xl mx-auto px-6 pb-16 max-md:pb-10">
+        <div className="bg-[#742938] text-white p-8 max-md:p-5">
+          <div className="flex items-start gap-3 mb-4">
+            <svg className="w-6 h-6 text-[#D4AFB9] shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <span className="text-[10px] text-[#D4AFB9] font-semibold tracking-[0.3em] uppercase">Good to know</span>
+              <h2 className="text-xl md:text-2xl font-serif mt-1">Important Notes</h2>
+            </div>
+          </div>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-[#F9F7F2]/80 font-light">
+            {[
+              'Delivery times may vary during peak seasons and public holidays.',
+              'Someone must be available at the delivery address to receive the parcel.',
+              'For bulk or corporate orders, contact us for preferential rates.',
+              'All perfumes are packaged securely to prevent damage in transit.',
+            ].map((n) => (
+              <li key={n} className="flex gap-2"><span className="text-[#D4AFB9] shrink-0">•</span> {n}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }

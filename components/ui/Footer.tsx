@@ -1,7 +1,6 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { t } from '@/lib/i18n/translations';
 
@@ -27,39 +26,6 @@ const COMPANY_LINKS = [
   { labelKey: 'footer.privacy', href: '/privacy' },
 ];
 
-function NewsletterForm() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
-
-  if (submitted) {
-    return <p className="text-[#D4AFB9] text-sm font-light">Thank you for subscribing.</p>;
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex gap-0 max-w-sm">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Your email address"
-        className="flex-1 bg-[#f5f5f5] border border-[#e8e8e8] text-[#191919] text-sm px-4 py-3 placeholder:text-[#999] focus:outline-none focus:border-[#191919] transition-colors"
-        required
-      />
-      <button
-        type="submit"
-        className="bg-[#191919] text-white text-xs font-semibold px-6 py-3 hover:bg-[#333] transition-colors tracking-wide uppercase whitespace-nowrap"
-      >
-        Subscribe
-      </button>
-    </form>
-  );
-}
-
 function PaymentIcons() {
   return (
     <div className="flex items-center gap-3">
@@ -82,14 +48,7 @@ export default function Footer() {
       {/* Desktop Footer */}
       <footer className="bg-[#742938] max-md:hidden text-[#F9F7F2] py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-          {/* Newsletter Section */}
-          <div className="flex flex-col items-center text-center mb-16 px-4">
-            <h3 className="text-3xl font-serif mb-4">{t(locale, 'footer.newsletter_title') || 'Join our elite circle'}</h3>
-            <p className="text-[#F9F7F2]/60 text-sm mb-8 max-w-md mx-auto">{t(locale, 'footer.newsletter_subtitle') || 'Be the first to know about sales and new arrivals!'}</p>
-            <NewsletterForm />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-t border-[#F9F7F2]/10 pt-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pt-4">
             {/* Brand */}
             <div>
               <Link href="/" className="inline-block mb-6">
@@ -162,12 +121,6 @@ export default function Footer() {
 
       {/* Mobile Footer */}
       <footer className="md:hidden bg-[#fafafa] border-t border-[#eee] mb-14">
-        {/* Newsletter - mobile */}
-        <div className="px-4 py-5 border-b border-[#e8e8e8] text-center">
-          <h3 className="text-sm text-[#191919] font-medium mb-3">{t(locale, 'footer.newsletter_title') || 'Be the first to know about sales and new arrivals!'}</h3>
-          <NewsletterForm />
-        </div>
-
         <div className="px-4 py-5 text-center">
           <Link href="/" className="inline-flex items-center gap-1.5 mb-3">
             <img src="/novalis-logo.png" alt="Novalis" className="h-7 w-auto" />

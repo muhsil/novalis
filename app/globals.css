@@ -382,6 +382,37 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Swiper customizations ── */
+.product-thumbs .swiper-slide {
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+.product-thumbs .swiper-slide:hover { opacity: 0.85; }
+.product-thumbs .swiper-slide-thumb-active { opacity: 1; }
+.product-thumbs .swiper-slide-thumb-active .thumb-slide {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.gallery-pagination .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background: rgba(18, 18, 18, 0.25);
+  opacity: 1;
+  border-radius: 99px;
+  transition: all 0.3s ease;
+}
+.gallery-pagination .swiper-pagination-bullet-active {
+  background: var(--color-brand);
+  width: 20px;
+}
+
+/* Swiper disabled navigation arrows */
+.swiper-button-disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed;
+}
+
 @supports (padding-top: env(safe-area-inset-top)) {
   .safe-area-top { padding-top: env(safe-area-inset-top); }
 }
