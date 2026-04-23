@@ -49,7 +49,7 @@ export default function OrderSummary({ items, subtotal }: OrderSummaryProps) {
         </div>
         <div className="flex justify-between items-center pt-3 border-t border-gray-100">
           <span className="text-gray-900 font-extrabold text-base">Total</span>
-          <PriceDisplay amount={displaySubtotal} currency={currSymbol} size="xl" />
+          <PriceDisplay amount={subtotal} size="xl" />
         </div>
       </div>
 
