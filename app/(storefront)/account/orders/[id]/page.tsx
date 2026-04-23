@@ -159,8 +159,6 @@ export default function OrderDetailPage() {
   }
 
   const statusConfig = STATUS_CONFIG[order.status] || STATUS_CONFIG.pending;
-  const deliveryDate = order.meta_data.find((m) => m.key === 'delivery_date')?.value;
-  const deliveryTime = order.meta_data.find((m) => m.key === 'delivery_time')?.value;
   const paymentIntentId = order.meta_data.find((m) => m.key === 'ziina_payment_intent_id')?.value;
 
   return (
@@ -190,29 +188,6 @@ export default function OrderDetailPage() {
           </div>
           <StatusTimeline current={order.status} />
         </div>
-
-        {/* Delivery Schedule */}
-        {(deliveryDate || deliveryTime) && (
-          <div className="bg-white rounded-xl border border-gray-100 p-4">
-            <h3 className="text-sm font-bold text-[#191919] mb-2 flex items-center gap-2">
-              <svg className="w-4 h-4 text-[#D4AFB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg> Delivery Schedule
-            </h3>
-            <div className="flex gap-4 text-sm text-[#666]">
-              {deliveryDate && (
-                <div>
-                  <span className="text-xs text-[#999] block">Date</span>
-                  <span className="font-medium">{new Date(deliveryDate).toLocaleDateString('en-AE', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
-                </div>
-              )}
-              {deliveryTime && (
-                <div>
-                  <span className="text-xs text-[#999] block">Time</span>
-                  <span className="font-medium">{deliveryTime}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Line Items */}
         <div className="bg-white rounded-xl border border-gray-100 p-4">
