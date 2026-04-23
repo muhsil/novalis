@@ -3,7 +3,6 @@ import React from 'react';
 import { wooApi } from '@/lib/woocommerce';
 import { getStoreSettings } from '@/lib/store-settings';
 import Link from 'next/link';
-import ProductCard from '@/components/ui/ProductCard';
 import EmptyState from '@/components/ui/EmptyState';
 import ProductImageGallery from '@/components/ui/ProductImageGallery';
 import StickyAddToCart from '@/components/ui/StickyAddToCart';
@@ -32,14 +31,34 @@ async function getVariations(productId: number) {
   } catch { return []; }
 }
 
-async function getRelated(categoryIds: number[]) {
+async function getRelated(relatedIds: number[], categoryIds: number[], currentSlug: string) {
   try {
-    if (!categoryIds?.length) return [];
+    // Prefer WooCommerce's built-in related_ids (computed server-side)
+    if (relatedIds?.length) {
+      const { data } = await wooApi.get('/products', {
+        params: { include: relatedIds.join(','), per_page: 20, status: 'publish' },
+      });
+      const filtered = (data as any[]).filter((p) => p.slug !== currentSlug);
+      if (filtered.length >= 4) return filtered;
+    }
+
+    // Fallback 1: same category
+    if (categoryIds?.length) {
+      const { data } = await wooApi.get('/products', {
+        params: { category: categoryIds.join(','), per_page: 20, status: 'publish' },
+      });
+      const filtered = (data as any[]).filter((p) => p.slug !== currentSlug);
+      if (filtered.length) return filtered;
+    }
+
+    // Fallback 2: any latest published products
     const { data } = await wooApi.get('/products', {
-      params: { category: categoryIds[0], per_page: 6, status: 'publish' }
+      params: { per_page: 12, status: 'publish', orderby: 'popularity' },
     });
-    return data as any[];
-  } catch { return []; }
+    return (data as any[]).filter((p) => p.slug !== currentSlug);
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -98,11 +117,15 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
 
   const [variations, related, settings] = await Promise.all([
     product.type === 'variable' ? getVariations(product.id) : Promise.resolve([]),
-    getRelated(product.categories?.map((c: any) => c.id)),
+    getRelated(
+      product.related_ids || [],
+      product.categories?.map((c: any) => c.id) || [],
+      params.slug,
+    ),
     getStoreSettings(),
   ]);
   const { currency } = settings;
-  const similarProducts = related.filter((p: any) => p.slug !== params.slug).slice(0, 4);
+  const similarProducts = related.slice(0, 10);
 
   const price = parseFloat(product.price || '0');
   const regularPrice = product.regular_price ? parseFloat(product.regular_price) : null;

@@ -1,88 +1,103 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import React from 'react';
+import { PageHero, CtaBanner, ChipList } from '@/components/ui/page';
+import { WhatsAppIcon, MailIcon, PhoneIcon, InstagramIcon, ArrowIcon, ClockIcon, PinIcon } from '@/components/ui/page/icons';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with Novalis Perfumes. We\'re here to help with your fragrance orders, questions, and consultations.',
+  description: "Get in touch with Novalis Perfumes. We're here to help with your fragrance orders, questions, and consultations.",
   alternates: { canonical: '/contact' },
 };
 
-const CONTACT_ICONS: Record<string, React.ReactNode> = {
-  email: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
-  phone: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>,
-  whatsapp: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>,
-  location: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>,
-  instagram: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>,
-};
-
-const CONTACT_METHODS = [
-  { key: 'email', label: 'Email', value: 'info@novalis.ae', href: 'mailto:info@novalis.ae' },
-  { key: 'phone', label: 'Phone', value: '+971 56 355 4303', href: 'tel:+971563554303' },
-  { key: 'whatsapp', label: 'WhatsApp', value: '+971 56 355 4303', href: 'https://wa.me/971563554303' },
-  { key: 'location', label: 'Location', value: 'Dubai, Abu Dhabi, Sharjah — UAE', href: null },
-  { key: 'instagram', label: 'Instagram', value: '@novalis.ae', href: 'https://instagram.com/novalis.ae' },
+const METHODS = [
+  { key: 'whatsapp', label: 'WhatsApp', value: '+971 56 355 4303', href: 'https://wa.me/971563554303', accent: '#25D366', tagline: 'Fastest response — within minutes', icon: WhatsAppIcon },
+  { key: 'email', label: 'Email', value: 'info@novalis.ae', href: 'mailto:info@novalis.ae', accent: '#742938', tagline: 'For detailed enquiries — within 24 hours', icon: MailIcon },
+  { key: 'phone', label: 'Call us', value: '+971 56 355 4303', href: 'tel:+971563554303', accent: '#D4AFB9', tagline: 'Speak with our fragrance team', icon: PhoneIcon },
+  { key: 'instagram', label: 'Instagram', value: '@novalis.ae', href: 'https://instagram.com/novalis.ae', accent: '#E4405F', tagline: 'DMs for quick questions', icon: InstagramIcon },
 ];
 
 const HOURS = [
-  { day: 'Saturday – Thursday', time: '9:00 AM – 9:00 PM' },
-  { day: 'Friday', time: '2:00 PM – 9:00 PM' },
+  { day: 'Saturday — Thursday', time: '9:00 AM — 9:00 PM' },
+  { day: 'Friday', time: '2:00 PM — 9:00 PM' },
 ];
+
+const AREAS = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain'];
+
+function InfoCard({ icon, eyebrow, title, children }: { icon: React.ReactNode; eyebrow: string; title: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="bg-white border border-[#E8E4DE] p-8 max-md:p-5">
+      <div className="flex items-center gap-3 mb-5">
+        <div className="w-10 h-10 bg-[#F9F7F2] text-[#742938] flex items-center justify-center">{icon}</div>
+        <div>
+          <span className="text-[10px] text-[#D4AFB9] font-semibold tracking-[0.25em] uppercase">{eyebrow}</span>
+          <h2 className="text-lg font-serif text-[#121212] mt-0.5">{title}</h2>
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}
 
 export default function ContactPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5 max-md:pb-20">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-[#999] mb-6">
-        <Link href="/" className="hover:text-[#D4AFB9]">Home</Link>
-        <span>&gt;</span>
-        <span className="text-[#191919] font-medium">Contact</span>
-      </nav>
+    <div className="min-h-screen bg-[#FCFAF7]">
+      <PageHero
+        breadcrumb="Contact"
+        eyebrow="Get in touch"
+        title={<>We&apos;d Love to <span className="italic text-[#D4AFB9]">Hear from You</span></>}
+        subtitle="Whether you need fragrance advice, have a question about an order, or just want to say hello — our team is ready to help."
+      />
 
-      <div className="text-center mb-8">
-        <h1 className="text-2xl max-md:text-xl font-light text-[#191919] tracking-wide">Get in <span className="font-semibold">Touch</span></h1>
-        <p className="text-sm text-[#999] mt-2 font-light">We&apos;d love to hear from you. Reach out through any of the channels below.</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-        {CONTACT_METHODS.map((m) => (
-          <div key={m.label} className="bg-white rounded-lg border border-[#f0f0f0] p-4 flex items-start gap-3">
-            <span className="text-[#D4AFB9]">{CONTACT_ICONS[m.key]}</span>
-            <div>
-              <h3 className="text-sm font-semibold text-[#191919]">{m.label}</h3>
-              {m.href ? (
-                <a href={m.href} className="text-sm text-[#D4AFB9] hover:underline font-light" target={m.href.startsWith('http') ? '_blank' : undefined} rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                  {m.value}
-                </a>
-              ) : (
-                <p className="text-sm text-[#666] font-light">{m.value}</p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Business Hours */}
-      <div className="bg-white rounded-lg border border-[#f0f0f0] p-6 max-md:p-4 mb-6">
-        <h2 className="text-lg font-light text-[#191919] mb-3">Business <span className="font-semibold">Hours</span></h2>
-        <div className="space-y-2">
-          {HOURS.map((h) => (
-            <div key={h.day} className="flex justify-between text-sm">
-              <span className="text-[#666] font-light">{h.day}</span>
-              <span className="font-medium text-[#191919]">{h.time}</span>
-            </div>
+      <section className="max-w-6xl mx-auto px-6 -mt-10 max-md:-mt-8 relative z-10 mb-12 max-md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-md:gap-3">
+          {METHODS.map((m) => (
+            <a
+              key={m.key}
+              href={m.href}
+              target={m.href.startsWith('http') ? '_blank' : undefined}
+              rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="group bg-white border border-[#E8E4DE] p-6 max-md:p-5 hover:border-[#742938]/40 hover:shadow-md transition-all"
+            >
+              <div className="w-12 h-12 flex items-center justify-center mb-4 text-white" style={{ backgroundColor: m.accent }}>{m.icon}</div>
+              <span className="text-[10px] text-[#D4AFB9] font-semibold tracking-[0.25em] uppercase">{m.label}</span>
+              <h3 className="text-base font-serif font-semibold text-[#121212] mt-1">{m.value}</h3>
+              <p className="text-xs text-[#121212]/60 mt-2 font-light">{m.tagline}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#742938] tracking-[0.15em] uppercase group-hover:gap-2 transition-all">
+                Connect
+                {ArrowIcon}
+              </span>
+            </a>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div className="bg-[#FAF6F0] rounded-lg p-6 max-md:p-4 text-center">
-        <h2 className="text-lg font-light text-[#191919] mb-2">Need <span className="font-semibold">Help?</span></h2>
-        <p className="text-sm text-[#666] mb-4 font-light">Our team is available to assist you with any questions about our fragrances.</p>
-        <a href="https://wa.me/971563554303" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-[#D4AFB9] text-white font-semibold text-sm px-6 py-2.5 rounded-none hover:bg-[#B8985D] transition-colors tracking-wide uppercase">
-          Chat on WhatsApp
-        </a>
-      </div>
+      <section className="max-w-6xl mx-auto px-6 mb-12 max-md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-md:gap-3">
+          <InfoCard icon={ClockIcon} eyebrow="Opening hours" title={<>Business <span className="italic">Hours</span></>}>
+            <div className="divide-y divide-[#E8E4DE]">
+              {HOURS.map((h) => (
+                <div key={h.day} className="flex justify-between text-sm py-3">
+                  <span className="text-[#121212]/70 font-light">{h.day}</span>
+                  <span className="font-semibold text-[#121212]">{h.time}</span>
+                </div>
+              ))}
+            </div>
+          </InfoCard>
+          <InfoCard icon={PinIcon} eyebrow="We deliver to" title={<>All of the <span className="italic">UAE</span></>}>
+            <ChipList items={AREAS} />
+            <p className="text-xs text-[#121212]/50 mt-4 font-light">Plus all GCC destinations. International shipping available on request.</p>
+          </InfoCard>
+        </div>
+      </section>
+
+      <CtaBanner
+        eyebrow="Let's chat"
+        title={<>Need Help <span className="italic text-[#D4AFB9]">Now?</span></>}
+        subtitle="Our team is available to assist you with any questions about our fragrances."
+        buttonLabel="Chat on WhatsApp"
+        buttonHref="https://wa.me/971563554303"
+        buttonTarget="_blank"
+        buttonIcon={WhatsAppIcon}
+      />
     </div>
   );
 }

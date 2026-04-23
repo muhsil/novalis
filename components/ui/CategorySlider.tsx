@@ -1,9 +1,15 @@
 "use client";
 
 import Link from 'next/link';
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { t } from '@/lib/i18n/translations';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, FreeMode } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 interface Category {
   id: number;
@@ -28,40 +34,9 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
 
 export default function CategorySlider({ categories }: CategorySliderProps) {
   const locale = useLocaleStore((s) => s.locale);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
+  const swiperRef = useRef<SwiperType | null>(null);
   const isRTL = locale === 'ar';
-
-  const checkScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const absScroll = Math.abs(el.scrollLeft);
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    setCanScrollLeft(absScroll > 4);
-    setCanScrollRight(absScroll < maxScroll - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    checkScroll();
-    el.addEventListener('scroll', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    return () => {
-      el.removeEventListener('scroll', checkScroll);
-      window.removeEventListener('resize', checkScroll);
-    };
-  }, [checkScroll]);
-
-  const scroll = (direction: 'prev' | 'next') => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const amount = el.clientWidth * 0.7;
-    const scrollAmount = direction === 'prev' ? -amount : amount;
-    el.scrollBy({ left: isRTL ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-  };
+  const navBtnCls = "w-10 h-10 flex items-center justify-center rounded-full border border-[#121212]/10 text-[#121212] hover:border-[#D4AFB9] hover:text-[#D4AFB9] transition-all duration-300";
 
   return (
     <div className="relative group">
@@ -71,38 +46,34 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
           {t(locale, 'categories.title_1')} <span className="italic text-[#D4AFB9]">{t(locale, 'categories.title_2')}</span>
         </h2>
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => scroll('prev')}
-            disabled={!canScrollLeft}
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-[#121212]/10 text-[#121212] disabled:opacity-30 hover:border-[#D4AFB9] hover:text-[#D4AFB9] transition-all duration-300"
-            aria-label="Previous"
-          >
+          <button onClick={() => swiperRef.current?.slidePrev()} className={navBtnCls} aria-label="Previous">
             <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
           </button>
-          <button
-            onClick={() => scroll('next')}
-            disabled={!canScrollRight}
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-[#121212]/10 text-[#121212] disabled:opacity-30 hover:border-[#D4AFB9] hover:text-[#D4AFB9] transition-all duration-300"
-            aria-label="Next"
-          >
+          <button onClick={() => swiperRef.current?.slideNext()} className={navBtnCls} aria-label="Next">
             <svg className="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
           </button>
         </div>
       </div>
 
-      {/* Slider Container */}
-      <div className="relative -mx-6 px-6 max-md:-mx-4 max-md:px-4">
-        <div
-          ref={scrollRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-8"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-        >
-          {/* All Categories Card */}
-          <Link
-            href="/shop"
-            className="shrink-0 w-[200px] md:w-[calc(20%-1.2rem)] group/card block"
-            style={{ scrollSnapAlign: 'start' }}
-          >
+      <Swiper
+        modules={[A11y, FreeMode]}
+        dir={isRTL ? 'rtl' : 'ltr'}
+        key={isRTL ? 'rtl' : 'ltr'}
+        spaceBetween={16}
+        slidesPerView={2.2}
+        freeMode={{ enabled: true, momentum: true, momentumRatio: 0.6 }}
+        speed={600}
+        grabCursor
+        onSwiper={(swiper) => { swiperRef.current = swiper; }}
+        breakpoints={{
+          640: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 5, spaceBetween: 24 },
+        }}
+        className="!pb-2"
+      >
+        {/* All Categories Card */}
+        <SwiperSlide className="h-auto">
+          <Link href="/shop" className="group/card block">
             <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#742938] flex flex-col items-center justify-center hover:shadow-2xl transition-all duration-500 ring-1 ring-[#E8E4DE]/10 cursor-pointer">
               <div className="w-16 h-16 max-md:w-12 max-md:h-12 rounded-full border border-[#D4AFB9]/30 flex items-center justify-center text-[#D4AFB9] mb-6 max-md:mb-4 group-hover/card:bg-[#D4AFB9] group-hover/card:text-white transition-colors duration-500 shadow-lg">
                 <svg className="w-8 h-8 max-md:w-5 max-md:h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
@@ -111,17 +82,14 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
               <span className="text-[#F9F7F2]/40 text-[10px] mt-2 tracking-[0.2em] uppercase font-light">{t(locale, 'categories.view_all')}</span>
             </div>
           </Link>
+        </SwiperSlide>
 
-          {/* Category Cards */}
-          {categories.map((cat) => {
-            const gradientClass = CATEGORY_GRADIENTS[cat.slug] || 'from-[#742938] to-[#1A1A1A]';
-            return (
-              <Link
-                key={cat.id}
-                href={`/shop?category=${cat.slug}`}
-                className="shrink-0 w-[200px] md:w-[calc(20%-1.2rem)] group/card block cursor-pointer"
-                style={{ scrollSnapAlign: 'start' }}
-              >
+        {/* Category Cards */}
+        {categories.map((cat) => {
+          const gradientClass = CATEGORY_GRADIENTS[cat.slug] || 'from-[#742938] to-[#1A1A1A]';
+          return (
+            <SwiperSlide key={cat.id} className="h-auto">
+              <Link href={`/shop?category=${cat.slug}`} className="group/card block cursor-pointer">
                 <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#742938] ring-1 ring-[#E8E4DE]/20 hover:shadow-2xl transition-all duration-500">
                   {cat.image?.src ? (
                     <img
@@ -137,21 +105,17 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
                       </div>
                     </div>
                   )}
-
-                  {/* Overlay for contrast */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#742938] via-transparent to-transparent opacity-80 group-hover/card:opacity-90 transition-opacity duration-500" />
-
-                  {/* Label */}
                   <div className="absolute bottom-0 left-0 right-0 p-8 max-md:p-5 flex flex-col items-center translate-y-2 group-hover/card:translate-y-0 transition-transform duration-500">
                     <span className="w-6 h-[1px] bg-[#D4AFB9] mb-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 delay-100"></span>
                     <p className="text-[#F9F7F2] font-serif font-medium text-xl max-md:text-base leading-tight tracking-wider text-center drop-shadow-md">{cat.name}</p>
                   </div>
                 </div>
               </Link>
-            );
-          })}
-        </div>
-      </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 }

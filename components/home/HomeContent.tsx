@@ -52,32 +52,14 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
   return (
     <div ref={wrapRef}>
-      {/* Hero Banner */}
-      <section className="relative h-[60vh] min-h-[400px] max-md:h-[55vh] overflow-hidden bg-[#742938]">
-        <div className="absolute inset-0 opacity-60">
-          <img src="/hero-perfume.png" alt={t(locale, 'hero.title_1')} className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#742938]/80" />
-        <div className="relative h-full max-w-7xl mx-auto px-5 flex flex-col items-center justify-center text-center">
-          <span className="text-[#D4AFB9] text-[10px] max-md:text-[9px] font-semibold tracking-[0.3em] uppercase mb-3 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            {t(locale, 'hero.subtitle') || 'The Art of Fragrance'}
-          </span>
-          <h1 className="text-4xl md:text-7xl lg:text-8xl text-white font-serif mb-4 max-md:mb-3 max-w-4xl leading-[1.1] animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            {t(locale, 'hero.title_1')} <span className="italic opacity-90">{t(locale, 'hero.title_highlight')}</span>
-          </h1>
-          <p className="text-[#F9F7F2]/80 text-sm md:text-xl font-light max-w-2xl mb-6 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300 max-md:hidden">
-            {t(locale, 'hero.description') || 'Discover our exclusive collection of premium Arabic perfumes.'}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-500">
-            <Link href="/shop" className="bg-[#D4AFB9] text-white px-8 py-3 max-md:px-6 max-md:py-3 text-xs font-semibold tracking-widest uppercase hover:bg-[#A6803F] transition-all">
-              {t(locale, 'nav.shop_now')}
-            </Link>
-            <Link href="/about" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-3 max-md:px-6 max-md:py-3 text-xs font-semibold tracking-widest uppercase hover:bg-white/20 transition-all max-md:hidden">
-              {t(locale, 'footer.about_us')}
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero Banner — image only */}
+      <Link href="/shop" className="block relative w-full overflow-hidden bg-[#742938] group">
+        <img
+          src="/hero-perfume.png"
+          alt={t(locale, 'hero.title_1')}
+          className="w-full h-[60vh] min-h-[400px] max-md:h-[55vh] max-md:min-h-[300px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+        />
+      </Link>
 
       {/* Categories */}
       {topCategories.length > 0 && (
