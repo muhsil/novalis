@@ -6,8 +6,6 @@ import QuantitySelector from '@/components/ui/QuantitySelector';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 
-const FREE_DELIVERY_THRESHOLD_AED = 100;
-
 interface CartDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -15,13 +13,13 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ open, onClose }: CartDrawerProps) {
   const { items, removeFromCart, updateQuantity } = useCartStore();
-  const { currency } = useStoreSettings();
+  const { currency, freeDeliveryThreshold } = useStoreSettings();
   const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
   const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
 
   const subtotalAED = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const subtotal = selectedCurrency !== 'AED' ? convertPrice(subtotalAED) : subtotalAED;
-  const threshold = selectedCurrency !== 'AED' ? convertPrice(FREE_DELIVERY_THRESHOLD_AED) : FREE_DELIVERY_THRESHOLD_AED;
+  const threshold = selectedCurrency !== 'AED' ? convertPrice(freeDeliveryThreshold) : freeDeliveryThreshold;
   const remaining = Math.max(0, threshold - subtotal);
   const progress = Math.min(100, (subtotal / threshold) * 100);
   const qualifies = remaining <= 0 && subtotal > 0;
@@ -133,8 +131,12 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             </div>
             <p className="text-[11px] text-[#121212]/50 font-light">Taxes and final delivery fees calculated at checkout.</p>
             <Link href="/checkout" onClick={onClose}
-              className="block w-full text-center bg-[#742938] text-white text-xs font-semibold tracking-[0.25em] uppercase py-4 hover:bg-[#D4AFB9] hover:text-[#742938] transition-colors">
+              className="block w-full text-center bg-[#742938] text-white text-xs font-semibold tracking-[0.25em] uppercase py-4 hover:bg-[#5c1f2c] transition-colors">
               Proceed to Checkout
+            </Link>
+            <Link href="/cart" onClick={onClose}
+              className="block w-full text-center border border-[#742938] text-[#742938] text-xs font-semibold tracking-[0.25em] uppercase py-3 hover:bg-[#742938] hover:text-white transition-colors">
+              View Cart
             </Link>
             <button onClick={onClose}
               className="w-full text-center text-[11px] text-[#121212]/60 hover:text-[#742938] py-1 transition-colors font-light tracking-[0.15em] uppercase">

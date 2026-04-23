@@ -71,19 +71,6 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
         }}
         className="!pb-2"
       >
-        {/* All Categories Card */}
-        <SwiperSlide className="h-auto">
-          <Link href="/shop" className="group/card block">
-            <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#742938] flex flex-col items-center justify-center hover:shadow-2xl transition-all duration-500 ring-1 ring-[#E8E4DE]/10 cursor-pointer">
-              <div className="w-16 h-16 max-md:w-12 max-md:h-12 rounded-full border border-[#D4AFB9]/30 flex items-center justify-center text-[#D4AFB9] mb-6 max-md:mb-4 group-hover/card:bg-[#D4AFB9] group-hover/card:text-white transition-colors duration-500 shadow-lg">
-                <svg className="w-8 h-8 max-md:w-5 max-md:h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-              </div>
-              <span className="text-[#F9F7F2] font-serif text-lg max-md:text-sm tracking-widest">{t(locale, 'categories.all_products')}</span>
-              <span className="text-[#F9F7F2]/40 text-[10px] mt-2 tracking-[0.2em] uppercase font-light">{t(locale, 'categories.view_all')}</span>
-            </div>
-          </Link>
-        </SwiperSlide>
-
         {/* Category Cards */}
         {categories.map((cat) => {
           const gradientClass = CATEGORY_GRADIENTS[cat.slug] || 'from-[#742938] to-[#1A1A1A]';

@@ -101,7 +101,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <LocalBusinessJsonLd currency={settings.currency} />
-        <StoreSettingsProvider currency={settings.currency} numDecimals={settings.numDecimals}>
+        <StoreSettingsProvider
+          currency={settings.currency}
+          numDecimals={settings.numDecimals}
+          freeDeliveryThreshold={settings.freeDeliveryThreshold}
+          storeCity={settings.city}
+          storeAddress={settings.address}
+        >
           <LocaleHydrator />
           {children}
         </StoreSettingsProvider>

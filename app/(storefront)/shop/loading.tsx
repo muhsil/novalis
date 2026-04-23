@@ -7,14 +7,9 @@ export default function ShopLoading() {
       {/* Trust banner skeleton */}
       <div className="h-12 max-md:h-8 skeleton w-full" />
 
-      <div className="max-w-7xl mx-auto px-4 max-md:px-2 pb-10 max-md:pb-20">
-        {/* Mobile search skeleton */}
-        <div className="md:hidden pt-3 mb-3">
-          <div className="h-10 skeleton rounded-full" />
-        </div>
-
+      <div className="max-w-7xl mx-auto px-4 max-md:px-2 pb-10 max-md:pb-20 pt-4 max-md:pt-3">
         {/* Category pills skeleton */}
-        <div className="pb-3 pt-3 md:pt-4">
+        <div className="pb-3">
           <CategoryPillsSkeleton />
         </div>
 

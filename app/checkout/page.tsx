@@ -156,18 +156,31 @@ function CheckoutContent() {
     <div className="min-h-screen bg-[#FCFAF7] py-6 max-md:py-4 max-md:pb-36">
       <div className="max-w-6xl mx-auto px-6 max-md:px-4">
         {/* Header */}
-        <div className="mb-6 max-md:mb-4 flex items-center justify-between">
-          <div>
-            <nav className="flex items-center gap-2 text-[11px] text-[#121212]/50 tracking-widest uppercase">
-              <Link href="/" className="hover:text-[#742938]">Home</Link>
-              <span>/</span>
-              <span className="text-[#742938]">Checkout</span>
-            </nav>
-            <h1 className="text-2xl md:text-3xl font-serif text-[#121212] mt-1">
-              Secure <span className="italic text-[#742938]">Checkout</span>
-            </h1>
+        <div className="mb-6 max-md:mb-4 flex items-center justify-between gap-4">
+          <div className="flex items-start gap-3 min-w-0">
+            <Link
+              href="/cart"
+              aria-label="Back to cart"
+              className="mt-1 w-9 h-9 flex items-center justify-center border border-[#E8E4DE] text-[#121212] hover:bg-[#742938] hover:text-white hover:border-[#742938] transition-colors shrink-0"
+            >
+              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </Link>
+            <div className="min-w-0">
+              <nav className="flex items-center gap-2 text-[11px] text-[#121212]/50 tracking-widest uppercase">
+                <Link href="/" className="hover:text-[#742938]">Home</Link>
+                <span>/</span>
+                <Link href="/cart" className="hover:text-[#742938]">Cart</Link>
+                <span>/</span>
+                <span className="text-[#742938]">Checkout</span>
+              </nav>
+              <h1 className="text-2xl md:text-3xl font-serif text-[#121212] mt-1">
+                Secure <span className="italic text-[#742938]">Checkout</span>
+              </h1>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-[11px] text-[#121212]/50 font-semibold tracking-[0.15em] uppercase">
+          <div className="flex items-center gap-2 text-[11px] text-[#121212]/50 font-semibold tracking-[0.15em] uppercase shrink-0">
             <svg className="w-4 h-4 text-[#1B4332]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>

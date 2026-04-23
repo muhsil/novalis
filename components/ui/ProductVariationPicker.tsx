@@ -115,7 +115,7 @@ export default function ProductVariationPicker({
           <label className="text-xs font-bold text-gray-700 mb-2 block">
             {attr.name}
             {selected[attr.slug] && (
-              <span className="text-[#D4AFB9] ml-1">: {selected[attr.slug]}</span>
+              <span className="text-[#742938] ml-1">: {selected[attr.slug]}</span>
             )}
           </label>
           <div className="flex flex-wrap gap-2">
@@ -127,7 +127,7 @@ export default function ProductVariationPicker({
                   onClick={() => handleSelect(attr.slug, opt)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                     isSelected
-                      ? 'border-[#D4AFB9] bg-[#FAF6F0] text-[#D4AFB9]'
+                      ? 'border-[#742938] bg-[#FAF6F0] text-[#742938]'
                       : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                   }`}
                 >
@@ -141,7 +141,7 @@ export default function ProductVariationPicker({
 
       {/* Price update for selected variation */}
       {hasVariations && matchedVariation && currentPrice !== basePrice && (
-        <div className="text-sm font-bold text-[#D4AFB9]">
+        <div className="text-sm font-bold text-[#742938]">
           {currency} {currentPrice.toFixed(0)}
         </div>
       )}
@@ -155,7 +155,7 @@ export default function ProductVariationPicker({
           className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
             added
               ? 'bg-[#00B578] text-white'
-              : 'bg-[#D4AFB9] text-white hover:bg-[#B8985D] active:scale-[0.98]'
+              : 'bg-[#742938] text-white hover:bg-[#5c1f2c] active:scale-[0.98]'
           }`}
         >
           {added ? '\u2713 Added!' : !isInStock ? 'Out of Stock' : `Add to Cart \u2022 ${currency} ${(currentPrice * quantity).toFixed(0)}`}
