@@ -187,7 +187,7 @@ function CheckoutContent() {
             <h1 className="text-lg font-extrabold text-gray-900">Checkout</h1>
           </div>
           <div className="bg-white px-3 py-1.5 rounded-lg border border-gray-100">
-            <PriceDisplay amount={selectedCurrency !== 'AED' ? convertPrice(subtotal) : subtotal} currency={currSymbol} size="md" />
+            <PriceDisplay amount={subtotal} size="md" />
           </div>
         </div>
 
