@@ -187,7 +187,7 @@
   }
 }
 
-@keyframes shimmer {
+@keyframes shimmer-legacy {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
 }
@@ -201,10 +201,14 @@
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
-  background-size: 800px 100%;
-  animation: shimmer 1.5s infinite linear;
+  background: linear-gradient(90deg, #F5EFE6 0%, #EFE4D2 50%, #F5EFE6 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
   border-radius: 0.25rem;
+}
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
 }
 
 .prose p  { margin-bottom: 0.5rem; }
