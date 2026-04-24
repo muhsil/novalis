@@ -140,12 +140,14 @@ export default function AddressesPage() {
   const authCustomer = useAuthStore((s) => s.customer);
 
   const fetchAddresses = async () => {
-    if (!authCustomer?.id) {
+    if (!authCustomer?.id || !authCustomer?.email) {
       setLoading(false);
       return;
     }
     try {
-      const res = await fetch(`/api/woo-addresses?customer_id=${authCustomer.id}`);
+      const res = await fetch(
+        `/api/woo-addresses?customer_id=${authCustomer.id}&email=${encodeURIComponent(authCustomer.email)}`
+      );
       if (res.ok) {
         const data = await res.json();
         setAddresses(data.addresses || []);
@@ -171,7 +173,7 @@ export default function AddressesPage() {
       const res = await fetch('/api/woo-addresses', {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ customerId: authCustomer.id, address: addr }),
+        body: JSON.stringify({ customerId: authCustomer.id, authEmail: authCustomer.email, address: addr }),
       });
       if (res.ok) {
         toast(isEdit ? 'Address updated!' : 'Address added!');
@@ -189,10 +191,10 @@ export default function AddressesPage() {
   };
 
   const handleDelete = async (addressId: string) => {
-    if (!authCustomer?.id || !confirm('Delete this address?')) return;
+    if (!authCustomer?.id || !authCustomer?.email || !confirm('Delete this address?')) return;
     try {
       const res = await fetch(
-        `/api/woo-addresses?customer_id=${authCustomer.id}&address_id=${addressId}`,
+        `/api/woo-addresses?customer_id=${authCustomer.id}&email=${encodeURIComponent(authCustomer.email)}&address_id=${addressId}`,
         { method: 'DELETE' }
       );
       if (res.ok) {

@@ -2,16 +2,32 @@ import { NextResponse } from 'next/server';
 import { wooApi } from '@/lib/woocommerce';
 import { hashPassword } from '@/lib/password';
 
+/** Split a full name into first + last for WooCommerce's split-name schema. */
+function splitName(full: string): { first: string; last: string } {
+  const parts = full.trim().split(/\s+/);
+  if (parts.length <= 1) return { first: parts[0] || '', last: '' };
+  return { first: parts[0], last: parts.slice(1).join(' ') };
+}
+
 export async function POST(req: Request) {
   try {
-    const { firstName, lastName, email, password, phone } = await req.json();
+    const body = await req.json();
+    // Accept either { name } (new, single-field flow) or { firstName, lastName } (legacy).
+    const rawName: string = body.name
+      ? String(body.name)
+      : [body.firstName, body.lastName].filter(Boolean).join(' ');
+    const email: string = body.email;
+    const password: string = body.password;
+    const phone: string = body.phone || '';
 
-    if (!email || !password || !firstName) {
+    if (!email || !password || !rawName.trim()) {
       return NextResponse.json(
-        { error: 'First name, email, and password are required' },
+        { error: 'Name, email, and password are required' },
         { status: 400 }
       );
     }
+
+    const { first: firstName, last: lastName } = splitName(rawName);
 
     // Check if customer already exists
     // Note: use 'search' param instead of 'email' because axios URL-encodes '@' to '%40'
@@ -32,22 +48,20 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create new WooCommerce customer
     const response = await wooApi.post('/customers', {
       email,
       first_name: firstName,
-      last_name: lastName || '',
+      last_name: lastName,
       billing: {
         first_name: firstName,
-        last_name: lastName || '',
+        last_name: lastName,
         email,
-        phone: phone || '',
+        phone,
       },
       shipping: {
         first_name: firstName,
-        last_name: lastName || '',
+        last_name: lastName,
       },
-      // Store hashed password in meta for simple auth (no JWT plugin needed)
       meta_data: [
         { key: 'novalis_password', value: hashPassword(password) },
       ],

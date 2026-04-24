@@ -1,33 +1,45 @@
 import { NextResponse } from 'next/server';
 import { wooApi } from '@/lib/woocommerce';
 
+/**
+ * Verify the caller knows both the customer id and the account email.
+ * Returns the customer record if the match succeeds, or null otherwise.
+ */
+async function verifyOwnership(
+  customerId: number,
+  email: string
+): Promise<{ id: number; email: string } | null> {
+  if (!customerId || !email) return null;
+  try {
+    const res = await wooApi.get(`/customers/${customerId}`);
+    const c = res.data as { id: number; email: string };
+    if (String(c.email || '').toLowerCase() !== email.toLowerCase()) return null;
+    return c;
+  } catch {
+    return null;
+  }
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const customerId = searchParams.get('id');
+    const customerId = Number(searchParams.get('id') || 0);
+    const email = searchParams.get('email')?.toLowerCase().trim() || '';
 
-    if (customerId) {
-      // Fetch specific customer by ID (authenticated user)
-      const response = await wooApi.get(`/customers/${customerId}`);
-      return NextResponse.json(
-        { customer: response.data },
-        {
-          headers: {
-            'Cache-Control': 'private, max-age=60, stale-while-revalidate=120',
-          },
-        }
-      );
+    const owned = await verifyOwnership(customerId, email);
+    if (!owned) {
+      return NextResponse.json({ customer: null }, { status: 403 });
     }
 
-    // Fallback: get most recent customer
-    const response = await wooApi.get('/customers', {
-      params: { per_page: 1, orderby: 'id', order: 'desc' },
-    });
-    const customers = response.data;
-    if (customers.length > 0) {
-      return NextResponse.json({ customer: customers[0] });
-    }
-    return NextResponse.json({ customer: null });
+    const response = await wooApi.get(`/customers/${customerId}`);
+    return NextResponse.json(
+      { customer: response.data },
+      {
+        headers: {
+          'Cache-Control': 'private, max-age=60, stale-while-revalidate=120',
+        },
+      }
+    );
   } catch (error) {
     console.error('Failed to fetch customer:', error);
     return NextResponse.json({ customer: null }, { status: 500 });
@@ -37,25 +49,19 @@ export async function GET(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const customerId = body.customerId;
+    const customerId = Number(body.customerId || 0);
+    const email = String(body.authEmail || '').toLowerCase().trim();
 
-    if (customerId) {
-      // Update specific customer (authenticated user)
-      const { customerId: _id, ...updateData } = body;
-      const response = await wooApi.put(`/customers/${customerId}`, updateData);
-      return NextResponse.json({ customer: response.data });
+    const owned = await verifyOwnership(customerId, email);
+    if (!owned) {
+      return NextResponse.json({ error: 'Not authorized' }, { status: 403 });
     }
 
-    // Fallback: update most recent customer
-    const listRes = await wooApi.get('/customers', {
-      params: { per_page: 1, orderby: 'id', order: 'desc' },
-    });
-    const customers = listRes.data;
-    if (customers.length === 0) {
-      return NextResponse.json({ error: 'No customer found' }, { status: 404 });
-    }
-    const fallbackId = customers[0].id;
-    const response = await wooApi.put(`/customers/${fallbackId}`, body);
+    // Strip out fields the client should never set directly.
+    const { customerId: _id, authEmail: _e, meta_data: _m, role: _r, ...updateData } = body;
+    void _id; void _e; void _m; void _r;
+
+    const response = await wooApi.put(`/customers/${customerId}`, updateData);
     return NextResponse.json({ customer: response.data });
   } catch (error) {
     console.error('Failed to update customer:', error);

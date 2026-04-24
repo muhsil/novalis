@@ -7,6 +7,7 @@ import { toast } from '@/components/ui/Toast';
 
 import PersonalInfoForm, { CustomerInfo } from '@/components/checkout/PersonalInfoForm';
 import BillingAddressForm, { BillingInfo } from '@/components/checkout/BillingAddressForm';
+import CreateAccountOption from '@/components/checkout/CreateAccountOption';
 import OrderNotes from '@/components/checkout/OrderNotes';
 import OrderSummary from '@/components/checkout/OrderSummary';
 import OrderSuccess from '@/components/checkout/OrderSuccess';
@@ -30,6 +31,9 @@ function CheckoutContent() {
   const [isInitializing, setIsInitializing] = useState(false);
   const [orderNotes, setOrderNotes] = useState('');
   const [sameAsShipping, setSameAsShipping] = useState(true);
+  const [createAccount, setCreateAccount] = useState(false);
+  const [accountPassword, setAccountPassword] = useState('');
+  const loginToAuth = useAuthStore((s) => s.login);
 
   const [customer, setCustomer] = useState<CustomerInfo>({
     firstName: authCustomer?.firstName || '',
@@ -80,6 +84,11 @@ function CheckoutContent() {
   const handleCreateOrder = async () => {
     if (!isFormValid) {
       toast('Please complete all shipping details', 'error');
+      return;
+    }
+
+    if (createAccount && !authCustomer && accountPassword.length < 6) {
+      toast('Account password must be at least 6 characters', 'error');
       return;
     }
 
@@ -136,6 +145,35 @@ function CheckoutContent() {
 
       if (!resWoo.ok) throw new Error('Failed to create order');
       const data = await resWoo.json();
+
+      // Optional: create an account now that the guest has placed an order.
+      if (createAccount && !authCustomer && accountPassword.length >= 6) {
+        try {
+          const regRes = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: [customer.firstName, customer.lastName].filter(Boolean).join(' '),
+              email: customer.email,
+              password: accountPassword,
+              phone: customer.phone ? `${customer.countryCode}${customer.phone}` : '',
+            }),
+          });
+          if (regRes.ok) {
+            const regData = await regRes.json();
+            if (regData.customer) {
+              loginToAuth(regData.customer);
+              toast('Account created — you can track this order in My Orders');
+            }
+          } else {
+            const regErr = await regRes.json().catch(() => ({}));
+            // Non-fatal: the order still succeeded.
+            toast(regErr.error || 'Order placed, but account could not be created', 'info');
+          }
+        } catch {
+          toast('Order placed, but account could not be created', 'info');
+        }
+      }
 
       setOrderId(data.orderId || null);
       setOrderCreated(true);
@@ -206,6 +244,15 @@ function CheckoutContent() {
             <SectionCard step={3} title="Order Notes" subtitle="Anything you'd like us to know? (optional)">
               <OrderNotes value={orderNotes} onChange={setOrderNotes} />
             </SectionCard>
+
+            {!authCustomer && (
+              <CreateAccountOption
+                enabled={createAccount}
+                onEnabledChange={setCreateAccount}
+                password={accountPassword}
+                onPasswordChange={setAccountPassword}
+              />
+            )}
 
             <SectionCard step={4} title="Payment Method" subtitle="Pay when you receive your order.">
               <div className="flex items-center gap-4 p-4 border-2 border-[#742938] bg-[#FCFAF7]">

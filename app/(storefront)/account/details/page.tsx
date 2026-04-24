@@ -32,8 +32,12 @@ export default function AccountDetailsPage() {
 
   useEffect(() => {
     async function fetchDetails() {
+      if (!authCustomer?.id || !authCustomer?.email) {
+        setLoading(false);
+        return;
+      }
       try {
-        const url = authCustomer?.id ? `/api/woo-customer?id=${authCustomer.id}` : '/api/woo-customer';
+        const url = `/api/woo-customer?id=${authCustomer.id}&email=${encodeURIComponent(authCustomer.email)}`;
         const res = await fetch(url);
         if (res.ok) {
           const json = await res.json();
@@ -55,7 +59,7 @@ export default function AccountDetailsPage() {
       }
     }
     fetchDetails();
-  }, []);
+  }, [authCustomer?.id, authCustomer?.email]);
 
   const update = (field: keyof AccountDetails, value: string) => {
     setDetails((prev) => ({ ...prev, [field]: value }));
@@ -69,6 +73,7 @@ export default function AccountDetailsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           customerId: authCustomer?.id,
+          authEmail: authCustomer?.email,
           first_name: details.firstName,
           last_name: details.lastName,
           email: details.email,
@@ -102,21 +107,18 @@ export default function AccountDetailsPage() {
     <AccountLayout title="Account Details">
       <SectionCard title="Personal Information">
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              label="First Name"
-              value={details.firstName}
-              onChange={(v) => update('firstName', v)}
-              placeholder="First name"
-              required
-            />
-            <FormField
-              label="Last Name"
-              value={details.lastName}
-              onChange={(v) => update('lastName', v)}
-              placeholder="Last name"
-            />
-          </div>
+          <FormField
+            label="Full Name"
+            value={[details.firstName, details.lastName].filter(Boolean).join(' ')}
+            onChange={(v) => {
+              const parts = v.trim().split(/\s+/);
+              const first = parts[0] || '';
+              const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
+              setDetails((prev) => ({ ...prev, firstName: first, lastName: last }));
+            }}
+            placeholder="Sarah Al Maktoum"
+            required
+          />
 
           <FormField
             label="Email Address"

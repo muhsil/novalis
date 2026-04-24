@@ -8,11 +8,14 @@ import EmptyCart from '@/components/checkout/EmptyCart';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 
+import { useAuthStore } from '@/store/useAuthStore';
+
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity } = useCartStore();
   const { currency, freeDeliveryThreshold } = useStoreSettings();
   const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
   const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   const subtotalAED = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const subtotal = selectedCurrency !== 'AED' ? convertPrice(subtotalAED) : subtotalAED;
@@ -44,6 +47,19 @@ export default function CartPage() {
               ({items.length} {items.length === 1 ? 'item' : 'items'})
             </span>
           </h1>
+          {!isLoggedIn && (
+            <p className="text-[11px] text-[#121212]/60 font-light mt-2 tracking-wide">
+              Checking out as a guest is totally fine.{' '}
+              <Link href="/account/login" className="text-[#742938] font-medium hover:underline">
+                Sign in
+              </Link>
+              {' '}or{' '}
+              <Link href="/account/register" className="text-[#742938] font-medium hover:underline">
+                create an account
+              </Link>
+              {' '}for faster checkout and order tracking.
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">

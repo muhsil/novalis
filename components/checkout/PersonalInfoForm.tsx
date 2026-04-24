@@ -6,6 +6,7 @@ import PhoneInput from '@/components/ui/PhoneInput';
 import CountrySelect from '@/components/ui/CountrySelect';
 
 export interface CustomerInfo {
+  /** Full name. First word is sent as first_name to WooCommerce; remainder as last_name. */
   firstName: string;
   lastName: string;
   email: string;
@@ -27,12 +28,18 @@ export default function PersonalInfoForm({ customer, onChange }: PersonalInfoFor
     onChange({ ...customer, [field]: value });
   };
 
+  const fullName = [customer.firstName, customer.lastName].filter(Boolean).join(' ');
+
+  const updateName = (value: string) => {
+    const parts = value.trim().split(/\s+/);
+    const first = parts[0] || '';
+    const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
+    onChange({ ...customer, firstName: first, lastName: last });
+  };
+
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField label="First Name" value={customer.firstName} onChange={(v) => update('firstName', v)} placeholder="e.g. Sarah" required />
-        <FormField label="Last Name" value={customer.lastName} onChange={(v) => update('lastName', v)} placeholder="e.g. Al Maktoum" />
-      </div>
+      <FormField label="Full Name" value={fullName} onChange={updateName} placeholder="e.g. Sarah Al Maktoum" required />
       <FormField label="Email Address" type="email" value={customer.email} onChange={(v) => update('email', v)} placeholder="your@email.com" required />
       <PhoneInput
         countryCode={customer.countryCode}

@@ -11,8 +11,7 @@ import PhoneInput from '@/components/ui/PhoneInput';
 export default function RegisterPage() {
   const router = useRouter();
   const login = useAuthStore((s) => s.login);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,7 +22,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!firstName || !email || !password) {
+    if (!name.trim() || !email || !password) {
       toast('Please fill in all required fields', 'error');
       return;
     }
@@ -44,8 +43,7 @@ export default function RegisterPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          name: name.trim(),
           email,
           password,
           phone: phone ? `${countryCode}${phone}` : '',
@@ -81,21 +79,13 @@ export default function RegisterPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4 shadow-sm">
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              label="First Name"
-              value={firstName}
-              onChange={setFirstName}
-              placeholder="Sarah"
-              required
-            />
-            <FormField
-              label="Last Name"
-              value={lastName}
-              onChange={setLastName}
-              placeholder="Al Maktoum"
-            />
-          </div>
+          <FormField
+            label="Full Name"
+            value={name}
+            onChange={setName}
+            placeholder="Sarah Al Maktoum"
+            required
+          />
 
           <FormField
             label="Email Address"
@@ -154,7 +144,7 @@ export default function RegisterPage() {
         <div className="text-center mt-6">
           <p className="text-sm text-[#666]">
             Already have an account?{' '}
-            <Link href="/account/login" className="text-[#D4AFB9] font-semibold hover:underline">
+            <Link href="/account/login" className="text-[#742938] font-semibold hover:underline">
               Sign In
             </Link>
           </p>

@@ -34,6 +34,14 @@ export default function BillingAddressForm({
     onChange({ ...billing, [field]: value });
   };
 
+  const fullName = [billing.firstName, billing.lastName].filter(Boolean).join(' ');
+  const updateName = (value: string) => {
+    const parts = value.trim().split(/\s+/);
+    const first = parts[0] || '';
+    const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
+    onChange({ ...billing, firstName: first, lastName: last });
+  };
+
   return (
     <div>
       <label className="flex items-center gap-3 cursor-pointer">
@@ -48,10 +56,7 @@ export default function BillingAddressForm({
 
       {!sameAsShipping && (
         <div className="space-y-4 pt-5 mt-5 border-t border-[#E8E4DE]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField label="First Name" value={billing.firstName} onChange={(v) => update('firstName', v)} placeholder="First name" required />
-            <FormField label="Last Name" value={billing.lastName} onChange={(v) => update('lastName', v)} placeholder="Last name" />
-          </div>
+          <FormField label="Full Name" value={fullName} onChange={updateName} placeholder="e.g. Sarah Al Maktoum" required />
           <FormField label="Email" type="email" value={billing.email} onChange={(v) => update('email', v)} placeholder="billing@email.com" required />
           <PhoneInput
             countryCode={billing.countryCode}
