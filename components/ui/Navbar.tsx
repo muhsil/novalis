@@ -285,6 +285,20 @@ export default function Navbar() {
           >
             {isLoggedIn ? t(locale, 'nav.my_account') : t(locale, 'nav.sign_in')}
           </Link>
+
+          <div className="border-t border-[#e8e8e8] my-2" />
+
+          <p className="text-[10px] font-bold text-[#999] uppercase tracking-[0.15em] px-3 py-1.5">
+            {t(locale, 'currency.label')} &amp; {t(locale, 'lang.switch')}
+          </p>
+          <div className="flex items-center gap-2 px-3 py-2">
+            <div className="flex-1">
+              <CurrencySwitcher variant="full" />
+            </div>
+            <div>
+              <LanguageSwitcher variant="full" />
+            </div>
+          </div>
         </nav>
 
         {/* Bottom CTA */}
