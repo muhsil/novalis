@@ -33,13 +33,13 @@ export default function TrustBanner() {
         <div className="flex items-center justify-between max-md:justify-start max-md:gap-6 max-md:overflow-x-auto no-scrollbar pb-1">
           {trustItems.map((item, i) => (
             <div key={item.title} className="flex items-center gap-3 shrink-0">
-              <span className="text-[#D4AFB9]">{item.icon}</span>
+              <span className="text-[#d2c7bf]">{item.icon}</span>
               <div className="flex items-baseline gap-2">
                 <span className="text-[11px] font-bold text-[#F9F7F2] tracking-[0.08em] uppercase">{item.title}</span>
-                <span className="hidden md:inline text-[10px] text-[#F9F7F2]/60 font-light tracking-wide">{item.subtitle}</span>
+                <span className="hidden md:inline text-[10px] text-[#F9F7F2]/70 font-light tracking-wide">{item.subtitle}</span>
               </div>
               {i < trustItems.length - 1 && (
-                <div className="hidden md:block w-px h-4 bg-[#F9F7F2]/10 ml-5" />
+                <div className="hidden md:block w-px h-4 bg-[#d2c7bf]/30 ml-5" />
               )}
             </div>
           ))}

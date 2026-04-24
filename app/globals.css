@@ -13,11 +13,13 @@
   --color-accent: #D4AFB9;
   --color-accent-dark: #A6803F;
   --color-accent-light: #F2E9D4;
-  
+  --color-sand: #d2c7bf;
+  --color-sand-light: #ece7e2;
+
   --color-text: #1A1A1A;
   --color-text-secondary: #555555;
   --color-text-muted: #888888;
-  
+
   --color-bg: #FCFAF7;
   --color-border: #E8E4DE;
   
@@ -32,6 +34,8 @@
     --color-brand-light: #F9F7F2;
     --color-accent: #D4AFB9;
     --color-accent-light: #F2E9D4;
+    --color-sand: #d2c7bf;
+    --color-sand-light: #ece7e2;
     --color-success: #1B4332;
     --color-success-light: #D8E2DC;
     --color-warning: #FF9F00;
