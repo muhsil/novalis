@@ -54,7 +54,7 @@ export default function BillingAddressForm({
       onChange({
         ...billing,
         firstName: v.slice(0, spaceIdx),
-        lastName: v.slice(spaceIdx + 1).trimStart(),
+        lastName: v.slice(spaceIdx + 1).trim(),
       });
     }
   };

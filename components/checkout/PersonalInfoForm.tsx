@@ -50,7 +50,7 @@ export default function PersonalInfoForm({ customer, onChange }: PersonalInfoFor
       onChange({
         ...customer,
         firstName: v.slice(0, spaceIdx),
-        lastName: v.slice(spaceIdx + 1).trimStart(),
+        lastName: v.slice(spaceIdx + 1).trim(),
       });
     }
   };

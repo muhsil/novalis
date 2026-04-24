@@ -124,7 +124,7 @@ export default function AccountDetailsPage() {
                 setDetails((prev) => ({
                   ...prev,
                   firstName: stripped.slice(0, spaceIdx),
-                  lastName: stripped.slice(spaceIdx + 1).trimStart(),
+                  lastName: stripped.slice(spaceIdx + 1).trim(),
                 }));
               }
             }}
