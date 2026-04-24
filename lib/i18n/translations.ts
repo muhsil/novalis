@@ -128,6 +128,23 @@ export const translations: Record<Locale, Record<string, string>> = {
     'product.hot': 'HOT',
     'product.hit': 'HIT',
     'product.new': 'NEW',
+
+    // Feature Grid
+    'feature.legacy_eyebrow': 'Our Craft',
+    'feature.legacy_title': 'The art behind',
+    'feature.legacy_title_accent': 'the scent.',
+    'feature.legacy_desc': 'At Novalis, perfumery is legacy. Each fragrance is crafted from rare treasures — agarwood from Assam, damask rose from the Emirates, saffron from Kashmir, musk and amber — forming the soul of our blends. We preserve age-old formulations while embracing modern elegance, creating scents that distill emotion rather than follow trends.',
+    'feature.legacy_cta': 'Experience The Journey',
+    'feature.bespoke_eyebrow': 'Made For You',
+    'feature.bespoke_title': 'Bespoke experience',
+    'feature.bespoke_title_accent': 'for the senses.',
+    'feature.bespoke_desc': 'Indulge in a fragrant journey crafted exclusively for you.',
+    'feature.bespoke_cta': 'Shop Now',
+    'feature.gift_eyebrow': 'Gifting',
+    'feature.gift_title': 'A gift as unforgettable',
+    'feature.gift_title_accent': 'as the moment.',
+    'feature.gift_desc': 'Celebrate life\u2019s special occasions with fragrances that speak from the heart.',
+    'feature.gift_cta': 'Shop Gifts',
   },
   ar: {
     // Navbar & Header
@@ -256,6 +273,23 @@ export const translations: Record<Locale, Record<string, string>> = {
     'product.hot': 'رائج',
     'product.hit': 'عرض',
     'product.new': 'جديد',
+
+    // Feature Grid
+    'feature.legacy_eyebrow': 'حرفتنا',
+    'feature.legacy_title': 'الفن وراء',
+    'feature.legacy_title_accent': 'العطر.',
+    'feature.legacy_desc': 'في نوفاليس، صناعة العطور إرث. كل عطر مصنوع من كنوز نادرة — العود من آسام، ورد الإمارات الدمشقي، زعفران كشمير، المسك والعنبر — تُشكّل روح مزيجنا. نحافظ على التركيبات العريقة مع احتضان الأناقة الحديثة لنصنع عطوراً تبث المشاعر بدلاً من مجاراة الصيحات.',
+    'feature.legacy_cta': 'ابدأ رحلة العطر',
+    'feature.bespoke_eyebrow': 'مُصمَّم لك',
+    'feature.bespoke_title': 'تجربة حصرية',
+    'feature.bespoke_title_accent': 'للحواس.',
+    'feature.bespoke_desc': 'انغمس في رحلة عطرية مصنوعة خصيصاً لك.',
+    'feature.bespoke_cta': 'تسوق الآن',
+    'feature.gift_eyebrow': 'هدايا',
+    'feature.gift_title': 'هدية لا تُنسى',
+    'feature.gift_title_accent': 'كاللحظة نفسها.',
+    'feature.gift_desc': 'احتفل بمناسباتك الخاصة بعطور تتحدث من القلب.',
+    'feature.gift_cta': 'تسوق الهدايا',
   },
 };
 

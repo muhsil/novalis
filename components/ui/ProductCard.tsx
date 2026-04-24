@@ -10,10 +10,14 @@ import { t } from '@/lib/i18n/translations';
 interface ProductCardProps {
   slug: string;
   name: string;
+  /** Optional Arabic override for `name` (from WC meta `name_ar`). */
+  nameAr?: string;
   price: number;
   regularPrice?: number | null;
   imageSrc?: string;
   categoryName?: string;
+  /** Optional Arabic override for `categoryName` (from WC category meta `name_ar`). */
+  categoryNameAr?: string;
   onSale?: boolean;
   featured?: boolean;
   variant?: 'default' | 'compact';
@@ -24,10 +28,12 @@ interface ProductCardProps {
 export default function ProductCard({
   slug,
   name,
+  nameAr,
   price,
   regularPrice,
   imageSrc,
   categoryName,
+  categoryNameAr,
   onSale,
   featured,
   variant = 'default',
@@ -35,6 +41,8 @@ export default function ProductCard({
   productId,
 }: ProductCardProps) {
   const locale = useLocaleStore((s) => s.locale);
+  const displayName = locale === 'ar' && nameAr ? nameAr : name;
+  const displayCategory = locale === 'ar' && categoryNameAr ? categoryNameAr : categoryName;
   const discount = onSale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
   return (
     <Link href={`/product/${slug}`} className="product-card group block bg-transparent transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
@@ -43,7 +51,7 @@ export default function ProductCard({
         {imageSrc ? (
           <img
             src={imageSrc}
-            alt={name}
+            alt={displayName}
             className="w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-1000 ease-out"
             loading="lazy"
           />
@@ -71,7 +79,7 @@ export default function ProductCard({
         {/* Wishlist heart */}
         <div className="absolute top-3 end-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 max-md:opacity-100">
           <WishlistButton
-            item={{ id: productId || 0, name, price, image: imageSrc, slug }}
+            item={{ id: productId || 0, name: displayName, price, image: imageSrc, slug }}
             size="sm"
           />
         </div>
@@ -79,13 +87,13 @@ export default function ProductCard({
 
       {/* Card body */}
       <div className="px-2 pt-3 pb-3 text-center">
-        {categoryName && (
+        {displayCategory && (
           <p className="text-[8px] text-[#D4AFB9] mb-1 font-bold tracking-[0.2em] uppercase">
-            {categoryName}
+            {displayCategory}
           </p>
         )}
         <h3 className="text-[13px] md:text-[15px] text-[#121212] line-clamp-2 leading-snug mb-1.5 font-serif font-medium group-hover:text-[#742938] transition-colors duration-300">
-          {name}
+          {displayName}
         </h3>
         <PriceDisplay
           amount={price}

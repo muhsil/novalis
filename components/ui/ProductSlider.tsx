@@ -76,17 +76,28 @@ export default function ProductSlider({
           const prod = p as {
             id: number; slug: string; name: string; price?: string;
             regular_price?: string; images?: { src: string }[];
-            categories?: { name: string }[]; on_sale?: boolean; featured?: boolean;
+            categories?: { name: string; meta_data?: { key?: string; value?: unknown }[] }[];
+            on_sale?: boolean; featured?: boolean;
+            meta_data?: { key?: string; value?: unknown }[];
           };
+          const readMeta = (meta: typeof prod.meta_data, key: string): string | undefined => {
+            const hit = meta?.find((m) => m?.key === key);
+            const v = hit?.value;
+            return typeof v === 'string' && v.trim() ? v : undefined;
+          };
+          const nameAr = readMeta(prod.meta_data, 'name_ar');
+          const categoryNameAr = readMeta(prod.categories?.[0]?.meta_data, 'name_ar');
           return (
             <SwiperSlide key={prod.id} className="h-auto">
               <ProductCard
                 slug={prod.slug}
                 name={prod.name}
+                nameAr={nameAr}
                 price={parseFloat(prod.price || '0')}
                 regularPrice={prod.regular_price ? parseFloat(prod.regular_price) : null}
                 imageSrc={prod.images?.[0]?.src}
                 categoryName={prod.categories?.[0]?.name}
+                categoryNameAr={categoryNameAr}
                 onSale={prod.on_sale}
                 featured={prod.featured}
                 productId={prod.id}

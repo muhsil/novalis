@@ -1,19 +1,27 @@
 "use client";
 
 import Link from 'next/link';
-import { useEffect, useRef, useState, useCallback } from 'react';
-import ProductCard from '@/components/ui/ProductCard';
+import { useEffect, useRef } from 'react';
 import ProductSlider from '@/components/ui/ProductSlider';
 import CategorySlider from '@/components/ui/CategorySlider';
+import FeatureGrid from '@/components/ui/page/FeatureGrid';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
-import { t, type Locale } from '@/lib/i18n/translations';
+import { t } from '@/lib/i18n/translations';
+
+type Category = {
+  id: number;
+  name: string;
+  slug: string;
+  image?: { src: string } | null;
+  count: number;
+};
 
 interface HomeContentProps {
   currency: string;
-  topCategories: any[];
-  bestSellers: any[];
-  newArrivals: any[];
+  topCategories: Category[];
+  bestSellers: Record<string, unknown>[];
+  newArrivals: Record<string, unknown>[];
 }
 
 function useScrollReveal() {
@@ -32,23 +40,11 @@ function useScrollReveal() {
   return ref;
 }
 
-// Abstracted ProductSlider logic moved to elements...
-
-export default function HomeContent({ currency, topCategories, bestSellers, newArrivals }: HomeContentProps) {
+export default function HomeContent({ topCategories, bestSellers, newArrivals }: HomeContentProps) {
   const locale = useLocaleStore((s) => s.locale);
-  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
+  const { getSymbol } = useCurrencyStore();
   const currSymbol = getSymbol();
   const wrapRef = useScrollReveal();
-
-  const getPrice = (price: string) => {
-    const num = parseFloat(price || '0');
-    return selectedCurrency !== 'AED' ? convertPrice(num) : num;
-  };
-  const getRegPrice = (price: string | undefined) => {
-    if (!price) return null;
-    const num = parseFloat(price);
-    return selectedCurrency !== 'AED' ? convertPrice(num) : num;
-  };
 
   return (
     <div ref={wrapRef}>
@@ -63,14 +59,14 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
 
       {/* Categories */}
       {topCategories.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-10 max-md:py-5">
+        <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-6 max-md:py-4">
           <CategorySlider categories={topCategories} />
         </section>
       )}
 
       {/* Best Selling Fragrances */}
       {bestSellers.length > 0 && (
-        <div className="bg-white py-10 max-md:py-5">
+        <div className="bg-white py-4 max-md:py-2">
           <ProductSlider
             products={bestSellers}
             locale={locale}
@@ -83,30 +79,42 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
         </div>
       )}
 
-      {/* Oud Collection Feature Banner */}
-      <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-10 max-md:py-5">
-        <div className="relative overflow-hidden bg-[#742938] flex flex-col md:flex-row items-center group">
-          {/* Image first on mobile */}
-          <div className="w-full md:w-1/2 h-[220px] md:h-[500px] overflow-hidden order-1 md:order-2">
-            <img src="/novalis-brand-story.png" alt="Oud Collection" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
-          </div>
-          <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-20 order-2 md:order-1">
-            <span className="text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 block">{t(locale, 'oud.label')}</span>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif text-white mb-3 leading-tight">
-              {t(locale, 'oud.title_1')} <span className="italic">{t(locale, 'oud.title_2')}</span>
-            </h2>
-            <p className="text-[#F9F7F2]/60 text-sm leading-relaxed mb-5 font-light max-w-md">{t(locale, 'oud.description')}</p>
-            <Link href="/shop?category=oud-collection" className="inline-flex items-center gap-3 text-[#D4AFB9] font-semibold text-xs tracking-widest uppercase hover:gap-5 transition-all duration-300">
-              {t(locale, 'oud.cta')}
-              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Feature grid — art/bespoke/gift (replaces oud + brand banners) */}
+      <FeatureGrid
+        top={{
+          eyebrow: t(locale, 'feature.legacy_eyebrow'),
+          title: t(locale, 'feature.legacy_title'),
+          titleAccent: t(locale, 'feature.legacy_title_accent'),
+          description: t(locale, 'feature.legacy_desc'),
+          cta: t(locale, 'feature.legacy_cta'),
+          href: '/about',
+          image: '/novalis-brand-story.png',
+        }}
+        bottom={[
+          {
+            eyebrow: t(locale, 'feature.bespoke_eyebrow'),
+            title: t(locale, 'feature.bespoke_title'),
+            titleAccent: t(locale, 'feature.bespoke_title_accent'),
+            description: t(locale, 'feature.bespoke_desc'),
+            cta: t(locale, 'feature.bespoke_cta'),
+            href: '/shop?category=oud-collection',
+            image: '/novalis-about.png',
+          },
+          {
+            eyebrow: t(locale, 'feature.gift_eyebrow'),
+            title: t(locale, 'feature.gift_title'),
+            titleAccent: t(locale, 'feature.gift_title_accent'),
+            description: t(locale, 'feature.gift_desc'),
+            cta: t(locale, 'feature.gift_cta'),
+            href: '/shop?category=luxury-fragrances',
+            image: '/cat-wedding.png',
+          },
+        ]}
+      />
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <div className="bg-[#F9F7F2] py-10 max-md:py-5">
+        <div className="bg-[#F9F7F2] py-4 max-md:py-2">
           <ProductSlider
             products={newArrivals.slice(0, 10)}
             locale={locale}
@@ -119,26 +127,8 @@ export default function HomeContent({ currency, topCategories, bestSellers, newA
         </div>
       )}
 
-      {/* Brand Story */}
-      <section className="fade-up mt-6 max-md:mt-3">
-        <div className="bg-[#742938]">
-          <div className="max-w-3xl mx-auto px-5 max-md:px-4 py-10 max-md:py-8 text-center">
-            <span className="text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 block">{t(locale, 'brand.label')}</span>
-            <h2 className="text-3xl max-md:text-xl font-serif text-white mb-3 leading-tight">
-              {t(locale, 'brand.title_1')} <span className="italic text-[#D4AFB9]">{t(locale, 'brand.title_2')}</span>
-            </h2>
-            <p className="text-[#F9F7F2]/60 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto font-light mb-6 max-md:hidden">
-              {t(locale, 'brand.description')}
-            </p>
-            <Link href="/about" className="inline-flex items-center text-[#D4AFB9] border border-[#D4AFB9] font-semibold text-xs tracking-widest uppercase px-8 py-3 hover:bg-[#D4AFB9] hover:text-[#121212] transition-colors">
-              {t(locale, 'brand.cta')}
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
-      <section className="fade-up max-w-5xl mx-auto px-4 max-md:px-4 pt-8 max-md:pt-6 pb-6 max-md:pb-24">
+      <section className="fade-up max-w-5xl mx-auto px-4 max-md:px-4 pt-6 max-md:pt-4 pb-6 max-md:pb-24">
         <h2 className="text-2xl max-md:text-lg font-serif text-[#121212] text-center italic mb-6 max-md:mb-4">
           {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
         </h2>
