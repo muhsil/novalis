@@ -1,8 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
-import { useLocaleStore } from '@/store/useLocaleStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 
 interface PriceDisplayProps {
   amount: number;
@@ -19,17 +18,11 @@ export default function PriceDisplay({
   className = '',
   size = 'md',
 }: PriceDisplayProps) {
-  const { convertPrice, selectedCurrency, currencies } = useCurrencyStore();
-  const locale = useLocaleStore((s) => s.locale);
+  const convertPrice = useCurrencyStore((s) => s.convertPrice);
+  const curr = useCurrencyLabel();
 
   const displayAmount = convertPrice(amount);
   const displayOriginal = originalAmount ? convertPrice(originalAmount) : null;
-
-  // EN → always show Roman currency code (AED, USD, OMR, SAR, …) so the
-  // shopper never sees an unfamiliar Arabic-script symbol. AR → keep the
-  // localized symbol (د.إ, ر.س, …).
-  const currObj = currencies.find((c) => c.code === selectedCurrency) || currencies[0];
-  const curr = locale === 'ar' ? currObj?.symbol || selectedCurrency : selectedCurrency;
 
   const sizeClasses = {
     sm: 'text-[15px]',
