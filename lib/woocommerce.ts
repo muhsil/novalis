@@ -16,13 +16,22 @@ export const wooApi = axios.create({
 
 // Retry transient failures (429 / 5xx / ECONNABORTED) once per configured attempt
 // with jittered exponential backoff. Keeps total worst-case latency bounded.
+//
+// Only safe/idempotent methods are retried. POST/PATCH are excluded because a
+// server-side success that surfaces to the client as a timeout/5xx would
+// otherwise cause duplicate resource creation (e.g. duplicate customers from
+// /api/auth/register, duplicate order notes from /api/orders/return).
 type RetryConfig = AxiosRequestConfig & { _retryCount?: number };
 const MAX_RETRIES = 1;
 const RETRY_STATUSES = new Set([408, 425, 429, 500, 502, 503, 504]);
+const IDEMPOTENT_METHODS = new Set(['get', 'head', 'options', 'put', 'delete']);
 
 wooApi.interceptors.response.use(undefined, async (error: AxiosError) => {
   const config = error.config as RetryConfig | undefined;
   if (!config) throw error;
+
+  const method = (config.method ?? 'get').toLowerCase();
+  if (!IDEMPOTENT_METHODS.has(method)) throw error;
 
   const status = error.response?.status;
   const isTimeout = error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT';
