@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FormField from '@/components/ui/FormField';
 import PhoneInput from '@/components/ui/PhoneInput';
 import CountrySelect from '@/components/ui/CountrySelect';
@@ -28,13 +28,31 @@ export default function PersonalInfoForm({ customer, onChange }: PersonalInfoFor
     onChange({ ...customer, [field]: value });
   };
 
-  const fullName = [customer.firstName, customer.lastName].filter(Boolean).join(' ');
+  // Local state so the user can type spaces (incl. trailing) in a controlled input.
+  // The parent still sees split firstName / lastName.
+  const [fullName, setFullName] = useState(
+    [customer.firstName, customer.lastName].filter(Boolean).join(' ')
+  );
+
+  useEffect(() => {
+    const incoming = [customer.firstName, customer.lastName].filter(Boolean).join(' ');
+    if (incoming !== fullName.trim()) setFullName(incoming);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customer.firstName, customer.lastName]);
 
   const updateName = (value: string) => {
-    const parts = value.trim().split(/\s+/);
-    const first = parts[0] || '';
-    const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
-    onChange({ ...customer, firstName: first, lastName: last });
+    const v = value.replace(/^\s+/, '');
+    setFullName(v);
+    const spaceIdx = v.indexOf(' ');
+    if (spaceIdx === -1) {
+      onChange({ ...customer, firstName: v, lastName: '' });
+    } else {
+      onChange({
+        ...customer,
+        firstName: v.slice(0, spaceIdx),
+        lastName: v.slice(spaceIdx + 1).trimStart(),
+      });
+    }
   };
 
   return (

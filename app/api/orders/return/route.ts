@@ -43,11 +43,14 @@ export async function POST(req: Request) {
       meta_data?: any[];
     };
 
-    const ownsByCustomer = customerId && order.customer_id === Number(customerId);
-    const ownsByEmail =
+    // Email match against billing is mandatory — customer_id alone is guessable
+    // (sequential ids) so we never allow it to grant ownership by itself.
+    const emailMatches =
       order.billing?.email?.toLowerCase() === String(email).toLowerCase();
+    const customerMatchesIfSupplied =
+      !customerId || order.customer_id === Number(customerId);
 
-    if (!ownsByCustomer && !ownsByEmail) {
+    if (!emailMatches || !customerMatchesIfSupplied) {
       return NextResponse.json(
         { error: 'This order does not belong to the provided account or email.' },
         { status: 403 }

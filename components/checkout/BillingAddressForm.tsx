@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FormField from '@/components/ui/FormField';
 import CountrySelect from '@/components/ui/CountrySelect';
 import PhoneInput from '@/components/ui/PhoneInput';
@@ -34,12 +34,29 @@ export default function BillingAddressForm({
     onChange({ ...billing, [field]: value });
   };
 
-  const fullName = [billing.firstName, billing.lastName].filter(Boolean).join(' ');
+  const [fullName, setFullName] = useState(
+    [billing.firstName, billing.lastName].filter(Boolean).join(' ')
+  );
+
+  useEffect(() => {
+    const incoming = [billing.firstName, billing.lastName].filter(Boolean).join(' ');
+    if (incoming !== fullName.trim()) setFullName(incoming);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [billing.firstName, billing.lastName]);
+
   const updateName = (value: string) => {
-    const parts = value.trim().split(/\s+/);
-    const first = parts[0] || '';
-    const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
-    onChange({ ...billing, firstName: first, lastName: last });
+    const v = value.replace(/^\s+/, '');
+    setFullName(v);
+    const spaceIdx = v.indexOf(' ');
+    if (spaceIdx === -1) {
+      onChange({ ...billing, firstName: v, lastName: '' });
+    } else {
+      onChange({
+        ...billing,
+        firstName: v.slice(0, spaceIdx),
+        lastName: v.slice(spaceIdx + 1).trimStart(),
+      });
+    }
   };
 
   return (
