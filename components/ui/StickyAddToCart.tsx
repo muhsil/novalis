@@ -35,8 +35,8 @@ export default function StickyAddToCart({ productId, name, price, image }: Stick
           onClick={handleAdd}
           className={`px-8 py-2.5 rounded-none text-xs font-semibold tracking-widest uppercase transition-all shrink-0 ${
             added
-              ? 'bg-[#742938] text-white border border-[#F9F7F2]/30'
-              : 'bg-[#D4AFB9] text-white hover:bg-[#A6803F] active:scale-[0.98]'
+              ? 'bg-[#5c1f2c] text-white border border-[#F9F7F2]/30'
+              : 'bg-white text-[#742938] hover:bg-[#F9F7F2] active:scale-[0.98]'
           }`}
         >
           {added ? (<span className="inline-flex items-center gap-2"><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> Added</span>) : 'Add to Cart'}

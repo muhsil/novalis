@@ -32,33 +32,33 @@ async function getVariations(productId: number) {
 }
 
 async function getRelated(relatedIds: number[], categoryIds: number[], currentSlug: string) {
-  try {
-    // Prefer WooCommerce's built-in related_ids (computed server-side)
-    if (relatedIds?.length) {
-      const { data } = await wooApi.get('/products', {
-        params: { include: relatedIds.join(','), per_page: 20, status: 'publish' },
-      });
-      const filtered = (data as any[]).filter((p) => p.slug !== currentSlug);
-      if (filtered.length >= 4) return filtered;
+  const tryFetch = async (params: Record<string, unknown>): Promise<any[]> => {
+    try {
+      const { data } = await wooApi.get('/products', { params });
+      return (data as any[]).filter((p) => p.slug !== currentSlug);
+    } catch {
+      return [];
     }
+  };
 
-    // Fallback 1: same category
-    if (categoryIds?.length) {
-      const { data } = await wooApi.get('/products', {
-        params: { category: categoryIds.join(','), per_page: 20, status: 'publish' },
-      });
-      const filtered = (data as any[]).filter((p) => p.slug !== currentSlug);
-      if (filtered.length) return filtered;
-    }
-
-    // Fallback 2: any latest published products
-    const { data } = await wooApi.get('/products', {
-      params: { per_page: 12, status: 'publish', orderby: 'popularity' },
+  // Prefer WooCommerce's built-in related_ids
+  if (relatedIds?.length) {
+    const results = await tryFetch({
+      include: relatedIds.join(','), per_page: 20, status: 'publish',
     });
-    return (data as any[]).filter((p) => p.slug !== currentSlug);
-  } catch {
-    return [];
+    if (results.length) return results;
   }
+
+  // Fallback 1: same category
+  if (categoryIds?.length) {
+    const results = await tryFetch({
+      category: categoryIds.join(','), per_page: 20, status: 'publish',
+    });
+    if (results.length) return results;
+  }
+
+  // Fallback 2: any latest published products
+  return tryFetch({ per_page: 12, status: 'publish', orderby: 'date' });
 }
 
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

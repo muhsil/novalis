@@ -72,26 +72,7 @@ export default async function ShopPage({
         { name: 'Shop', href: '/shop' },
       ]} />
 
-      <div className="max-w-7xl mx-auto px-4 max-md:px-3 pb-8 max-md:pb-20">
-        {/* Mobile search */}
-        <form method="GET" action="/shop" className="md:hidden pt-3 mb-3">
-          <div className="flex rounded-full overflow-hidden bg-[#f5f5f5] border border-[#eee] focus-within:border-[#999]">
-            <input
-              name="search"
-              defaultValue={searchParams.search || ''}
-              placeholder="Search perfumes..."
-              className="flex-1 px-3 py-2 text-sm outline-none bg-transparent"
-            />
-            <button type="submit" className="bg-[#191919] text-white px-3">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-          </div>
-        </form>
-
-        {/* Search */}
-
+      <div className="max-w-7xl mx-auto px-4 max-md:px-3 pb-8 max-md:pb-20 pt-4 max-md:pt-3">
         {/* Results count */}
         <div className="flex items-center justify-between mb-3 mt-1">
           <p className="text-xs text-[#999]">

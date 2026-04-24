@@ -10,6 +10,7 @@ export interface StoreSettings {
   country: string;
   city: string;
   address: string;
+  freeDeliveryThreshold: number;
 }
 
 const DEFAULT_SETTINGS: StoreSettings = {
@@ -22,7 +23,27 @@ const DEFAULT_SETTINGS: StoreSettings = {
   country: 'AE',
   city: 'Dubai',
   address: 'Dubai, United Arab Emirates',
+  freeDeliveryThreshold: 100,
 };
+
+async function getFreeDeliveryThreshold(): Promise<number> {
+  try {
+    // WooCommerce shipping zones → free_shipping method min_amount
+    const { data: zones } = await wooApi.get('/shipping/zones');
+    for (const zone of zones as { id: number }[]) {
+      try {
+        const { data: methods } = await wooApi.get(`/shipping/zones/${zone.id}/methods`);
+        for (const m of methods as { method_id: string; settings?: Record<string, { value?: string }> }[]) {
+          if (m.method_id === 'free_shipping') {
+            const minAmount = parseFloat(m.settings?.min_amount?.value || '0');
+            if (minAmount > 0) return minAmount;
+          }
+        }
+      } catch { /* skip zone */ }
+    }
+  } catch { /* ignore */ }
+  return DEFAULT_SETTINGS.freeDeliveryThreshold;
+}
 
 let cachedSettings: StoreSettings | null = null;
 let cacheTimestamp = 0;
@@ -39,7 +60,10 @@ export async function getStoreSettings(): Promise<StoreSettings> {
   }
 
   try {
-    const { data } = await wooApi.get('/settings/general');
+    const [{ data }, freeDeliveryThreshold] = await Promise.all([
+      wooApi.get('/settings/general'),
+      getFreeDeliveryThreshold(),
+    ]);
     const settings: Record<string, string> = {};
     for (const item of data as { id: string; value: string }[]) {
       settings[item.id] = item.value;
@@ -55,6 +79,7 @@ export async function getStoreSettings(): Promise<StoreSettings> {
       country: settings['woocommerce_default_country'] || DEFAULT_SETTINGS.country,
       city: settings['woocommerce_store_city'] || DEFAULT_SETTINGS.city,
       address: settings['woocommerce_store_address'] || DEFAULT_SETTINGS.address,
+      freeDeliveryThreshold,
     };
     cacheTimestamp = now;
 
