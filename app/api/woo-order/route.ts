@@ -4,9 +4,10 @@ import { wooApi } from '@/lib/woocommerce';
 /**
  * Fetch a single order.
  *
- * Requires `email` or `customer_id` that matches the order, to prevent
- * simple id-enumeration of other customers' orders over the proxied
- * WooCommerce REST credentials.
+ * Requires `email` that matches the order's billing email (mandatory) to
+ * prevent id-enumeration of other customers' orders over the proxied
+ * WooCommerce REST credentials. A `customer_id` alone is NOT sufficient
+ * because WooCommerce customer ids are sequential and guessable.
  */
 export async function GET(req: Request) {
   try {
@@ -18,6 +19,12 @@ export async function GET(req: Request) {
     if (!orderId) {
       return NextResponse.json({ error: 'Order ID required' }, { status: 400 });
     }
+    if (!email) {
+      return NextResponse.json(
+        { error: 'Email required to view this order' },
+        { status: 403 }
+      );
+    }
 
     const response = await wooApi.get(`/orders/${orderId}`);
     const order = response.data as {
@@ -27,13 +34,13 @@ export async function GET(req: Request) {
     };
 
     const emailMatches =
-      email && String(order.billing?.email || '').toLowerCase() === email;
-    const customerMatches =
-      customerIdParam &&
-      Number(customerIdParam) > 0 &&
+      String(order.billing?.email || '').toLowerCase() === email;
+    // customer_id, if supplied, must ALSO match — but email match is still required.
+    const customerMatchesIfSupplied =
+      !customerIdParam ||
       Number(customerIdParam) === Number(order.customer_id);
 
-    if (!emailMatches && !customerMatches) {
+    if (!emailMatches || !customerMatchesIfSupplied) {
       return NextResponse.json(
         { error: 'Not authorized to view this order' },
         { status: 403 }

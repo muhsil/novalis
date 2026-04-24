@@ -25,6 +25,7 @@ export default function AccountDetailsPage() {
     phone: '',
     countryCode: '+971',
   });
+  const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const authCustomer = useAuthStore((s) => s.customer);
@@ -43,13 +44,16 @@ export default function AccountDetailsPage() {
           const json = await res.json();
           const c = json.customer;
           if (c) {
+            const first = c.first_name || '';
+            const last = c.last_name || '';
             setDetails({
-              firstName: c.first_name || '',
-              lastName: c.last_name || '',
+              firstName: first,
+              lastName: last,
               email: c.email || '',
               phone: c.billing?.phone || '',
               countryCode: '+971',
             });
+            setFullName([first, last].filter(Boolean).join(' '));
           }
         }
       } catch (err) {
@@ -109,12 +113,20 @@ export default function AccountDetailsPage() {
         <div className="space-y-4">
           <FormField
             label="Full Name"
-            value={[details.firstName, details.lastName].filter(Boolean).join(' ')}
+            value={fullName}
             onChange={(v) => {
-              const parts = v.trim().split(/\s+/);
-              const first = parts[0] || '';
-              const last = parts.length > 1 ? parts.slice(1).join(' ') : '';
-              setDetails((prev) => ({ ...prev, firstName: first, lastName: last }));
+              const stripped = v.replace(/^\s+/, '');
+              setFullName(stripped);
+              const spaceIdx = stripped.indexOf(' ');
+              if (spaceIdx === -1) {
+                setDetails((prev) => ({ ...prev, firstName: stripped, lastName: '' }));
+              } else {
+                setDetails((prev) => ({
+                  ...prev,
+                  firstName: stripped.slice(0, spaceIdx),
+                  lastName: stripped.slice(spaceIdx + 1).trim(),
+                }));
+              }
             }}
             placeholder="Sarah Al Maktoum"
             required

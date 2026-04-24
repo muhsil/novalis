@@ -13,9 +13,11 @@ interface ReturnRequestBody {
  * Submit a return request for a WooCommerce order.
  *
  * We do not trust the client to say "this order belongs to me". Before writing
- * anything, we fetch the order from WooCommerce and verify that either:
- *   - the authenticated customer_id on the order matches the submitted customerId, or
- *   - the order's billing email matches the submitted email (case-insensitive).
+ * anything, we fetch the order from WooCommerce and require BOTH:
+ *   - the submitted email matches the order's billing email (case-insensitive), AND
+ *   - if a customerId is supplied, it also matches order.customer_id.
+ * Email is mandatory; customer_id alone cannot grant ownership because WC
+ * customer ids are sequential and therefore guessable.
  *
  * On success we write a customer-visible order note and set a meta flag so the
  * shop owner can filter by "return_requested" in wp-admin.
@@ -43,11 +45,14 @@ export async function POST(req: Request) {
       meta_data?: any[];
     };
 
-    const ownsByCustomer = customerId && order.customer_id === Number(customerId);
-    const ownsByEmail =
+    // Email match against billing is mandatory — customer_id alone is guessable
+    // (sequential ids) so we never allow it to grant ownership by itself.
+    const emailMatches =
       order.billing?.email?.toLowerCase() === String(email).toLowerCase();
+    const customerMatchesIfSupplied =
+      !customerId || order.customer_id === Number(customerId);
 
-    if (!ownsByCustomer && !ownsByEmail) {
+    if (!emailMatches || !customerMatchesIfSupplied) {
       return NextResponse.json(
         { error: 'This order does not belong to the provided account or email.' },
         { status: 403 }
