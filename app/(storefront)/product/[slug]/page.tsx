@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { wooApi } from '@/lib/woocommerce';
 import { getStoreSettings } from '@/lib/store-settings';
+import { extractArNames } from '@/lib/woo-localize';
+import LocalizedText from '@/components/ui/LocalizedText';
 import Link from 'next/link';
 import EmptyState from '@/components/ui/EmptyState';
 import ProductImageGallery from '@/components/ui/ProductImageGallery';
@@ -132,6 +134,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
   const discount = product.on_sale && regularPrice ? Math.round(((regularPrice - price) / regularPrice) * 100) : 0;
   const mainImage = product.images?.[0]?.src || '';
   const fragranceNotes = extractFragranceNotes(product.description || '');
+  const ar = extractArNames(product);
 
   return (
     <div className="max-w-7xl mx-auto pb-10 max-md:pb-24">
@@ -157,7 +160,7 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
         <span className="shrink-0 text-[#ddd]">/</span>
         <Link href="/shop" className="hover:text-[#191919] transition-colors shrink-0">Shop</Link>
         <span className="shrink-0 text-[#ddd]">/</span>
-        <span className="text-[#191919] truncate">{product.name}</span>
+        <span className="text-[#191919] truncate"><LocalizedText en={product.name} ar={ar.nameAr} /></span>
       </nav>
 
       {/* Product Layout */}
@@ -183,7 +186,9 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
           )}
 
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl font-serif text-[#121212] mb-6 leading-[1.1]">{product.name}</h1>
+          <h1 className="text-3xl md:text-5xl font-serif text-[#121212] mb-6 leading-[1.1]">
+            <LocalizedText en={product.name} ar={ar.nameAr} />
+          </h1>
 
           {/* Price */}
           <PriceDisplay 
@@ -196,8 +201,12 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
 
           {/* Short description */}
           {product.short_description && (
-            <div className="text-[#121212]/70 text-sm md:text-base leading-relaxed mb-6 font-light prose"
-              dangerouslySetInnerHTML={{ __html: product.short_description }} />
+            <LocalizedText
+              en={product.short_description}
+              ar={ar.shortDescriptionAr}
+              html
+              className="text-[#121212]/70 text-sm md:text-base leading-relaxed mb-6 font-light prose"
+            />
           )}
 
           {/* Stock status */}
@@ -251,7 +260,12 @@ export default async function ProductPage({ params: paramsPromise }: { params: P
 
               {product.description && (
                 <AccordionItem title="About This Fragrance">
-                  <div className="prose prose-sm text-[#121212]/70 leading-relaxed font-light py-2" dangerouslySetInnerHTML={{ __html: product.description }} />
+                  <LocalizedText
+                    en={product.description}
+                    ar={ar.descriptionAr}
+                    html
+                    className="prose prose-sm text-[#121212]/70 leading-relaxed font-light py-2"
+                  />
                 </AccordionItem>
               )}
               

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { wooApi } from '@/lib/woocommerce';
 import { getStoreSettings } from '@/lib/store-settings';
+import { extractArNames } from '@/lib/woo-localize';
 import ProductCard from '@/components/ui/ProductCard';
 import EmptyState from '@/components/ui/EmptyState';
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd';
@@ -93,21 +94,26 @@ export default async function ShopPage({
           />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-md:gap-2">
-            {displayProducts.map((p: any) => (
-              <ProductCard
-                key={p.id}
-                slug={p.slug}
-                name={p.name}
-                price={parseFloat(p.price || '0')}
-                regularPrice={p.regular_price ? parseFloat(p.regular_price) : null}
-                imageSrc={p.images?.[0]?.src}
-                categoryName={p.categories?.[0]?.name}
-                onSale={p.on_sale}
-                featured={p.featured}
-                currency={currency}
-                productId={p.id}
-              />
-            ))}
+            {displayProducts.map((p: any) => {
+              const ar = extractArNames(p);
+              return (
+                <ProductCard
+                  key={p.id}
+                  slug={p.slug}
+                  name={p.name}
+                  nameAr={ar.nameAr}
+                  price={parseFloat(p.price || '0')}
+                  regularPrice={p.regular_price ? parseFloat(p.regular_price) : null}
+                  imageSrc={p.images?.[0]?.src}
+                  categoryName={p.categories?.[0]?.name}
+                  categoryNameAr={ar.categoryNameAr}
+                  onSale={p.on_sale}
+                  featured={p.featured}
+                  currency={currency}
+                  productId={p.id}
+                />
+              );
+            })}
           </div>
         )}
       </div>
