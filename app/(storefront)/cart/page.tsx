@@ -6,15 +6,15 @@ import { toast } from '@/components/ui/Toast';
 import QuantitySelector from '@/components/ui/QuantitySelector';
 import EmptyCart from '@/components/checkout/EmptyCart';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 
 import { useAuthStore } from '@/store/useAuthStore';
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity } = useCartStore();
-  const { currency, freeDeliveryThreshold } = useStoreSettings();
-  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
-  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const { freeDeliveryThreshold } = useStoreSettings();
+  const { selectedCurrency, convertPrice } = useCurrencyStore();
+  const currSymbol = useCurrencyLabel();
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   const subtotalAED = items.reduce((s, i) => s + i.price * i.quantity, 0);

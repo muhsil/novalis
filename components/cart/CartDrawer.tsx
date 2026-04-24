@@ -4,7 +4,7 @@ import { toast } from '@/components/ui/Toast';
 import Link from 'next/link';
 import QuantitySelector from '@/components/ui/QuantitySelector';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 
 interface CartDrawerProps {
   open: boolean;
@@ -13,9 +13,9 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ open, onClose }: CartDrawerProps) {
   const { items, removeFromCart, updateQuantity } = useCartStore();
-  const { currency, freeDeliveryThreshold } = useStoreSettings();
-  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
-  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const { freeDeliveryThreshold } = useStoreSettings();
+  const { selectedCurrency, convertPrice } = useCurrencyStore();
+  const currSymbol = useCurrencyLabel();
 
   const subtotalAED = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const subtotal = selectedCurrency !== 'AED' ? convertPrice(subtotalAED) : subtotalAED;

@@ -10,123 +10,136 @@ export interface FeaturePanel {
   cta?: string;
   href?: string;
   image: string;
-  /** Accent background color for the text-side (used when image is half-width). */
-  textBg?: string;
-  /** Text color class applied to title/description inside the panel. */
-  textClass?: string;
-  /** Accent color for CTA text. */
-  ctaClass?: string;
+  /** Tone of the overlaid text card. */
+  tone?: 'dark' | 'light' | 'warm';
 }
 
 interface FeatureGridProps {
-  /** Large top panel. Renders image-right on desktop, image-below on mobile. */
+  /** Large top panel. Full-bleed image with a text card overlaid on the left. */
   top: FeaturePanel;
   /** Two smaller panels rendered side-by-side below the top panel. */
   bottom: [FeaturePanel, FeaturePanel];
 }
 
 /**
- * 3-card feature grid used on the home page. One big top card with a
- * text block on the left and an image on the right, plus two half-width
- * cards underneath that overlay copy on a full-bleed image. Matches the
- * "Shama" layout but uses the site's maroon / secondary palette.
+ * Shama-style 3-card feature section. Each card is a full-bleed image
+ * with a text block anchored to the TOP-LEFT — no heavy gradients,
+ * no split-panel layouts. Matches the reference provided by the brand.
  */
 export default function FeatureGrid({ top, bottom }: FeatureGridProps) {
   return (
-    <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-6 max-md:py-3">
-      <div className="grid grid-cols-2 gap-3 max-md:gap-2">
-        {/* Top — full-width split card */}
-        <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 overflow-hidden bg-[#742938] text-white min-h-[360px] max-md:min-h-[260px]">
-          <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center gap-4 order-2 md:order-1">
-            {top.eyebrow && (
-              <span className="text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase">
-                {top.eyebrow}
-              </span>
-            )}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight text-white">
-              {top.title}
-              {top.titleAccent && (
-                <>
-                  {' '}
-                  <span className="italic text-[#D4AFB9]">{top.titleAccent}</span>
-                </>
-              )}
-            </h2>
-            {top.description && (
-              <p className="text-[#F9F7F2]/70 text-sm md:text-base leading-relaxed font-light max-w-md">
-                {top.description}
-              </p>
-            )}
-            {top.cta && top.href && (
-              <Link
-                href={top.href}
-                className="inline-flex items-center self-start gap-2 mt-2 text-[11px] font-semibold tracking-[0.25em] uppercase text-[#D4AFB9] border border-[#D4AFB9] px-5 py-2.5 hover:bg-[#D4AFB9] hover:text-[#121212] transition-colors"
-              >
-                {top.cta}
-                <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </Link>
-            )}
-          </div>
-          <div className="relative overflow-hidden order-1 md:order-2 min-h-[220px] md:min-h-[420px]">
-            <img
-              src={top.image}
-              alt={top.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
+    <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5">
+      <div className="grid grid-cols-2 gap-4 max-md:gap-2.5">
+        {/* Top — full-width feature panel, image-first with text card on the left */}
+        <FeatureCard
+          panel={top}
+          className="col-span-2 aspect-[21/9] max-md:aspect-[4/3] min-h-[320px] max-md:min-h-[360px]"
+          textBoxCls="md:max-w-[48%] max-md:max-w-full md:inset-y-0 md:start-0 max-md:inset-x-0 max-md:top-0 md:p-10 lg:p-14 max-md:p-5 max-md:pb-8"
+          titleCls="text-3xl md:text-4xl lg:text-[44px] leading-[1.1]"
+          descCls="mt-4 text-[13px] md:text-sm max-w-sm"
+        />
 
-        {/* Bottom — two half-width image cards with overlay copy */}
+        {/* Bottom — two half-width panels */}
         {bottom.map((panel, i) => (
-          <Link
+          <FeatureCard
             key={panel.title + i}
-            href={panel.href || '#'}
-            className="relative col-span-2 md:col-span-1 group overflow-hidden min-h-[300px] max-md:min-h-[240px] block"
-          >
-            <img
-              src={panel.image}
-              alt={panel.title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#121212]/70 via-[#121212]/20 to-transparent" />
-            <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8 text-white">
-              <div>
-                {panel.eyebrow && (
-                  <span className="block text-[#D4AFB9] text-[10px] font-bold tracking-[0.3em] uppercase mb-2">
-                    {panel.eyebrow}
-                  </span>
-                )}
-                <h3 className="text-2xl md:text-3xl font-serif leading-tight">
-                  {panel.title}
-                  {panel.titleAccent && (
-                    <>
-                      {' '}
-                      <span className="italic text-[#D4AFB9]">{panel.titleAccent}</span>
-                    </>
-                  )}
-                </h3>
-                {panel.description && (
-                  <p className="mt-2 text-[#F9F7F2]/80 text-sm leading-relaxed font-light max-w-xs">
-                    {panel.description}
-                  </p>
-                )}
-              </div>
-              {panel.cta && (
-                <span className="inline-flex items-center gap-2 self-start text-[11px] font-semibold tracking-[0.25em] uppercase text-[#D4AFB9] border border-[#D4AFB9]/70 bg-[#121212]/30 px-4 py-2 backdrop-blur-sm group-hover:bg-[#D4AFB9] group-hover:text-[#121212] transition-colors">
-                  {panel.cta}
-                  <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                  </svg>
-                </span>
-              )}
-            </div>
-          </Link>
+            panel={panel}
+            className="col-span-2 md:col-span-1 aspect-[4/3] max-md:aspect-[5/4] min-h-[320px]"
+            textBoxCls="inset-x-0 top-0 p-6 md:p-8"
+            titleCls="text-2xl md:text-[32px] leading-[1.1]"
+            descCls="mt-2.5 text-[13px] max-w-xs"
+          />
         ))}
       </div>
     </section>
   );
+}
+
+interface FeatureCardProps {
+  panel: FeaturePanel;
+  className: string;
+  textBoxCls: string;
+  titleCls: string;
+  descCls: string;
+}
+
+function FeatureCard({ panel, className, textBoxCls, titleCls, descCls }: FeatureCardProps) {
+  const tone = panel.tone || 'dark';
+  const textColor =
+    tone === 'light' ? 'text-[#2A1E1A]' : 'text-white';
+  const descColor =
+    tone === 'light' ? 'text-[#2A1E1A]/75' : 'text-white/85';
+  const ctaCls =
+    tone === 'light'
+      ? 'bg-[#2A1E1A] text-white hover:bg-[#742938]'
+      : tone === 'warm'
+        ? 'bg-[#d2c7bf] text-[#2A1E1A] hover:bg-white'
+        : 'bg-[#d2c7bf] text-[#2A1E1A] hover:bg-white';
+  const eyebrowColor =
+    tone === 'light' ? 'text-[#742938]' : 'text-[#d2c7bf]';
+
+  const inner = (
+    <>
+      <img
+        src={panel.image}
+        alt={panel.title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+      {/* Soft text-side wash so copy is readable regardless of photo subject.
+          Positioned to the TOP-LEFT on bottom cards, full LEFT-column on top card. */}
+      {tone !== 'light' && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(100deg, rgba(20,14,12,0.62) 0%, rgba(20,14,12,0.35) 40%, rgba(20,14,12,0) 60%)',
+          }}
+        />
+      )}
+      <div className={`absolute ${textBoxCls} flex flex-col justify-start z-10`}>
+        {panel.eyebrow && (
+          <span className={`block ${eyebrowColor} text-[10px] font-bold tracking-[0.3em] uppercase mb-3`}>
+            {panel.eyebrow}
+          </span>
+        )}
+        <h3 className={`${titleCls} font-serif ${textColor} tracking-tight`}>
+          {panel.title}
+          {panel.titleAccent && (
+            <>
+              {' '}
+              <span className="italic">{panel.titleAccent}</span>
+            </>
+          )}
+        </h3>
+        {panel.description && (
+          <p className={`${descColor} ${descCls} leading-relaxed font-light`}>
+            {panel.description}
+          </p>
+        )}
+        {panel.cta && panel.href && (
+          <span
+            className={`inline-flex items-center gap-2 self-start mt-auto pt-5 text-[11px] font-semibold tracking-[0.25em] uppercase px-5 py-3 ${ctaCls} transition-colors`}
+            style={{ marginTop: 'auto' }}
+          >
+            {panel.cta}
+            <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+          </span>
+        )}
+      </div>
+    </>
+  );
+
+  const cardCls = `relative group overflow-hidden block ${className}`;
+
+  if (panel.href) {
+    return (
+      <Link href={panel.href} className={cardCls}>
+        {inner}
+      </Link>
+    );
+  }
+  return <div className={cardCls}>{inner}</div>;
 }

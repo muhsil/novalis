@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useLocaleStore } from './useLocaleStore';
 
 export interface CurrencyOption {
   code: string;
@@ -62,3 +63,19 @@ export const useCurrencyStore = create<CurrencyState>()(
     }
   )
 );
+
+/**
+ * Returns the user-facing currency label for the active locale:
+ * English → the ISO code (AED, USD, OMR, SAR, …) so shoppers never
+ * see an unfamiliar Arabic-script glyph. Arabic → the localized
+ * symbol (د.إ, ر.س, …). Use this everywhere a currency badge is
+ * rendered next to a price — don't call `getSymbol()` directly.
+ */
+export function useCurrencyLabel(): string {
+  const selected = useCurrencyStore((s) => s.selectedCurrency);
+  const currencies = useCurrencyStore((s) => s.currencies);
+  const locale = useLocaleStore((s) => s.locale);
+  const curr = currencies.find((c) => c.code === selected);
+  if (locale === 'ar') return curr?.symbol || selected;
+  return selected;
+}
