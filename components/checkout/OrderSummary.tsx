@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { CartItem } from '@/store/useCartStore';
-import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -11,9 +10,8 @@ interface OrderSummaryProps {
 }
 
 export default function OrderSummary({ items, subtotal }: OrderSummaryProps) {
-  const { currency } = useStoreSettings();
-  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
-  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const { selectedCurrency, convertPrice } = useCurrencyStore();
+  const currSymbol = useCurrencyLabel();
   const disp = (n: number) => selectedCurrency !== 'AED' ? convertPrice(n) : n;
 
   return (

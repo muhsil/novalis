@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useLocaleStore } from '@/store/useLocaleStore';
 
 interface PriceDisplayProps {
   amount: number;
@@ -18,11 +19,17 @@ export default function PriceDisplay({
   className = '',
   size = 'md',
 }: PriceDisplayProps) {
-  const { convertPrice, getSymbol } = useCurrencyStore();
-  
+  const { convertPrice, selectedCurrency, currencies } = useCurrencyStore();
+  const locale = useLocaleStore((s) => s.locale);
+
   const displayAmount = convertPrice(amount);
   const displayOriginal = originalAmount ? convertPrice(originalAmount) : null;
-  const curr = getSymbol();
+
+  // EN → always show Roman currency code (AED, USD, OMR, SAR, …) so the
+  // shopper never sees an unfamiliar Arabic-script symbol. AR → keep the
+  // localized symbol (د.إ, ر.س, …).
+  const currObj = currencies.find((c) => c.code === selectedCurrency) || currencies[0];
+  const curr = locale === 'ar' ? currObj?.symbol || selectedCurrency : selectedCurrency;
 
   const sizeClasses = {
     sm: 'text-[15px]',
@@ -36,15 +43,15 @@ export default function PriceDisplay({
       {onSale && displayOriginal ? (
         <>
           <span className={`${sizeClasses[size]} font-serif font-medium text-[#121212] tracking-wide`}>
-            {curr} {displayAmount.toFixed(0)}
+            <bdi>{curr}</bdi> {displayAmount.toFixed(0)}
           </span>
           <span className="text-[13px] md:text-sm text-[#888888] line-through font-light">
-            {curr} {displayOriginal.toFixed(0)}
+            <bdi>{curr}</bdi> {displayOriginal.toFixed(0)}
           </span>
         </>
       ) : (
         <span className={`${sizeClasses[size]} font-serif font-medium text-[#121212] tracking-wide`}>
-          {curr} {displayAmount.toFixed(0)}
+          <bdi>{curr}</bdi> {displayAmount.toFixed(0)}
         </span>
       )}
     </div>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLocaleStore } from '@/store/useLocaleStore';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
 import { t } from '@/lib/i18n/translations';
 
@@ -15,9 +15,9 @@ const TRUST_ICONS = {
 
 export default function TrustBanner() {
   const locale = useLocaleStore((s) => s.locale);
-  const { convertPrice, getSymbol } = useCurrencyStore();
+  const { convertPrice } = useCurrencyStore();
   const { freeDeliveryThreshold } = useStoreSettings();
-  const currSymbol = getSymbol();
+  const currSymbol = useCurrencyLabel();
   const convertedThreshold = String(Math.round(convertPrice(freeDeliveryThreshold)));
 
   const trustItems = [

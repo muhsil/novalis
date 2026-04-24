@@ -17,13 +17,12 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import SectionCard from '@/components/ui/SectionCard';
 import { useStoreSettings } from '@/components/providers/StoreSettingsProvider';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useCurrencyStore, useCurrencyLabel } from '@/store/useCurrencyStore';
 
 function CheckoutContent() {
   const { items, clearCart } = useCartStore();
-  const { currency } = useStoreSettings();
-  const { selectedCurrency, convertPrice, getSymbol } = useCurrencyStore();
-  const currSymbol = selectedCurrency !== 'AED' ? getSymbol() : currency;
+  const { selectedCurrency, convertPrice } = useCurrencyStore();
+  const currSymbol = useCurrencyLabel();
   const authCustomer = useAuthStore((s) => s.customer);
 
   const [orderCreated, setOrderCreated] = useState(false);
