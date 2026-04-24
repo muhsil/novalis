@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { wooApi } from '@/lib/woocommerce';
+import { verifyCustomerOwnership } from '@/lib/verifyCustomer';
 
 export interface SavedAddress {
   id: string;
@@ -22,9 +23,14 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const customerId = searchParams.get('customer_id');
+    const email = searchParams.get('email') || '';
 
     if (!customerId) {
       return NextResponse.json({ error: 'Customer ID required' }, { status: 400 });
+    }
+
+    if (!(await verifyCustomerOwnership(customerId, email))) {
+      return NextResponse.json({ addresses: [] }, { status: 403 });
     }
 
     const response = await wooApi.get(`/customers/${customerId}?_=${Date.now()}`);
@@ -93,10 +99,14 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { customerId, address } = body as { customerId: number; address: SavedAddress };
+    const { customerId, address, authEmail } = body as { customerId: number; address: SavedAddress; authEmail?: string };
 
     if (!customerId || !address) {
       return NextResponse.json({ error: 'Customer ID and address required' }, { status: 400 });
+    }
+
+    if (!(await verifyCustomerOwnership(customerId, authEmail))) {
+      return NextResponse.json({ error: 'Not authorized' }, { status: 403 });
     }
 
     // Fetch current addresses
@@ -143,10 +153,14 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { customerId, address } = body as { customerId: number; address: SavedAddress };
+    const { customerId, address, authEmail } = body as { customerId: number; address: SavedAddress; authEmail?: string };
 
     if (!customerId || !address?.id) {
       return NextResponse.json({ error: 'Customer ID and address ID required' }, { status: 400 });
+    }
+
+    if (!(await verifyCustomerOwnership(customerId, authEmail))) {
+      return NextResponse.json({ error: 'Not authorized' }, { status: 403 });
     }
 
     // Handle billing/shipping updates natively
@@ -225,9 +239,14 @@ export async function DELETE(req: Request) {
     const { searchParams } = new URL(req.url);
     const customerId = searchParams.get('customer_id');
     const addressId = searchParams.get('address_id');
+    const email = searchParams.get('email') || '';
 
     if (!customerId || !addressId) {
       return NextResponse.json({ error: 'Customer ID and address ID required' }, { status: 400 });
+    }
+
+    if (!(await verifyCustomerOwnership(customerId, email))) {
+      return NextResponse.json({ error: 'Not authorized' }, { status: 403 });
     }
 
     // Cannot delete billing/shipping base addresses

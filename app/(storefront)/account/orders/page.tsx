@@ -25,8 +25,12 @@ export default function OrdersPage() {
 
   useEffect(() => {
     async function fetchOrders() {
+      if (!customer?.id || !customer?.email) {
+        setLoading(false);
+        return;
+      }
       try {
-        const url = customer?.id ? `/api/woo-orders?customer_id=${customer.id}` : '/api/woo-orders';
+        const url = `/api/woo-orders?customer_id=${customer.id}&email=${encodeURIComponent(customer.email)}`;
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
@@ -39,7 +43,7 @@ export default function OrdersPage() {
       }
     }
     fetchOrders();
-  }, []);
+  }, [customer?.id, customer?.email]);
 
   return (
     <AccountLayout title="My Orders">
