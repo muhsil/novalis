@@ -36,9 +36,9 @@ export default function ProductSlider({
   const navBtnCls = "w-10 h-10 flex items-center justify-center rounded-full border border-[#121212]/20 text-[#121212] hover:border-[#D4AFB9] hover:bg-[#742938] hover:text-white transition-all duration-300";
 
   return (
-    <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 py-8">
-      <div className="flex items-center justify-between mb-8 max-md:mb-6">
-        <h2 className="text-4xl max-md:text-2xl font-serif text-[#121212]">
+    <section className="fade-up max-w-7xl mx-auto px-6 max-md:px-4 py-8 max-md:py-4">
+      <div className="flex items-center justify-between mb-8 max-md:mb-4">
+        <h2 className="text-4xl max-md:text-xl font-serif text-[#121212]">
           {title1} {title2 && <span className="italic text-[#D4AFB9]">{title2}</span>}
         </h2>
         <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export default function ProductSlider({
       </Swiper>
 
       {viewAllLink && viewAllText && (
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-6 max-md:mt-4">
           <Link
             href={viewAllLink}
             className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] uppercase text-[#742938] hover:text-[#D4AFB9] transition-colors group"

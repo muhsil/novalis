@@ -41,8 +41,8 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
   return (
     <div className="relative group">
       {/* Slider Header w/ Controls */}
-      <div className="flex items-center justify-between mb-8 max-md:mb-6">
-        <h2 className="text-4xl max-md:text-2xl font-serif text-[#121212]">
+      <div className="flex items-center justify-between mb-8 max-md:mb-4">
+        <h2 className="text-4xl max-md:text-xl font-serif text-[#121212]">
           {t(locale, 'categories.title_1')} <span className="italic text-[#D4AFB9]">{t(locale, 'categories.title_2')}</span>
         </h2>
         <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function CategorySlider({ categories }: CategorySliderProps) {
           return (
             <SwiperSlide key={cat.id} className="h-auto">
               <Link href={`/shop?category=${cat.slug}`} className="group/card block cursor-pointer">
-                <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#742938] ring-1 ring-[#E8E4DE]/20 hover:shadow-2xl transition-all duration-500">
+                <div className="relative overflow-hidden aspect-square md:aspect-[4/5] bg-[#742938] ring-1 ring-[#E8E4DE]/20 hover:shadow-2xl transition-all duration-500">
                   {cat.image?.src ? (
                     <img
                       src={cat.image.src}
