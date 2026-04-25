@@ -53,20 +53,20 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals }:
         <img
           src="/hero-perfume.png"
           alt={t(locale, 'hero.title_1')}
-          className="w-full h-[60vh] min-h-[400px] max-md:h-[55vh] max-md:min-h-[300px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+          className="w-full h-[60vh] min-h-[400px] max-md:h-[42vh] max-md:min-h-[260px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
         />
       </Link>
 
       {/* Categories */}
       {topCategories.length > 0 && (
-        <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-6 max-md:py-4">
+        <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-6 max-md:py-3">
           <CategorySlider categories={topCategories} />
         </section>
       )}
 
       {/* Best Selling Fragrances */}
       {bestSellers.length > 0 && (
-        <div className="bg-white py-4 max-md:py-2">
+        <div className="bg-white py-4 max-md:py-1">
           <ProductSlider
             products={bestSellers}
             locale={locale}
@@ -114,7 +114,7 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals }:
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <div className="bg-[#F9F7F2] py-4 max-md:py-2">
+        <div className="bg-[#F9F7F2] py-4 max-md:py-1">
           <ProductSlider
             products={newArrivals.slice(0, 10)}
             locale={locale}
@@ -128,8 +128,8 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals }:
       )}
 
       {/* FAQ Section */}
-      <section className="fade-up max-w-5xl mx-auto px-4 max-md:px-4 pt-6 max-md:pt-4 pb-6 max-md:pb-24">
-        <h2 className="text-2xl max-md:text-lg font-serif text-[#121212] text-center italic mb-6 max-md:mb-4">
+      <section className="fade-up max-w-5xl mx-auto px-4 max-md:px-4 pt-6 max-md:pt-3 pb-6 max-md:pb-24">
+        <h2 className="text-2xl max-md:text-lg font-serif text-[#121212] text-center italic mb-6 max-md:mb-3">
           {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
         </h2>
         <div className="grid gap-0">

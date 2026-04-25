@@ -28,15 +28,15 @@ interface FeatureGridProps {
  */
 export default function FeatureGrid({ top, bottom }: FeatureGridProps) {
   return (
-    <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-8 max-md:py-5">
+    <section className="fade-up max-w-7xl mx-auto px-4 max-md:px-3 py-8 max-md:py-4">
       <div className="grid grid-cols-2 gap-4 max-md:gap-2.5">
         {/* Top — full-width feature panel, image-first with text card on the left */}
         <FeatureCard
           panel={top}
-          className="col-span-2 aspect-[21/9] max-md:aspect-[4/3] min-h-[320px] max-md:min-h-[360px]"
-          textBoxCls="md:max-w-[48%] max-md:max-w-full md:inset-y-0 md:start-0 max-md:inset-x-0 max-md:top-0 md:p-10 lg:p-14 max-md:p-5 max-md:pb-8"
-          titleCls="text-3xl md:text-4xl lg:text-[44px] leading-[1.1]"
-          descCls="mt-4 text-[13px] md:text-sm max-w-sm"
+          className="col-span-2 aspect-[21/9] max-md:aspect-[4/3] min-h-[320px] max-md:min-h-[260px]"
+          textBoxCls="md:max-w-[48%] max-md:max-w-full inset-0 md:p-10 lg:p-14 max-md:p-5"
+          titleCls="text-3xl md:text-4xl lg:text-[44px] max-md:text-2xl leading-[1.1]"
+          descCls="mt-4 max-md:mt-2 text-[13px] md:text-sm max-md:text-xs max-w-sm"
         />
 
         {/* Bottom — two half-width panels */}
@@ -44,10 +44,10 @@ export default function FeatureGrid({ top, bottom }: FeatureGridProps) {
           <FeatureCard
             key={panel.title + i}
             panel={panel}
-            className="col-span-2 md:col-span-1 aspect-[4/3] max-md:aspect-[5/4] min-h-[320px]"
-            textBoxCls="inset-x-0 top-0 p-6 md:p-8"
-            titleCls="text-2xl md:text-[32px] leading-[1.1]"
-            descCls="mt-2.5 text-[13px] max-w-xs"
+            className="col-span-2 md:col-span-1 aspect-[4/3] max-md:aspect-[5/4] min-h-[320px] max-md:min-h-[240px]"
+            textBoxCls="inset-0 p-6 md:p-8 max-md:p-4"
+            titleCls="text-2xl md:text-[32px] max-md:text-xl leading-[1.1]"
+            descCls="mt-2.5 max-md:mt-1.5 text-[13px] max-md:text-xs max-w-xs"
           />
         ))}
       </div>

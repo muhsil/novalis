@@ -52,7 +52,7 @@ export default function ProductCard({
           <img
             src={imageSrc}
             alt={displayName}
-            className="w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-1000 ease-out"
+            className="w-full h-full object-contain p-6 max-md:p-3 mix-blend-multiply group-hover:scale-110 transition-transform duration-1000 ease-out"
             loading="lazy"
           />
         ) : (
