@@ -48,10 +48,15 @@ function useScrollReveal() {
 }
 
 function toFeaturePanel(card: FeatureCard): FeaturePanel {
+  let title = card.title;
+  const accent = card.title_accent;
+  if (accent && title.toLowerCase().endsWith(accent.toLowerCase())) {
+    title = title.slice(0, title.length - accent.length).trim();
+  }
   return {
     eyebrow: card.eyebrow || undefined,
-    title: card.title.replace(card.title_accent, '').trim(),
-    titleAccent: card.title_accent || undefined,
+    title,
+    titleAccent: accent || undefined,
     description: card.description || undefined,
     cta: card.cta_text || undefined,
     href: card.link || undefined,
