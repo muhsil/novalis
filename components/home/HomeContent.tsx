@@ -8,6 +8,7 @@ import FeatureGrid from '@/components/ui/page/FeatureGrid';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { t } from '@/lib/i18n/translations';
+import type { HeroBanner } from '@/lib/hero-banners';
 
 type Category = {
   id: number;
@@ -22,6 +23,7 @@ interface HomeContentProps {
   topCategories: Category[];
   bestSellers: Record<string, unknown>[];
   newArrivals: Record<string, unknown>[];
+  heroBanners?: HeroBanner[];
 }
 
 function useScrollReveal() {
@@ -40,7 +42,7 @@ function useScrollReveal() {
   return ref;
 }
 
-export default function HomeContent({ topCategories, bestSellers, newArrivals }: HomeContentProps) {
+export default function HomeContent({ topCategories, bestSellers, newArrivals, heroBanners = [] }: HomeContentProps) {
   const locale = useLocaleStore((s) => s.locale);
   const { getSymbol } = useCurrencyStore();
   const currSymbol = getSymbol();
@@ -48,14 +50,41 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals }:
 
   return (
     <div ref={wrapRef}>
-      {/* Hero Banner — image only */}
-      <Link href="/shop" className="block relative w-full overflow-hidden bg-[#742938] group">
-        <img
-          src="/hero-perfume.png"
-          alt={t(locale, 'hero.title_1')}
-          className="w-full h-[60vh] min-h-[400px] max-md:h-[42vh] max-md:min-h-[260px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
-        />
-      </Link>
+      {/* Hero Banner */}
+      {heroBanners.length > 0 ? (
+        <Link
+          href={heroBanners[0].link || '/shop'}
+          className="block relative w-full overflow-hidden bg-[#742938] group"
+        >
+          <img
+            src={heroBanners[0].image}
+            alt={heroBanners[0].title}
+            className="w-full h-[60vh] min-h-[400px] max-md:h-[42vh] max-md:min-h-[260px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+          />
+          {(heroBanners[0].subtitle || heroBanners[0].button_text) && (
+            <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 max-md:pb-8 bg-gradient-to-t from-black/40 to-transparent">
+              {heroBanners[0].subtitle && (
+                <p className="text-white text-lg max-md:text-sm font-light tracking-widest uppercase mb-4 max-md:mb-3 text-center px-4">
+                  {heroBanners[0].subtitle}
+                </p>
+              )}
+              {heroBanners[0].button_text && (
+                <span className="inline-block border border-white text-white text-sm max-md:text-xs tracking-widest uppercase px-8 max-md:px-5 py-2.5 max-md:py-2 hover:bg-white hover:text-[#742938] transition-colors">
+                  {heroBanners[0].button_text}
+                </span>
+              )}
+            </div>
+          )}
+        </Link>
+      ) : (
+        <Link href="/shop" className="block relative w-full overflow-hidden bg-[#742938] group">
+          <img
+            src="/hero-perfume.png"
+            alt={t(locale, 'hero.title_1')}
+            className="w-full h-[60vh] min-h-[400px] max-md:h-[42vh] max-md:min-h-[260px] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+          />
+        </Link>
+      )}
 
       {/* Categories */}
       {topCategories.length > 0 && (
