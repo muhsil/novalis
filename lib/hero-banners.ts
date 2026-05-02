@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { cache } from 'react';
-
-const WP_URL = process.env.NEXT_PUBLIC_WP_URL || 'https://cms.shapehive.in';
+import { wpApi } from './woocommerce';
 
 export interface HeroBanner {
   id: number;
@@ -15,9 +13,8 @@ export interface HeroBanner {
 
 async function loadHeroBanners(): Promise<HeroBanner[]> {
   try {
-    const { data } = await axios.get<HeroBanner[]>(
-      `${WP_URL}/wp-json/novalis/v1/hero-banners`,
-      { timeout: 6000 }
+    const { data } = await wpApi.get<HeroBanner[]>(
+      '/novalis/v1/hero-banners'
     );
     return data;
   } catch {
