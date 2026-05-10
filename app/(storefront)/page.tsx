@@ -1,6 +1,8 @@
 import { wooApi } from '@/lib/woocommerce';
 import { getStoreSettings } from '@/lib/store-settings';
 import { getHeroBanners } from '@/lib/hero-banners';
+import { getFeatureCards } from '@/lib/feature-cards';
+import { getHomepageFaqs } from '@/lib/faqs';
 import HomeContent from '@/components/home/HomeContent';
 
 export const revalidate = 60;
@@ -34,12 +36,14 @@ async function getAllProducts() {
 }
 
 export default async function HomePage() {
-  const [featured, categories, allProducts, settings, heroBanners] = await Promise.all([
+  const [featured, categories, allProducts, settings, heroBanners, featureCards, faqs] = await Promise.all([
     getFeaturedProducts(),
     getCategories(),
     getAllProducts(),
     getStoreSettings(),
     getHeroBanners(),
+    getFeatureCards(),
+    getHomepageFaqs(),
   ]);
   const { currency } = settings;
 
@@ -61,6 +65,8 @@ export default async function HomePage() {
       bestSellers={bestSellers}
       newArrivals={newArrivals}
       heroBanners={heroBanners}
+      featureCards={featureCards}
+      faqs={faqs}
     />
   );
 }

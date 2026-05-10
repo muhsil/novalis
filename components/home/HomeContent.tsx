@@ -9,6 +9,9 @@ import { useLocaleStore } from '@/store/useLocaleStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { t } from '@/lib/i18n/translations';
 import type { HeroBanner } from '@/lib/hero-banners';
+import type { FeatureCard } from '@/lib/feature-cards';
+import type { HomepageFaq } from '@/lib/faqs';
+import type { FeaturePanel } from '@/components/ui/page/FeatureGrid';
 
 type Category = {
   id: number;
@@ -24,6 +27,8 @@ interface HomeContentProps {
   bestSellers: Record<string, unknown>[];
   newArrivals: Record<string, unknown>[];
   heroBanners?: HeroBanner[];
+  featureCards?: FeatureCard[];
+  faqs?: HomepageFaq[];
 }
 
 function useScrollReveal() {
@@ -42,11 +47,32 @@ function useScrollReveal() {
   return ref;
 }
 
-export default function HomeContent({ topCategories, bestSellers, newArrivals, heroBanners = [] }: HomeContentProps) {
+function toFeaturePanel(card: FeatureCard): FeaturePanel {
+  let title = card.title;
+  const accent = card.title_accent;
+  if (accent && title.toLowerCase().endsWith(accent.toLowerCase())) {
+    title = title.slice(0, title.length - accent.length).trim();
+  }
+  return {
+    eyebrow: card.eyebrow || undefined,
+    title,
+    titleAccent: accent || undefined,
+    description: card.description || undefined,
+    cta: card.cta_text || undefined,
+    href: card.link || undefined,
+    image: card.image,
+    tone: card.tone as FeaturePanel['tone'],
+  };
+}
+
+export default function HomeContent({ topCategories, bestSellers, newArrivals, heroBanners = [], featureCards = [], faqs = [] }: HomeContentProps) {
   const locale = useLocaleStore((s) => s.locale);
   const { getSymbol } = useCurrencyStore();
   const currSymbol = getSymbol();
   const wrapRef = useScrollReveal();
+
+  const topCard = featureCards.find((c) => c.position === 'top');
+  const bottomCards = featureCards.filter((c) => c.position === 'bottom');
 
   return (
     <div ref={wrapRef}>
@@ -108,9 +134,9 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals, h
         </div>
       )}
 
-      {/* Feature grid — art/bespoke/gift (replaces oud + brand banners) */}
+      {/* Feature grid — art/bespoke/gift */}
       <FeatureGrid
-        top={{
+        top={topCard ? toFeaturePanel(topCard) : {
           eyebrow: t(locale, 'feature.legacy_eyebrow'),
           title: t(locale, 'feature.legacy_title'),
           titleAccent: t(locale, 'feature.legacy_title_accent'),
@@ -119,26 +145,29 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals, h
           href: '/about',
           image: '/novalis-brand-story.png',
         }}
-        bottom={[
-          {
-            eyebrow: t(locale, 'feature.bespoke_eyebrow'),
-            title: t(locale, 'feature.bespoke_title'),
-            titleAccent: t(locale, 'feature.bespoke_title_accent'),
-            description: t(locale, 'feature.bespoke_desc'),
-            cta: t(locale, 'feature.bespoke_cta'),
-            href: '/shop?category=oud-collection',
-            image: '/novalis-about.png',
-          },
-          {
-            eyebrow: t(locale, 'feature.gift_eyebrow'),
-            title: t(locale, 'feature.gift_title'),
-            titleAccent: t(locale, 'feature.gift_title_accent'),
-            description: t(locale, 'feature.gift_desc'),
-            cta: t(locale, 'feature.gift_cta'),
-            href: '/shop?category=luxury-fragrances',
-            image: '/cat-wedding.png',
-          },
-        ]}
+        bottom={bottomCards.length >= 2
+          ? [toFeaturePanel(bottomCards[0]), toFeaturePanel(bottomCards[1])]
+          : [
+              {
+                eyebrow: t(locale, 'feature.bespoke_eyebrow'),
+                title: t(locale, 'feature.bespoke_title'),
+                titleAccent: t(locale, 'feature.bespoke_title_accent'),
+                description: t(locale, 'feature.bespoke_desc'),
+                cta: t(locale, 'feature.bespoke_cta'),
+                href: '/shop?category=oud-collection',
+                image: '/novalis-about.png',
+              },
+              {
+                eyebrow: t(locale, 'feature.gift_eyebrow'),
+                title: t(locale, 'feature.gift_title'),
+                titleAccent: t(locale, 'feature.gift_title_accent'),
+                description: t(locale, 'feature.gift_desc'),
+                cta: t(locale, 'feature.gift_cta'),
+                href: '/shop?category=luxury-fragrances',
+                image: '/cat-wedding.png',
+              },
+            ]
+        }
       />
 
       {/* New Arrivals */}
@@ -162,12 +191,15 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals, h
           {t(locale, 'faq.title_1')} {t(locale, 'faq.title_2')}
         </h2>
         <div className="grid gap-0">
-          {[
-            { q: t(locale, 'faq.q1'), a: t(locale, 'faq.a1') },
-            { q: t(locale, 'faq.q2'), a: t(locale, 'faq.a2') },
-            { q: t(locale, 'faq.q3'), a: t(locale, 'faq.a3') },
-            { q: t(locale, 'faq.q4'), a: t(locale, 'faq.a4') },
-          ].map((item) => (
+          {(faqs.length > 0
+            ? faqs.map((f) => ({ q: f.question, a: f.answer }))
+            : [
+                { q: t(locale, 'faq.q1'), a: t(locale, 'faq.a1') },
+                { q: t(locale, 'faq.q2'), a: t(locale, 'faq.a2') },
+                { q: t(locale, 'faq.q3'), a: t(locale, 'faq.a3') },
+                { q: t(locale, 'faq.q4'), a: t(locale, 'faq.a4') },
+              ]
+          ).map((item) => (
             <details key={item.q} className="bg-transparent border-b border-[#E8E4DE] group">
               <summary className="flex items-center justify-between py-3.5 cursor-pointer text-sm font-semibold tracking-wide text-[#121212] hover:text-[#742938] transition-colors">
                 {item.q}
