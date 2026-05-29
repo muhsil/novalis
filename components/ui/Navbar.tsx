@@ -16,8 +16,10 @@ const NAV_LINKS = [
   { href: '/shop?category=perfumes', labelKey: 'nav.perfumes', key: 'perfumes' },
   { href: '/shop?category=luxury-fragrances', labelKey: 'nav.luxury_fragrances', key: 'luxury-fragrances' },
   { href: '/shop?category=oud-collection', labelKey: 'nav.oud_collection', key: 'oud-collection' },
+  { href: '/shop?category=natural-oud', labelKey: 'nav.natural_oud', key: 'natural-oud' },
   { href: '/shop?category=oils', labelKey: 'nav.oils', key: 'oils' },
   { href: '/shop?category=dokhun', labelKey: 'nav.dokhun', key: 'dokhun' },
+  { href: '/shop?category=oud-dakhoon', labelKey: 'nav.oud_dakhoon', key: 'oud-dakhoon' },
   { href: '/shop?category=all-over-spray', labelKey: 'nav.all_over_spray', key: 'all-over-spray' },
 ];
 

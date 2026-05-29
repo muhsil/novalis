@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 
 const CATEGORY_ICONS: Record<string, string> = {
   perfumes: 'perfumes', 'luxury-fragrances': 'luxury-fragrances', 'oud-collection': 'oud-collection',
+  'natural-oud': 'oud-collection', 'oud-dakhoon': 'dokhun',
   oils: 'oils', dokhun: 'dokhun', 'all-over-spray': 'all-over-spray',
   default: 'all',
 };
