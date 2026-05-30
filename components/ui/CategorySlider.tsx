@@ -25,8 +25,8 @@ interface CategorySliderProps {
 
 const CATEGORY_GRADIENTS: Record<string, string> = {
   perfumes: 'from-[#742938] to-[#1A1A1A]',
-  'luxury-fragrances': 'from-[#0A0A0A] to-[#141414]',
-  'oud-collection': 'from-[#121110] to-[#1C1A18]',
+  'natural-oud': 'from-[#121110] to-[#1C1A18]',
+  'oud-dakhoon': 'from-[#0A0A0A] to-[#141414]',
   oils: 'from-[#101211] to-[#181C1A]',
   dokhun: 'from-[#141212] to-[#1E1A1A]',
   'all-over-spray': 'from-[#121214] to-[#1A1A1E]',
