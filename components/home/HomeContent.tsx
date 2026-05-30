@@ -154,7 +154,7 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals, h
                 titleAccent: t(locale, 'feature.bespoke_title_accent'),
                 description: t(locale, 'feature.bespoke_desc'),
                 cta: t(locale, 'feature.bespoke_cta'),
-                href: '/shop?category=oud-collection',
+                href: '/shop?category=natural-oud',
                 image: '/novalis-about.png',
               },
               {
@@ -163,7 +163,7 @@ export default function HomeContent({ topCategories, bestSellers, newArrivals, h
                 titleAccent: t(locale, 'feature.gift_title_accent'),
                 description: t(locale, 'feature.gift_desc'),
                 cta: t(locale, 'feature.gift_cta'),
-                href: '/shop?category=luxury-fragrances',
+                href: '/shop?category=perfumes',
                 image: '/cat-wedding.png',
               },
             ]

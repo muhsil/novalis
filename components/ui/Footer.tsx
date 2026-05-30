@@ -12,10 +12,10 @@ const SOCIAL_LINKS = [
 const SHOP_LINKS = [
   { labelKey: 'footer.all_fragrances', href: '/shop' },
   { labelKey: 'nav.perfumes', href: '/shop?category=perfumes' },
-  { labelKey: 'nav.oud_collection', href: '/shop?category=oud-collection' },
-  { labelKey: 'nav.natural_oud', href: '/shop?category=natural-oud' },
-  { labelKey: 'nav.luxury_fragrances', href: '/shop?category=luxury-fragrances' },
+  { labelKey: 'nav.all_over_spray', href: '/shop?category=all-over-spray' },
   { labelKey: 'nav.oils', href: '/shop?category=oils' },
+  { labelKey: 'nav.oud_dakhoon', href: '/shop?category=oud-dakhoon' },
+  { labelKey: 'nav.natural_oud', href: '/shop?category=natural-oud' },
 ];
 
 const COMPANY_LINKS = [
