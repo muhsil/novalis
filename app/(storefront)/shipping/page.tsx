@@ -42,6 +42,14 @@ const INTL_RATES = {
   ],
 } as const;
 
+const CUSTOMS_INFO = [
+  { destination: 'GCC Countries', duty: '5%', tax: '0–15% VAT', basis: 'CIF', note: 'VAT varies by country (e.g. 0% Kuwait, 5% Bahrain/Oman, 15% Saudi Arabia)' },
+  { destination: 'United Kingdom', duty: '0%', tax: '20% VAT', basis: 'CIF', note: 'Perfume (HS 3303) enters UK duty-free. VAT applies on orders over £135' },
+  { destination: 'United States', duty: '0%', tax: 'No federal tax', basis: 'FOB', note: 'Perfume enters duty-free. No customs charges on shipments under $800' },
+  { destination: 'Canada', duty: '6.5%', tax: '5% GST', basis: 'CIF', note: 'Duty + GST apply on shipments over CAD 20' },
+  { destination: 'Australia', duty: '5%', tax: '10% GST', basis: 'CIF', note: 'Duty + GST apply on shipments over AUD 1,000' },
+];
+
 export default async function ShippingPage() {
   const { currency } = await getStoreSettings();
 
@@ -155,7 +163,48 @@ export default async function ShippingPage() {
             </table>
           </div>
           <p className="text-[11px] text-[#121212]/40 mt-6 font-light text-center">
-            Rates effective October 2024 via Zajel Express. Customs duties may apply at destination. For packages over 3 kg, <a href="https://wa.me/971563554303" className="text-[#742938] font-semibold hover:underline">contact us</a> for a quote.
+            Rates effective October 2024 via Zajel Express. For packages over 3 kg, <a href="https://wa.me/971563554303" className="text-[#742938] font-semibold hover:underline">contact us</a> for a quote.
+          </p>
+        </div>
+      </section>
+
+      {/* Customs & Duties */}
+      <section className="max-w-6xl mx-auto px-6 mb-12 max-md:mb-8">
+        <div className="bg-white border border-[#E8E4DE] p-8 max-md:p-5">
+          <SectionHeader
+            eyebrow="Import fees"
+            title={<>Customs &amp; <span className="italic text-[#742938]">Duties</span></>}
+            className="mb-6"
+          />
+          <p className="text-sm text-[#121212]/60 font-light text-center mb-8 max-w-2xl mx-auto">
+            Customs duties and taxes are determined by the destination country and are the responsibility of the recipient. Below is a guide for perfume shipments.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b-2 border-[#742938]/20">
+                  <th className="text-start py-3 px-4 text-[10px] font-semibold tracking-[0.25em] uppercase text-[#742938]">Destination</th>
+                  <th className="py-3 px-3 text-[10px] font-semibold tracking-[0.15em] uppercase text-[#121212]/50 text-center">Duty</th>
+                  <th className="py-3 px-3 text-[10px] font-semibold tracking-[0.15em] uppercase text-[#121212]/50 text-center">Tax</th>
+                  <th className="py-3 px-4 text-[10px] font-semibold tracking-[0.15em] uppercase text-[#121212]/50 text-start max-md:hidden">Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CUSTOMS_INFO.map((row, i) => (
+                  <tr key={row.destination} className={`border-b border-[#E8E4DE] ${i % 2 === 0 ? 'bg-[#FCFAF7]' : 'bg-white'}`}>
+                    <td className="py-4 px-4">
+                      <span className="font-serif font-semibold text-[#121212]">{row.destination}</span>
+                    </td>
+                    <td className="py-4 px-3 text-center font-medium text-[#121212]/80">{row.duty}</td>
+                    <td className="py-4 px-3 text-center font-medium text-[#121212]/80">{row.tax}</td>
+                    <td className="py-4 px-4 text-[#121212]/50 font-light max-md:hidden">{row.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[11px] text-[#121212]/40 mt-6 font-light text-center">
+            Rates are estimates for perfume (HS 3303) and may vary. Customs charges are collected by the destination country, not by Novalis.
           </p>
         </div>
       </section>
