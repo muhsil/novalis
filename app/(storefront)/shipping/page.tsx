@@ -125,7 +125,7 @@ export default async function ShippingPage() {
             className="mb-6"
           />
           <p className="text-sm text-[#121212]/60 font-light text-center mb-8 max-w-2xl mx-auto">
-            Rates shown in AED for express international shipping from Dubai. Final cost calculated at checkout based on package weight.
+            Rates shown in {currency} for express international shipping from Dubai. Final cost calculated at checkout based on package weight.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -146,7 +146,7 @@ export default async function ShippingPage() {
                     </td>
                     {dest.rates.map((rate, j) => (
                       <td key={INTL_RATES.weights[j]} className="py-4 px-3 text-center font-medium text-[#121212]/80">
-                        <span className="text-[10px] text-[#121212]/40">AED </span>{rate}
+                        <span className="text-[10px] text-[#121212]/40">{currency} </span>{rate}
                       </td>
                     ))}
                   </tr>
